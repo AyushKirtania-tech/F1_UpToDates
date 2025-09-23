@@ -1,0 +1,27 @@
+{
+  "name": "F1 Website Dev",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    },
+    "ghcr.io/devcontainers/features/mongodb:1": {}
+  },
+
+  "forwardPorts": [3000, 27017],
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",     // Code formatter
+        "dbaeumer.vscode-eslint",     // Linting for JS/TS
+        "mongodb.mongodb-vscode"      // MongoDB integration
+      ]
+    }
+  },
+
+  "postCreateCommand": "npm install",
+
+  "remoteUser": "node"
+}

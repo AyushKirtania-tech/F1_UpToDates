@@ -1,0 +1,183 @@
+/* ===========================
+   GLOBAL STYLES
+=========================== */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #0d0d0d url("images/schedule.jpg") no-repeat center center fixed;
+  background-size: cover;
+  color: #f5f5f5;
+  min-height: 100%;
+}
+
+/* ===========================
+   HEADER & NAV
+=========================== */
+header {
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  padding: 20px 10px;
+  text-align: center;
+  border-bottom: 3px solid #e10600; /* F1 Red */
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.2rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0 0;
+}
+
+nav ul li {
+  display: inline-block;
+  margin: 0 15px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #f5f5f5;
+  font-weight: bold;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #e10600;
+  border-bottom: 2px solid #e10600;
+  padding-bottom: 3px;
+}
+
+/* ===========================
+   HERO / SECTION
+=========================== */
+.hero {
+  padding: 60px 20px;
+  text-align: center;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.9));
+  color: #fff;
+}
+
+.hero h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* ===========================
+   GENERAL SECTION
+=========================== */
+section {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #e10600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ===========================
+   CARD GRID (Teams/Drivers)
+=========================== */
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 0;
+}
+
+.card-grid li {
+  list-style: none;
+  background: rgba(30, 30, 30, 0.9);
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 15px;
+  width: 200px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.card-grid li img {
+  width: 100%;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.card-grid li:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(225, 6, 0, 0.6);
+}
+
+/* ===========================
+   SCHEDULE TABLE
+=========================== */
+.schedule-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  font-size: 1rem;
+}
+
+th, td {
+  border: 1px solid #333;
+  padding: 12px 15px;
+  text-align: center;
+}
+
+th {
+  background: #e10600;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+td {
+  background: rgba(20, 20, 20, 0.8);
+  color: #f5f5f5;
+}
+
+tr:nth-child(even) td {
+  background: rgba(40, 40, 40, 0.8);
+}
+
+tr:hover td {
+  background: rgba(225, 6, 0, 0.4);
+  transition: background 0.3s ease;
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+footer {
+  background: rgba(0, 0, 0, 0.9);
+  color: #ccc;
+  text-align: center;
+  padding: 20px;
+  border-top: 2px solid #e10600;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+footer p {
+  margin: 0;
+  font-size: 0.9rem;
+}

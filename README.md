@@ -1,2 +1,2 @@
 # F1_UpToDates
-An Website Formula One Fans
+An Website for THE Formula One Fans
