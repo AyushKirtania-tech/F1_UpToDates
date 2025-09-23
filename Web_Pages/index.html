@@ -1,32 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formula One Racing</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Formula One Racing - Feel the Speed Live</title>
   <link rel="stylesheet" href="Styles/style.css">
+  <link rel="stylesheet" href="Styles/index.css"
+  <meta name="description" content="Follow every lap, every overtake, and every heart-stopping moment in Formula One racing. Live schedules, driver spotlights, team updates and behind-the-scenes action.">
 </head>
 <body>
-  <header>
-      <h1>Formula One Racing</h1>
-      <nav>
-          <ul>
-              <li><a href="index.html">Home</a></li>
-              <li><a href="about.html">About</a></li>
-              <li><a href="teams.html">Teams</a></li>
-              <li><a href="drivers.html">Drivers</a></li>
-              <li><a href="schedule.html">Schedule</a></li>
-          </ul>
+  <header class="site-header" id="header">
+    <div class="header-inner">
+      <h1 class="logo">🏁 F1 Racing</h1>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="#" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="teams.html">Teams</a></li>
+          <li><a href="drivers.html">Drivers</a></li>
+          <li><a href="schedule.html">Schedule</a></li>
+          <li><a href="#login">Login</a></li>
+        </ul>
       </nav>
+    </div>
   </header>
 
-  <section class="hero">
-    <h2>Welcome to the World of F1</h2>
-    <p>Get the latest updates, race schedules, teams, and driver info.</p>
-  </section>
+  <main>
+    <!-- Enhanced Hero -->
+    <section class="hero">
+      <div class="hero-left reveal">
+        <h2>Feel the Speed — Live</h2>
+        <p class="lead">Experience every heart-pounding moment of Formula One racing. From lightning-fast qualifying sessions to wheel-to-wheel battles, we bring you closer to the action with live updates, exclusive insights, and behind-the-scenes coverage.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="schedule.html">View Race Calendar</a>
+          <a class="btn btn-outline" href="drivers.html">Meet the Drivers</a>
+        </div>
+
+        <!-- Enhanced Next Race Card -->
+        <div id="next-race" class="next-race">
+          <h3>🏁 Next Race</h3>
+          <p class="race-name" id="nr-name">Loading race information...</p>
+          <p class="race-info" id="nr-circuit"></p>
+          <p class="race-date" id="nr-date"></p>
+          <div id="countdown" class="countdown">
+            <div><span id="cd-days">--</span><small>Days</small></div>
+            <div><span id="cd-hours">--</span><small>Hours</small></div>
+            <div><span id="cd-mins">--</span><small>Minutes</small></div>
+            <div><span id="cd-secs">--</span><small>Seconds</small></div>
+          </div>
+          <a id="nr-link" class="btn btn-primary" href="schedule.html">View Full Schedule</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <!-- Enhanced Car Banner -->
+        <div class="car-banner reveal">
+          <img src="images/banner.jpeg" alt="Formula 1 Racing Car" loading="lazy" />
+        </div>
+
+        <!-- Enhanced News Ticker -->
+        <div class="news-ticker reveal">
+          <div class="ticker-title">🔥 Latest Updates</div>
+          <ul id="newsList" class="ticker-list">
+            <li>🏎️ Red Bull Racing unveils new aerodynamic package for upcoming race weekend</li>
+            <li>🏁 Hamilton sets fastest lap time in final practice session</li>
+            <li>📺 Exclusive: Behind-the-scenes footage from the pit lane now available</li>
+            <li>⚡ Weather forecast shows potential rain for qualifying session</li>
+            <li>🔧 McLaren completes successful engine upgrade testing</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Enhanced Teams Section -->
+    <section class="section-cards" id="teams">
+      <h2 class="reveal">Championship Teams</h2>
+      <div class="teams-carousel">
+        <div class="team-slide reveal" data-team="mercedes">
+          <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=100&h=60&fit=crop" alt="Mercedes Team" loading="lazy">
+          <span>Mercedes-AMG</span>
+        </div>
+        <div class="team-slide reveal" data-team="redbull">
+          <img src="https://images.unsplash.com/photo-1551410224-699683e15636?w=100&h=60&fit=crop" alt="Red Bull Team" loading="lazy">
+          <span>Red Bull Racing</span>
+        </div>
+        <div class="team-slide reveal" data-team="ferrari">
+          <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=100&h=60&fit=crop" alt="Ferrari Team" loading="lazy">
+          <span>Scuderia Ferrari</span>
+        </div>
+        <div class="team-slide reveal" data-team="mclaren">
+          <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=100&h=60&fit=crop" alt="McLaren Team" loading="lazy">
+          <span>McLaren F1</span>
+        </div>
+        <div class="team-slide reveal" data-team="alpine">
+          <img src="https://images.unsplash.com/photo-1566473965997-3de9c817e938?w=100&h=60&fit=crop" alt="Alpine Team" loading="lazy">
+          <span>Alpine F1</span>
+        </div>
+        <div class="team-slide reveal" data-team="aston-martin">
+          <img src="https://images.unsplash.com/photo-1597223557154-721c1cecc4b0?w=100&h=60&fit=crop" alt="Aston Martin Team" loading="lazy">
+          <span>Aston Martin</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Enhanced Driver Spotlight -->
+    <section class="driver-spotlight" id="drivers">
+      <h2 class="reveal">Driver Spotlights</h2>
+      <ul class="card-grid">
+        <li class="reveal" data-driver="verstappen">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=150&h=150&fit=crop&crop=face" alt="Max Verstappen" loading="lazy">
+          <h3>Max Verstappen</h3>
+          <p>The reigning world champion known for his aggressive racing style and lightning-fast reflexes. Currently leading the championship standings.</p>
+        </li>
+        <li class="reveal" data-driver="hamilton">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face" alt="Lewis Hamilton" loading="lazy">
+          <h3>Lewis Hamilton</h3>
+          <p>Seven-time world champion with unmatched experience and precision. Master of wet-weather driving and strategic overtakes.</p>
+        </li>
+        <li class="reveal" data-driver="leclerc">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Charles Leclerc" loading="lazy">
+          <h3>Charles Leclerc</h3>
+          <p>Ferrari's young star driver with exceptional qualifying pace and fearless racing approach. A consistent podium contender.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Enhanced Newsletter -->
+    <section class="newsletter reveal" id="newsletter">
+      <h2>🏁 Join the Paddock Club</h2>
+      <p>Get exclusive access to race previews, driver interviews, technical insights, and breaking news delivered directly to your inbox every week.</p>
+
+      <form id="newsletterForm" class="newsletter-form" novalidate>
+        <input id="email" type="email" placeholder="Enter your email address" required>
+        <button type="submit" class="btn btn-primary">Subscribe Now</button>
+      </form>
+      <p id="newsletter-msg" class="muted"></p>
+    </section>
+
+    <!-- Enhanced Quick Links -->
+    <section class="quick-links">
+      <a class="quick" href="#teams">🏎️ Team Profiles</a>
+      <a class="quick" href="#drivers">👨‍🏁 Driver Stats</a>
+      <a class="quick" href="#schedule">📅 Race Calendar</a>
+      <a class="quick" href="#login">🔐 VIP Access</a>
+    </section>
+  </main>
+
+  <button id="backToTop" title="Back to top" aria-label="Scroll to top">↑</button>
 
   <footer>
-    <p>&copy; 2024 Formula One Racing. All rights reserved.</p>
+    <div class="footer-grid">
+      <div>© <span id="yr"></span> F1 Racing Hub - Unofficial Fan Site</div>
+      <div class="socials">
+        <a href="#" aria-label="Follow us on Twitter">Twitter</a> ·
+        <a href="#" aria-label="Follow us on Instagram">Instagram</a> ·
+        <a href="#" aria-label="Subscribe to our YouTube">YouTube</a> ·
+        <a href="#" aria-label="Join our Discord">Discord</a>
+      </div>
+    </div>
   </footer>
+
+  <script src="Script/index.js"></script>
 </body>
 </html>

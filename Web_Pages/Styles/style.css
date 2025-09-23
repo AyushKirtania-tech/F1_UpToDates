@@ -1,25 +1,44 @@
 /* ===========================
-   GLOBAL STYLES
+   COMMON STYLES (ALL PAGES)
 =========================== */
-html, body {
+
+/* Reset & Variables */
+* {
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #0d0d0d url("images/schedule.jpg") no-repeat center center fixed;
-  background-size: cover;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #070707;
+  --muted: #bdbdbd;
+  --accent: #e10600;
+  --accent-hover: #ff1e00;
+  --card: rgba(20, 20, 20, 0.92);
+  --glass: rgba(255, 255, 255, 0.05);
+  --shadow: 0 8px 32px rgba(0,0,0,0.3);
+  --gradient-primary: linear-gradient(135deg, #e10600 0%, #ff4500 100%);
+  --gradient-card: linear-gradient(145deg, rgba(20,20,20,0.95), rgba(35,35,35,0.85));
+  --font-main: "Inter", "Segoe UI", system-ui, Arial, sans-serif;
+}
+
+/* Global Styles */
+html, body {
+  font-family: var(--font-main);
+  background: var(--bg);
   color: #f5f5f5;
+  line-height: 1.6;
+  scroll-behavior: smooth;
   min-height: 100%;
 }
 
-/* ===========================
-   HEADER & NAV
-=========================== */
+/* Header & Nav (common for all pages) */
 header {
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0,0,0,0.85);
   color: #fff;
   padding: 20px 10px;
   text-align: center;
-  border-bottom: 3px solid #e10600; /* F1 Red */
+  border-bottom: 3px solid var(--accent);
 }
 
 header h1 {
@@ -33,11 +52,9 @@ nav ul {
   list-style: none;
   padding: 0;
   margin: 15px 0 0;
-}
-
-nav ul li {
-  display: inline-block;
-  margin: 0 15px;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
 }
 
 nav ul li a {
@@ -48,133 +65,18 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-  color: #e10600;
-  border-bottom: 2px solid #e10600;
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
   padding-bottom: 3px;
 }
 
-/* ===========================
-   HERO / SECTION
-=========================== */
-.hero {
-  padding: 60px 20px;
-  text-align: center;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.9));
-  color: #fff;
-}
-
-.hero h2 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-
-.hero p {
-  font-size: 1.2rem;
-  opacity: 0.9;
-}
-
-/* ===========================
-   GENERAL SECTION
-=========================== */
-section {
-  padding: 40px 20px;
-  text-align: center;
-}
-
-section h2 {
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-  color: #e10600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* ===========================
-   CARD GRID (Teams/Drivers)
-=========================== */
-.card-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  padding: 0;
-}
-
-.card-grid li {
-  list-style: none;
-  background: rgba(30, 30, 30, 0.9);
-  border: 1px solid #333;
-  border-radius: 8px;
-  padding: 15px;
-  width: 200px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: center;
-}
-
-.card-grid li img {
-  width: 100%;
-  border-radius: 6px;
-  margin-bottom: 10px;
-}
-
-.card-grid li:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 8px 20px rgba(225, 6, 0, 0.6);
-}
-
-/* ===========================
-   SCHEDULE TABLE
-=========================== */
-.schedule-container {
-  overflow-x: auto;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 0 auto;
-  font-size: 1rem;
-}
-
-th, td {
-  border: 1px solid #333;
-  padding: 12px 15px;
-  text-align: center;
-}
-
-th {
-  background: #e10600;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-td {
-  background: rgba(20, 20, 20, 0.8);
-  color: #f5f5f5;
-}
-
-tr:nth-child(even) td {
-  background: rgba(40, 40, 40, 0.8);
-}
-
-tr:hover td {
-  background: rgba(225, 6, 0, 0.4);
-  transition: background 0.3s ease;
-}
-
-/* ===========================
-   FOOTER
-=========================== */
+/* Footer */
 footer {
-  background: rgba(0, 0, 0, 0.9);
-  color: #ccc;
+  background: rgba(0,0,0,0.9);
+  color: var(--muted);
   text-align: center;
   padding: 20px;
-  border-top: 2px solid #e10600;
-  position: relative;
-  bottom: 0;
-  width: 100%;
+  border-top: 2px solid var(--accent);
 }
 
 footer p {
