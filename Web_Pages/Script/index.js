@@ -1,310 +1,510 @@
-// script.js - corrected and hardened version for F1 Racing home page
+// F1 Racing Website - Main JavaScript File (Simplified)
+// ========================================================
 
-// Constants and Configuration
-const ERGAST_API_URL = 'https://ergast.com/api/f1/current.json?limit=1000';
-const CORS_PROXY = url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+// Utility Functions
+// -----------------
+const $ = (selector) => document.querySelector(selector);
+const $$ = (selector) => document.querySelectorAll(selector);
 
-// Short helpers
-const $ = selector => document.querySelector(selector);
-const $$ = selector => Array.from(document.querySelectorAll(selector));
+// Debounce function for performance optimization
+const debounce = (func, wait) => {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+};
 
-// Robust fetch with timeout and proxy fallback
-async function fetchWithFallback(url, options = {}) {
-  const controller = new AbortController();
-  const timeout = 10000; // 10s
-  const timeoutId = setTimeout(() => controller.abort(), timeout);
+// Main App Class
+// --------------
+class F1App {
+  constructor() {
+    this.init();
+    this.setupEventListeners();
+    this.startAnimations();
+  }
 
-  try {
-    const res = await fetch(url, { ...options, signal: controller.signal });
-    clearTimeout(timeoutId);
-    if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
-    return await res.json();
-  } catch (err) {
-    clearTimeout(timeoutId);
-    console.warn('Direct fetch failed — trying proxy:', err.message);
-    try {
-      const proxyRes = await fetch(CORS_PROXY(url));
-      if (!proxyRes.ok) throw new Error(`Proxy HTTP ${proxyRes.status}`);
-      return await proxyRes.json();
-    } catch (proxyErr) {
-      console.error('Proxy fetch also failed:', proxyErr);
-      throw new Error('Unable to fetch data from API');
+  // Initialize the application
+  init() {
+    this.setCurrentYear();
+    this.setupNextRaceData();
+    this.startCountdown();
+    this.initRevealAnimations();
+    this.showBackToTopButton();
+  }
+
+  // Set current year in footer
+  setCurrentYear() {
+    const yearElement = $('#yr');
+    if (yearElement) {
+      yearElement.textContent = new Date().getFullYear();
     }
   }
-}
 
-// Date/time formatting for races
-function formatRaceDateTime(dateStr, timeStr) {
-  try {
-    if (!dateStr) return 'TBA';
-    if (timeStr) {
-      const dt = new Date(`${dateStr}T${timeStr}Z`);
-      return dt.toLocaleString(undefined, {
-        weekday: 'short', year: 'numeric', month: 'short', day: 'numeric',
-        hour: '2-digit', minute: '2-digit', timeZoneName: 'short'
+  // Setup Next Race Information
+  setupNextRaceData() {
+    // Sample race data - in a real app, this would come from an API
+    const upcomingRaces = [
+      {
+        name: "Singapore Grand Prix",
+        circuit: "Marina Bay Street Circuit",
+        date: new Date('2025-10-15T14:00:00'),
+        location: "Singapore"
+      },
+      {
+        name: "Japanese Grand Prix", 
+        circuit: "Suzuka International Racing Course",
+        date: new Date('2025-10-29T14:00:00'),
+        location: "Suzuka, Japan"
+      },
+      {
+        name: "United States Grand Prix",
+        circuit: "Circuit of the Americas",
+        date: new Date('2025-11-12T14:00:00'),
+        location: "Austin, Texas"
+      }
+    ];
+
+    // Find next upcoming race
+    const now = new Date();
+    const nextRace = upcomingRaces.find(race => race.date > now) || upcomingRaces[0];
+    
+    this.updateNextRaceDisplay(nextRace);
+    this.nextRaceDate = nextRace.date;
+  }
+
+  // Update next race display
+  updateNextRaceDisplay(race) {
+    const nameElement = $('#nr-name');
+    const circuitElement = $('#nr-circuit');
+    const dateElement = $('#nr-date');
+
+    if (nameElement) nameElement.textContent = race.name;
+    if (circuitElement) circuitElement.textContent = race.circuit;
+    if (dateElement) {
+      dateElement.textContent = race.date.toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
       });
-    } else {
-      const d = new Date(dateStr);
-      return d.toLocaleDateString(undefined, { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
     }
-  } catch (e) {
-    console.error('formatRaceDateTime error', e);
-    return dateStr || 'TBA';
   }
-}
 
-// Countdown system (uses setInterval for simplicity & reliability)
-function createCountdown(targetDate) {
-  const elDays = $('#cd-days'), elHours = $('#cd-hours'), elMins = $('#cd-mins'), elSecs = $('#cd-secs');
-  if (!elDays || !elHours || !elMins || !elSecs) return () => {};
-  function update() {
-    const now = Date.now();
-    let diff = targetDate.getTime() - now;
-    if (diff <= 0) {
-      elDays.textContent = '0';
-      elHours.textContent = '00';
-      elMins.textContent = '00';
-      elSecs.textContent = '00';
-      return;
-    }
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    diff -= days * (1000 * 60 * 60 * 24);
-    const hours = Math.floor(diff / (1000 * 60 * 60));
-    diff -= hours * (1000 * 60 * 60);
-    const mins = Math.floor(diff / (1000 * 60));
-    diff -= mins * (1000 * 60);
-    const secs = Math.floor(diff / 1000);
+  // Countdown Timer
+  startCountdown() {
+    if (!this.nextRaceDate) return;
 
-    // animate only when changed
-    const updates = {
-      days: String(days),
-      hours: String(hours).padStart(2, '0'),
-      minutes: String(mins).padStart(2, '0'),
-      seconds: String(secs).padStart(2, '0')
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const distance = this.nextRaceDate.getTime() - now;
+
+      if (distance < 0) {
+        this.displayCountdownFinished();
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      this.updateCountdownDisplay(days, hours, minutes, seconds);
     };
 
-    if (elDays.textContent !== updates.days) { elDays.textContent = updates.days; }
-    if (elHours.textContent !== updates.hours) { elHours.textContent = updates.hours; }
-    if (elMins.textContent !== updates.minutes) { elMins.textContent = updates.minutes; }
-    if (elSecs.textContent !== updates.seconds) { elSecs.textContent = updates.seconds; }
+    // Update immediately and then every second
+    updateCountdown();
+    this.countdownInterval = setInterval(updateCountdown, 1000);
   }
 
-  update();
-  const intervalId = setInterval(update, 1000);
-  return () => clearInterval(intervalId);
-}
+  updateCountdownDisplay(days, hours, minutes, seconds) {
+    const daysEl = $('#cd-days');
+    const hoursEl = $('#cd-hours');
+    const minsEl = $('#cd-mins');
+    const secsEl = $('#cd-secs');
 
-// Load next race from Ergast (with fallback)
-async function loadNextRace() {
-  const elName = $('#nr-name'), elCircuit = $('#nr-circuit'), elDate = $('#nr-date'), elLink = $('#nr-link'), elCountdown = $('#countdown');
-  if (elName) { elName.textContent = 'Loading next race...'; elName.classList.add('loading'); }
+    if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
+    if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+    if (minsEl) minsEl.textContent = minutes.toString().padStart(2, '0');
+    if (secsEl) secsEl.textContent = seconds.toString().padStart(2, '0');
+  }
 
-  try {
-    const data = await fetchWithFallback(ERGAST_API_URL);
-    const races = data?.MRData?.RaceTable?.Races || [];
-    if (!races.length) throw new Error('No race data');
+  displayCountdownFinished() {
+    const countdownEl = $('#countdown');
+    if (countdownEl) {
+      countdownEl.innerHTML = '<div class="race-live" style="text-align: center; color: var(--accent); font-weight: 900; font-size: 1.2rem; padding: 20px;">🏁 RACE IS LIVE! 🏁</div>';
+    }
+    clearInterval(this.countdownInterval);
+  }
 
-    const now = new Date();
-    const next = races.find(r => {
-      if (!r.date) return false;
-      const dt = r.time ? new Date(`${r.date}T${r.time}Z`) : new Date(`${r.date}T23:59:59Z`);
-      return dt > now;
+  // Reveal Animations (Intersection Observer)
+  initRevealAnimations() {
+    const revealElements = $$('.reveal');
+    
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { 
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    revealElements.forEach((el) => {
+      revealObserver.observe(el);
+    });
+  }
+
+  // Back to Top Button
+  showBackToTopButton() {
+    const backToTopBtn = $('#backToTop');
+    if (!backToTopBtn) return;
+
+    const toggleVisibility = debounce(() => {
+      if (window.pageYOffset > 300) {
+        backToTopBtn.style.display = 'flex';
+        setTimeout(() => {
+          backToTopBtn.style.opacity = '1';
+          backToTopBtn.style.transform = 'translateY(0)';
+        }, 10);
+      } else {
+        backToTopBtn.style.opacity = '0';
+        backToTopBtn.style.transform = 'translateY(10px)';
+        setTimeout(() => {
+          if (backToTopBtn.style.opacity === '0') {
+            backToTopBtn.style.display = 'none';
+          }
+        }, 300);
+      }
+    }, 100);
+
+    window.addEventListener('scroll', toggleVisibility);
+    
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+
+  // Newsletter Subscription
+  handleNewsletterSubmission() {
+    const form = $('#newsletterForm');
+    const emailInput = $('#email');
+    const messageEl = $('#newsletter-msg');
+
+    if (!form || !emailInput || !messageEl) return;
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const email = emailInput.value.trim();
+      
+      // Basic email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      
+      if (!email) {
+        this.showNewsletterMessage('Please enter your email address.', 'error');
+        return;
+      }
+      
+      if (!emailRegex.test(email)) {
+        this.showNewsletterMessage('Please enter a valid email address.', 'error');
+        return;
+      }
+
+      // Simulate API call
+      this.simulateNewsletterSubscription(email);
+    });
+  }
+
+  simulateNewsletterSubscription(email) {
+    const messageEl = $('#newsletter-msg');
+    const submitBtn = $('#newsletterForm button');
+    
+    if (submitBtn) {
+      submitBtn.textContent = 'Subscribing...';
+      submitBtn.disabled = true;
+    }
+
+    // Simulate API delay
+    setTimeout(() => {
+      this.showNewsletterMessage(
+        `🏁 Welcome to the Paddock Club! Confirmation sent to ${email}`, 
+        'success'
+      );
+      
+      $('#email').value = '';
+      
+      if (submitBtn) {
+        submitBtn.textContent = 'Subscribe Now';
+        submitBtn.disabled = false;
+      }
+    }, 2000);
+  }
+
+  showNewsletterMessage(message, type) {
+    const messageEl = $('#newsletter-msg');
+    if (!messageEl) return;
+
+    messageEl.textContent = message;
+    messageEl.style.color = type === 'error' ? '#ff4757' : '#2ed573';
+    messageEl.style.fontWeight = '600';
+    
+    // Clear message after 5 seconds
+    setTimeout(() => {
+      messageEl.textContent = '';
+    }, 5000);
+  }
+
+  // Team and Driver Interactions
+  initInteractiveElements() {
+    // Team slides hover effects
+    const teamSlides = $$('.team-slide');
+    teamSlides.forEach((slide) => {
+      slide.addEventListener('click', () => {
+        const teamName = slide.dataset.team;
+        this.showTeamInfo(teamName);
+      });
     });
 
-    if (!next) {
-      if (elName) elName.textContent = 'Season Complete! 🏆';
-      if (elCircuit) elCircuit.textContent = 'Check back next season';
-      if (elDate) elDate.textContent = '';
-      if (elCountdown) elCountdown.style.display = 'none';
-      return;
-    }
-
-    if (elName) { elName.textContent = next.raceName; elName.classList.remove('loading'); }
-    if (elCircuit && next.Circuit) elCircuit.textContent = `${next.Circuit.circuitName} • ${next.Circuit.Location.locality}, ${next.Circuit.Location.country}`;
-    if (elDate) elDate.textContent = formatRaceDateTime(next.date, next.time);
-    if (elLink) elLink.href = 'schedule.html';
-
-    if (elCountdown) elCountdown.style.display = ''; // show countdown
-    const target = next.time ? new Date(`${next.date}T${next.time}Z`) : new Date(`${next.date}T14:00:00Z`);
-    // start countdown and keep cleanup if needed
-    createCountdown(target);
-
-    // store for other use
-    window.nextRaceData = next;
-  } catch (err) {
-    console.error('loadNextRace error', err);
-    if (elName) { elName.textContent = 'Unable to load race data'; elName.classList.remove('loading'); }
-    if (elCircuit) elCircuit.textContent = 'Please check your connection';
-    if (elDate) elDate.textContent = '';
-    if (elCountdown) elCountdown.style.display = 'none';
-  }
-}
-
-// Newsletter (client-side demo)
-function initNewsletter() {
-  const form = $('#newsletterForm'), email = $('#email'), msg = $('#newsletter-msg');
-  if (!form || !email || !msg) return;
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const show = (text, type='success') => {
-    msg.textContent = text;
-    msg.style.color = type === 'success' ? '#4ade80' : '#f87171';
-    setTimeout(() => { msg.textContent = ''; }, 5000);
-  };
-
-  email.addEventListener('input', () => {
-    email.style.borderColor = email.value && !emailRegex.test(email.value) ? '#f87171' : '';
-  });
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const val = email.value.trim();
-    if (!val) return show('Enter your email', 'error');
-    if (!emailRegex.test(val)) return show('Please provide a valid email', 'error');
-
-    const btn = form.querySelector('button[type="submit"]');
-    const original = btn ? btn.textContent : null;
-    if (btn) { btn.disabled = true; btn.textContent = 'Subscribing...' }
-
-    try {
-      await new Promise(r => setTimeout(r, 700)); // demo delay
-      show(`Subscribed: ${val}`, 'success');
-      email.value = '';
-    } catch (err) {
-      console.error(err);
-      show('Subscription failed', 'error');
-    } finally {
-      if (btn) { btn.disabled = false; btn.textContent = original; }
-    }
-  });
-}
-
-// Scroll reveal using IntersectionObserver
-function initScrollReveal() {
-  const reveals = $$('.reveal');
-  if (!reveals.length) return;
-
-  if (!('IntersectionObserver' in window)) {
-    reveals.forEach(el => el.classList.add('visible'));
-    return;
+    // Driver cards hover effects  
+    const driverCards = $$('.card-grid li');
+    driverCards.forEach((card) => {
+      card.addEventListener('click', () => {
+        const driverName = card.dataset.driver;
+        this.showDriverInfo(driverName);
+      });
+    });
   }
 
-  const obs = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
+  showTeamInfo(teamName) {
+    // In a real app, this would show a modal or navigate to team page
+    console.log(`Showing info for team: ${teamName}`);
+    
+    // Simple toast notification
+    this.showToast(`Loading ${teamName} team information...`);
+  }
+
+  showDriverInfo(driverName) {
+    // In a real app, this would show driver details
+    console.log(`Showing info for driver: ${driverName}`);
+    
+    this.showToast(`Loading ${driverName} driver profile...`);
+  }
+
+  showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    toast.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--gradient-primary);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      z-index: 1000;
+      font-weight: 600;
+      transform: translateX(400px);
+      transition: transform 0.3s ease;
+    `;
+    
+    document.body.appendChild(toast);
+    
+    // Slide in
+    setTimeout(() => {
+      toast.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Slide out and remove
+    setTimeout(() => {
+      toast.style.transform = 'translateX(400px)';
+      setTimeout(() => {
+        document.body.removeChild(toast);
+      }, 300);
+    }, 3000);
+  }
+
+  // Performance optimizations
+  initPerformanceOptimizations() {
+    // Lazy load images when they come into view
+    const images = $$('img[loading="lazy"]');
+    
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.src || img.dataset.src;
+            img.classList.remove('loading');
+            imageObserver.unobserve(img);
+          }
+        });
+      });
+
+      images.forEach((img) => {
+        img.classList.add('loading');
+        imageObserver.observe(img);
+      });
+    }
+  }
+
+  // Navigation enhancements
+  enhanceNavigation() {
+    const navLinks = $$('.main-nav a');
+    
+    navLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        // Remove active class from all links
+        navLinks.forEach(l => l.classList.remove('active'));
+        // Add active class to clicked link
+        link.classList.add('active');
+        
+        // Smooth scroll for anchor links
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#') && href !== '#login') {
+          e.preventDefault();
+          const target = $(href);
+          if (target) {
+            target.scrollIntoView({ 
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        }
+      });
+    });
+  }
+
+  // Start background animations
+  startAnimations() {
+    // Add subtle parallax effect to hero section
+    const hero = $('.hero');
+    if (hero) {
+      window.addEventListener('scroll', debounce(() => {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * -0.1;
+        hero.style.transform = `translateY(${rate}px)`;
+      }, 10));
+    }
+
+    // Animate team slides on scroll
+    const teamSlides = $$('.team-slide');
+    if (teamSlides.length) {
+      window.addEventListener('scroll', debounce(() => {
+        teamSlides.forEach((slide, index) => {
+          const rect = slide.getBoundingClientRect();
+          const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+          
+          if (isVisible) {
+            slide.style.animationDelay = `${index * 0.1}s`;
+            slide.classList.add('animate-in');
+          }
+        });
+      }, 100));
+    }
+  }
+
+  // Setup all event listeners
+  setupEventListeners() {
+    // Newsletter form
+    this.handleNewsletterSubmission();
+    
+    // Interactive elements
+    this.initInteractiveElements();
+    
+    // Navigation
+    this.enhanceNavigation();
+    
+    // Performance optimizations
+    this.initPerformanceOptimizations();
+    
+    // Handle window resize
+    window.addEventListener('resize', debounce(() => {
+      // Recalculate any position-dependent elements
+      this.handleResize();
+    }, 250));
+    
+    // Handle page visibility changes
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        // Pause animations when page is not visible
+        clearInterval(this.countdownInterval);
+      } else {
+        // Resume animations when page becomes visible
+        this.startCountdown();
       }
     });
-  }, { threshold: 0.12 });
+  }
 
-  reveals.forEach(el => obs.observe(el));
-}
+  handleResize() {
+    // Handle responsive adjustments
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile) {
+      // Mobile-specific optimizations
+      this.optimizeForMobile();
+    } else {
+      // Desktop optimizations
+      this.optimizeForDesktop();
+    }
+  }
 
-// Back-to-top button
-function initBackToTop() {
-  const btn = $('#backToTop');
-  if (!btn) return;
-  let visible = false;
-  window.addEventListener('scroll', () => {
-    const should = window.pageYOffset > 300;
-    if (should && !visible) { btn.style.display = 'flex'; visible = true; }
-    else if (!should && visible) { btn.style.display = 'none'; visible = false; }
-  }, { passive: true });
-  btn.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
-}
-
-// News ticker (rotate list items)
-function initNewsTicker() {
-  const ul = $('#newsList');
-  if (!ul || !ul.children.length) return;
-  setInterval(() => {
-    const first = ul.firstElementChild;
-    if (!first) return;
-    first.style.transition = 'margin 0.45s ease, opacity 0.45s';
-    first.style.marginTop = '-26px';
-    first.style.opacity = '0';
-    setTimeout(() => {
-      first.style.transition = '';
-      first.style.marginTop = '';
-      first.style.opacity = '';
-      ul.appendChild(first);
-    }, 470);
-  }, 3500);
-}
-
-
-// Interactive elements (team slides, driver cards)
-function initInteractiveElements() {
-  const slides = $$('.team-slide');
-  slides.forEach(slide => {
-    slide.addEventListener('click', () => {
-      const team = slide.dataset.team || slide.querySelector('.team-name')?.textContent || 'team';
-      // Example: navigate to team page /teams.html#team
-      console.log('team clicked', team);
-      // window.location.href = `teams.html#${team.toLowerCase().replace(/\s+/g,'-')}`;
+  optimizeForMobile() {
+    // Reduce animation complexity on mobile
+    const reveals = $$('.reveal');
+    reveals.forEach(el => {
+      el.style.transition = 'opacity 0.3s ease';
     });
-  });
+  }
 
-  const cards = $$('.card-grid li');
-  cards.forEach(card => {
-    card.addEventListener('click', () => {
-      const driver = card.dataset.driver || card.querySelector('h3')?.textContent || 'driver';
-      console.log('driver clicked', driver);
-      // e.g. open driver page
+  optimizeForDesktop() {
+    // Restore full animations on desktop
+    const reveals = $$('.reveal');
+    reveals.forEach(el => {
+      el.style.transition = 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)';
     });
-  });
+  }
+
+  // Cleanup method
+  destroy() {
+    clearInterval(this.countdownInterval);
+    // Remove event listeners if needed
+  }
 }
 
-// Image fallback for logos (hides broken images)
-function attachImageFallbacks() {
-  $$('.team-slide img').forEach(img => {
-    img.addEventListener('error', () => {
-      const parent = img.closest('.team-slide');
-      if (parent) parent.classList.add('no-image');
-      img.style.display = 'none';
-    });
-  });
-}
+// Initialize the application when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('🏁 F1 Racing Website Loaded!');
+  new F1App();
+});
 
-// Performance & error monitoring (light)
-function initPerformanceMonitoring() {
+// Handle page unload
+window.addEventListener('beforeunload', () => {
+  // Cleanup any intervals or ongoing processes
+});
+
+// Error handling
+window.addEventListener('error', (e) => {
+  console.error('F1 App Error:', e.error);
+});
+
+// Performance monitoring (optional)
+if ('performance' in window) {
   window.addEventListener('load', () => {
-    try {
-      const nav = performance.getEntriesByType('navigation')[0];
-      if (nav) console.log(`Load time: ${Math.round(nav.loadEventEnd - nav.startTime)}ms`);
-    } catch (e) {}
-  });
-  window.addEventListener('error', (e) => console.error('Global error', e.error || e.message));
-  window.addEventListener('unhandledrejection', (e) => console.error('Unhandled promise', e.reason));
-}
-
-// Main initializer
-function init() {
-  const yr = $('#yr');
-  if (yr) yr.textContent = new Date().getFullYear();
-
-  attachImageFallbacks();
-  loadNextRace();
-  initNewsletter();
-  initScrollReveal();
-  initBackToTop();
-  initNewsTicker();
-  initInteractiveElements();
-  initPerformanceMonitoring();
-
-  console.log('🏁 F1 Racing initialized');
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
-} else {
-  init();
-}
-
-// Optional: service worker (register only on HTTPS or localhost)
-if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker?.register('/sw.js').then(() => console.log('SW registered')).catch(() => {});
+    const loadTime = performance.now();
+    console.log(`🏎️ Page loaded in ${Math.round(loadTime)}ms`);
   });
 }

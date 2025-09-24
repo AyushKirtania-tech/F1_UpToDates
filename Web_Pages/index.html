@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Formula One Racing - Feel the Speed Live</title>
   <link rel="stylesheet" href="Styles/style.css">
-  <link rel="stylesheet" href="Styles/index.css"
+  <link rel="stylesheet" href="Styles/index.css">
   <meta name="description" content="Follow every lap, every overtake, and every heart-stopping moment in Formula One racing. Live schedules, driver spotlights, team updates and behind-the-scenes action.">
 </head>
 <body>
@@ -58,16 +58,30 @@
           <img src="images/banner.jpeg" alt="Formula 1 Racing Car" loading="lazy" />
         </div>
 
-        <!-- Enhanced News Ticker -->
-        <div class="news-ticker reveal">
-          <div class="ticker-title">🔥 Latest Updates</div>
-          <ul id="newsList" class="ticker-list">
-            <li>🏎️ Red Bull Racing unveils new aerodynamic package for upcoming race weekend</li>
-            <li>🏁 Hamilton sets fastest lap time in final practice session</li>
-            <li>📺 Exclusive: Behind-the-scenes footage from the pit lane now available</li>
-            <li>⚡ Weather forecast shows potential rain for qualifying session</li>
-            <li>🔧 McLaren completes successful engine upgrade testing</li>
-          </ul>
+        <!-- About F1 Section -->
+        <div class="about-f1 reveal">
+          <div class="about-title">🏆 Formula 1 Legacy</div>
+          <div class="about-content">
+            <h4>The Pinnacle of Motorsport</h4>
+            <p>Since 1950, Formula 1 has been the ultimate test of speed, skill, and engineering excellence. From the legendary circuits of Monaco and Silverstone to the modern marvels of Singapore and Abu Dhabi, F1 continues to push the boundaries of what's possible.</p>
+            
+            <div class="f1-stats">
+              <div class="stat-item">
+                <span class="stat-number">74</span>
+                <span class="stat-label">Years of Racing</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">33</span>
+                <span class="stat-label">Current Drivers</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">23</span>
+                <span class="stat-label">Race Calendar</span>
+              </div>
+            </div>
+            
+            <a href="about.html" class="btn btn-outline btn-small">Learn More</a>
+          </div>
         </div>
       </div>
     </section>
@@ -76,29 +90,29 @@
     <section class="section-cards" id="teams">
       <h2 class="reveal">Championship Teams</h2>
       <div class="teams-carousel">
-        <div class="team-slide reveal" data-team="mercedes">
-          <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=100&h=60&fit=crop" alt="Mercedes Team" loading="lazy">
+        <div class="team-slide reveal mercedes-bg" data-team="mercedes">
           <span>Mercedes-AMG</span>
         </div>
-        <div class="team-slide reveal" data-team="redbull">
-          <img src="https://images.unsplash.com/photo-1551410224-699683e15636?w=100&h=60&fit=crop" alt="Red Bull Team" loading="lazy">
+        <div class="team-slide reveal redbull-bg" data-team="redbull">
           <span>Red Bull Racing</span>
         </div>
-        <div class="team-slide reveal" data-team="ferrari">
-          <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=100&h=60&fit=crop" alt="Ferrari Team" loading="lazy">
+        <div class="team-slide reveal ferrari-bg" data-team="ferrari">
           <span>Scuderia Ferrari</span>
         </div>
-        <div class="team-slide reveal" data-team="mclaren">
-          <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=100&h=60&fit=crop" alt="McLaren Team" loading="lazy">
+        <div class="team-slide reveal mclaren-bg" data-team="mclaren">
           <span>McLaren F1</span>
         </div>
-        <div class="team-slide reveal" data-team="alpine">
-          <img src="https://images.unsplash.com/photo-1566473965997-3de9c817e938?w=100&h=60&fit=crop" alt="Alpine Team" loading="lazy">
+        <div class="team-slide reveal alpine-bg" data-team="alpine">
           <span>Alpine F1</span>
         </div>
-        <div class="team-slide reveal" data-team="aston-martin">
-          <img src="https://images.unsplash.com/photo-1597223557154-721c1cecc4b0?w=100&h=60&fit=crop" alt="Aston Martin Team" loading="lazy">
+        <div class="team-slide reveal aston-martin-bg" data-team="aston-martin">
           <span>Aston Martin</span>
+        </div>
+        <div class="team-slide reveal kick-sauber-bg" data-team="kick-sauber">
+          <span>Kick Sauber</span>
+        </div>
+        <div class="team-slide reveal williams-bg" data-team="williams">
+          <span>Williams Racing</span>
         </div>
       </div>
     </section>

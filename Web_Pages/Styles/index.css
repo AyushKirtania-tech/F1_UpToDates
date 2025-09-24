@@ -1,4 +1,4 @@
-    /* Reset & Variables */
+/* Reset & Variables */
     * { 
       box-sizing: border-box; 
       margin: 0; 
@@ -123,6 +123,11 @@
       overflow: hidden;
       border: none;
       cursor: pointer;
+    }
+
+    .btn-small {
+      padding: 10px 20px;
+      font-size: 0.9rem;
     }
     
     .btn::before {
@@ -271,10 +276,10 @@
       transform: scale(1.05);
     }
     
-    /* Enhanced News Ticker */
-    .news-ticker { 
+    /* About F1 Section */
+    .about-f1 { 
       background: var(--gradient-card);
-      padding: 20px; 
+      padding: 24px; 
       border-radius: 16px;
       border: 1px solid rgba(255,255,255,0.08);
       box-shadow: var(--shadow);
@@ -282,7 +287,7 @@
       overflow: hidden;
     }
 
-    .news-ticker::before {
+    .about-f1::before {
       content: '';
       position: absolute;
       top: 0;
@@ -292,33 +297,60 @@
       background: var(--gradient-primary);
     }
     
-    .ticker-title { 
+    .about-title { 
       color: var(--accent); 
       font-weight: 700; 
-      margin-bottom: 12px;
+      margin-bottom: 16px;
       text-transform: uppercase;
       letter-spacing: 1px;
-    }
-    
-    .ticker-list { 
-      list-style: none; 
-      max-height: 120px; 
-      overflow: hidden;
-      color: var(--muted); 
-      font-size: 0.95rem; 
-    }
-    
-    .ticker-list li { 
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      animation: tickerSlide 15s linear infinite;
+      font-size: 0.95rem;
     }
 
-    @keyframes tickerSlide {
-      0% { transform: translateY(100%); opacity: 0; }
-      10% { transform: translateY(0); opacity: 1; }
-      90% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(-100%); opacity: 0; }
+    .about-content h4 {
+      font-size: 1.4rem;
+      color: #fff;
+      margin-bottom: 12px;
+      font-weight: 800;
+    }
+
+    .about-content p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .f1-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 12px 8px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .stat-number {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
     }
 
     /* Enhanced Teams Section */
@@ -348,12 +380,13 @@
       padding: 20px;
     }
     
+    /* Enhanced Team Slides with Background Images */
     .team-slide { 
       height: 140px;
       display: flex; 
       flex-direction: column;
       align-items: center; 
-      justify-content: center; 
+      justify-content: flex-end; 
       gap: 12px; 
       background: var(--gradient-card);
       border-radius: 16px; 
@@ -362,6 +395,32 @@
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: var(--shadow);
       cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .team-slide::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.2) 0%,
+        rgba(0,0,0,0.4) 50%,
+        rgba(0,0,0,0.8) 100%
+      );
+      z-index: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .team-slide:hover::before {
+      opacity: 0.7;
     }
     
     .team-slide:hover {
@@ -370,22 +429,51 @@
       border-color: var(--accent);
     }
     
-    .team-slide img { 
-      max-width: 80px; 
-      max-height: 50px; 
-      object-fit: contain;
-      filter: brightness(0.9);
-      transition: filter 0.3s ease;
-    }
-
-    .team-slide:hover img {
-      filter: brightness(1.2);
-    }
-    
     .team-slide span { 
       font-weight: 700; 
       color: #fff;
       font-size: 1.1rem;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+      padding: 8px 12px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 6px;
+      backdrop-filter: blur(5px);
+    }
+
+    /* Team Background Images */
+    .mercedes-bg {
+      background-image: url('https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=400&h=300&fit=crop');
+    }
+
+    .redbull-bg {
+      background-image: url('https://images.unsplash.com/photo-1551410224-699683e15636?w=400&h=300&fit=crop');
+    }
+
+    .ferrari-bg {
+      background-image: url('https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=400&h=300&fit=crop');
+    }
+
+    .mclaren-bg {
+      background-image: url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=400&h=300&fit=crop');
+    }
+
+    .alpine-bg {
+      background-image: url('https://images.unsplash.com/photo-1566473965997-3de9c817e938?w=400&h=300&fit=crop');
+    }
+
+    .aston-martin-bg {
+      background-image: url('https://images.unsplash.com/photo-1597223557154-721c1cecc4b0?w=400&h=300&fit=crop');
+    }
+
+    .kick-sauber-bg {
+      background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop');
+    }
+
+    .williams-bg {
+      background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=300&fit=crop');
     }
 
     /* Enhanced Driver Spotlight */
@@ -729,6 +817,19 @@
       .countdown span {
         font-size: 1.2rem;
       }
+
+      .f1-stats {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .stat-item {
+        padding: 16px 12px;
+      }
+
+      .stat-number {
+        font-size: 1.8rem;
+      }
       
       .newsletter-form { 
         flex-direction: column;
@@ -778,6 +879,27 @@
       }
 
       .countdown small {
+        font-size: 0.7rem;
+      }
+
+      .about-content h4 {
+        font-size: 1.2rem;
+      }
+
+      .about-content p {
+        font-size: 0.9rem;
+      }
+
+      .f1-stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      .stat-number {
+        font-size: 1.3rem;
+      }
+
+      .stat-label {
         font-size: 0.7rem;
       }
     }
