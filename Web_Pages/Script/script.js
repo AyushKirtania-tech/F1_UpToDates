@@ -1,97 +1,145 @@
-/* schedule.js - robust fetch with CORS fallback and friendly UI updates */
+// F1 Racing Website - Clean JavaScript
 
-const ergastURL = 'https://ergast.com/api/f1/current.json?limit=1000';
-const corsProxy = (u) => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`;
+// Utility functions
+const $ = (selector) => document.querySelector(selector);
 
-const $ = sel => document.querySelector(sel);
-const setText = (sel, txt) => { const el = $(sel); if (el) el.textContent = txt; };
+// Race data
+const upcomingRaces = [
+  {
+    name: "Singapore Grand Prix",
+    circuit: "Marina Bay Street Circuit",
+    date: new Date('2025-10-15T14:00:00'),
+    location: "Singapore"
+  },
+  {
+    name: "Japanese Grand Prix", 
+    circuit: "Suzuka International Racing Course",
+    date: new Date('2025-10-29T14:00:00'),
+    location: "Suzuka, Japan"
+  },
+  {
+    name: "United States Grand Prix",
+    circuit: "Circuit of the Americas",
+    date: new Date('2025-11-12T14:00:00'),
+    location: "Austin, Texas"
+  }
+];
 
-async function fetchJsonWithFallback(url) {
-  // try direct fetch first
-  try {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    return await res.json();
-  } catch (err) {
-    console.warn('Direct fetch failed, trying proxy', err);
-    const res2 = await fetch(corsProxy(url));
-    if (!res2.ok) throw new Error('Proxy error ' + res2.status);
-    return await res2.json();
+// Next race functionality
+function setupNextRace() {
+  const now = new Date();
+  const nextRace = upcomingRaces.find(race => race.date > now) || upcomingRaces[0];
+  
+  updateNextRaceDisplay(nextRace);
+  startCountdown(nextRace.date);
+}
+
+function updateNextRaceDisplay(race) {
+  const nameEl = $('#nr-name');
+  const circuitEl = $('#nr-circuit');
+  const dateEl = $('#nr-date');
+
+  if (nameEl) nameEl.textContent = race.name;
+  if (circuitEl) circuitEl.textContent = race.circuit;
+  if (dateEl) {
+    dateEl.textContent = race.date.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
   }
 }
 
-function formatLocal(dateStr, timeStr) {
-  try {
-    if (timeStr) {
-      const dt = new Date(`${dateStr}T${timeStr}Z`);
-      return dt.toLocaleString();
-    } else {
-      return new Date(dateStr).toLocaleDateString();
-    }
-  } catch {
-    return dateStr;
-  }
-}
+// Countdown timer
+function startCountdown(targetDate) {
+  const daysEl = $('#cd-days');
+  const hoursEl = $('#cd-hours');
+  const minsEl = $('#cd-mins');
+  const secsEl = $('#cd-secs');
 
-function startCountdownTo(targetDate) {
-  const daysEl = $('#cd-days'), hrsEl = $('#cd-hours'), minsEl = $('#cd-mins'), secsEl = $('#cd-secs');
   if (!daysEl) return;
 
-  function tick() {
-    const now = new Date();
-    const diff = targetDate - now;
-    if (diff <= 0) {
-      daysEl.textContent = '0'; hrsEl.textContent = '00'; minsEl.textContent = '00'; secsEl.textContent = '00';
-      clearInterval(interval);
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = targetDate.getTime() - now;
+
+    if (distance < 0) {
+      const countdownEl = $('#countdown');
+      if (countdownEl) {
+        countdownEl.innerHTML = '<div style="text-align: center; color: var(--accent); font-weight: 900; font-size: 1.2rem; padding: 20px;">🏁 RACE IS LIVE! 🏁</div>';
+      }
       return;
     }
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const mins = Math.floor((diff / (1000 * 60)) % 60);
-    const secs = Math.floor((diff / 1000) % 60);
-    daysEl.textContent = days;
-    hrsEl.textContent = String(hours).padStart(2,'0');
-    minsEl.textContent = String(mins).padStart(2,'0');
-    secsEl.textContent = String(secs).padStart(2,'0');
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
+    if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+    if (minsEl) minsEl.textContent = minutes.toString().padStart(2, '0');
+    if (secsEl) secsEl.textContent = seconds.toString().padStart(2, '0');
   }
-  tick();
-  const interval = setInterval(tick, 1000);
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
 }
 
-async function loadAndShowNextRace() {
-  setText('#nr-name', 'Loading...');
-  try {
-    const data = await fetchJsonWithFallback(ergastURL);
-    const races = data?.MRData?.RaceTable?.Races || [];
-    const now = new Date();
-    const next = races.find(r => {
-      if (!r.date) return false;
-      const dt = r.time ? new Date(`${r.date}T${r.time}Z`) : new Date(r.date);
-      return dt > now;
-    });
-    if (!next) {
-      setText('#nr-name', 'No upcoming race found');
-      $('#countdown').style.display = 'none';
-      setText('#nr-circuit', '');
-      setText('#nr-date', '');
+// Newsletter functionality
+function setupNewsletter() {
+  const form = $('#newsletter-form');
+  const emailInput = $('#email');
+  const messageEl = $('#newsletter-msg');
+
+  if (!form) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const email = emailInput.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    if (!email) {
+      showMessage('Please enter your email address.', 'error');
       return;
     }
-    setText('#nr-name', next.raceName);
-    setText('#nr-circuit', `${next.Circuit.circuitName} — ${next.Circuit.Location.locality}, ${next.Circuit.Location.country}`);
-    setText('#nr-date', formatLocal(next.date, next.time));
-    $('#nr-link').href = 'schedule.html';
-    const target = next.time ? new Date(`${next.date}T${next.time}Z`) : new Date(next.date);
-    startCountdownTo(target);
-  } catch (err) {
-    console.error('Failed to load schedule:', err);
-    setText('#nr-name', 'Unable to load next race');
-    $('#countdown').style.display = 'none';
+    
+    if (!emailRegex.test(email)) {
+      showMessage('Please enter a valid email address.', 'error');
+      return;
+    }
+
+    // Simulate subscription
+    showMessage('🏁 Welcome to the Paddock Club! Confirmation sent to ' + email, 'success');
+    emailInput.value = '';
+  });
+
+  function showMessage(message, type) {
+    if (!messageEl) return;
+    messageEl.textContent = message;
+    messageEl.style.color = type === 'error' ? '#ff4757' : '#2ed573';
+    
+    setTimeout(() => {
+      messageEl.textContent = '';
+    }, 5000);
   }
 }
 
+// Set current year in footer
+function setCurrentYear() {
+  const yearElement = $('#year');
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
+}
+
+// Initialize application
 document.addEventListener('DOMContentLoaded', () => {
-  // ensure elements exist on the page before calling
-  if (document.querySelector('#nr-name')) {
-    loadAndShowNextRace();
-  }
+  console.log('🏁 F1 Racing Website Loaded!');
+  
+  setCurrentYear();
+  setupNextRace();
+  setupNewsletter();
 });
