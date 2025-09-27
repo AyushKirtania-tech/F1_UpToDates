@@ -97,9 +97,24 @@ body::before{
   background-clip:text;
   color:transparent;
 }
-.championship-table{border-radius:12px;border:1px solid rgba(255,255,255,0.04);overflow:hidden;background:var(--card)}
-.table-header{display:grid;grid-template-columns:72px 1fr 100px 80px;padding:14px;background:rgba(225,6,0,0.04);font-weight:800;color:var(--accent)}
-.table-row{display:grid;grid-template-columns:72px 1fr 100px 80px;padding:12px;border-top:1px solid rgba(255,255,255,0.02);align-items:center}
+.championship-table .table-header,
+.championship-table .table-row {
+  display: grid;
+  grid-template-columns: 60px 1fr 100px; /* Pos, Team, Points */
+  padding: 12px;
+  align-items: center;
+}
+
+/* adjust header style if you have special styling */
+.table-header {
+  font-weight: 800;
+  /* other header styling */
+}
+.table-row {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  transition: background .3s;
+}
+
 
 /* chips */
 .team-color{width:16px;height:14px;border-radius:4px;display:inline-block;margin-right:8px}
@@ -112,6 +127,8 @@ body::before{
 .team-color.haas{background:linear-gradient(135deg,#ffffff,#b91c1c)}
 .team-color.alpine{background:linear-gradient(135deg,#0084c7,#005a8f)}
 .team-color.racingbulls{background:linear-gradient(135deg,#9b2c2c,#3730a3)}
+.team-color.astonmartin{background:linear-gradient(135deg,#006f62,#004d45)}
+
 
 /* reveal animation */
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
