@@ -37,13 +37,13 @@ header {
 .header-inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 16px 24px;
+  padding: 10px 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.logo {
+.logo h1 {
   font-size: 1.5rem;
   font-weight: 900;
   letter-spacing: 2px;
@@ -73,6 +73,13 @@ header {
 .main-nav a.active {
   color: var(--accent);
   background: rgba(225, 6, 0, 0.1);
+}
+
+/*global css*/
+.home-main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 24px;
 }
 
 /* Hero Section */

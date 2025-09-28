@@ -1,5 +1,5 @@
 /* teams.js
-   - Robust include for navbar/footer (with fallback)
+   - Clean navbar/footer loading
    - Filterable cards with animation
    - Reveal on scroll (IntersectionObserver)
    - Lightweight modal using injected overlay
@@ -7,10 +7,11 @@
 */
 
 (() => {
-  /* includeHTML: injects external html into a container; resolves when done */
+  /* includeHTML: injects external html into a container */
   async function includeHTML(id, path) {
     const container = document.getElementById(id);
     if (!container) return Promise.resolve();
+    
     try {
       const resp = await fetch(path, { cache: "no-store" });
       if (!resp.ok) throw new Error('Not found');
@@ -19,35 +20,7 @@
       setActiveNavLink();
       return;
     } catch (err) {
-      // fallback markup if include missing
-      if (id === 'navbar') {
-        container.innerHTML = `
-          <header class="site-header" role="banner">
-            <div class="header-inner container">
-              <a class="logo" href="./index.html">🏁 F1 Racing</a>
-              <nav class="main-nav" role="navigation">
-                <ul>
-                  <li><a href="index.html">Home</a></li>
-                  <li><a href="about.html">About</a></li>
-                  <li><a href="teams.html" class="active">Teams</a></li>
-                  <li><a href="drivers.html">Drivers</a></li>
-                  <li><a href="schedule.html">Schedule</a></li>
-                </ul>
-              </nav>
-            </div>
-          </header>`;
-      } else if (id === 'footer') {
-        container.innerHTML = `
-          <footer class="site-footer">
-            <div class="container">
-              <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;">
-                <div>© <span id="currentYear"></span> F1 Racing Hub - Unofficial</div>
-                <div class="socials"><a href="#" aria-label="Twitter">Twitter</a> · <a href="#" aria-label="Instagram">Instagram</a></div>
-              </div>
-            </div>
-          </footer>`;
-      }
-      setActiveNavLink();
+      console.warn(`Could not load ${path} for ${id}:`, err.message);
       return;
     }
   }
@@ -55,7 +28,8 @@
   function setActiveNavLink() {
     setTimeout(() => {
       const links = document.querySelectorAll('.main-nav a');
-      if (!links) return;
+      if (!links.length) return;
+      
       const current = location.pathname.split('/').pop() || 'index.html';
       links.forEach(a => {
         const href = (a.getAttribute('href') || '').split('/').pop();
@@ -86,11 +60,9 @@
         if (matches) {
           card.classList.remove('filtered-out');
           card.style.display = '';
-          // animate in
           requestAnimationFrame(() => card.classList.remove('hidden'));
           any = true;
         } else {
-          // animate out then remove from layout
           card.classList.add('hidden');
           setTimeout(() => {
             card.classList.add('filtered-out');
@@ -107,7 +79,6 @@
       btn.addEventListener('click', () => applyFilter(btn.dataset.filter || 'all'));
     });
 
-    // init from default active
     const start = buttons.find(b => b.classList.contains('active'))?.dataset.filter || 'all';
     applyFilter(start);
   }
@@ -116,6 +87,7 @@
   function initRevealOnScroll() {
     const targets = document.querySelectorAll('.reveal');
     if (!targets.length) return;
+    
     if (!('IntersectionObserver' in window)) {
       targets.forEach(t => t.classList.add('visible'));
       return;
@@ -208,35 +180,35 @@
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('visible')) close(); });
   }
 
-  /* fallback images & year update */
+  /* Update year placeholders */
   function updateYearPlaceholders() {
     const yearEls = document.querySelectorAll('#currentYear, #yr');
-    const y = new Date().getFullYear();
-    yearEls.forEach(el => el.textContent = y);
+    const currentYear = new Date().getFullYear();
+    yearEls.forEach(el => el.textContent = currentYear);
   }
 
-  // global image fallback handler
+  /* Global image fallback handler */
   function bindImageFallbacks() {
     document.body.addEventListener('error', e => {
-      const t = e.target;
-      if (t && t.tagName === 'IMG') {
-        if (!t.dataset.fallbackApplied) {
-          t.dataset.fallbackApplied = '1';
-          t.src = t.getAttribute('data-fallback') || 'images/team-fallback.jpg';
+      const target = e.target;
+      if (target && target.tagName === 'IMG') {
+        if (!target.dataset.fallbackApplied) {
+          target.dataset.fallbackApplied = '1';
+          target.src = target.getAttribute('data-fallback') || 'images/team-fallback.jpg';
         }
       }
     }, true);
   }
 
-  /* DOM ready */
+  /* Initialize when DOM ready */
   document.addEventListener('DOMContentLoaded', async () => {
-    // Try to load navbar/footer (if files don't exist, fallback is injected)
+    // Load navbar and footer
     await Promise.all([
       includeHTML('navbar', 'navbar.html'),
       includeHTML('footer', 'footer.html')
     ]);
 
-    // Init interactive features
+    // Initialize interactive features
     initFilters();
     initRevealOnScroll();
     initTeamModal();
@@ -248,16 +220,16 @@
 
 // Fill team stat boxes from data-* attributes if values are missing
 function fillTeamStatsFromDataAttributes() {
-  document.querySelectorAll('.team-stats').forEach(stBlock => {
-    const champs = stBlock.dataset.championships ?? '';
-    const wins   = stBlock.dataset.wins ?? '';
-    const founded= stBlock.dataset.founded ?? '';
+  document.querySelectorAll('.team-stats').forEach(statsBlock => {
+    const championships = statsBlock.dataset.championships ?? '';
+    const wins = statsBlock.dataset.wins ?? '';
+    const founded = statsBlock.dataset.founded ?? '';
 
-    const statEls = stBlock.querySelectorAll('.stat .stat-value');
-    if (statEls.length >= 3) {
-      statEls[0].textContent = statEls[0].textContent.trim() || (champs || '—');
-      statEls[1].textContent = statEls[1].textContent.trim() || (wins   || '—');
-      statEls[2].textContent = statEls[2].textContent.trim() || (founded|| '—');
+    const statElements = statsBlock.querySelectorAll('.stat .stat-value');
+    if (statElements.length >= 3) {
+      statElements[0].textContent = statElements[0].textContent.trim() || (championships || '—');
+      statElements[1].textContent = statElements[1].textContent.trim() || (wins || '—');
+      statElements[2].textContent = statElements[2].textContent.trim() || (founded || '—');
     }
   });
 }
