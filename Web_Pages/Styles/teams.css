@@ -456,3 +456,37 @@ footer {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* Add this to your teams.css file, after the existing modal styles */
+
+.modal-learn-more {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(225, 6, 0, 0.3);
+}
+
+.modal-learn-more:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(225, 6, 0, 0.5);
+}
+
+.modal-learn-more:active {
+  transform: translateY(0);
+}
+
+.modal-learn-more:focus {
+  outline: 3px solid rgba(225, 6, 0, 0.4);
+  outline-offset: 3px;
+}

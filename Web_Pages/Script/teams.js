@@ -105,81 +105,92 @@
     targets.forEach(t => obs.observe(t));
   }
 
-  /* MODAL for team details */
-  function initTeamModal() {
-    const grid = document.querySelector('.teams-grid');
-    if (!grid) return;
+  /* MODAL for team details - Updated with Learn More button */
+function initTeamModal() {
+  const grid = document.querySelector('.teams-grid');
+  if (!grid) return;
 
-    const overlay = document.createElement('div');
-    overlay.className = 'team-modal-overlay';
-    overlay.innerHTML = `
-      <div class="team-modal" role="dialog" aria-modal="true" aria-hidden="true">
-        <button class="team-modal-close" aria-label="Close">&times;</button>
-        <div class="team-modal-grid">
-          <div class="team-modal-image"><img alt=""></div>
-          <div class="team-modal-content">
-            <h2></h2>
-            <div class="modal-base"></div>
-            <div class="modal-stats"></div>
-            <p class="modal-desc-text"></p>
-          </div>
+  const overlay = document.createElement('div');
+  overlay.className = 'team-modal-overlay';
+  overlay.innerHTML = `
+    <div class="team-modal" role="dialog" aria-modal="true" aria-hidden="true">
+      <button class="team-modal-close" aria-label="Close">&times;</button>
+      <div class="team-modal-grid">
+        <div class="team-modal-image"><img alt=""></div>
+        <div class="team-modal-content">
+          <h2></h2>
+          <div class="modal-base"></div>
+          <div class="modal-stats"></div>
+          <p class="modal-desc-text"></p>
+          <a href="#" class="modal-learn-more" target="_blank" rel="noopener noreferrer">Learn More</a>
         </div>
       </div>
-    `;
-    document.body.appendChild(overlay);
+    </div>
+  `;
+  document.body.appendChild(overlay);
 
-    const modal = overlay.querySelector('.team-modal');
-    const closeBtn = overlay.querySelector('.team-modal-close');
+  const modal = overlay.querySelector('.team-modal');
+  const closeBtn = overlay.querySelector('.team-modal-close');
+  const learnMoreBtn = overlay.querySelector('.modal-learn-more');
 
-    function open(card) {
-      const img = card.querySelector('.team-image img');
-      const title = card.querySelector('.team-info h2')?.textContent || '';
-      const base = card.querySelector('.team-base')?.textContent || '';
-      const desc = card.querySelector('.team-description')?.textContent || '';
-      const statNodes = card.querySelectorAll('.team-stats .stat');
+  function open(card) {
+    const img = card.querySelector('.team-image img');
+    const title = card.querySelector('.team-info h2')?.textContent || '';
+    const base = card.querySelector('.team-base')?.textContent || '';
+    const desc = card.querySelector('.team-description')?.textContent || '';
+    const statNodes = card.querySelectorAll('.team-stats .stat');
+    const teamLink = card.dataset.link || '#';
 
-      overlay.classList.add('visible');
-      overlay.setAttribute('aria-hidden', 'false');
-      modal.setAttribute('aria-hidden', 'false');
+    overlay.classList.add('visible');
+    overlay.setAttribute('aria-hidden', 'false');
+    modal.setAttribute('aria-hidden', 'false');
 
-      const modalImg = overlay.querySelector('.team-modal-image img');
-      modalImg.src = img?.src || '';
-      modalImg.alt = `${title} car`;
-      overlay.querySelector('.team-modal-content h2').textContent = title;
-      overlay.querySelector('.modal-base').textContent = base;
+    const modalImg = overlay.querySelector('.team-modal-image img');
+    modalImg.src = img?.src || '';
+    modalImg.alt = `${title} car`;
+    overlay.querySelector('.team-modal-content h2').textContent = title;
+    overlay.querySelector('.modal-base').textContent = base;
 
-      const stats = overlay.querySelector('.modal-stats');
-      stats.innerHTML = '';
-      statNodes.forEach(s => {
-        const val = s.querySelector('.stat-value')?.textContent || '';
-        const label = s.querySelector('.stat-desc')?.textContent || '';
-        const el = document.createElement('div');
-        el.className = 'modal-stat';
-        el.innerHTML = `<span class="modal-value">${val}</span><span class="modal-desc">${label}</span>`;
-        stats.appendChild(el);
-      });
-      overlay.querySelector('.modal-desc-text').textContent = desc || '';
-      closeBtn.focus();
-    }
-
-    function close() {
-      overlay.classList.remove('visible');
-      overlay.setAttribute('aria-hidden','true');
-      modal.setAttribute('aria-hidden','true');
-    }
-
-    grid.addEventListener('click', e => {
-      const card = e.target.closest('.team-card');
-      if (!card) return;
-      if (e.target.closest('a') || e.target.closest('button')) return;
-      open(card);
+    const stats = overlay.querySelector('.modal-stats');
+    stats.innerHTML = '';
+    statNodes.forEach(s => {
+      const val = s.querySelector('.stat-value')?.textContent || '';
+      const label = s.querySelector('.stat-desc')?.textContent || '';
+      const el = document.createElement('div');
+      el.className = 'modal-stat';
+      el.innerHTML = `<span class="modal-value">${val}</span><span class="modal-desc">${label}</span>`;
+      stats.appendChild(el);
     });
-
-    closeBtn.addEventListener('click', close);
-    overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('visible')) close(); });
+    overlay.querySelector('.modal-desc-text').textContent = desc || '';
+    
+    // Update Learn More button
+    learnMoreBtn.href = teamLink;
+    if (teamLink === '#') {
+      learnMoreBtn.style.display = 'none';
+    } else {
+      learnMoreBtn.style.display = 'inline-block';
+    }
+    
+    closeBtn.focus();
   }
 
+  function close() {
+    overlay.classList.remove('visible');
+    overlay.setAttribute('aria-hidden','true');
+    modal.setAttribute('aria-hidden','true');
+  }
+
+  grid.addEventListener('click', e => {
+    const card = e.target.closest('.team-card');
+    if (!card) return;
+    if (e.target.closest('a') || e.target.closest('button')) return;
+    open(card);
+  });
+
+  closeBtn.addEventListener('click', close);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('visible')) close(); });
+}
   /* Update year placeholders */
   function updateYearPlaceholders() {
     const yearEls = document.querySelectorAll('#currentYear, #yr');
