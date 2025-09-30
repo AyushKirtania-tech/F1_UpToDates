@@ -16,7 +16,7 @@
       "extensions": [
         "esbenp.prettier-vscode",     // Code formatter
         "dbaeumer.vscode-eslint",     // Linting for JS/TS
-        "mongodb.mongodb-vscode"      // MongoDB integration
+             // MongoDB integration
       ]
     }
   },

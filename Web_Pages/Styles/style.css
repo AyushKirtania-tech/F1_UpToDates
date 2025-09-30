@@ -75,12 +75,6 @@ header {
   background: rgba(225, 6, 0, 0.1);
 }
 
-/*global css*/
-.home-main {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 40px 24px;
-}
 
 /* Hero Section */
 .hero {

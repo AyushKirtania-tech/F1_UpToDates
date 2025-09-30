@@ -14,56 +14,6 @@ body::before {
   z-index: -2;
 }
 
-/* Header */
-header {
-  background: rgba(0,0,0,0.9);
-  border-bottom: 3px solid var(--accent);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.header-inner  {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 10px 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo h1 {
-  font-size: 1.5rem;
-  font-weight: 900;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.main-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 1rem;
-}
-
-.main-nav a {
-  text-decoration: none;
-  color: var(--text);
-  font-weight: 600;
-  padding: 8px 16px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
-
-.main-nav a:hover,
-.main-nav a.active {
-  color: var(--accent);
-  background: rgba(225, 6, 0, 0.1);
-}
-
 /* Main Content */
 .about-main {
   max-width: 1400px;
@@ -701,11 +651,6 @@ a:focus,
 button:focus {
   outline: 2px dashed var(--accent);
   outline-offset: 4px;
-}
-
-/* Ensure footer text wraps properly on small devices */
-.footer-grid {
-  text-align: center;
 }
 
 /* Typography tweaks */

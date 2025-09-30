@@ -2,6 +2,11 @@
    - Variables, responsive, accessible focus styles
    - Keeps visual identity from original file
 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 :root{
   --bg: #070707;
@@ -173,10 +178,10 @@ header {
   z-index: 100;
 }
 
-.header-inner  {
+.header-inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0px -1px;
+  padding: 10px 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -489,4 +494,52 @@ footer {
 .modal-learn-more:focus {
   outline: 3px solid rgba(225, 6, 0, 0.4);
   outline-offset: 3px;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header-inner {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .main-nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .hero-right {
+    order: -1;
+  }
+
+  .hero h2 {
+    font-size: 2rem;
+  }
+
+  .countdown {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .f1-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+  }
+
+  .teams-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .drivers-grid {
+    grid-template-columns: 1fr;
+  }
 }

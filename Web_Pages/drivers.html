@@ -1,37 +1,452 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Drivers - F1 Racing</title>
-  <link rel="stylesheet" href="Styles/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Drivers — F1 Racing</title>
+  <meta name="description" content="Meet the 2025 Formula One drivers competing for championship glory." />
+  <meta name="keywords" content="F1, drivers, 2025, racing, championship" />
+  <link rel="stylesheet" href="Styles/drivers.css">
+  <meta name="theme-color" content="#070707" />
 </head>
 <body>
-  <header>
-      <h1>Formula One Racing</h1>
-      <nav>
-          <ul>
-              <li><a href="index.html">Home</a></li>
-              <li><a href="about.html">About</a></li>
-              <li><a href="teams.html">Teams</a></li>
-              <li><a href="drivers.html">Drivers</a></li>
-              <li><a href="schedule.html">Schedule</a></li>
-          </ul>
-      </nav>
-  </header>
+ 
+  <div id="navbar"></div>
 
-  <section>
-    <h2>F1 Drivers</h2>
-    <ul class="card-grid">
-      <li><img src="images/driver.jpg" alt="Lewis Hamilton"> Lewis Hamilton</li>
-      <li><img src="images/driver.jpg" alt="Max Verstappen"> Max Verstappen</li>
-      <li><img src="images/driver.jpg" alt="Charles Leclerc"> Charles Leclerc</li>
-      <li><img src="images/driver.jpg" alt="Lando Norris"> Lando Norris</li>
-    </ul>
-  </section>
+  <main id="main" class="drivers-main" tabindex="-1">
+    <!-- Hero -->
+    <header class="drivers-hero" aria-labelledby="drivers-heading">
+      <div class="hero-content">
+        <h1 id="drivers-heading">2025 F1 Drivers</h1>
+        <p class="hero-subtitle">Twenty elite drivers from around the world competing for motorsport's ultimate prize.</p>
+      </div>
 
-  <footer>
-    <p>&copy; 2024 Formula One Racing. All rights reserved.</p>
-  </footer>
+      <div class="drivers-stats" aria-hidden="false">
+        <div class="stat-item" role="group" aria-label="Total drivers">
+          <span class="stat-number">20</span>
+          <span class="stat-label">Drivers</span>
+        </div>
+        <div class="stat-item" role="group" aria-label="Countries">
+          <span class="stat-number">15</span>
+          <span class="stat-label">Countries</span>
+        </div>
+        <div class="stat-item" role="group" aria-label="Races">
+          <span class="stat-number">23</span>
+          <span class="stat-label">Races</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Filters -->
+    <section class="filter-section" aria-label="Filters">
+      <div class="container">
+        <div class="filter-controls" role="tablist" aria-label="Driver filters">
+           <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All Drivers</button>
+           <button class="filter-btn" data-filter="champions" role="tab" aria-selected="false">Champions</button>
+           <button class="filter-btn" data-filter="rookies" role="tab" aria-selected="false">Rookies</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="drivers-section" aria-label="Drivers list">
+      <div class="container">
+        <div class="drivers-grid" id="driversGrid">
+
+          <!-- Max Verstappen -->
+          <article class="driver-card reveal" data-category="champions" data-team="redbull" data-link="https://www.verstappen.com/">
+            <div class="driver-header" style="background: linear-gradient(135deg, #1e3a8a, #3730a3);">
+              <div class="driver-number">#1</div>
+              <div class="country-flag">
+                <img src="images/flags/netherlands.png" alt="Netherlands" onerror="this.style.display='none'">
+              </div>
+            </div>
+            <div class="driver-image">
+              <img src="images/drivers/max.jpg" alt="Max Verstappen" loading="lazy">
+            </div>
+            <div class="driver-details">
+              <h2>Max Verstappen</h2>
+              <p class="team-name">Red Bull Racing</p>
+              <div class="driver-stats">
+                <div class="stat">
+                  <span class="stat-value">4</span>
+                  <span class="stat-desc">Championships</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value">63</span>
+                  <span class="stat-desc">Wins</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value">111</span>
+                  <span class="stat-desc">Podiums</span>
+                </div>
+              </div>
+              <p class="driver-description">The reigning world champion and one of the most dominant drivers in F1 history.</p>
+            </div>
+          </article>
+
+          <!-- Lando Norris -->
+          <article class="driver-card reveal" data-category="all" data-team="mclaren" data-link="https://landonorris.com/">
+            <div class="driver-header" style="background: linear-gradient(135deg,#ff8c00,#ff6600);">
+              <div class="driver-number">#4</div>
+              <div class="country-flag">
+                <img src="images/flags/uk.png" alt="United Kingdom" onerror="this.style.display='none'">
+              </div>
+            </div>
+            <div class="driver-image">
+              <img src="images/drivers/lando.webp" alt="Lando Norris" loading="lazy">
+            </div>
+            <div class="driver-details">
+              <h2>Lando Norris</h2>
+              <p class="team-name">McLaren</p>
+              <div class="driver-stats">
+                <div class="stat">
+                  <span class="stat-value">0</span>
+                  <span class="stat-desc">Championships</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value">4</span>
+                  <span class="stat-desc">Wins</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value">24</span>
+                  <span class="stat-desc">Podiums</span>
+                </div>
+              </div>
+              <p class="driver-description">Fast, consistent, and a fan favorite pushing for his first world championship.</p>
+            </div>
+          </article>
+
+          <!-- Charles Leclerc -->
+          <article class="driver-card reveal" data-category="all" data-team="ferrari" data-link="https://www.charlesleclerc.com/">
+            <div class="driver-header" style="background: linear-gradient(135deg, #dc2626, #991b1b);">
+              <div class="driver-number">#16</div>
+              <div class="country-flag">
+                <img src="images/flags/monaco.png" alt="Monaco" onerror="this.style.display='none'">
+              </div>
+            </div>
+            <div class="driver-image">
+              <img src="images/drivers/leclerc.jpg" alt="Charles Leclerc" loading="lazy">
+            </div>
+            <div class="driver-details">
+              <h2>Charles Leclerc</h2>
+              <p class="team-name">Ferrari</p>
+              <div class="driver-stats">
+                <div class="stat">
+                  <span class="stat-value">0</span>
+                  <span class="stat-desc">Championships</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value">7</span>
+                  <span class="stat-desc">Wins</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value">39</span>
+                  <span class="stat-desc">Podiums</span>
+                </div>
+              </div>
+              <p class="driver-description">Ferrari's leading star with exceptional speed and qualifying prowess.</p>
+            </div>
+          </article>
+
+          <!-- Lewis Hamilton -->
+          <article class="driver-card reveal" data-category="champions" data-team="ferrari" data-link="https://www.lewishamilton.com/">
+            <div class="driver-header" style="background: linear-gradient(135deg, #dc2626, #991b1b);">
+              <div class="driver-number">#44</div>
+              <div class="country-flag">
+                <img src="images/flags/uk.png" alt="United Kingdom" onerror="this.style.display='none'">
+              </div>
+            </div>
+            <div class="driver-image">
+              <img src="images/drivers/lewis.jpg" alt="Lewis Hamilton" loading="lazy">
+            </div>
+            <div class="driver-details">
+              <h2>Lewis Hamilton</h2>
+              <p class="team-name">Ferrari</p>
+              <div class="driver-stats">
+                <div class="stat">
+                  <span class="stat-value">7</span>
+                  <span class="stat-desc">Championships</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value">105</span>
+                  <span class="stat-desc">Wins</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value">201</span>
+                  <span class="stat-desc">Podiums</span>
+                </div>
+              </div>
+              <p class="driver-description">Seven-time world champion and F1 legend now racing for Ferrari.</p>
+            </div>
+          </article>
+
+          <!-- George Russell -->
+          <article class="driver-card reveal" data-category="all" data-team="mercedes" data-link="https://www.georgerussell63.com/">
+            <div class="driver-header" style="background: linear-gradient(135deg, #00d2be, #00a19c);">
+              <div class="driver-number">#63</div>
+              <div class="country-flag">
+                <img src="images/flags/uk.png" alt="United Kingdom" onerror="this.style.display='none'">
+              </div>
+            </div>
+            <div class="driver-image">
+              <img src="images/drivers/george.jpg" alt="George Russell" loading="lazy">
+            </div>
+            <div class="driver-details">
+              <h2>George Russell</h2>
+              <p class="team-name">Mercedes</p>
+              <div class="driver-stats">
+                <div class="stat">
+                  <span class="stat-value">0</span>
+                  <span class="stat-desc">Championships</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value">3</span>
+                  <span class="stat-desc">Wins</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value">16</span>
+                  <span class="stat-desc">Podiums</span>
+                </div>
+              </div>
+              <p class="driver-description">Mercedes' team leader with strong race craft and consistency.</p>
+            </div>
+          </article>
+
+          <!-- Andrea Kimi Antonelli -->
+          <article class="driver-card reveal" data-category="rookies" data-team="mercedes">
+            <div class="driver-header" style="background: linear-gradient(135deg, #00d2be, #00a19c);">
+              <div class="driver-number">#12</div>
+              <div class="country-flag">
+                <img src="images/flags/italy.png" alt="Italy" onerror="this.style.display='none'">
+              </div>
+            </div>
+            <div class="driver-image">
+              <img src="images/drivers/antonelli.avif" alt="Andrea Kimi Antonelli" loading="lazy">
+            </div>
+            <div class="driver-details">
+              <h2>Andrea Kimi Antonelli</h2>
+              <p class="team-name">Mercedes</p>
+              <div class="driver-stats">
+                <div class="stat">
+                  <span class="stat-value">0</span>
+                  <span class="stat-desc">Championships</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value">0</span>
+                  <span class="stat-desc">Wins</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value">0</span>
+                  <span class="stat-desc">Podiums</span>
+                </div>
+              </div>
+              <p class="driver-description">Exciting rookie making his F1 debut with Mercedes in 2025.</p>
+            </div>
+          </article>
+
+          <!-- Oscar Piastri -->
+          <article class="driver-card reveal" data-category="all" data-team="mclaren">
+            <div class="driver-header" style="background: linear-gradient(135deg,#ff8c00,#ff6600);">
+              <div class="driver-number">#81</div>
+              <div class="country-flag">
+                <img src="images/flags/australia.png" alt="Australia" onerror="this.style.display='none'">
+              </div>
+            </div>
+            <div class="driver-image">
+              <img src="images/drivers/piastri.webp" alt="Oscar Piastri" loading="lazy">
+            </div>
+            <div class="driver-details">
+              <h2>Oscar Piastri</h2>
+              <p class="team-name">McLaren</p>
+              <div class="driver-stats">
+                <div class="stat">
+                  <span class="stat-value">0</span>
+                  <span class="stat-desc">Championships</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value">2</span>
+                  <span class="stat-desc">Wins</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value">9</span>
+                  <span class="stat-desc">Podiums</span>
+                </div>
+              </div>
+              <p class="driver-description">Rising star showing incredible maturity and race-winning pace.</p>
+            </div>
+          </article>
+
+          <!-- Carlos Sainz Jr -->
+          <article class="driver-card reveal" data-category="all" data-team="williams">
+            <div class="driver-header" style="background: linear-gradient(135deg, #00a0de, #0073a3);">
+              <div class="driver-number">#55</div>
+              <div class="country-flag">
+                <img src="images/flags/spain.png" alt="Spain" onerror="this.style.display='none'">
+              </div>
+            </div>
+            <div class="driver-image">
+              <img src="images/drivers/carlos.jpeg" alt="Carlos Sainz Jr" loading="lazy">
+            </div>
+            <div class="driver-details">
+              <h2>Carlos Sainz Jr.</h2>
+              <p class="team-name">Williams Racing</p>
+              <div class="driver-stats">
+                <div class="stat">
+                  <span class="stat-value">0</span>
+                  <span class="stat-desc">Championships</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value">4</span>
+                  <span class="stat-desc">Wins</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value">27</span>
+                  <span class="stat-desc">Podiums</span>
+                </div>
+              </div>
+              <p class="driver-description">Experienced race winner bringing leadership to Williams.</p>
+            </div>
+          </article>
+
+          <!-- Fernando Alonso -->
+          <article class="driver-card reveal" data-category="champions" data-team="astonmartin">
+            <div class="driver-header" style="background: linear-gradient(135deg, #006a4e, #004d3b);">
+              <div class="driver-number">#14</div>
+              <div class="country-flag">
+                <img src="images/flags/spain.png" alt="Spain" onerror="this.style.display='none'">
+              </div>
+            </div>
+            <div class="driver-image">
+              <img src="images/drivers/alonso.jpg" alt="Fernando Alonso" loading="lazy">
+            </div>
+            <div class="driver-details">
+              <h2>Fernando Alonso</h2>
+              <p class="team-name">Aston Martin</p>
+              <div class="driver-stats">
+                <div class="stat">
+                  <span class="stat-value">2</span>
+                  <span class="stat-desc">Championships</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value">32</span>
+                  <span class="stat-desc">Wins</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value">106</span>
+                  <span class="stat-desc">Podiums</span>
+                </div>
+              </div>
+              <p class="driver-description">Two-time champion still competing at the highest level.</p>
+            </div>
+          </article>
+
+          <!-- Yuki Tsunoda -->
+          <article class="driver-card reveal" data-category="all" data-team="redbull">
+            <div class="driver-header" style="background: linear-gradient(135deg, #1e3a8a, #3730a3);">
+              <div class="driver-number">#22</div>
+              <div class="country-flag">
+                <img src="images/flags/japan.png" alt="Japan" onerror="this.style.display='none'">
+              </div>
+            </div>
+            <div class="driver-image">
+              <img src="images/drivers/yuki.webp" alt="Yuki Tsunoda" loading="lazy">
+            </div>
+            <div class="driver-details">
+              <h2>Yuki Tsunoda</h2>
+              <p class="team-name">Red Bull Racing</p>
+              <div class="driver-stats">
+                <div class="stat">
+                  <span class="stat-value">0</span>
+                  <span class="stat-desc">Championships</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value">0</span>
+                  <span class="stat-desc">Wins</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value">0</span>
+                  <span class="stat-desc">Podiums</span>
+                </div>
+              </div>
+              <p class="driver-description">Quick and determined driver now in the senior Red Bull team.</p>
+            </div>
+          </article>
+
+          <!-- Pierre Gasly -->
+          <article class="driver-card reveal" data-category="all" data-team="alpine">
+            <div class="driver-header" style="background: linear-gradient(135deg, #0084c7, #005a8f);">
+              <div class="driver-number">#10</div>
+              <div class="country-flag">
+                <img src="images/flags/france.png" alt="France" onerror="this.style.display='none'">
+              </div>
+            </div>
+            <div class="driver-image">
+              <img src="images/drivers/gasly.jpg" alt="Pierre Gasly" loading="lazy">
+            </div>
+            <div class="driver-details">
+              <h2>Pierre Gasly</h2>
+              <p class="team-name">Alpine</p>
+              <div class="driver-stats">
+                <div class="stat">
+                  <span class="stat-value">0</span>
+                  <span class="stat-desc">Championships</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value">1</span>
+                  <span class="stat-desc">Wins</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value">4</span>
+                  <span class="stat-desc">Podiums</span>
+                </div>
+              </div>
+              <p class="driver-description">Race winner with strong pace and determination.</p>
+            </div>
+          </article>
+
+          <!-- Alex Albon -->
+          <article class="driver-card reveal" data-category="all" data-team="williams">
+            <div class="driver-header" style="background: linear-gradient(135deg, #00a0de, #0073a3);">
+              <div class="driver-number">#23</div>
+              <div class="country-flag">
+                <img src="images/flags/thailand.png" alt="Thailand" onerror="this.style.display='none'">
+              </div>
+            </div>
+            <div class="driver-image">
+              <img src="images/drivers/albon.jpg" alt="Alex Albon" loading="lazy">
+            </div>
+            <div class="driver-details">
+              <h2>Alex Albon</h2>
+              <p class="team-name">Williams Racing</p>
+              <div class="driver-stats">
+                <div class="stat">
+                  <span class="stat-value">0</span>
+                  <span class="stat-desc">Championships</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value">0</span>
+                  <span class="stat-desc">Wins</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value">2</span>
+                  <span class="stat-desc">Podiums</span>
+                </div>
+              </div>
+              <p class="driver-description">Consistent performer and Williams team leader.</p>
+            </div>
+          </article>
+
+        </div>
+
+        <div id="noResults" class="no-results" role="status" aria-live="polite" hidden>No drivers match that filter.</div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footer" aria-hidden="true"></div>
+
+  <script defer src="Script/drivers.js"></script>
+  <script defer src="Script/common.js"></script>
 </body>
 </html>
