@@ -127,6 +127,84 @@ function setupNewsletter() {
   }
 }
 
+// Driver Carousel functionality
+function setupDriverCarousel() {
+  const grid = document.getElementById('driversGrid');
+  const dotsContainer = document.getElementById('carouselDots');
+  
+  if (!grid || !dotsContainer) return;
+  
+  const cards = document.querySelectorAll('.driver-card');
+  const totalCards = cards.length;
+  const cardsPerView = window.innerWidth <= 640 ? 1 : window.innerWidth <= 968 ? 2 : 3;
+  const totalSlides = Math.ceil(totalCards / cardsPerView);
+  let currentSlide = 0;
+  let autoplayInterval;
+
+  // Create dots
+  dotsContainer.innerHTML = '';
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'carousel-dot';
+    if (i === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsContainer.appendChild(dot);
+  }
+
+  const dots = document.querySelectorAll('.carousel-dot');
+
+  function updateCarousel() {
+    const containerWidth = grid.parentElement.offsetWidth;
+    const gap = 24;
+    const totalGaps = (cardsPerView - 1) * gap;
+    const cardWidth = (containerWidth - totalGaps) / cardsPerView;
+    
+    // Set card width
+    cards.forEach(card => {
+      card.style.width = `${cardWidth}px`;
+      card.style.minWidth = `${cardWidth}px`;
+    });
+    
+    const offset = currentSlide * (cardWidth + gap) * cardsPerView;
+    grid.style.transform = `translateX(-${offset}px)`;
+    
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentSlide);
+    });
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateCarousel();
+  }
+
+  function goToSlide(index) {
+    currentSlide = index;
+    updateCarousel();
+    resetAutoplay();
+  }
+
+  function startAutoplay() {
+    autoplayInterval = setInterval(nextSlide, 2000);
+  }
+
+  function resetAutoplay() {
+    clearInterval(autoplayInterval);
+    startAutoplay();
+  }
+
+  // Initial setup
+  updateCarousel();
+  startAutoplay();
+
+  // Pause on hover
+  grid.addEventListener('mouseenter', () => clearInterval(autoplayInterval));
+  grid.addEventListener('mouseleave', startAutoplay);
+
+  // Handle window resize
+  window.addEventListener('resize', updateCarousel);
+}
+
 // Set current year in footer
 function setCurrentYear() {
   const yearElement = $('#year');
@@ -142,4 +220,5 @@ document.addEventListener('DOMContentLoaded', () => {
   setCurrentYear();
   setupNextRace();
   setupNewsletter();
+  setupDriverCarousel();
 });

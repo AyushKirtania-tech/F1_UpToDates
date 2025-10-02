@@ -1,126 +1,159 @@
-/* drivers.js
-   - Clean navbar/footer loading
-   - Filterable driver cards with animation
-   - Reveal on scroll (IntersectionObserver)
-   - Modal with driver details and learn more button
+/* drivers.js (improved)
+   - includeHTML for navbar/footer
+   - filterable driver cards (cards may have multiple space-separated categories)
+   - reveal-on-scroll (IntersectionObserver)
+   - accessible modal (focus trap + restore)
+   - image fallback, year placeholders
 */
 
 (() => {
-  /* includeHTML: injects external html into a container */
+  /* ---------- Helpers ---------- */
+  const $ = sel => document.querySelector(sel);
+  const $$ = sel => Array.from(document.querySelectorAll(sel));
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+
+  /* ---------- includeHTML: inject external HTML into container ---------- */
   async function includeHTML(id, path) {
     const container = document.getElementById(id);
-    if (!container) return Promise.resolve();
-    
+    if (!container) return;
     try {
-      const resp = await fetch(path, { cache: "no-store" });
-      if (!resp.ok) throw new Error('Not found');
+      const resp = await fetch(path, { cache: 'no-store' });
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
       const html = await resp.text();
       container.innerHTML = html;
-      setActiveNavLink();
-      return;
+      setActiveNavLink(); // call after nav injected
     } catch (err) {
-      console.warn(`Could not load ${path} for ${id}:`, err.message);
-      return;
+      // fail silently but log
+      console.warn(`Could not load '${path}' into #${id}:`, err.message);
+      container.innerHTML = ''; // ensure no leftover
     }
   }
 
+  /* ---------- Set active nav link (robust) ---------- */
   function setActiveNavLink() {
-    setTimeout(() => {
-      const links = document.querySelectorAll('.main-nav a');
+    // run async to ensure nav links exist
+    requestAnimationFrame(() => {
+      const links = $$('.main-nav a, nav a');
       if (!links.length) return;
-      
-      const current = location.pathname.split('/').pop() || 'index.html';
+      // Use pathname last segment (or index.html if blank)
+      const current = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
       links.forEach(a => {
-        const href = (a.getAttribute('href') || '').split('/').pop();
-        a.classList.toggle('active', href === current);
+        const href = (a.getAttribute('href') || '').split('/').pop().toLowerCase();
+        const isActive = href && (href === current || (href === '' && current === 'index.html'));
+        a.classList.toggle('active', isActive);
+        a.setAttribute('aria-current', isActive ? 'page' : 'false');
       });
-    }, 50);
+    });
   }
 
-  /* FILTERS */
+  /* ---------- FILTERS ---------- */
   function initFilters() {
-    const buttons = Array.from(document.querySelectorAll('.filter-btn'));
-    const cards = Array.from(document.querySelectorAll('.driver-card'));
-    const noResults = document.getElementById('noResults');
+    const buttons = $$('.filter-btn');
+    const cards = $$('.driver-card');
+    const noResults = $('#noResults');
 
     if (!buttons.length || !cards.length) return;
 
+    // normalize category list of a card into an array
+    const cardCats = card => (card.dataset.category || 'all').toLowerCase().trim().split(/\s+/);
+
     function applyFilter(filter) {
-      let any = false;
-      buttons.forEach(b => {
-        const isActive = b.dataset.filter === filter;
-        b.classList.toggle('active', isActive);
-        b.setAttribute('aria-selected', String(isActive));
+      const f = (filter || 'all').toLowerCase();
+      let anyShown = false;
+
+      // update buttons (single-select behavior)
+      buttons.forEach(btn => {
+        const active = (btn.dataset.filter || 'all').toLowerCase() === f;
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-pressed', String(active));
+        btn.setAttribute('aria-selected', String(active));
       });
 
+      // show/hide cards
       cards.forEach(card => {
-        const cat = card.dataset.category || 'all';
-        const matches = filter === 'all' || cat === filter || cat === 'all';
-        if (matches) {
+        const cats = cardCats(card);
+        const show = f === 'all' || cats.includes(f);
+        if (show) {
+          // reveal with animation: remove hidden/filtered classes
           card.classList.remove('filtered-out');
+          // ensure element is in layout before removing 'hidden' so CSS transition can play
           card.style.display = '';
           requestAnimationFrame(() => card.classList.remove('hidden'));
-          any = true;
+          anyShown = true;
         } else {
+          // add hidden class then after transition set display none/filtered-out
           card.classList.add('hidden');
+          // after CSS transition (300ms in your stylesheet) mark filtered
           setTimeout(() => {
-            card.classList.add('filtered-out');
-          }, 300);
+            // if still hidden, mark filtered-out and remove from layout
+            if (card.classList.contains('hidden')) {
+              card.classList.add('filtered-out');
+              card.style.display = 'none';
+            }
+          }, 320);
         }
       });
 
-      if (noResults) {
-        noResults.hidden = any;
-      }
+      if (noResults) noResults.hidden = anyShown;
     }
 
     buttons.forEach(btn => {
-      btn.addEventListener('click', () => applyFilter(btn.dataset.filter || 'all'));
+      btn.addEventListener('click', () => applyFilter(btn.dataset.filter));
+      // keyboard accessibility
+      btn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          btn.click();
+        }
+      });
     });
 
+    // initial filter (if one button has active class use it, else 'all')
     const start = buttons.find(b => b.classList.contains('active'))?.dataset.filter || 'all';
     applyFilter(start);
   }
 
-  /* REVEAL ON SCROLL */
+  /* ---------- REVEAL ON SCROLL ---------- */
   function initRevealOnScroll() {
-    const targets = document.querySelectorAll('.reveal');
+    const targets = $$('.reveal');
     if (!targets.length) return;
-    
+
     if (!('IntersectionObserver' in window)) {
       targets.forEach(t => t.classList.add('visible'));
       return;
     }
 
     const obs = new IntersectionObserver((entries, observer) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.12 });
-
     targets.forEach(t => obs.observe(t));
   }
 
-  /* MODAL for driver details */
+  /* ---------- DRIVER MODAL (accessible) ---------- */
   function initDriverModal() {
-    const grid = document.querySelector('.drivers-grid');
+    const grid = $('.drivers-grid');
     if (!grid) return;
 
+    // Create overlay/modal once
     const overlay = document.createElement('div');
     overlay.className = 'driver-modal-overlay';
     overlay.innerHTML = `
       <div class="driver-modal" role="dialog" aria-modal="true" aria-hidden="true">
-        <button class="driver-modal-close" aria-label="Close">&times;</button>
-        <div class="driver-modal-image"><img alt=""></div>
-        <div class="driver-modal-content">
-          <h2></h2>
-          <div class="modal-team"></div>
-          <div class="modal-stats"></div>
-          <p class="modal-desc-text"></p>
-          <a href="#" class="modal-learn-more" target="_blank" rel="noopener noreferrer">Learn More</a>
+        <button class="driver-modal-close" aria-label="Close dialog">&times;</button>
+        <div class="driver-modal-body">
+          <div class="driver-modal-image"><img alt=""></div>
+          <div class="driver-modal-content">
+            <h2 class="modal-name"></h2>
+            <div class="modal-team"></div>
+            <div class="modal-stats"></div>
+            <p class="modal-desc-text"></p>
+            <a href="#" class="modal-learn-more" target="_blank" rel="noopener noreferrer">Learn more</a>
+          </div>
         </div>
       </div>
     `;
@@ -129,8 +162,39 @@
     const modal = overlay.querySelector('.driver-modal');
     const closeBtn = overlay.querySelector('.driver-modal-close');
     const learnMoreBtn = overlay.querySelector('.modal-learn-more');
+    const modalImg = overlay.querySelector('.driver-modal-image img');
+    const modalName = overlay.querySelector('.modal-name');
+    const modalTeam = overlay.querySelector('.modal-team');
+    const modalStats = overlay.querySelector('.modal-stats');
+    const modalDesc = overlay.querySelector('.modal-desc-text');
+
+    // keep track of last focused element to restore focus when modal closes
+    let lastFocused = null;
+
+    // focus trap helpers
+    function trapFocus(e) {
+      if (!overlay.classList.contains('visible')) return;
+      const focusable = modal.querySelectorAll('a[href], button:not([disabled]), input, textarea, [tabindex]:not([tabindex="-1"])');
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.key === 'Tab') {
+        if (e.shiftKey) { // shift + tab
+          if (document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else { // tab
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      }
+    }
 
     function open(card) {
+      lastFocused = document.activeElement;
       const img = card.querySelector('.driver-image img');
       const name = card.querySelector('.driver-details h2')?.textContent || '';
       const team = card.querySelector('.team-name')?.textContent || '';
@@ -138,93 +202,99 @@
       const statNodes = card.querySelectorAll('.driver-stats .stat');
       const driverLink = card.dataset.link || '#';
 
+      // populate modal
+      modalImg.src = img?.src || '';
+      modalImg.alt = name;
+      modalName.textContent = name;
+      modalTeam.textContent = team;
+      modalStats.innerHTML = '';
+      statNodes.forEach(s => {
+        const v = s.querySelector('.stat-value')?.textContent || '';
+        const d = s.querySelector('.stat-desc')?.textContent || '';
+        const el = document.createElement('div');
+        el.className = 'modal-stat';
+        el.innerHTML = `<span class="modal-value">${v}</span><span class="modal-desc">${d}</span>`;
+        modalStats.appendChild(el);
+      });
+      modalDesc.textContent = desc || '';
+      learnMoreBtn.href = driverLink;
+      learnMoreBtn.style.display = driverLink === '#' ? 'none' : 'inline-block';
+
+      // show overlay
       overlay.classList.add('visible');
       overlay.setAttribute('aria-hidden', 'false');
       modal.setAttribute('aria-hidden', 'false');
 
-      const modalImg = overlay.querySelector('.driver-modal-image img');
-      modalImg.src = img?.src || '';
-      modalImg.alt = name;
-      
-      overlay.querySelector('.driver-modal-content h2').textContent = name;
-      overlay.querySelector('.modal-team').textContent = team;
-
-      const stats = overlay.querySelector('.modal-stats');
-      stats.innerHTML = '';
-      statNodes.forEach(s => {
-        const val = s.querySelector('.stat-value')?.textContent || '';
-        const label = s.querySelector('.stat-desc')?.textContent || '';
-        const el = document.createElement('div');
-        el.className = 'modal-stat';
-        el.innerHTML = `<span class="modal-value">${val}</span><span class="modal-desc">${label}</span>`;
-        stats.appendChild(el);
-      });
-      
-      overlay.querySelector('.modal-desc-text').textContent = desc || '';
-      
-      // Update Learn More button
-      learnMoreBtn.href = driverLink;
-      if (driverLink === '#') {
-        learnMoreBtn.style.display = 'none';
-      } else {
-        learnMoreBtn.style.display = 'inline-block';
-      }
-      
-      closeBtn.focus();
+      // wait a tick then focus close button
+      requestAnimationFrame(() => closeBtn.focus());
+      document.addEventListener('keydown', handleKeyDown);
+      modal.addEventListener('keydown', trapFocus);
     }
 
     function close() {
       overlay.classList.remove('visible');
-      overlay.setAttribute('aria-hidden','true');
-      modal.setAttribute('aria-hidden','true');
+      overlay.setAttribute('aria-hidden', 'true');
+      modal.setAttribute('aria-hidden', 'true');
+      document.removeEventListener('keydown', handleKeyDown);
+      modal.removeEventListener('keydown', trapFocus);
+      // restore focus
+      if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
     }
 
-    grid.addEventListener('click', e => {
+    function handleKeyDown(e) {
+      if (e.key === 'Escape') close();
+    }
+
+    // delegate click on grid to open modal
+    grid.addEventListener('click', (e) => {
       const card = e.target.closest('.driver-card');
       if (!card) return;
-      if (e.target.closest('a') || e.target.closest('button')) return;
+      // don't open when clicking links or buttons inside the card
+      if (e.target.closest('a, button')) return;
       open(card);
     });
 
     closeBtn.addEventListener('click', close);
-    overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('visible')) close(); });
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) close();
+    });
   }
 
-  /* Update year placeholders */
+  /* ---------- year placeholders ---------- */
   function updateYearPlaceholders() {
-    const yearEls = document.querySelectorAll('#currentYear, #yr');
-    const currentYear = new Date().getFullYear();
-    yearEls.forEach(el => el.textContent = currentYear);
+    const yearEls = $$('#currentYear, #yr, .current-year');
+    const year = new Date().getFullYear();
+    yearEls.forEach(el => (el.textContent = year));
   }
 
-  /* Global image fallback handler */
+  /* ---------- image fallback ---------- */
   function bindImageFallbacks() {
-    document.body.addEventListener('error', e => {
-      const target = e.target;
-      if (target && target.tagName === 'IMG') {
-        if (!target.dataset.fallbackApplied) {
-          target.dataset.fallbackApplied = '1';
-          target.src = target.getAttribute('data-fallback') || 'images/driver-fallback.jpg';
+    document.body.addEventListener('error', (e) => {
+      const img = e.target;
+      if (img && img.tagName === 'IMG') {
+        if (!img.dataset.fallbackApplied) {
+          img.dataset.fallbackApplied = '1';
+          // try data-fallback attribute first, then generic fallback
+          img.src = img.getAttribute('data-fallback') || 'images/driver-fallback.jpg';
         }
       }
     }, true);
   }
 
-  /* Initialize when DOM ready */
+  /* ---------- initialize everything ---------- */
   document.addEventListener('DOMContentLoaded', async () => {
-    // Load navbar and footer
+    // load navbar & footer if they exist as containers
     await Promise.all([
       includeHTML('navbar', 'navbar.html'),
       includeHTML('footer', 'footer.html')
     ]);
 
-    // Initialize interactive features
+    // init features
     initFilters();
     initRevealOnScroll();
     initDriverModal();
-    updateYearPlaceholders();
     bindImageFallbacks();
+    updateYearPlaceholders();
   });
 
 })();
