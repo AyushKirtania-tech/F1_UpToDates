@@ -489,7 +489,7 @@ body::before{
 header {
   background: rgba(0,0,0,0.9);
   border-bottom: 3px solid var(--accent);
-  position: sticky;
+  position: relative;
   top: 0;
   z-index: 100;
 }
