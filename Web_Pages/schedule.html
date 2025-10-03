@@ -5,50 +5,102 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Schedule - F1 Racing</title>
   <link rel="stylesheet" href="Styles/style.css">
+  <link rel="stylesheet" href="Styles/schedule.css">
+  <meta name="description" content="Complete Formula 1 race schedule with practice sessions, qualifying, and race times">
 </head>
 <body>
-  <header>
-    <h1>Formula One Racing</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="teams.html">Teams</a></li>
-        <li><a href="drivers.html">Drivers</a></li>
-        <li><a href="schedule.html" class="active">Schedule</a></li>
-      </ul>
-    </nav>
-  </header>
+  <!-- Navbar placeholder -->
+  <div id="navbar"></div>
 
-  <main id="main">
-    <section id="schedule">
-      <h2 id="season-title">Loading season schedule…</h2>
+  <main class="schedule-main">
+    <!-- Hero Section -->
+    <section class="schedule-hero">
+      <h1>🏁 <span id="season-title">2024 F1 Race Calendar</span></h1>
+      <p>Complete schedule with practice sessions, qualifying, and race times</p>
+      
+      <div class="schedule-filters">
+        <button class="filter-btn active" data-filter="all">All Races</button>
+        <button class="filter-btn" data-filter="upcoming">Upcoming</button>
+        <button class="filter-btn" data-filter="completed">Completed</button>
+        <button class="filter-btn" data-filter="sprint">Sprint Weekends</button>
+      </div>
+    </section>
 
-      <div id="notice" aria-live="polite" style="margin:12px 0;color:#ffd;"></div>
+    <!-- Notice/Loading State -->
+    <div id="loading" class="loading">
+      <div class="spinner"></div>
+      <p>Loading race schedule...</p>
+    </div>
 
-      <div class="schedule-container">
+    <div id="notice" class="notice" aria-live="polite"></div>
+
+    <!-- Schedule Container -->
+    <section id="schedule" class="schedule-section">
+      <div id="schedule-container" class="schedule-container">
+        <!-- Race cards will be dynamically inserted here -->
+      </div>
+
+      <!-- Optional: Classic Table View -->
+      <div class="table-view" style="display: none;">
         <table id="schedule-table" aria-describedby="season-title">
           <thead>
             <tr>
               <th>Round</th>
-              <th>Date (local)</th>
+              <th>Date</th>
               <th>Grand Prix</th>
               <th>Circuit</th>
               <th>Location</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody id="schedule-body">
-            <!-- rows injected here -->
+            <!-- Table rows will be inserted here if using table view -->
           </tbody>
         </table>
       </div>
     </section>
+
+    <!-- View Toggle -->
+    <div class="view-toggle">
+      <button id="toggle-view" class="btn btn-outline">
+        <span id="view-text">Switch to Table View</span>
+      </button>
+    </div>
+
+    <!-- Quick Stats -->
+    <section class="schedule-stats">
+      <div class="stat-card">
+        <div class="stat-number" id="total-races">--</div>
+        <div class="stat-label">Total Races</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="completed-races">--</div>
+        <div class="stat-label">Completed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="upcoming-races">--</div>
+        <div class="stat-label">Upcoming</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="sprint-races">--</div>
+        <div class="stat-label">Sprint Weekends</div>
+      </div>
+    </section>
+
+    <!-- Newsletter CTA -->
+    <section class="schedule-cta">
+      <div class="cta-content">
+        <h2>🏎️ Never Miss a Race</h2>
+        <p>Get race reminders and schedule updates delivered straight to your inbox</p>
+        <a href="index.html#newsletter" class="btn btn-primary">Subscribe to Alerts</a>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    <p>&copy; <span id="year"></span> F1 Racing. All rights reserved.</p>
-  </footer>
+  <!-- Footer placeholder -->
+  <div id="footer"></div>
 
-  <script src="Script/script.js"></script>
+  <script src="Script/schedule.js"></script>
+  <script src="Script/common.js"></script>
 </body>
 </html>

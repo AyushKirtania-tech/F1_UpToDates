@@ -23,8 +23,25 @@
   font-family: "Inter", "Segoe UI", system-ui, Arial, sans-serif;
 }
 
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  /* Background */
+  background: url("../images/background.png") no-repeat center center fixed;
+  background-size: cover;   /* Make it cover the whole screen */
+  background-attachment: fixed; /* Creates a parallax effect */
+  background-color: #000;   /* Fallback color if image doesn’t load */
+  color: #fff; /* Ensures text is visible */
+}
+
+
+
+
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;background:var(--bg);color:#f7f7f7;line-height:1.5}
+html{height:100%;margin:0;background:var(--bg);color:#f7f7f7;line-height:1.5}
 .container{max-width:var(--container);margin:0 auto;padding:0 var(--pad)}
 .skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
 .skip-link:focus{left:12px;top:12px;width:auto;height:auto;padding:8px 12px;background:#fff;color:#000;border-radius:6px;z-index:9999}
