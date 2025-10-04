@@ -38,43 +38,70 @@
     <!-- Regional Overview Cards -->
     <section class="world-circuits-section">
       <h2>F1 Circuits Worldwide</h2>
+
       <section class="regional-overview">
         <div class="region-cards-grid">
-          <div class="region-card">
-            <div class="region-image">
-              <img src="images/regions/europe.jpg" alt="Europe" onerror="this.src='https://source.unsplash.com/400x200/?europe,racing'">
-            </div>
-            <h3>Europe</h3>
-            <p class="region-count">10 Circuits</p>
-            <p class="region-list">Monaco • Silverstone • Spa • Monza • Zandvoort • Imola • Barcelona • Red Bull Ring • Hungaroring • Baku</p>
-          </div>
 
-          <div class="region-card">
+          <!-- Europe -->
+          <article class="region-card" role="button" tabindex="0" aria-label="Europe circuits">
             <div class="region-image">
-              <img src="images/regions/asia.jpg" alt="Asia & Middle East" onerror="this.src='https://source.unsplash.com/400x200/?asia,racing'">
+              <img src="images/regions/europe.jpg" alt="Europe circuits photo" onerror="this.src='https://source.unsplash.com/800x600/?europe,race,track'">
+              <div class="region-overlay-text">
+                <h3>Europe</h3>
+                <div class="region-count">10 Circuits</div>
+                <div class="region-list">Monaco • Silverstone • Spa • Monza • Zandvoort • Imola • Barcelona • Red Bull Ring • Hungaroring • Baku</div>
+              </div>
             </div>
-            <h3>Asia & Middle East</h3>
-            <p class="region-count">7 Circuits</p>
-            <p class="region-list">Bahrain • Saudi Arabia • Abu Dhabi • Singapore • Japan • China • Qatar</p>
-          </div>
+            <div class="region-meta">
+              <div style="flex:1; color:var(--muted); font-size:0.9rem;">Historic venues & high-speed straights</div>
+            </div>
+          </article>
 
-          <div class="region-card">
+          <!-- Asia & Middle East -->
+          <article class="region-card" role="button" tabindex="0" aria-label="Asia and Middle East circuits">
             <div class="region-image">
-              <img src="images/regions/americas.jpg" alt="Americas" onerror="this.src='https://source.unsplash.com/400x200/?america,racing'">
+              <img src="images/regions/asia_middle_east.jpg" alt="Asia and Middle East circuits photo" onerror="this.src='https://source.unsplash.com/800x600/?asia,grandprix,track'">
+              <div class="region-overlay-text">
+                <h3>Asia & Middle East</h3>
+                <div class="region-count">7 Circuits</div>
+                <div class="region-list">Bahrain • Saudi Arabia • Abu Dhabi • Singapore • Japan • China • Qatar</div>
+              </div>
             </div>
-            <h3>Americas</h3>
-            <p class="region-count">5 Circuits</p>
-            <p class="region-list">USA (Miami, Austin, Las Vegas) • Canada • Brazil • Mexico</p>
-          </div>
+            <div class="region-meta">
+              <div style="flex:1; color:var(--muted); font-size:0.9rem;">Night races & desert speedways</div>
+            </div>
+          </article>
 
-          <div class="region-card">
+          <!-- Americas -->
+          <article class="region-card" role="button" tabindex="0" aria-label="Americas circuits">
             <div class="region-image">
-              <img src="images/regions/oceania.jpg" alt="Oceania" onerror="this.src='https://source.unsplash.com/400x200/?australia,racing'">
+              <img src="images/regions/america.webp" alt="Americas circuits photo" onerror="this.src='https://source.unsplash.com/800x600/?america,grandprix,track'">
+              <div class="region-overlay-text">
+                <h3>Americas</h3>
+                <div class="region-count">5 Circuits</div>
+                <div class="region-list">USA (Miami, Austin, Las Vegas) • Canada • Brazil • Mexico</div>
+              </div>
             </div>
-            <h3>Oceania</h3>
-            <p class="region-count">1 Circuit</p>
-            <p class="region-list">Australia (Melbourne)</p>
-          </div>
+            <div class="region-meta">
+              <div style="flex:1; color:var(--muted); font-size:0.9rem;">Street races meet fast permanent circuits</div>
+            </div>
+          </article>
+
+          <!-- Oceania -->
+          <article class="region-card" role="button" tabindex="0" aria-label="Oceania circuits">
+            <div class="region-image">
+              <img src="images/regions/australia.webp" alt="Oceania circuits photo" onerror="this.src='https://source.unsplash.com/800x600/?australia,grandprix,track'">
+              <div class="region-overlay-text">
+                <h3>Oceania</h3>
+                <div class="region-count">1 Circuit</div>
+                <div class="region-list">Australia (Melbourne)</div>
+              </div>
+            </div>
+            <div class="region-meta">
+              <div style="flex:1; color:var(--muted); font-size:0.9rem;">Season opener classics</div>
+            </div>
+          </article>
+
         </div>
       </section>
     </section>
@@ -84,8 +111,8 @@
       <div class="search-bar">
         <input type="text" id="circuit-search" placeholder="Search circuits by name or country..." />
       </div>
-      
-      <div class="filter-buttons">
+
+      <div class="filter-buttons" role="group" aria-label="Filter circuits">
         <button class="filter-btn active" data-filter="all">All Circuits</button>
         <button class="filter-btn" data-filter="street">Street Circuits</button>
         <button class="filter-btn" data-filter="permanent">Permanent Tracks</button>
@@ -104,18 +131,18 @@
     </section>
 
     <!-- Loading State -->
-    <div id="loading" class="loading">
+    <div id="loading" class="loading" hidden>
       <div class="spinner"></div>
       <p>Loading circuits...</p>
     </div>
 
     <!-- Circuits Grid -->
-    <section id="circuits-container" class="circuits-grid">
+    <section id="circuits-container" class="circuits-grid" aria-live="polite">
       <!-- Circuit cards will be dynamically inserted here -->
     </section>
 
     <!-- Featured Circuit Spotlight -->
-    <section class="featured-circuit" id="featured-circuit">
+    <section class="featured-circuit" id="featured-circuit" hidden>
       <!-- Featured circuit will be dynamically inserted -->
     </section>
 

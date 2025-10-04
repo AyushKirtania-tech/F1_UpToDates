@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ferrari SF-25 — F1 Racing</title>
+  <meta name="description" content="Explore the Ferrari SF-25 F1 car specifications, performance, and technical details for the 2025 season." />
+  <meta name="keywords" content="F1, Ferrari, SF-25, Formula 1, car specifications, 2025" />
+  
+  <link rel="stylesheet" href="../Styles/teams.css">
+  <style>
+    .car-hero {
+      position: relative;
+      height: 60vh;
+      min-height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 24px;
+      margin-bottom: 40px;
+      background: linear-gradient(135deg, #dc2626, #991b1b);
+    }
+
+    .car-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('../images/cars/ferrari.avif') center/cover;
+      opacity: 0.3;
+      z-index: 0;
+    }
+
+    .car-hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .car-hero h1 {
+      font-size: 4rem;
+      font-weight: 900;
+      margin: 0 0 16px;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: #fff;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .car-hero .subtitle {
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.9);
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .car-main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #bdbdbd;
+      text-decoration: none;
+      margin-bottom: 24px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.3s;
+    }
+
+    .back-link:hover {
+      color: #dc2626;
+      border-color: #dc2626;
+      transform: translateX(-4px);
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+
+    .main-content {
+      background: rgba(20,20,20,0.92);
+      padding: 32px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .specs-card {
+      background: rgba(20,20,20,0.92);
+      padding: 24px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .specs-card h3 {
+      margin: 0 0 20px;
+      font-size: 1.3rem;
+      color: #dc2626;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .spec-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .spec-item:last-child {
+      border-bottom: none;
+    }
+
+    .spec-label {
+      color: #bdbdbd;
+      font-weight: 600;
+    }
+
+    .spec-value {
+      color: #fff;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 900;
+      margin: 0 0 24px;
+      background: linear-gradient(135deg, #dc2626, #991b1b);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin: 32px 0;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.02);
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      background: rgba(255,255,255,0.04);
+      border-color: #dc2626;
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #dc2626, #991b1b);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .feature-card h4 {
+      margin: 0 0 12px;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    .feature-card p {
+      color: #bdbdbd;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .stat-highlight {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin: 32px 0;
+    }
+
+    .stat-box {
+      background: rgba(255,255,255,0.02);
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.06);
+      text-align: center;
+    }
+
+    .stat-number {
+      display: block;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #dc2626;
+      margin-bottom: 8px;
+    }
+
+    .stat-text {
+      color: #bdbdbd;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .technical-section {
+      background: rgba(20,20,20,0.92);
+      padding: 40px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.04);
+      margin: 32px 0;
+    }
+
+    .tech-detail {
+      margin: 24px 0;
+      padding: 20px;
+      background: rgba(255,255,255,0.02);
+      border-left: 4px solid #dc2626;
+      border-radius: 8px;
+    }
+
+    .tech-detail h4 {
+      margin: 0 0 12px;
+      color: #dc2626;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+    }
+
+    .tech-detail p {
+      color: #bdbdbd;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .drivers-showcase {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin: 32px 0;
+    }
+
+    .driver-card-large {
+      background: rgba(20,20,20,0.92);
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: all 0.3s;
+    }
+
+    .driver-card-large:hover {
+      transform: translateY(-8px);
+      border-color: #dc2626;
+    }
+
+    .driver-image-wrap {
+      height: 250px;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(220,38,38,0.2), rgba(153,27,27,0.2));
+    }
+
+    .driver-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .driver-info {
+      padding: 20px;
+    }
+
+    .driver-info h4 {
+      margin: 0 0 8px;
+      font-size: 1.5rem;
+      color: #fff;
+    }
+
+    .driver-number {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(220,38,38,0.2);
+      color: #dc2626;
+      border-radius: 6px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    @media (max-width: 1000px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .car-hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .stat-highlight {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .drivers-showcase {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-highlight {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <meta name="theme-color" content="#dc2626" />
+</head>
+<body>
+  <div id="navbar"></div>
+
+  <main class="car-main">
+    <a href="../teams.html" class="back-link">
+      <span>←</span> Back to Teams
+    </a>
+
+    <!-- Hero -->
+    <header class="car-hero">
+      <div class="car-hero-content">
+        <h1>SF-25</h1>
+        <p class="subtitle">Scuderia Ferrari 2025 Formula One Car</p>
+      </div>
+    </header>
+
+    <!-- Stats Highlight -->
+    <div class="stat-highlight">
+      <div class="stat-box">
+        <span class="stat-number">~1000</span>
+        <span class="stat-text">Horsepower</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-number">1.6L</span>
+        <span class="stat-text">V6 Turbo Hybrid</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-number">740</span>
+        <span class="stat-text">kg Minimum Weight</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-number">360+</span>
+        <span class="stat-text">km/h Top Speed</span>
+      </div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="content-grid">
+      <div class="main-content">
+        <h2 class="section-title">Overview</h2>
+        <p style="color: #bdbdbd; line-height: 1.8; margin-bottom: 24px;">
+          The Ferrari SF-25 represents a complete evolution in Ferrari's Formula One engineering philosophy. Designed to compete at the highest level in the 2025 World Championship, this machine combines cutting-edge aerodynamics, advanced hybrid power unit technology, and the legendary Prancing Horse racing spirit. With significant changes from its predecessor, the SF-25 showcases Ferrari's commitment to returning to championship-winning form.
+        </p>
+
+        <h2 class="section-title">Key Features</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h4>Hybrid Power Unit</h4>
+            <p>Advanced 1.6L V6 turbocharged engine paired with dual MGU systems delivering approximately 1,000 horsepower.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔧</div>
+            <h4>Carbon Fiber Chassis</h4>
+            <p>Lightweight monocoque construction using carbon-fiber composite honeycomb structures for maximum rigidity and safety.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">💨</div>
+            <h4>Advanced Aerodynamics</h4>
+            <p>Completely redesigned aero package with optimized front wing, floor, and diffuser configurations for enhanced downforce.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🛑</div>
+            <h4>Brembo Braking</h4>
+            <p>Carbon self-ventilated disc brakes with electronically controlled hydraulic system for precise stopping power.</p>
+          </div>
+        </div>
+
+        <h2 class="section-title">2025 Driver Lineup</h2>
+        <div class="drivers-showcase">
+          <div class="driver-card-large">
+            <div class="driver-image-wrap">
+              <img src="../images/drivers/leclerc.jpg" alt="Charles Leclerc" onerror="this.src='../images/team-fallback.jpg'">
+            </div>
+            <div class="driver-info">
+              <span class="driver-number">#16</span>
+              <h4>Charles Leclerc</h4>
+              <p style="color: #bdbdbd;">The Monegasque talent continues to lead Ferrari's charge with speed, consistency, and racecraft honed over multiple seasons with the team.</p>
+            </div>
+          </div>
+          <div class="driver-card-large">
+            <div class="driver-image-wrap">
+              <img src="../images/drivers/lewis.jpg" alt="Lewis Hamilton" onerror="this.src='../images/team-fallback.jpg'">
+            </div>
+            <div class="driver-info">
+              <span class="driver-number">#44</span>
+              <h4>Lewis Hamilton</h4>
+              <p style="color: #bdbdbd;">The seven-time World Champion joins Ferrari in 2025, bringing championship experience and legendary skill to the Prancing Horse.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar">
+        <!-- Technical Specs -->
+        <div class="specs-card">
+          <h3>Technical Specifications</h3>
+          <div class="spec-item">
+            <span class="spec-label">Chassis</span>
+            <span class="spec-value">Carbon Fiber Monocoque</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Engine</span>
+            <span class="spec-value">Ferrari 1.6L V6 Turbo</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Power Output</span>
+            <span class="spec-value">~1000 HP</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Energy Recovery</span>
+            <span class="spec-value">Dual MGU System</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Transmission</span>
+            <span class="spec-value">8-Speed Sequential</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Weight</span>
+            <span class="spec-value">740 kg (min)</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Fuel Capacity</span>
+            <span class="spec-value">110 kg (max)</span>
+          </div>
+        </div>
+
+        <!-- Performance -->
+        <div class="specs-card">
+          <h3>Performance</h3>
+          <div class="spec-item">
+            <span class="spec-label">0-100 km/h</span>
+            <span class="spec-value">~2.5 seconds</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">0-200 km/h</span>
+            <span class="spec-value">~4.5 seconds</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Top Speed</span>
+            <span class="spec-value">360+ km/h</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Max RPM</span>
+            <span class="spec-value">15,000 RPM</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Max Lateral G</span>
+            <span class="spec-value">6.5G</span>
+          </div>
+        </div>
+
+        <!-- Heritage -->
+        <div class="specs-card">
+          <h3>Ferrari F1 Heritage</h3>
+          <div class="spec-item">
+            <span class="spec-label">Championships</span>
+            <span class="spec-value">16</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Race Wins</span>
+            <span class="spec-value">248+</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Pole Positions</span>
+            <span class="spec-value">250+</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Founded</span>
+            <span class="spec-value">1947</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Technical Deep Dive -->
+    <section class="technical-section">
+      <h2 class="section-title">Technical Deep Dive</h2>
+      
+      <div class="tech-detail">
+        <h4>🔋 Power Unit & Hybrid System</h4>
+        <p>
+          The SF-25 is powered by Ferrari's latest evolution of their turbocharged 1.6-liter V6 internal combustion engine. This power unit works in harmony with two Motor Generator Units (MGUs): the MGU-K recovers kinetic energy during braking, while the MGU-H harvests energy from exhaust gases through the turbocharger. Together, the system produces approximately 1,000 horsepower, with the hybrid components adding around 160 HP of electrical boost. The engine revs to 15,000 RPM and features direct fuel injection for optimal efficiency and power delivery.
+        </p>
+      </div>
+
+      <div class="tech-detail">
+        <h4>⚙️ Aerodynamics & Downforce</h4>
+        <p>
+          The SF-25 features a completely redesigned aerodynamic package compared to its predecessor. The front wing has been optimized for better airflow management, while the floor and diffuser have been extensively reworked to maximize ground effect downforce. The rear wing features a DRS (Drag Reduction System) that can be deployed in designated zones for increased straight-line speed. The bodywork is sculpted to minimize drag while maximizing cooling efficiency for the power unit and brakes. At high speeds, the car can generate up to 5 times its own weight in downforce.
+        </p>
+      </div>
+
+      <div class="tech-detail">
+        <h4>🏗️ Chassis & Construction</h4>
+        <p>
+          Built around a carbon-fiber composite monocoque chassis with honeycomb structures, the SF-25 achieves an optimal balance between strength, rigidity, and weight. The chassis must meet the FIA's minimum weight requirement of 740 kg (including driver). Every component is engineered to save weight while maintaining structural integrity and safety. The survival cell protects the driver in the event of an impact, incorporating advanced crash structures that have been rigorously tested to exceed FIA safety standards.
+        </p>
+      </div>
+
+      <div class="tech-detail">
+        <h4>🛑 Braking System</h4>
+        <p>
+          The SF-25 utilizes Brembo carbon-carbon disc brakes, which are capable of operating at temperatures exceeding 1,000°C. The system features self-ventilated discs at both the front and rear, with an electronically controlled hydraulic braking system on the rear wheels that works in conjunction with the energy recovery system. Under heavy braking, the car can decelerate at forces exceeding 5G, with the carbon discs providing consistent performance lap after lap throughout a race distance.
+        </p>
+      </div>
+
+      <div class="tech-detail">
+        <h4>🎯 Electronics & Control Systems</h4>
+        <p>
+          The SF-25's electronics are governed by a standardized FIA ECU, but Ferrari has optimized every parameter within the regulations. The car features advanced traction control algorithms, energy management systems for the hybrid components, and sophisticated brake-by-wire technology. The steering wheel serves as the driver's interface, featuring dozens of switches and rotary dials for adjusting everything from differential settings to energy deployment modes. Real-time telemetry allows the team to monitor hundreds of sensors throughout the car during every session.
+        </p>
+      </div>
+    </section>
+
+    <!-- Design Philosophy -->
+    <section class="main-content" style="margin-top: 32px;">
+      <h2 class="section-title">Design Philosophy</h2>
+      <p style="color: #bdbdbd; line-height: 1.8; margin-bottom: 16px;">
+        Ferrari described the SF-25 as "a completely new car" that uses the 2024 machine only as a basic foundation. The design philosophy focuses on three core principles:
+      </p>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h4>Efficiency</h4>
+          <p>Maximizing performance from every component while staying within weight and budget regulations.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h4>Innovation</h4>
+          <p>Implementing bold aerodynamic concepts and power unit optimizations to find performance advantages.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🏁</div>
+          <h4>Reliability</h4>
+          <p>Ensuring the car can consistently finish races at the front while maintaining pace throughout the season.</p>
+        </div>
+      </div>
+      <p style="color: #bdbdbd; line-height: 1.8; margin-top: 24px;">
+        The SF-25 represents Ferrari's ambition to reclaim championship glory, combining decades of Formula One expertise with cutting-edge technology. With a darker shade of Ferrari red and a distinctive white stripe on the engine cover, the car honors the Scuderia's heritage while looking firmly to the future.
+      </p>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+  <script defer src="../Script/common.js"></script>
+  <script>
+    // Load navbar and footer
+    async function includeHTML(id, path) {
+      const container = document.getElementById(id);
+      if (!container) return;
+      try {
+        const resp = await fetch(path);
+        if (!resp.ok) throw new Error('Not found');
+        const html = await resp.text();
+        container.innerHTML = html;
+      } catch (err) {
+        console.warn(`Could not load ${path}`);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      await Promise.all([
+        includeHTML('navbar', '../navbar.html'),
+        includeHTML('footer', '../footer.html')
+      ]);
+    });
+  </script>
+</body>
+</html>

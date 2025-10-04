@@ -15,7 +15,7 @@ const circuitDetails = {
     firstRace: '1996',
     grandPrixName: 'Australian Grand Prix',
     description: 'A stunning street circuit around Albert Park Lake, combining high-speed sections with technical corners.',
-    image: 'https://source.unsplash.com/400x200/?melbourne,formula1'
+    image: 'images/circuits/australian.webp'
   },
   'bahrain': {
     type: 'permanent',
@@ -26,7 +26,7 @@ const circuitDetails = {
     firstRace: '2004',
     grandPrixName: 'Bahrain Grand Prix',
     description: 'A modern desert circuit known for incredible battles and spectacular floodlit night racing.',
-    image: 'https://source.unsplash.com/400x200/?bahrain,racing'
+    image: 'images/circuits/bahrain.jpg'
   },
   'monaco': {
     type: 'street',
@@ -37,7 +37,7 @@ const circuitDetails = {
     firstRace: '1950',
     grandPrixName: 'Monaco Grand Prix',
     description: 'The jewel in F1\'s crown - the most prestigious and challenging street circuit in motorsport.',
-    image: 'https://source.unsplash.com/400x200/?monaco,racing'
+    image: 'images/circuits/monaco.jpg'
   },
   'silverstone': {
     type: 'permanent',
@@ -48,7 +48,7 @@ const circuitDetails = {
     firstRace: '1950',
     grandPrixName: 'British Grand Prix',
     description: 'The home of British motorsport with fast, flowing corners and rich F1 heritage.',
-    image: 'https://source.unsplash.com/400x200/?silverstone,racing'
+    image: 'images/circuits/british.jpeg'
   },
   'spa': {
     type: 'permanent',
@@ -59,7 +59,7 @@ const circuitDetails = {
     firstRace: '1950',
     grandPrixName: 'Belgian Grand Prix',
     description: 'The longest and most challenging circuit - a true driver\'s favorite with legendary corners.',
-    image: 'https://source.unsplash.com/400x200/?spa,belgium,racing'
+    image: 'images/circuits/belgian.avif'
   },
   'monza': {
     type: 'permanent',
@@ -70,7 +70,7 @@ const circuitDetails = {
     firstRace: '1950',
     grandPrixName: 'Italian Grand Prix',
     description: 'The Temple of Speed - F1\'s fastest circuit with passionate Italian fans.',
-    image: 'https://source.unsplash.com/400x200/?monza,italy,racing'
+    image: 'images/circuits/monza.jpg'
   },
   'suzuka': {
     type: 'permanent',
@@ -81,7 +81,7 @@ const circuitDetails = {
     firstRace: '1987',
     grandPrixName: 'Japanese Grand Prix',
     description: 'A unique figure-eight layout with the iconic 130R corner and passionate Japanese fans.',
-    image: 'https://source.unsplash.com/400x200/?japan,racing'
+    image: 'images/circuits/japan.webp'
   },
   'marina_bay': {
     type: 'street',
@@ -92,7 +92,7 @@ const circuitDetails = {
     firstRace: '2008',
     grandPrixName: 'Singapore Grand Prix',
     description: 'F1\'s first night race - a spectacular street circuit under the lights of Singapore.',
-    image: 'https://source.unsplash.com/400x200/?singapore,night,racing'
+    image: 'images/circuits/singapore.jpg'
   },
   'interlagos': {
     type: 'permanent',
@@ -103,7 +103,7 @@ const circuitDetails = {
     firstRace: '1973',
     grandPrixName: 'São Paulo Grand Prix',
     description: 'An anti-clockwise circuit with incredible atmosphere and unpredictable weather.',
-    image: 'https://source.unsplash.com/400x200/?brazil,racing'
+    image: 'images/circuits/sao_paulo.webp'
   },
   'red_bull_ring': {
     type: 'permanent',
@@ -114,7 +114,7 @@ const circuitDetails = {
     firstRace: '1970',
     grandPrixName: 'Austrian Grand Prix',
     description: 'A short, fast circuit in the stunning Austrian mountains with aggressive racing.',
-    image: 'https://source.unsplash.com/400x200/?austria,mountains,racing'
+    image: 'images/circuits/austrian.jpg'
   },
   'jeddah': {
     type: 'street',
@@ -125,7 +125,7 @@ const circuitDetails = {
     firstRace: '2021',
     grandPrixName: 'Saudi Arabian Grand Prix',
     description: 'The fastest street circuit in F1 with long straights and high-speed corners.',
-    image: 'https://source.unsplash.com/400x200/?saudi,arabia,city'
+    image: 'images/circuits/saudi.webp'
   },
   'americas': {
     type: 'permanent',
@@ -136,7 +136,7 @@ const circuitDetails = {
     firstRace: '2012',
     grandPrixName: 'United States Grand Prix',
     description: 'A modern circuit in Texas with multiple overtaking opportunities and great facilities.',
-    image: 'https://source.unsplash.com/400x200/?texas,racing'
+    image: 'images/circuits/americas.avif'
   },
   'imola': {
     type: 'permanent',
@@ -147,7 +147,7 @@ const circuitDetails = {
     firstRace: '1980',
     grandPrixName: 'Emilia Romagna Grand Prix',
     description: 'Named after Enzo and Dino Ferrari, this historic circuit offers challenging corners.',
-    image: 'https://source.unsplash.com/400x200/?italy,racing'
+    image: 'images/circuits/imola.avif'
   },
   'miami': {
     type: 'street',
@@ -158,7 +158,7 @@ const circuitDetails = {
     firstRace: '2022',
     grandPrixName: 'Miami Grand Prix',
     description: 'A modern street circuit around the Hard Rock Stadium with an American atmosphere.',
-    image: 'https://source.unsplash.com/400x200/?miami,racing'
+    image: 'images/circuits/miami.avif'
   },
   'zandvoort': {
     type: 'permanent',
@@ -169,7 +169,7 @@ const circuitDetails = {
     firstRace: '1952',
     grandPrixName: 'Dutch Grand Prix',
     description: 'A historic Dutch circuit known for its banked corners and passionate orange fans.',
-    image: 'https://source.unsplash.com/400x200/?netherlands,racing'
+    image: 'images/circuits/dutch.jpeg'
   },
   'hungaroring': {
     type: 'permanent',
@@ -180,7 +180,7 @@ const circuitDetails = {
     firstRace: '1986',
     grandPrixName: 'Hungarian Grand Prix',
     description: 'A tight and twisty circuit near Budapest, often compared to Monaco without walls.',
-    image: 'https://source.unsplash.com/400x200/?hungary,racing'
+    image: 'images/circuits/hungarian.webp'
   },
   'baku': {
     type: 'street',
@@ -191,7 +191,7 @@ const circuitDetails = {
     firstRace: '2016',
     grandPrixName: 'Azerbaijan Grand Prix',
     description: 'A spectacular street circuit combining medieval old town with modern architecture.',
-    image: 'https://source.unsplash.com/400x200/?baku,azerbaijan'
+    image: 'images/circuits/azerbaijan.jpg'
   },
   'vegas': {
     type: 'street',
@@ -202,7 +202,7 @@ const circuitDetails = {
     firstRace: '2023',
     grandPrixName: 'Las Vegas Grand Prix',
     description: 'A glamorous night race on the Las Vegas Strip with incredible entertainment.',
-    image: 'https://source.unsplash.com/400x200/?lasvegas,night'
+    image: 'images/circuits/las_vegas.jpg'
   },
   'shanghai': {
     type: 'permanent',
@@ -213,7 +213,7 @@ const circuitDetails = {
     firstRace: '2004',
     grandPrixName: 'Chinese Grand Prix',
     description: 'A modern circuit with a unique layout and long back straight.',
-    image: 'https://source.unsplash.com/400x200/?shanghai,racing'
+    image: 'images/circuits/chinese.jpeg'
   },
   'villeneuve': {
     type: 'permanent',
@@ -224,7 +224,7 @@ const circuitDetails = {
     firstRace: '1978',
     grandPrixName: 'Canadian Grand Prix',
     description: 'A semi-permanent circuit on Île Notre-Dame with the famous Wall of Champions.',
-    image: 'https://source.unsplash.com/400x200/?canada,montreal'
+    image: 'images/circuits/canadian.jpg'
   },
   'yas_marina': {
     type: 'permanent',
@@ -235,7 +235,7 @@ const circuitDetails = {
     firstRace: '2009',
     grandPrixName: 'Abu Dhabi Grand Prix',
     description: 'A spectacular twilight race at the Yas Marina complex in Abu Dhabi.',
-    image: 'https://source.unsplash.com/400x200/?abudhabi,racing'
+    image: 'images/circuits/abu_dhabi.avif'
   },
   'rodriguez': {
     type: 'permanent',
@@ -246,7 +246,7 @@ const circuitDetails = {
     firstRace: '1963',
     grandPrixName: 'Mexico City Grand Prix',
     description: 'High altitude circuit with passionate fans and unique challenges due to thin air.',
-    image: 'https://source.unsplash.com/400x200/?mexico,racing'
+    image: 'images/circuits/mexico.jpg'
   },
   'catalunya': {
     type: 'permanent',
@@ -257,8 +257,19 @@ const circuitDetails = {
     firstRace: '1991',
     grandPrixName: 'Spanish Grand Prix',
     description: 'The Spanish Grand Prix venue, known for testing and technical sections.',
-    image: 'https://source.unsplash.com/400x200/?barcelona,racing'
-  }
+    image: 'images/circuits/spanish.jpg'
+  },
+  'losail': {
+    type: 'permanent',
+    classic: false,
+    length: '5.419',
+    turns: '16',
+    lapRecord: '1:22.384',
+    firstRace: '2021',
+    grandPrixName: 'Qatar Grand Prix',
+    description: 'Held at the Lusail (Losail) International Circuit — a modern, high-speed permanent track with a long main straight and 16 corners. Often run under lights, it challenges tyres and top speed setups.',
+    image: 'images/circuits/qatar.webp'
+  },
 };
 
 // Fetch circuits from Ergast API
@@ -406,8 +417,19 @@ function sortCircuits(sortBy) {
       case 'country':
         return a.dataset.country.localeCompare(b.dataset.country);
       case 'length':
-        const lengthA = parseFloat(a.querySelector('.info-value').textContent);
-        const lengthB = parseFloat(b.querySelector('.info-value').textContent);
+        const getLength = node => {
+          const text = node.querySelector('.info-item .info-value') ?
+                       node.querySelector('.info-item .info-value').textContent :
+                       '';
+          // try to find the first .info-value within the card that contains "km"
+          const vals = Array.from(node.querySelectorAll('.info-value'));
+          for (let v of vals) {
+            if (v.textContent.includes('km')) return parseFloat(v.textContent);
+          }
+          return parseFloat(text) || 0;
+        };
+        const lengthA = getLength(a);
+        const lengthB = getLength(b);
         return lengthB - lengthA;
       default:
         return 0;

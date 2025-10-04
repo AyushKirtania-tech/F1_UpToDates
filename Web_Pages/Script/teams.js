@@ -105,7 +105,7 @@
     targets.forEach(t => obs.observe(t));
   }
 
-  /* MODAL for team details - Updated with Learn More button */
+  /* MODAL for team details - Updated with Know The Car button */
 function initTeamModal() {
   const grid = document.querySelector('.teams-grid');
   if (!grid) return;
@@ -122,7 +122,7 @@ function initTeamModal() {
           <div class="modal-base"></div>
           <div class="modal-stats"></div>
           <p class="modal-desc-text"></p>
-          <a href="#" class="modal-learn-more" target="_blank" rel="noopener noreferrer">Learn More</a>
+          <a href="#" class="modal-learn-more">Know The Car</a>
         </div>
       </div>
     </div>
@@ -139,7 +139,7 @@ function initTeamModal() {
     const base = card.querySelector('.team-base')?.textContent || '';
     const desc = card.querySelector('.team-description')?.textContent || '';
     const statNodes = card.querySelectorAll('.team-stats .stat');
-    const teamLink = card.dataset.link || '#';
+    const teamName = card.dataset.team || '';
 
     overlay.classList.add('visible');
     overlay.setAttribute('aria-hidden', 'false');
@@ -163,9 +163,10 @@ function initTeamModal() {
     });
     overlay.querySelector('.modal-desc-text').textContent = desc || '';
     
-    // Update Learn More button
-    learnMoreBtn.href = teamLink;
-    if (teamLink === '#') {
+    // Update Know The Car button with car page link
+    const carPageLink = teamName ? `cars/${teamName}.html` : '#';
+    learnMoreBtn.href = carPageLink;
+    if (!teamName) {
       learnMoreBtn.style.display = 'none';
     } else {
       learnMoreBtn.style.display = 'inline-block';

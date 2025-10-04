@@ -1,4 +1,15 @@
-/* Circuits Page Styles */
+:root {
+  --accent: #e10600;
+  --muted: #aab3c6;
+  --text: #f4f7fb;
+  --card-bg: rgba(6, 8, 15, 0.55);
+  --gradient-primary: linear-gradient(90deg, #0b3b6e, #e10600);
+}
+
+/* ===========================
+   CIRCUITS PAGE STYLES
+   (Full CSS for Circuits page)
+   =========================== */
 
 .circuits-main {
   max-width: 1400px;
@@ -12,7 +23,7 @@
   border-radius: 24px;
   padding: 60px 40px;
   margin-bottom: 60px;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
   overflow: hidden;
 }
@@ -38,10 +49,9 @@
 .circuits-hero h1 {
   font-size: 3rem;
   margin-bottom: 16px;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   font-weight: 900;
+  color: #e10600; /* F1 red */
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .circuits-hero p {
@@ -96,85 +106,141 @@
   margin-bottom: 60px;
 }
 
+/* GRID: 2x2 on desktop, stack on mobile */
 .region-cards-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
 }
 
+/* REGION CARD (image-first with overlay text) */
 .region-card {
-  background: var(--card-bg);
-  border: 2px solid rgba(255,255,255,0.1);
   border-radius: 16px;
-  padding: 24px;
-  text-align: center;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  position: relative;
   overflow: hidden;
-}
-
-.region-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(225, 6, 0, 0.1), transparent);
-  transition: left 0.5s ease;
-}
-
-.region-card:hover::before {
-  left: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  cursor: pointer;
+  background: var(--card-bg);
+  border: 2px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
 }
 
 .region-card:hover {
   transform: translateY(-8px);
   border-color: var(--accent);
-  box-shadow: 0 12px 40px rgba(225, 6, 0, 0.3);
+  box-shadow: 0 12px 40px rgba(225, 6, 0, 0.18);
 }
 
+/* image container takes majority of card */
 .region-image {
-  width: 100%;
-  height: 150px;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 20px;
   position: relative;
+  width: 100%;
+  height: 78%;
+  overflow: hidden;
+  background: #0a0a0a;
+  display: block;
 }
 
 .region-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  display: block;
+  transition: transform 0.45s cubic-bezier(.2,.9,.2,1), filter 0.35s ease;
+  filter: brightness(65%) contrast(105%);
 }
 
+/* subtle zoom on hover */
 .region-card:hover .region-image img {
-  transform: scale(1.1);
+  transform: scale(1.08);
+  filter: brightness(78%) contrast(108%);
 }
 
-.region-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 12px;
+/* dark gradient overlay to ensure text is readable */
+.region-image::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background: linear-gradient(to top, rgba(2,6,12,0.65), rgba(2,6,12,0.15) 40%, rgba(2,6,12,0));
+  pointer-events: none;
+}
+
+/* overlay text sits inside image container */
+.region-overlay-text {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 12px;
+  color: #fff;
+  z-index: 3;
+  text-align: left;
+}
+
+.region-overlay-text h3 {
+  margin: 0 0 6px;
+  font-size: 1.3rem;
+  font-weight: 800;
   color: var(--text);
-  font-weight: 700;
+  text-shadow: 0 6px 18px rgba(0,0,0,0.55);
 }
 
-.region-count {
+/* show count as accent chip */
+.region-overlay-text .region-count {
+  display: inline-block;
+  font-size: 0.95rem;
+  font-weight: 700;
   color: var(--accent);
-  font-weight: 700;
-  font-size: 1.1rem;
-  margin-bottom: 16px;
+  margin-bottom: 6px;
+  background: rgba(255,255,255,0.03);
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.04);
 }
 
-.region-list {
-  color: var(--muted);
+/* move the list into the lower bar area (inside image but smaller) */
+.region-overlay-text .region-list {
+  --lines: 2; /* Number of lines to show */
+  margin-top: 8px;
   font-size: 0.85rem;
-  line-height: 1.6;
-  padding-top: 16px;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  /* Multi-line clipping without vendor prefixes */
+  display: block;
+  max-height: calc(var(--lines) * 1.25em);
+  position: relative;
+}
+
+/* Optional fade at bottom (visual hint there's more text) */
+.region-overlay-text .region-list::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1em;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
+  pointer-events: none;
+}
+
+/* bottom content area (optional small meta outside image) */
+.region-card .region-meta {
+  padding: 12px 16px;
+  height: 22%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255,255,255,0.02);
 }
 
 /* Controls Section */
@@ -226,7 +292,7 @@
   border-radius: 25px;
   border: 2px solid rgba(255,255,255,0.2);
   background: transparent;
-  color: var(--text);
+  color: whitesmoke;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -235,12 +301,12 @@
 
 .filter-btn:hover {
   border-color: var(--accent);
-  background: rgba(225, 6, 0, 0.1);
+  background: red(225, 6, 0, 0.1);
   transform: translateY(-2px);
 }
 
 .filter-btn.active {
-  background: var(--gradient-primary);
+  background: peru;
   border-color: var(--accent);
   color: white;
 }
@@ -291,7 +357,9 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Circuits Grid */
@@ -347,7 +415,6 @@
 .circuit-image {
   width: 100%;
   height: 200px;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   position: relative;
   overflow: hidden;
 }
@@ -570,10 +637,12 @@
 .circuit-facts h2 {
   font-size: 2.5rem;
   margin-bottom: 48px;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   font-weight: 900;
+  color: #cf2c27;
+  background-image: red;
+  background-clip: text;
+  color: red;
+  text-shadow: 0 2px 8px rgba(246, 243, 243, 0.25);
 }
 
 .facts-grid {
@@ -640,99 +709,38 @@
 
 /* Responsive Design */
 @media (max-width: 968px) {
-  .circuits-hero h1 {
-    font-size: 2.2rem;
-  }
-
-  .hero-stats {
-    gap: 30px;
-  }
-
-  .region-cards-grid {
-    grid-template-columns: 1fr;
-  }
-
+  .circuits-hero h1 { font-size: 2.2rem; }
+  .region-cards-grid { grid-template-columns: 1fr; }
   .circuits-grid {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
   }
-
-  .featured-content {
-    grid-template-columns: 1fr;
-  }
-
-  .featured-stats {
-    grid-template-columns: 1fr;
-  }
-
-  .filter-buttons {
-    justify-content: center;
-  }
-
-  .sort-options {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+  .featured-content { grid-template-columns: 1fr; }
+  .featured-stats { grid-template-columns: 1fr; }
+  .filter-buttons { justify-content: center; }
+  .sort-options { flex-direction: column; align-items: flex-start; }
 }
 
 @media (max-width: 640px) {
-  .circuits-hero {
-    padding: 40px 24px;
-  }
-
-  .circuits-hero h1 {
-    font-size: 1.8rem;
-  }
-
-  .stat-num {
-    font-size: 2rem;
-  }
-
-  .circuits-controls {
-    padding: 20px;
-  }
-
-  .circuit-info {
-    grid-template-columns: 1fr;
-  }
-
-  .featured-circuit {
-    padding: 24px;
-  }
-
-  .featured-header h2 {
-    font-size: 1.8rem;
-  }
-
-  .facts-grid {
-    grid-template-columns: 1fr;
-  }
+  .circuits-hero { padding: 40px 24px; }
+  .circuits-hero h1 { font-size: 1.8rem; }
+  .stat-num { font-size: 2rem; }
+  .circuits-controls { padding: 20px; }
+  .circuit-info { grid-template-columns: 1fr; }
+  .featured-circuit { padding: 24px; }
+  .featured-header h2 { font-size: 1.8rem; }
+  .facts-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
-  .circuits-hero {
-    padding: 30px 16px;
-  }
-  
-  .hero-stats {
-    gap: 20px;
-  }
-  
-  .stat-num {
-    font-size: 1.8rem;
-  }
-  
-  .circuit-name {
-    font-size: 1.2rem;
-  }
-  
-  .filter-btn {
-    padding: 8px 16px;
-    font-size: 0.85rem;
-  }
+  .circuits-hero { padding: 30px 16px; }
+  .hero-stats { gap: 20px; }
+  .stat-num { font-size: 1.8rem; }
+  .circuit-name { font-size: 1.2rem; }
+  .filter-btn { padding: 8px 16px; font-size: 0.85rem; }
 }
 
-/* Accessibility */
+/* Accessibility focus states */
 .circuit-card:focus-within {
   outline: 2px solid var(--accent);
   outline-offset: 4px;
@@ -748,7 +756,7 @@
 /* Grand Prix Badge */
 .gp-badge {
   display: inline-block;
-  background: var(--gradient-primary);
+  background: blue;
   color: white;
   padding: 6px 16px;
   border-radius: 20px;
