@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RB21 — Oracle Red Bull Racing</title>
+  <meta name="description" content="Oracle Red Bull Racing RB21 — tech specs, performance and driver lineup for Red Bull's 2025 challenger." />
+  <meta name="keywords" content="F1, Red Bull, RB21, Formula 1, car specifications, 2025" />
+
+  <link rel="stylesheet" href="../Styles/teams.css">
+  <style>
+    /* Red Bull-themed page (navy + red + yellow accents) */
+    :root{
+      --navy: #07133b;
+      --red: #ff2b2b;
+      --yellow: #f5c400;
+      --card-bg: rgba(7,10,20,0.95);
+      --card-border: rgba(255,255,255,0.04);
+    }
+
+    .car-hero {
+      position: relative;
+      height: 60vh;
+      min-height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 24px;
+      margin-bottom: 40px;
+      background: linear-gradient(135deg, var(--navy), #03061a);
+    }
+
+    .car-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('../images/cars/redbull.webp') center/cover;
+      opacity: 0.20;
+      z-index: 0;
+      filter: contrast(1.02) saturate(0.95);
+    }
+
+    .car-hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .car-hero h1 {
+      font-size: 4rem;
+      font-weight: 900;
+      margin: 0 0 16px;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: var(--yellow);
+      text-shadow: 0 6px 24px rgba(0,0,0,0.6);
+    }
+
+    .car-hero .subtitle {
+      font-size: 1.3rem;
+      color: rgba(255,255,255,0.95);
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .car-main { max-width:1400px; margin:0 auto; padding:40px 24px }
+
+    .back-link { display:inline-flex; align-items:center; gap:8px; color:#d0d7e6; text-decoration:none; margin-bottom:24px; padding:10px 16px; border-radius:8px; background: rgba(255,255,255,0.02); border:1px solid var(--card-border); transition:all .28s }
+    .back-link:hover { color:var(--red); border-color:var(--red); transform:translateX(-4px) }
+
+    .content-grid{ display:grid; grid-template-columns:2fr 1fr; gap:32px; margin-bottom:48px }
+    .main-content, .specs-card, .technical-section, .driver-card-large { background: var(--card-bg); padding:32px; border-radius:18px; border:1px solid var(--card-border) }
+
+    .specs-card h3{ margin:0 0 20px; font-size:1.3rem; color:var(--red); text-transform:uppercase }
+    .spec-item{ display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid rgba(255,255,255,0.06) }
+    .spec-item:last-child{ border-bottom:none }
+    .spec-label{ color:#bdbdbd; font-weight:600 }
+    .spec-value{ color:#fff; font-weight:700; text-align:right }
+
+    .section-title{ font-size:2rem; font-weight:900; margin:0 0 24px; background: linear-gradient(135deg,var(--yellow),var(--red)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; text-transform:uppercase }
+
+    .feature-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:24px; margin:32px 0 }
+    .feature-card{ background: rgba(255,255,255,0.02); padding:24px; border-radius:16px; border:1px solid rgba(255,255,255,0.06); transition:all .3s }
+    .feature-card:hover{ transform:translateY(-8px); background: rgba(255,255,255,0.04); border-color:var(--red) }
+    .feature-icon{ width:48px; height:48px; background: linear-gradient(135deg,var(--yellow),var(--red)); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:16px }
+    .feature-card h4{ margin:0 0 12px; font-size:1.1rem; color:#fff }
+    .feature-card p{ color:#bdbdbd; line-height:1.6; margin:0 }
+
+    .stat-highlight{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin:32px 0 }
+    .stat-box{ background: rgba(255,255,255,0.02); padding:20px; border-radius:12px; border:1px solid rgba(255,255,255,0.06); text-align:center }
+    .stat-number{ display:block; font-size:2.5rem; font-weight:900; color:var(--yellow); margin-bottom:8px }
+    .stat-text{ color:#bdbdbd; font-size:0.9rem; text-transform:uppercase; letter-spacing:1px }
+
+    .drivers-showcase {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin: 32px 0;
+    }
+
+    .driver-card-large {
+      background: rgba(20,20,20,0.92);
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: all 0.3s;
+    }
+
+    .driver-card-large:hover {
+      transform: translateY(-8px);
+      border-color: #dc2626;
+    }
+
+    .driver-image-wrap {
+      height: 250px;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(220,38,38,0.2), rgba(153,27,27,0.2));
+    }
+
+    .driver-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .driver-info {
+      padding: 20px;
+    }
+
+    .driver-info h4 {
+      margin: 0 0 8px;
+      font-size: 1.5rem;
+      color: #fff;
+    }
+
+    .driver-number {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(220,38,38,0.2);
+      color: #dc2626;
+      border-radius: 6px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    
+    @media (max-width:1000px){ .content-grid{ grid-template-columns:1fr } .car-hero h1{ font-size:2.5rem } .stat-highlight{ grid-template-columns:repeat(2,1fr) }  .drivers-showcase {
+        grid-template-columns: 1fr} }
+
+    @media (max-width:680px){ .feature-grid{ grid-template-columns:1fr } .stat-highlight{ grid-template-columns:1fr } }
+  </style>
+  <meta name="theme-color" content="#07133b" />
+</head>
+<body>
+  <div id="navbar"></div>
+
+  <main class="car-main">
+    <a href="../teams.html" class="back-link"><span>←</span> Back to Teams</a>
+
+    <!-- Hero -->
+    <header class="car-hero">
+      <div class="car-hero-content">
+        <h1>RB21</h1>
+        <p class="subtitle">Oracle Red Bull Racing — 2025 Formula One Car</p>
+      </div>
+    </header>
+
+    <!-- Stats -->
+    <div class="stat-highlight">
+      <div class="stat-box"><span class="stat-number">740 bhp</span><span class="stat-text">ICE Power (approx.)</span></div>
+      <div class="stat-box"><span class="stat-number">1.6L</span><span class="stat-text">V6 Turbo Hybrid</span></div>
+      <div class="stat-box"><span class="stat-number">740</span><span class="stat-text">kg Minimum Weight</span></div>
+      <div class="stat-box"><span class="stat-number">360+</span><span class="stat-text">km/h Top Speed</span></div>
+    </div>
+
+    <div class="content-grid">
+      <div class="main-content">
+        <h2 class="section-title">Overview</h2>
+        <p style="color:#bdbdbd; line-height:1.8; margin-bottom:24px;">
+          The RB21 is Oracle Red Bull Racing's 2025 contender — a refined evolution focused on extracting maximum performance from the Honda RBPT power unit while improving tyre life and cornering stability. Designed under Red Bull's technical leadership, the RB21 mixes track-proven aero concepts with aggressive packaging and cooling solutions.
+        </p>
+
+        <h2 class="section-title">Key Features</h2>
+        <div class="feature-grid">
+          <div class="feature-card"><div class="feature-icon">⚡</div><h4>Honda RBPTH Power Unit</h4><p>Turbocharged 1.6L V6 ICE paired with MGU-K and MGU-H hybrid systems supplied under the Honda partnership.</p></div>
+          <div class="feature-card"><div class="feature-icon">🔧</div><h4>Compact Packaging</h4><p>Inline compact packaging to optimise rear airflow and diffuser efficiency while maintaining cooling for the power unit.</p></div>
+          <div class="feature-card"><div class="feature-icon">💨</div><h4>High-Downforce Aero</h4><p>Advanced front wing and underfloor design to generate consistent downforce with better tyre temperature management.</p></div>
+          <div class="feature-card"><div class="feature-icon">🛠️</div><h4>Suspension & Setup</h4><p>Adaptive suspension geometry aimed at improving mechanical grip and curb behaviour across circuits.</p></div>
+        </div>
+
+        <h2 class="section-title">2025 Driver Lineup</h2>
+        <div class="drivers-showcase">
+          <div class="driver-card-large">
+            <div class="driver-image-wrap"><img src="../images/drivers/max.jpg" alt="Max Verstappen" onerror="this.src='../images/team-fallback.jpg'"></div>
+            <div class="driver-info"><span class="driver-number">#1</span><h4>Max Verstappen</h4><p style="color:#bdbdbd;">Defending World Champion and the lead driver for Red Bull, delivering blistering pace and race-winning consistency.</p></div>
+          </div>
+
+          <div class="driver-card-large">
+            <div class="driver-image-wrap"><img src="../images/drivers/yuki.webp" alt="Yuki Tsunoda" onerror="this.src='../images/team-fallback.jpg'"></div>
+            <div class="driver-info"><span class="driver-number">#22</span><h4>Yuki Tsunoda</h4><p style="color:#bdbdbd;">Experienced Japanese driver joining Red Bull in 2025, bringing strong qualifying pace and technical feedback.</p></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sidebar">
+        <div class="specs-card"><h3>Technical Specifications</h3>
+          <div class="spec-item"><span class="spec-label">Chassis</span><span class="spec-value">Carbon-fibre composite monocoque</span></div>
+          <div class="spec-item"><span class="spec-label">Engine</span><span class="spec-value">Honda RBPTH 1.6L V6 Turbo</span></div>
+          <div class="spec-item"><span class="spec-label">ICE Output</span><span class="spec-value">~740 bhp</span></div>
+          <div class="spec-item"><span class="spec-label">Energy Recovery</span><span class="spec-value">MGU-K / MGU-H</span></div>
+          <div class="spec-item"><span class="spec-label">Transmission</span><span class="spec-value">8-Speed Sequential</span></div>
+          <div class="spec-item"><span class="spec-label">Weight</span><span class="spec-value">740 kg (min)</span></div>
+          <div class="spec-item"><span class="spec-label">Fuel</span><span class="spec-value">Oracle Red Bull Racing Spec</span></div>
+        </div>
+
+        <div class="specs-card"><h3>Performance</h3>
+          <div class="spec-item"><span class="spec-label">0-100 km/h</span><span class="spec-value">~2.5 s</span></div>
+          <div class="spec-item"><span class="spec-label">0-200 km/h</span><span class="spec-value">~4.5 s</span></div>
+          <div class="spec-item"><span class="spec-label">Top Speed</span><span class="spec-value">360+ km/h</span></div>
+          <div class="spec-item"><span class="spec-label">Max RPM</span><span class="spec-value">15,000 RPM</span></div>
+          <div class="spec-item"><span class="spec-label">Max Lateral G</span><span class="spec-value">6.5G</span></div>
+        </div>
+
+        <div class="specs-card"><h3>Team</h3>
+          <div class="spec-item"><span class="spec-label">Base</span><span class="spec-value">Milton Keynes, United Kingdom</span></div>
+          <div class="spec-item"><span class="spec-label">Constructors' Champs</span><span class="spec-value">6+</span></div>
+          <div class="spec-item"><span class="spec-label">Founded</span><span class="spec-value">2005</span></div>
+        </div>
+      </div>
+    </div>
+
+    <section class="technical-section">
+      <h2 class="section-title">Technical Deep Dive</h2>
+
+      <div class="tech-detail" style="margin:0 0 20px;">
+        <h4>🔋 Power Unit & Hybrid System</h4>
+        <p style="color:#bdbdbd;line-height:1.7;">The RB21 is powered by Honda's RBPTH power unit: a 1.6L turbocharged V6 ICE paired with MGU-K and MGU-H systems. The ICE produces around 740 bhp with the hybrid systems providing additional electric boost during acceleration and energy recovery under braking.</p>
+      </div>
+
+      <div class="tech-detail" style="margin:0 0 20px;">
+        <h4>⚙️ Aerodynamics & Cooling</h4>
+        <p style="color:#bdbdbd;line-height:1.7;">Red Bull's aero package focuses on a highly efficient underfloor and diffuser, with carefully tuned sidepod inlets to balance cooling and aerodynamic cleanliness. The car aims to keep tyre temperatures consistent while producing high downforce levels in medium to high-speed corners.</p>
+      </div>
+
+      <div class="tech-detail" style="margin:0 0 20px;">
+        <h4>🏗️ Chassis & Safety</h4>
+        <p style="color:#bdbdbd;line-height:1.7;">Carbon-fibre monocoque with FIA-mandated safety structures, crash tests and survival cell design. The RB21 benefits from Red Bull's close integration between chassis and aerodynamic departments to maximise responsiveness and driver feedback.</p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <div id="footer"></div>
+  <script defer src="../Script/common.js"></script>
+  <script>
+    async function includeHTML(id,path){ const container=document.getElementById(id); if(!container) return; try{ const resp=await fetch(path); if(!resp.ok) throw new Error('Not found'); container.innerHTML=await resp.text(); }catch(e){ console.warn(e) }}
+    document.addEventListener('DOMContentLoaded',async()=>{ await Promise.all([ includeHTML('navbar','../navbar.html'), includeHTML('footer','../footer.html') ]) });
+  </script>
+</body>
+</html>
