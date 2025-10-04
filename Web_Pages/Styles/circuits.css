@@ -1,0 +1,766 @@
+/* Circuits Page Styles */
+
+.circuits-main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+/* Hero Section */
+.circuits-hero {
+  background: linear-gradient(135deg, rgba(225, 6, 0, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
+  border-radius: 24px;
+  padding: 60px 40px;
+  margin-bottom: 60px;
+  border: 1px solid rgba(255,255,255,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.circuits-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M10,50 Q30,20 50,50 T90,50" stroke="rgba(225,6,0,0.1)" fill="none" stroke-width="0.5"/></svg>');
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.hero-content {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.circuits-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+}
+
+.circuits-hero p {
+  color: var(--muted);
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.stat-num {
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.stat-label {
+  color: var(--muted);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+/* Controls Section */
+.circuits-controls {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 32px;
+  margin-bottom: 40px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Search Bar */
+.search-bar {
+  margin-bottom: 24px;
+}
+
+#circuit-search {
+  width: 100%;
+  padding: 16px 20px;
+  background: rgba(0,0,0,0.3);
+  border: 2px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+#circuit-search:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: rgba(0,0,0,0.5);
+  box-shadow: 0 0 20px rgba(225, 6, 0, 0.3);
+}
+
+#circuit-search::placeholder {
+  color: var(--muted);
+}
+
+/* Filter Buttons */
+.filter-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.filter-btn {
+  padding: 10px 24px;
+  border-radius: 25px;
+  border: 2px solid rgba(255,255,255,0.2);
+  background: transparent;
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.filter-btn:hover {
+  border-color: var(--accent);
+  background: rgba(225, 6, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.filter-btn.active {
+  background: var(--gradient-primary);
+  border-color: var(--accent);
+  color: white;
+}
+
+/* Sort Options */
+.sort-options {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sort-options label {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+#sort-select {
+  padding: 10px 16px;
+  background: rgba(0,0,0,0.3);
+  border: 2px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#sort-select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* Loading State */
+.loading {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(225, 6, 0, 0.1);
+  border-top: 4px solid var(--accent);
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Circuits Grid */
+.circuits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+/* Circuit Card */
+.circuit-card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.circuit-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(225, 6, 0, 0.3);
+  border-color: var(--accent);
+}
+
+.circuit-card.hidden {
+  display: none;
+}
+
+/* Circuit Card Hover Animation */
+.circuit-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(225, 6, 0, 0.1), transparent);
+  transition: left 0.5s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.circuit-card:hover::before {
+  left: 100%;
+}
+
+/* Circuit Image */
+.circuit-image {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.circuit-track-layout {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 80px;
+  opacity: 0.5;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(-50%, -50%) translateY(0px);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-10px);
+  }
+}
+
+/* Circuit Type Badge */
+.circuit-type {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 6px 14px;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: 2;
+}
+
+.circuit-type.street {
+  color: #ffd700;
+  border: 1px solid #ffd700;
+}
+
+.circuit-type.permanent {
+  color: #00d4ff;
+  border: 1px solid #00d4ff;
+}
+
+.circuit-type.classic {
+  color: #ff4757;
+  border: 1px solid #ff4757;
+}
+
+/* Circuit Content */
+.circuit-content {
+  padding: 24px;
+}
+
+.circuit-header {
+  margin-bottom: 16px;
+}
+
+.circuit-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.circuit-location {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.circuit-location::before {
+  content: '📍';
+}
+
+/* Circuit Info Grid */
+.circuit-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.info-item {
+  background: rgba(255,255,255,0.03);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: all 0.3s ease;
+}
+
+.info-item:hover {
+  background: rgba(225, 6, 0, 0.05);
+  border-color: var(--accent);
+  transform: scale(1.05);
+}
+
+.info-label {
+  color: var(--muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.info-value {
+  color: var(--text);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* Circuit Description */
+.circuit-description {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Featured Circuit Section */
+.featured-circuit {
+  background: var(--card-bg);
+  border-radius: 24px;
+  padding: 48px;
+  margin-bottom: 60px;
+  border: 2px solid var(--accent);
+  position: relative;
+  overflow: hidden;
+  animation: subtle-pulse 4s ease-in-out infinite;
+}
+
+.featured-circuit::before {
+  content: '⭐';
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 60px;
+  opacity: 0.1;
+}
+
+@keyframes subtle-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(225, 6, 0, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(225, 6, 0, 0.4);
+  }
+}
+
+.featured-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.featured-badge {
+  display: inline-block;
+  background: var(--gradient-primary);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.featured-header h2 {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+.featured-location {
+  color: var(--accent);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.featured-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.featured-image {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid rgba(255,255,255,0.1);
+}
+
+.featured-details h3 {
+  color: var(--accent);
+  margin-bottom: 16px;
+  font-size: 1.2rem;
+}
+
+.featured-details p {
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+
+.featured-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Circuit Facts Section */
+.circuit-facts {
+  margin-top: 80px;
+  text-align: center;
+}
+
+.circuit-facts h2 {
+  font-size: 2.5rem;
+  margin-bottom: 48px;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+}
+
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.fact-card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 40px 24px;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: all 0.3s ease;
+}
+
+.fact-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 30px rgba(225, 6, 0, 0.2);
+}
+
+.fact-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.fact-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+.fact-highlight {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
+
+.fact-detail {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Loading animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.circuit-card {
+  animation: fadeIn 0.5s ease forwards;
+  opacity: 0;
+}
+
+.circuit-card:nth-child(1) { animation-delay: 0.1s; }
+.circuit-card:nth-child(2) { animation-delay: 0.2s; }
+.circuit-card:nth-child(3) { animation-delay: 0.3s; }
+.circuit-card:nth-child(4) { animation-delay: 0.4s; }
+.circuit-card:nth-child(5) { animation-delay: 0.5s; }
+.circuit-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* Responsive Design */
+@media (max-width: 968px) {
+  .circuits-hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero-stats {
+    gap: 30px;
+  }
+
+  .circuits-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .featured-content {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-buttons {
+    justify-content: center;
+  }
+
+  .sort-options {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .circuits-hero {
+    padding: 40px 24px;
+  }
+
+  .circuits-hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .stat-num {
+    font-size: 2rem;
+  }
+
+  .circuits-controls {
+    padding: 20px;
+  }
+
+  .circuit-info {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-circuit {
+    padding: 24px;
+  }
+
+  .featured-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .facts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .circuits-hero {
+    padding: 30px 16px;
+  }
+  
+  .hero-stats {
+    gap: 20px;
+  }
+  
+  .stat-num {
+    font-size: 1.8rem;
+  }
+  
+  .circuit-name {
+    font-size: 1.2rem;
+  }
+  
+  .filter-btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Accessibility */
+.circuit-card:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.filter-btn:focus,
+#circuit-search:focus,
+#sort-select:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ===========================
+   WORLD CIRCUITS SECTION
+=========================== */
+
+.world-circuits-section {
+  padding: 60px 10%;
+  background: linear-gradient(180deg, #0d0d0d 0%, #1a1a1a 100%);
+  color: #f5f5f5;
+  text-align: center;
+  border-top: 2px solid #ff1a1a;
+}
+
+.world-circuits-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+  color: #ff1a1a;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(255, 26, 26, 0.4);
+}
+
+.circuits-by-region {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  justify-items: center;
+}
+
+/* ===========================
+   REGION CARDS
+=========================== */
+
+.region-card {
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 16px;
+  padding: 25px 10px;
+  width: 100%;
+  max-width: 320px;
+  box-shadow: 0 4px 15px rgba(255, 26, 26, 0.15);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.region-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 26, 26, 0.15), rgba(0, 0, 0, 0));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.region-card:hover::before {
+  opacity: 1;
+}
+
+.region-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(255, 26, 26, 0.25);
+}
+
+/* ===========================
+   TEXT & ICONS
+=========================== */
+
+.region-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.region-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  color: #ff4d4d;
+  font-weight: 700;
+}
+
+.region-count {
+  font-size: 0.95rem;
+  color: #bbb;
+  margin-bottom: 15px;
+}
+
+.region-circuits {
+  font-size: 0.9rem;
+  color: #e6e6e6;
+  line-height: 1.6;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 12px 15px;
+  text-align: left;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 768px) {
+  .world-circuits-section {
+    padding: 40px 5%;
+  }
+
+  .world-circuits-section h2 {
+    font-size: 2rem;
+  }
+
+  .region-card {
+    max-width: 100%;
+  }
+}

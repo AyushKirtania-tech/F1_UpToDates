@@ -212,7 +212,7 @@ header {
   text-transform: uppercase;
   background: var(--gradient-primary);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: red;
   background-clip: text;
 }
 
