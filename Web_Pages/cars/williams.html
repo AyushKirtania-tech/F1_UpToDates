@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>RB20 — Oracle Red Bull Racing</title>
-  <meta name="description" content="Explore the Red Bull RB20 — technical specs, performance and technical details for the 2025 season." />
-  <meta name="keywords" content="F1, Red Bull, RB20, Formula 1, car specifications, 2025" />
+  <title>FW46 — Williams Racing</title>
+  <meta name="description" content="Explore the Williams FW46 — technical specs, performance and technical details for the 2025 season." />
+  <meta name="keywords" content="F1, Williams, FW46, Formula 1, car specifications, 2025" />
 
   <link rel="stylesheet" href="../Styles/teams.css">
   <style>
@@ -14,9 +14,9 @@
     img { display: block; max-width: 100%; height: auto; }
 
     :root{
-      --rb-deep: #0600ef;
-      --rb-mid: #3671c6;
-      --rb-yellow: #fcd700;
+      --wil-deep: #00539f;
+      --wil-mid: #0082c8;
+      --wil-light: #00a0de;
       --muted: #bdbdbd;
       --card-bg: rgba(20,20,20,0.92);
     }
@@ -31,15 +31,15 @@
       overflow: hidden;
       border-radius: 24px;
       margin-bottom: 40px;
-      background: linear-gradient(135deg, #2b068093, #413bed95 );
+      background: linear-gradient(135deg, #0b0b0b, #00539f, #0082c8cc);
     }
 
     .car-hero::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: url('../images/cars/redbull.webp') center/cover;
-      opacity: 0.8;
+      background: url('../images/cars/williams.webp') center/cover;
+      opacity: 0.52;
       z-index: 0;
       mix-blend-mode: overlay;
     }
@@ -90,8 +90,8 @@
     }
 
     .back-link:hover {
-      color: var(--rb-mid);
-      border-color: var(--rb-mid);
+      color: var(--wil-mid);
+      border-color: var(--wil-mid);
       transform: translateX(-4px);
     }
 
@@ -127,7 +127,7 @@
     .specs-card h3 {
       margin: 0 0 20px;
       font-size: 1.3rem;
-      color: var(--rb-mid);
+      color: var(--wil-mid);
       text-transform: uppercase;
       letter-spacing: 1px;
     }
@@ -158,7 +158,7 @@
       font-size: 2rem;
       font-weight: 900;
       margin: 0 0 24px;
-      background: linear-gradient(135deg, var(--rb-mid), var(--rb-deep));
+      background: linear-gradient(135deg, var(--wil-light), var(--wil-deep));
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -183,13 +183,13 @@
     .feature-card:hover {
       transform: translateY(-8px);
       background: rgba(255,255,255,0.04);
-      border-color: var(--rb-mid);
+      border-color: var(--wil-mid);
     }
 
     .feature-icon {
       width: 48px;
       height: 48px;
-      background: linear-gradient(135deg, var(--rb-mid), var(--rb-deep));
+      background: linear-gradient(135deg, var(--wil-light), var(--wil-deep));
       border-radius: 12px;
       display: flex;
       align-items: center;
@@ -230,7 +230,7 @@
       display: block;
       font-size: 2.5rem;
       font-weight: 900;
-      color: var(--rb-mid);
+      color: var(--wil-mid);
       margin-bottom: 8px;
     }
 
@@ -253,13 +253,13 @@
       margin: 24px 0;
       padding: 20px;
       background: rgba(255,255,255,0.02);
-      border-left: 4px solid var(--rb-mid);
+      border-left: 4px solid var(--wil-mid);
       border-radius: 8px;
     }
 
     .tech-detail h4 {
       margin: 0 0 12px;
-      color: var(--rb-mid);
+      color: var(--wil-mid);
       font-size: 1.1rem;
       text-transform: uppercase;
     }
@@ -288,13 +288,13 @@
 
     .driver-card-large:hover {
       transform: translateY(-8px);
-      border-color: var(--rb-mid);
+      border-color: var(--wil-mid);
     }
 
     .driver-image-wrap {
       height: 250px;
       overflow: hidden;
-      background: linear-gradient(135deg, rgba(54,113,198,0.08), rgba(6,0,239,0.06));
+      background: linear-gradient(135deg, rgba(0,160,222,0.08), rgba(0,83,159,0.06));
     }
 
     .driver-image-wrap img {
@@ -316,8 +316,8 @@
     .driver-number {
       display: inline-block;
       padding: 4px 12px;
-      background: rgba(54,113,198,0.12);
-      color: var(--rb-mid);
+      background: rgba(0,130,200,0.12);
+      color: var(--wil-mid);
       border-radius: 6px;
       font-weight: 900;
       margin-bottom: 12px;
@@ -352,7 +352,7 @@
     }
   </style>
 
-  <meta name="theme-color" content="#3671c6" />
+  <meta name="theme-color" content="#0082c8" />
 </head>
 <body>
 
@@ -364,8 +364,8 @@
     <!-- Hero -->
     <header class="car-hero">
       <div class="car-hero-content">
-        <h1>RB20</h1>
-        <p class="subtitle">Oracle Red Bull Racing — 2025 Formula One Car</p>
+        <h1>FW46</h1>
+        <p class="subtitle">Williams Racing — 2025 Formula One Car</p>
       </div>
     </header>
 
@@ -394,30 +394,30 @@
       <div class="main-content">
         <h2 class="section-title">Overview</h2>
         <p style="color: var(--muted); line-height: 1.8; margin-bottom: 24px;">
-          The Red Bull RB20 represents the pinnacle of Adrian Newey's aerodynamic philosophy combined with Honda RBPT's powerful hybrid technology. Built at Milton Keynes, the RB20 is designed to dominate across all circuit types with exceptional downforce, mechanical grip, and power delivery. It continues Red Bull's winning legacy with refined aero concepts and championship-winning DNA.
+          The Williams FW46 represents the team's commitment to returning to competitiveness with Mercedes power. Built at Grove, the FW46 combines traditional Williams racing spirit with modern engineering approaches. The car focuses on aerodynamic efficiency, reliability, and providing a solid platform for development throughout the season.
         </p>
 
         <h2 class="section-title">Key Features</h2>
         <div class="feature-grid">
           <div class="feature-card">
             <div class="feature-icon">⚡</div>
-            <h4>Honda RBPT Power Unit</h4>
-            <p>Advanced 1.6L V6 turbo hybrid from Red Bull Powertrains with Honda collaboration, delivering explosive acceleration and race-winning reliability.</p>
+            <h4>Mercedes Power Unit</h4>
+            <p>Proven 1.6L V6 turbo hybrid from Mercedes-AMG High Performance Powertrains, delivering reliable power and excellent fuel efficiency.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">🔧</div>
-            <h4>Aggressive Aero Package</h4>
-            <p>Sophisticated front wing design and optimized floor tunnels create massive downforce while maintaining low-drag efficiency on straights.</p>
+            <h4>Efficient Packaging</h4>
+            <p>Optimized component layout to reduce weight and improve center of gravity, enhancing overall balance and handling characteristics.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">💨</div>
-            <h4>Ground Effect Mastery</h4>
-            <p>Maximized ground effect tunnels and diffuser design extract exceptional performance from underbody aerodynamics for superior cornering speeds.</p>
+            <h4>Aerodynamic Development</h4>
+            <p>Focus on clean airflow management and efficient downforce generation to maximize performance within budget constraints.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">🛞</div>
-            <h4>Advanced Suspension</h4>
-            <p>Sophisticated kinematic geometry and damper technology optimize tire temperature management and mechanical grip across all conditions.</p>
+            <h4>Mechanical Platform</h4>
+            <p>Refined suspension geometry designed to extract maximum performance from Pirelli tires across varying track conditions.</p>
           </div>
         </div>
 
@@ -425,27 +425,26 @@
         <div class="drivers-showcase">
           <div class="driver-card-large">
             <div class="driver-image-wrap">
-              <img src="../images/drivers/max.jpg" alt="Max Verstappen" onerror="this.src='../images/team-fallback.jpg'">
+              <img src="../images/drivers/albon.jpg" alt="Alexander Albon" onerror="this.src='../images/team-fallback.jpg'">
             </div>
             <div class="driver-info">
-              <span class="driver-number">#1</span>
-              <h4>Max Verstappen</h4>
-              <p style="color: var(--muted);">Three-time World Champion and Red Bull's superstar — combining raw speed, tactical brilliance and relentless racecraft.</p>
+              <span class="driver-number">#23</span>
+              <h4>Alexander Albon</h4>
+              <p style="color: var(--muted);">Experienced racer and team leader — providing crucial development direction and consistent point-scoring performances.</p>
             </div>
           </div>
 
           <div class="driver-card-large">
             <div class="driver-image-wrap">
-              <img src="../images/drivers/yuki.webp" alt="Yuki Tsunoda" onerror="this.src='../images/team-fallback.jpg'">
+              <img src="../images/drivers/carlos.jpeg" alt="Carlos Sainz Jr." onerror="this.src='../images/team-fallback.jpg'">
             </div>
             <div class="driver-info">
-              <span class="driver-number">#22</span>
-              <h4>Yuki Tsunoda</h4>
-              <p style="color: var(--muted);">Dynamic Japanese talent with exceptional feedback and raw pace — bringing energy and precision to the team.</p>
+              <span class="driver-number">#55</span>
+              <h4>Carlos Sainz Jr.</h4>
+              <p style="color: #bdbdbd;">The experienced race winner joins Williams in 2025, bringing championship-caliber speed and development expertise to accelerate the team's progress.</p>
             </div>
           </div>
         </div>
-
       </div>
 
       <div class="sidebar">
@@ -453,7 +452,7 @@
         <div class="specs-card">
           <h3>Technical Specifications</h3>
           <div class="spec-item"><span class="spec-label">Chassis</span><span class="spec-value">Carbon Fiber Monocoque</span></div>
-          <div class="spec-item"><span class="spec-label">Engine</span><span class="spec-value">Honda RBPT 1.6L V6 Turbo</span></div>
+          <div class="spec-item"><span class="spec-label">Engine</span><span class="spec-value">Mercedes-AMG 1.6L V6 Turbo</span></div>
           <div class="spec-item"><span class="spec-label">Power Output</span><span class="spec-value">~1000 HP</span></div>
           <div class="spec-item"><span class="spec-label">Energy Recovery</span><span class="spec-value">Dual MGU System</span></div>
           <div class="spec-item"><span class="spec-label">Transmission</span><span class="spec-value">8-Speed Sequential</span></div>
@@ -474,7 +473,7 @@
         <!-- 2025 Season Goals (dynamic) -->
         <div class="specs-card" id="season-goals-card">
           <h3>2025 Season Goals</h3>
-          <div class="spec-item"><span class="spec-label">Target Position</span><span class="spec-value" id="target-position">1st</span></div>
+          <div class="spec-item"><span class="spec-label">Target Position</span><span class="spec-value" id="target-position">Top 5</span></div>
           <div class="spec-item"><span class="spec-label">Current Position</span><span class="spec-value" id="current-position">—</span></div>
           <div class="spec-item"><span class="spec-label">Points Scored</span><span class="spec-value" id="points-scored">—</span></div>
           <div class="spec-item"><span class="spec-label">Wins</span><span class="spec-value" id="wins-count">—</span></div>
@@ -483,11 +482,11 @@
 
         <!-- Heritage -->
         <div class="specs-card">
-          <h3>Red Bull F1 Heritage</h3>
-          <div class="spec-item"><span class="spec-label">Constructors' Championships</span><span class="spec-value">6</span></div>
-          <div class="spec-item"><span class="spec-label">Race Wins</span><span class="spec-value">120+</span></div>
-          <div class="spec-item"><span class="spec-label">Pole Positions</span><span class="spec-value">100+</span></div>
-          <div class="spec-item"><span class="spec-label">Base</span><span class="spec-value">Milton Keynes, United Kingdom</span></div>
+          <h3>Williams F1 Heritage</h3>
+          <div class="spec-item"><span class="spec-label">Constructors' Championships</span><span class="spec-value">9</span></div>
+          <div class="spec-item"><span class="spec-label">Race Wins</span><span class="spec-value">114</span></div>
+          <div class="spec-item"><span class="spec-label">Pole Positions</span><span class="spec-value">128</span></div>
+          <div class="spec-item"><span class="spec-label">Base</span><span class="spec-value">Grove, United Kingdom</span></div>
         </div>
       </div>
     </div>
@@ -497,30 +496,30 @@
       <h2 class="section-title">Technical Deep Dive</h2>
 
       <div class="tech-detail">
-        <h4>🔋 Power Unit & Hybrid System</h4>
+        <h4>🔋 Power Unit & Integration</h4>
         <p>
-          The Honda RBPT power unit delivers exceptional performance through optimized combustion, advanced turbocharger technology, and intelligent energy recovery. The MGU-K and MGU-H systems work seamlessly to maximize both power delivery and fuel efficiency throughout race distance.
+          The Mercedes-AMG power unit provides Williams with proven performance and reliability. The team has focused on optimal integration to maximize cooling efficiency while minimizing aerodynamic drag from radiator inlets and exhausts.
         </p>
       </div>
 
       <div class="tech-detail">
-        <h4>⚙️ Aerodynamics & Downforce</h4>
+        <h4>⚙️ Aerodynamics & Efficiency</h4>
         <p>
-          The RB20's aerodynamic philosophy focuses on maximizing ground effect while maintaining excellent balance. Advanced computational fluid dynamics and wind tunnel testing have refined the floor, diffuser, and wing profiles to create a stable platform with exceptional cornering performance.
+          The FW46's aerodynamic concept emphasizes efficiency over outright downforce. The floor, sidepods, and rear end have been optimized through CFD and wind tunnel work to provide stable, predictable performance across different circuit types.
         </p>
       </div>
 
       <div class="tech-detail">
-        <h4>🏗️ Chassis & Structure</h4>
+        <h4>🏗️ Chassis & Weight Distribution</h4>
         <p>
-          The carbon fiber monocoque is engineered for maximum stiffness with minimal weight penalty. Strategic placement of components and advanced composite materials ensure optimal weight distribution and structural integrity under extreme racing loads.
+          The carbon fiber monocoque meets all FIA safety standards while achieving competitive weight targets. Strategic component placement ensures optimal weight distribution for improved tire management and handling balance.
         </p>
       </div>
 
       <div class="tech-detail">
-        <h4>🎯 Electronics & Strategy</h4>
+        <h4>🎯 Development & Strategy</h4>
         <p>
-          The RB20 utilizes sophisticated electronic control systems for energy deployment, brake balance, and differential management. Real-time telemetry enables precise strategy calls and setup optimization throughout practice, qualifying, and race sessions.
+          Williams' approach for 2025 focuses on understanding the car's behavior and implementing targeted upgrades. The team uses comprehensive data analysis and driver feedback to guide development priorities throughout the season.
         </p>
       </div>
     </section>
@@ -529,17 +528,17 @@
     <section class="main-content" style="margin-top: 32px;">
       <h2 class="section-title">Design Philosophy</h2>
       <p style="color: var(--muted); line-height: 1.8; margin-bottom: 16px;">
-        Red Bull's design philosophy for the RB20 centers on outright performance combined with operational flexibility. The engineering team has focused on creating a car that excels in all conditions while providing drivers with the confidence to push limits consistently.
+        Williams' design philosophy for the FW46 centers on building a solid foundation for sustained progress. The team has prioritized reliability, efficient aerodynamics, and creating a car that allows drivers to extract consistent performance while providing clear development paths.
       </p>
 
       <div class="feature-grid">
-        <div class="feature-card"><div class="feature-icon">🎯</div><h4>Peak Performance</h4><p>Uncompromising pursuit of maximum downforce and mechanical grip across all circuit configurations.</p></div>
-        <div class="feature-card"><div class="feature-icon">⚡</div><h4>Efficiency</h4><p>Optimized drag characteristics and energy management systems ensure competitive straight-line speed.</p></div>
-        <div class="feature-card"><div class="feature-icon">🏁</div><h4>Consistency</h4><p>Robust design architecture allows predictable development and reliable performance race after race.</p></div>
+        <div class="feature-card"><div class="feature-icon">🎯</div><h4>Reliability</h4><p>Robust engineering to ensure consistent race finishes and maximize point-scoring opportunities.</p></div>
+        <div class="feature-card"><div class="feature-icon">⚡</div><h4>Efficiency</h4><p>Optimized aerodynamic and mechanical efficiency to compete effectively within budget constraints.</p></div>
+        <div class="feature-card"><div class="feature-icon">🏁</div><h4>Progress</h4><p>Clear development roadmap focused on steady improvement throughout the season and beyond.</p></div>
       </div>
 
       <p style="color: var(--muted); line-height: 1.8; margin-top: 24px;">
-        With championship-winning experience and cutting-edge technology, the RB20 is Red Bull Racing's weapon to defend their titles and dominate the 2025 season.
+        With legendary racing heritage and renewed determination, Williams is focused on climbing back up the grid and reclaiming their position as a competitive force in Formula One.
       </p>
     </section>
 
@@ -552,7 +551,7 @@
     // --- Dynamic Season Stats (wins/podiums/current position) from API ---
     (function () {
       const API_BASE = 'https://api.jolpi.ca/ergast/f1';
-      const constructorId = 'red_bull'; // page constructor id
+      const constructorId = 'williams'; // page constructor id
 
       // DOM elements to update
       const elCurrentPos = document.getElementById('current-position');
@@ -641,26 +640,6 @@
     })();
 
     // Load navbar and footer
-    async function includeHTML(id, path) {
-      const container = document.getElementById(id);
-      if (!container) return;
-      try {
-        const resp = await fetch(path);
-        if (!resp.ok) throw new Error('Not found');
-        const html = await resp.text();
-        container.innerHTML = html;
-      } catch (err) {
-        console.warn(`Could not load ${path}`);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', async () => {
-      await Promise.all([
-        includeHTML('footer', '../footer.html')
-      ]);
-    });
-
-    // Load footer
     async function includeHTML(id, path) {
       const container = document.getElementById(id);
       if (!container) return;

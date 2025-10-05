@@ -9,6 +9,10 @@
   
   <link rel="stylesheet" href="../Styles/teams.css">
   <style>
+    /* small layout fixes to prevent stray gaps */
+    *, *::before, *::after { box-sizing: border-box; }
+    img { display: block; max-width: 100%; height: auto; }
+
     .car-hero {
       position: relative;
       height: 60vh;
@@ -54,6 +58,7 @@
       margin: 0;
       text-transform: uppercase;
       letter-spacing: 2px;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.721);
     }
 
     .car-main {
@@ -87,6 +92,7 @@
       grid-template-columns: 2fr 1fr;
       gap: 32px;
       margin-bottom: 48px;
+      align-items: start; /* keep both columns top-aligned to avoid vertical gap */
     }
 
     .main-content {
@@ -100,6 +106,7 @@
       display: flex;
       flex-direction: column;
       gap: 24px;
+      align-self: start; /* ensure sidebar starts at same vertical position as main column */
     }
 
     .specs-card {
@@ -259,6 +266,7 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 24px;
       margin: 32px 0;
+      align-items: stretch;
     }
 
     .driver-card-large {
@@ -487,6 +495,31 @@
           </div>
         </div>
 
+        <!-- 2025 Season Goals (dynamic) -->
+        <div class="specs-card" id="season-goals-card">
+          <h3>2025 Season Goals</h3>
+          <div class="spec-item">
+            <span class="spec-label">Target Position</span>
+            <span class="spec-value" id="target-position">1st</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Current Position</span>
+            <span class="spec-value" id="current-position">—</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Points Scored</span>
+            <span class="spec-value" id="points-scored">—</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Wins</span>
+            <span class="spec-value" id="wins-count">—</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Podiums</span>
+            <span class="spec-value" id="podiums-count">—</span>
+          </div>
+        </div>
+
         <!-- Heritage -->
         <div class="specs-card">
           <h3>Ferrari F1 Heritage</h3>
@@ -580,8 +613,112 @@
   </main>
   <div id="footer"></div>
   <script defer src="../Script/common.js"></script>
+
   <script>
-    // Load navbar and footer
+    // --- Dynamic Season Stats (wins/podiums/current position) from API ---
+    (function () {
+      const API_BASE = 'https://api.jolpi.ca/ergast/f1';
+      // constructorId mapping (expandable)
+      const CONSTRUCTOR_IDS = {
+        ferrari: 'ferrari',
+        mercedes: 'mercedes',
+        mclaren: 'mclaren',
+        redbull: 'red_bull' // if needed - note some constructors use 'red_bull' or 'red_bull_racing' depending on API
+      };
+
+      const constructorId = CONSTRUCTOR_IDS.ferrari; // change as needed
+
+      // DOM elements to update
+      const elCurrentPos = document.getElementById('current-position');
+      const elPoints = document.getElementById('points-scored');
+      const elWins = document.getElementById('wins-count');
+      const elPodiums = document.getElementById('podiums-count');
+
+      // show loading state
+      if (elCurrentPos) elCurrentPos.textContent = 'Loading…';
+      if (elPoints) elPoints.textContent = 'Loading…';
+      if (elWins) elWins.textContent = 'Loading…';
+      if (elPodiums) elPodiums.textContent = 'Loading…';
+
+      async function fetchJson(url) {
+        const resp = await fetch(url);
+        if (!resp.ok) throw new Error(`HTTP ${resp.status} ${resp.statusText}`);
+        return resp.json();
+      }
+
+      async function loadSeasonStats() {
+        try {
+          // 1) Get constructor standings for current position & points
+          const standingsUrl = `${API_BASE}/current/constructorStandings.json`;
+          const standingsJson = await fetchJson(standingsUrl);
+          const standingsLists = standingsJson?.MRData?.StandingsTable?.StandingsLists || [];
+          if (standingsLists.length > 0) {
+            const constructorStandings = standingsLists[0]?.ConstructorStandings || [];
+            const myStanding = constructorStandings.find(c => {
+              // some APIs use constructor.constructorId or constructorId field; defensive checks
+              const cid = (c?.Constructor?.constructorId || c?.constructorId || '').toLowerCase();
+              return cid === constructorId.toLowerCase();
+            });
+            if (myStanding) {
+              if (elCurrentPos) elCurrentPos.textContent = myStanding.position || '—';
+              if (elPoints) elPoints.textContent = myStanding.points || '—';
+            } else {
+              // constructor not found: clear or fallback
+              if (elCurrentPos) elCurrentPos.textContent = '—';
+              if (elPoints) elPoints.textContent = '—';
+              console.warn('Constructor standing not found for', constructorId, standingsUrl);
+            }
+          } else {
+            if (elCurrentPos) elCurrentPos.textContent = '—';
+            if (elPoints) elPoints.textContent = '—';
+            console.warn('No standings data found at', standingsUrl);
+          }
+
+          // 2) Get current season race results and count wins & podiums for constructor
+          // request large limit to get whole season (ergast supports limit param)
+          const resultsUrl = `${API_BASE}/current/results.json?limit=1000`;
+          const resultsJson = await fetchJson(resultsUrl);
+          const races = resultsJson?.MRData?.RaceTable?.Races || [];
+          let wins = 0;
+          let podiums = 0;
+
+          for (const race of races) {
+            const results = race.Results || [];
+            for (const res of results) {
+              const resConstructorId = (res?.Constructor?.constructorId || '').toLowerCase();
+              const pos = parseInt(res.position, 10);
+              if (resConstructorId === constructorId.toLowerCase()) {
+                if (!Number.isNaN(pos)) {
+                  if (pos === 1) wins += 1;
+                  if (pos >= 1 && pos <= 3) podiums += 1;
+                }
+                // break after we find the constructor in this race
+                break;
+              }
+            }
+          }
+
+          if (elWins) elWins.textContent = String(wins);
+          if (elPodiums) elPodiums.textContent = String(podiums);
+
+        } catch (err) {
+          console.error('Error loading season stats:', err);
+          // fallback: show hyphens
+          if (elCurrentPos) elCurrentPos.textContent = '—';
+          if (elPoints) elPoints.textContent = '—';
+          if (elWins) elWins.textContent = '—';
+          if (elPodiums) elPodiums.textContent = '—';
+        }
+      }
+
+      // run on DOM ready (script is at end, but be safe)
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadSeasonStats);
+      } else {
+        loadSeasonStats();
+      }
+    })();
+
     async function includeHTML(id, path) {
       const container = document.getElementById(id);
       if (!container) return;
@@ -597,7 +734,6 @@
 
     document.addEventListener('DOMContentLoaded', async () => {
       await Promise.all([
-        includeHTML('navbar', '../navbar.html'),
         includeHTML('footer', '../footer.html')
       ]);
     });
