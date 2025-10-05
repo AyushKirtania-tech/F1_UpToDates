@@ -439,53 +439,6 @@ function sortCircuits(sortBy) {
   cards.forEach(card => container.appendChild(card));
 }
 
-// Create featured circuit
-function createFeaturedCircuit() {
-  return `
-    <div class="featured-header">
-      <span class="featured-badge">Featured Circuit</span>
-      <h2>Circuit de Monaco</h2>
-      <p class="featured-location">Monte Carlo, Monaco</p>
-    </div>
-    
-    <div class="featured-content">
-      <div class="featured-image">
-        <div style="width:100%;height:300px;background:linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);display:flex;align-items:center;justify-content:center;font-size:80px;border-radius:16px;">
-          🏰
-        </div>
-      </div>
-      
-      <div class="featured-details">
-        <h3>The Crown Jewel of Formula 1</h3>
-        <p>
-          Monaco is the most prestigious race on the F1 calendar. This legendary street circuit 
-          winds through the narrow streets of Monte Carlo, offering no room for error. With barriers 
-          just inches from the track and average speeds of 160 km/h, it's the ultimate test of 
-          precision and concentration. Overtaking is nearly impossible, making qualifying crucial.
-        </p>
-        <p>
-          Since 1950, Monaco has been synonymous with glamour, history, and the pinnacle of 
-          motorsport achievement. Winning here is every driver's dream.
-        </p>
-        
-        <div class="featured-stats">
-          <div class="info-item">
-            <span class="info-label">Circuit Length</span>
-            <span class="info-value">3.337 km</span>
-          </div>
-          <div class="info-item">
-            <span class="info-label">Number of Turns</span>
-            <span class="info-value">19</span>
-          </div>
-          <div class="info-item">
-            <span class="info-label">First GP</span>
-            <span class="info-value">1950</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-}
 
 // Update stats
 function updateStats(circuits) {
