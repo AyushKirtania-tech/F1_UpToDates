@@ -1,24 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>FW46 — Williams Racing</title>
-  <meta name="description" content="Explore the Williams FW46 — technical specs, performance and technical details for the 2025 season." />
+  <meta name="description"
+    content="Explore the Williams FW46 — technical specs, performance and technical details for the 2025 season." />
   <meta name="keywords" content="F1, Williams, FW46, Formula 1, car specifications, 2025" />
 
   <link rel="stylesheet" href="../Styles/teams.css">
   <style>
     /* small layout fixes to prevent stray gaps and match previous layout */
-    *, *::before, *::after { box-sizing: border-box; }
-    img { display: block; max-width: 100%; height: auto; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
 
-    :root{
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    :root {
       --wil-deep: #00539f;
       --wil-mid: #0082c8;
       --wil-light: #00a0de;
       --muted: #bdbdbd;
-      --card-bg: rgba(20,20,20,0.92);
+      --card-bg: rgba(20, 20, 20, 0.92);
     }
 
     .car-hero {
@@ -58,12 +69,12 @@
       text-transform: uppercase;
       letter-spacing: 4px;
       color: #fff;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
     }
 
     .car-hero .subtitle {
       font-size: 1.3rem;
-      color: rgba(255,255,255,0.95);
+      color: rgba(255, 255, 255, 0.95);
       margin: 0;
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -84,8 +95,8 @@
       margin-bottom: 24px;
       padding: 10px 16px;
       border-radius: 8px;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       transition: all 0.3s;
     }
 
@@ -107,7 +118,7 @@
       background: var(--card-bg);
       padding: 32px;
       border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid rgba(255, 255, 255, 0.04);
     }
 
     .sidebar {
@@ -121,7 +132,7 @@
       background: var(--card-bg);
       padding: 24px;
       border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid rgba(255, 255, 255, 0.04);
     }
 
     .specs-card h3 {
@@ -136,7 +147,7 @@
       display: flex;
       justify-content: space-between;
       padding: 12px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .spec-item:last-child {
@@ -173,16 +184,16 @@
     }
 
     .feature-card {
-      background: rgba(255,255,255,0.02);
+      background: rgba(255, 255, 255, 0.02);
       padding: 24px;
       border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.06);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       transition: all 0.3s;
     }
 
     .feature-card:hover {
       transform: translateY(-8px);
-      background: rgba(255,255,255,0.04);
+      background: rgba(255, 255, 255, 0.04);
       border-color: var(--wil-mid);
     }
 
@@ -219,10 +230,10 @@
     }
 
     .stat-box {
-      background: rgba(255,255,255,0.02);
+      background: rgba(255, 255, 255, 0.02);
       padding: 20px;
       border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.06);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       text-align: center;
     }
 
@@ -245,14 +256,14 @@
       background: var(--card-bg);
       padding: 40px;
       border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid rgba(255, 255, 255, 0.04);
       margin: 32px 0;
     }
 
     .tech-detail {
       margin: 24px 0;
       padding: 20px;
-      background: rgba(255,255,255,0.02);
+      background: rgba(255, 255, 255, 0.02);
       border-left: 4px solid var(--wil-mid);
       border-radius: 8px;
     }
@@ -282,7 +293,7 @@
       background: var(--card-bg);
       border-radius: 18px;
       overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid rgba(255, 255, 255, 0.04);
       transition: all 0.3s;
     }
 
@@ -294,7 +305,7 @@
     .driver-image-wrap {
       height: 250px;
       overflow: hidden;
-      background: linear-gradient(135deg, rgba(0,160,222,0.08), rgba(0,83,159,0.06));
+      background: linear-gradient(135deg, rgba(0, 160, 222, 0.08), rgba(0, 83, 159, 0.06));
     }
 
     .driver-image-wrap img {
@@ -316,7 +327,7 @@
     .driver-number {
       display: inline-block;
       padding: 4px 12px;
-      background: rgba(0,130,200,0.12);
+      background: rgba(0, 130, 200, 0.12);
       color: var(--wil-mid);
       border-radius: 6px;
       font-weight: 900;
@@ -354,12 +365,14 @@
 
   <meta name="theme-color" content="#0082c8" />
 </head>
+
 <body>
 
   <main class="car-main">
-    <a href="../teams.html" class="back-link">
-      <span>←</span> Back to Teams
+    <a href="javascript:void(0)" class="back-link" id="go-back">
+      <span>←</span> Back
     </a>
+
 
     <!-- Hero -->
     <header class="car-hero">
@@ -394,7 +407,10 @@
       <div class="main-content">
         <h2 class="section-title">Overview</h2>
         <p style="color: var(--muted); line-height: 1.8; margin-bottom: 24px;">
-          The Williams FW46 represents the team's commitment to returning to competitiveness with Mercedes power. Built at Grove, the FW46 combines traditional Williams racing spirit with modern engineering approaches. The car focuses on aerodynamic efficiency, reliability, and providing a solid platform for development throughout the season.
+          The Williams FW46 represents the team's commitment to returning to competitiveness with Mercedes power. Built
+          at Grove, the FW46 combines traditional Williams racing spirit with modern engineering approaches. The car
+          focuses on aerodynamic efficiency, reliability, and providing a solid platform for development throughout the
+          season.
         </p>
 
         <h2 class="section-title">Key Features</h2>
@@ -402,22 +418,26 @@
           <div class="feature-card">
             <div class="feature-icon">⚡</div>
             <h4>Mercedes Power Unit</h4>
-            <p>Proven 1.6L V6 turbo hybrid from Mercedes-AMG High Performance Powertrains, delivering reliable power and excellent fuel efficiency.</p>
+            <p>Proven 1.6L V6 turbo hybrid from Mercedes-AMG High Performance Powertrains, delivering reliable power and
+              excellent fuel efficiency.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">🔧</div>
             <h4>Efficient Packaging</h4>
-            <p>Optimized component layout to reduce weight and improve center of gravity, enhancing overall balance and handling characteristics.</p>
+            <p>Optimized component layout to reduce weight and improve center of gravity, enhancing overall balance and
+              handling characteristics.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">💨</div>
             <h4>Aerodynamic Development</h4>
-            <p>Focus on clean airflow management and efficient downforce generation to maximize performance within budget constraints.</p>
+            <p>Focus on clean airflow management and efficient downforce generation to maximize performance within
+              budget constraints.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">🛞</div>
             <h4>Mechanical Platform</h4>
-            <p>Refined suspension geometry designed to extract maximum performance from Pirelli tires across varying track conditions.</p>
+            <p>Refined suspension geometry designed to extract maximum performance from Pirelli tires across varying
+              track conditions.</p>
           </div>
         </div>
 
@@ -425,23 +445,27 @@
         <div class="drivers-showcase">
           <div class="driver-card-large">
             <div class="driver-image-wrap">
-              <img src="../images/drivers/albon.jpg" alt="Alexander Albon" onerror="this.src='../images/team-fallback.jpg'">
+              <img src="../images/drivers/albon.jpg" alt="Alexander Albon"
+                onerror="this.src='../images/team-fallback.jpg'">
             </div>
             <div class="driver-info">
               <span class="driver-number">#23</span>
               <h4>Alexander Albon</h4>
-              <p style="color: var(--muted);">Experienced racer and team leader — providing crucial development direction and consistent point-scoring performances.</p>
+              <p style="color: var(--muted);">Experienced racer and team leader — providing crucial development
+                direction and consistent point-scoring performances.</p>
             </div>
           </div>
 
           <div class="driver-card-large">
             <div class="driver-image-wrap">
-              <img src="../images/drivers/carlos.jpeg" alt="Carlos Sainz Jr." onerror="this.src='../images/team-fallback.jpg'">
+              <img src="../images/drivers/carlos.jpeg" alt="Carlos Sainz Jr."
+                onerror="this.src='../images/team-fallback.jpg'">
             </div>
             <div class="driver-info">
               <span class="driver-number">#55</span>
               <h4>Carlos Sainz Jr.</h4>
-              <p style="color: #bdbdbd;">The experienced race winner joins Williams in 2025, bringing championship-caliber speed and development expertise to accelerate the team's progress.</p>
+              <p style="color: #bdbdbd;">The experienced race winner joins Williams in 2025, bringing
+                championship-caliber speed and development expertise to accelerate the team's progress.</p>
             </div>
           </div>
         </div>
@@ -451,13 +475,20 @@
         <!-- Technical Specs -->
         <div class="specs-card">
           <h3>Technical Specifications</h3>
-          <div class="spec-item"><span class="spec-label">Chassis</span><span class="spec-value">Carbon Fiber Monocoque</span></div>
-          <div class="spec-item"><span class="spec-label">Engine</span><span class="spec-value">Mercedes-AMG 1.6L V6 Turbo</span></div>
-          <div class="spec-item"><span class="spec-label">Power Output</span><span class="spec-value">~1000 HP</span></div>
-          <div class="spec-item"><span class="spec-label">Energy Recovery</span><span class="spec-value">Dual MGU System</span></div>
-          <div class="spec-item"><span class="spec-label">Transmission</span><span class="spec-value">8-Speed Sequential</span></div>
-          <div class="spec-item"><span class="spec-label">Weight</span><span class="spec-value">740 kg (min)</span></div>
-          <div class="spec-item"><span class="spec-label">Fuel Capacity</span><span class="spec-value">110 kg (max)</span></div>
+          <div class="spec-item"><span class="spec-label">Chassis</span><span class="spec-value">Carbon Fiber
+              Monocoque</span></div>
+          <div class="spec-item"><span class="spec-label">Engine</span><span class="spec-value">Mercedes-AMG 1.6L V6
+              Turbo</span></div>
+          <div class="spec-item"><span class="spec-label">Power Output</span><span class="spec-value">~1000 HP</span>
+          </div>
+          <div class="spec-item"><span class="spec-label">Energy Recovery</span><span class="spec-value">Dual MGU
+              System</span></div>
+          <div class="spec-item"><span class="spec-label">Transmission</span><span class="spec-value">8-Speed
+              Sequential</span></div>
+          <div class="spec-item"><span class="spec-label">Weight</span><span class="spec-value">740 kg (min)</span>
+          </div>
+          <div class="spec-item"><span class="spec-label">Fuel Capacity</span><span class="spec-value">110 kg
+              (max)</span></div>
         </div>
 
         <!-- Performance -->
@@ -465,7 +496,8 @@
           <h3>Performance</h3>
           <div class="spec-item"><span class="spec-label">0-100 km/h</span><span class="spec-value">~2.5 s</span></div>
           <div class="spec-item"><span class="spec-label">0-200 km/h</span><span class="spec-value">~4.5 s</span></div>
-          <div class="spec-item"><span class="spec-label">Top Speed</span><span class="spec-value">360+ km/h</span></div>
+          <div class="spec-item"><span class="spec-label">Top Speed</span><span class="spec-value">360+ km/h</span>
+          </div>
           <div class="spec-item"><span class="spec-label">Max RPM</span><span class="spec-value">15,000 RPM</span></div>
           <div class="spec-item"><span class="spec-label">Max Lateral G</span><span class="spec-value">6.5G</span></div>
         </div>
@@ -473,20 +505,27 @@
         <!-- 2025 Season Goals (dynamic) -->
         <div class="specs-card" id="season-goals-card">
           <h3>2025 Season Goals</h3>
-          <div class="spec-item"><span class="spec-label">Target Position</span><span class="spec-value" id="target-position">Top 5</span></div>
-          <div class="spec-item"><span class="spec-label">Current Position</span><span class="spec-value" id="current-position">—</span></div>
-          <div class="spec-item"><span class="spec-label">Points Scored</span><span class="spec-value" id="points-scored">—</span></div>
-          <div class="spec-item"><span class="spec-label">Wins</span><span class="spec-value" id="wins-count">—</span></div>
-          <div class="spec-item"><span class="spec-label">Podiums</span><span class="spec-value" id="podiums-count">—</span></div>
+          <div class="spec-item"><span class="spec-label">Target Position</span><span class="spec-value"
+              id="target-position">Top 5</span></div>
+          <div class="spec-item"><span class="spec-label">Current Position</span><span class="spec-value"
+              id="current-position">—</span></div>
+          <div class="spec-item"><span class="spec-label">Points Scored</span><span class="spec-value"
+              id="points-scored">—</span></div>
+          <div class="spec-item"><span class="spec-label">Wins</span><span class="spec-value" id="wins-count">—</span>
+          </div>
+          <div class="spec-item"><span class="spec-label">Podiums</span><span class="spec-value"
+              id="podiums-count">—</span></div>
         </div>
 
         <!-- Heritage -->
         <div class="specs-card">
           <h3>Williams F1 Heritage</h3>
-          <div class="spec-item"><span class="spec-label">Constructors' Championships</span><span class="spec-value">9</span></div>
+          <div class="spec-item"><span class="spec-label">Constructors' Championships</span><span
+              class="spec-value">9</span></div>
           <div class="spec-item"><span class="spec-label">Race Wins</span><span class="spec-value">114</span></div>
           <div class="spec-item"><span class="spec-label">Pole Positions</span><span class="spec-value">128</span></div>
-          <div class="spec-item"><span class="spec-label">Base</span><span class="spec-value">Grove, United Kingdom</span></div>
+          <div class="spec-item"><span class="spec-label">Base</span><span class="spec-value">Grove, United
+              Kingdom</span></div>
         </div>
       </div>
     </div>
@@ -498,28 +537,36 @@
       <div class="tech-detail">
         <h4>🔋 Power Unit & Integration</h4>
         <p>
-          The Mercedes-AMG power unit provides Williams with proven performance and reliability. The team has focused on optimal integration to maximize cooling efficiency while minimizing aerodynamic drag from radiator inlets and exhausts.
+          The Mercedes-AMG power unit provides Williams with proven performance and reliability. The team has focused on
+          optimal integration to maximize cooling efficiency while minimizing aerodynamic drag from radiator inlets and
+          exhausts.
         </p>
       </div>
 
       <div class="tech-detail">
         <h4>⚙️ Aerodynamics & Efficiency</h4>
         <p>
-          The FW46's aerodynamic concept emphasizes efficiency over outright downforce. The floor, sidepods, and rear end have been optimized through CFD and wind tunnel work to provide stable, predictable performance across different circuit types.
+          The FW46's aerodynamic concept emphasizes efficiency over outright downforce. The floor, sidepods, and rear
+          end have been optimized through CFD and wind tunnel work to provide stable, predictable performance across
+          different circuit types.
         </p>
       </div>
 
       <div class="tech-detail">
         <h4>🏗️ Chassis & Weight Distribution</h4>
         <p>
-          The carbon fiber monocoque meets all FIA safety standards while achieving competitive weight targets. Strategic component placement ensures optimal weight distribution for improved tire management and handling balance.
+          The carbon fiber monocoque meets all FIA safety standards while achieving competitive weight targets.
+          Strategic component placement ensures optimal weight distribution for improved tire management and handling
+          balance.
         </p>
       </div>
 
       <div class="tech-detail">
         <h4>🎯 Development & Strategy</h4>
         <p>
-          Williams' approach for 2025 focuses on understanding the car's behavior and implementing targeted upgrades. The team uses comprehensive data analysis and driver feedback to guide development priorities throughout the season.
+          Williams' approach for 2025 focuses on understanding the car's behavior and implementing targeted upgrades.
+          The team uses comprehensive data analysis and driver feedback to guide development priorities throughout the
+          season.
         </p>
       </div>
     </section>
@@ -528,17 +575,32 @@
     <section class="main-content" style="margin-top: 32px;">
       <h2 class="section-title">Design Philosophy</h2>
       <p style="color: var(--muted); line-height: 1.8; margin-bottom: 16px;">
-        Williams' design philosophy for the FW46 centers on building a solid foundation for sustained progress. The team has prioritized reliability, efficient aerodynamics, and creating a car that allows drivers to extract consistent performance while providing clear development paths.
+        Williams' design philosophy for the FW46 centers on building a solid foundation for sustained progress. The team
+        has prioritized reliability, efficient aerodynamics, and creating a car that allows drivers to extract
+        consistent performance while providing clear development paths.
       </p>
 
       <div class="feature-grid">
-        <div class="feature-card"><div class="feature-icon">🎯</div><h4>Reliability</h4><p>Robust engineering to ensure consistent race finishes and maximize point-scoring opportunities.</p></div>
-        <div class="feature-card"><div class="feature-icon">⚡</div><h4>Efficiency</h4><p>Optimized aerodynamic and mechanical efficiency to compete effectively within budget constraints.</p></div>
-        <div class="feature-card"><div class="feature-icon">🏁</div><h4>Progress</h4><p>Clear development roadmap focused on steady improvement throughout the season and beyond.</p></div>
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h4>Reliability</h4>
+          <p>Robust engineering to ensure consistent race finishes and maximize point-scoring opportunities.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h4>Efficiency</h4>
+          <p>Optimized aerodynamic and mechanical efficiency to compete effectively within budget constraints.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🏁</div>
+          <h4>Progress</h4>
+          <p>Clear development roadmap focused on steady improvement throughout the season and beyond.</p>
+        </div>
       </div>
 
       <p style="color: var(--muted); line-height: 1.8; margin-top: 24px;">
-        With legendary racing heritage and renewed determination, Williams is focused on climbing back up the grid and reclaiming their position as a competitive force in Formula One.
+        With legendary racing heritage and renewed determination, Williams is focused on climbing back up the grid and
+        reclaiming their position as a competitive force in Formula One.
       </p>
     </section>
 
@@ -658,6 +720,20 @@
         includeHTML('footer', '../footer.html')
       ]);
     });
+
+    document.getElementById("go-back").addEventListener("click", function (e) {
+      e.preventDefault();
+
+      // If user has a referrer (came from another page)
+      if (document.referrer && document.referrer !== window.location.href) {
+        // Go back in history
+        window.history.back();
+      } else {
+        // Otherwise, fallback to teams page
+        window.location.href = "../teams.html";
+      }
+    });
   </script>
 </body>
+
 </html>

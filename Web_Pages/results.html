@@ -1,0 +1,892 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Race Results – F1 Racing</title>
+  <meta name="description" content="F1 race results (season & round) using Jolpi Ergast API." />
+  <style>
+    :root {
+      --bg: #070707;
+      --card: rgba(20, 20, 20, 0.92);
+      --muted: #bdbdbd;
+      --accent: #e10600;
+      --accent-2: #ff4500;
+      --glass: rgba(255, 255, 255, 0.04);
+      --shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+      --container: 1200px;
+      --pad: 24px;
+      --radius: 12px;
+      --transition: 0.32s cubic-bezier(.2, .9, .2, 1);
+      font-family: "Inter", "Segoe UI", system-ui, Arial, sans-serif;
+    }
+
+    html,
+    body {
+      margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  /* Background */
+  background: url("images/background.png") no-repeat center center fixed;
+  background-size: cover;
+  /* Make it cover the whole screen */
+  background-attachment: fixed;
+  /* Creates a parallax effect */
+  background-color: #000;
+  /* Fallback color if image doesn’t load */
+  color: #fff;
+  /* Ensures text is visible */
+    }
+
+    .container {
+      max-width: var(--container);
+      margin: 28px auto;
+      padding: 0 var(--pad);
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      background: linear-gradient(145deg, rgba(20, 20, 20, 0.95), rgba(35, 35, 35, 0.85));
+      padding: 22px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      box-shadow: var(--shadow);
+      margin-bottom: 18px
+    }
+
+    .hero-left {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      min-width: 0
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: 1.4rem;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 520px;
+      font-size: 0.95rem
+    }
+
+    .controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap
+    }
+
+    select,
+    button {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .18s;
+      min-width: 140px
+    }
+
+    button.primary {
+      background: linear-gradient(90deg, rgba(225, 6, 0, 0.12), rgba(255, 69, 0, 0.08));
+      border: 1px solid rgba(225, 6, 0, 0.16);
+      color: #fff;
+      min-width: 100px
+    }
+
+    select:focus,
+    button:focus {
+      outline: 3px solid rgba(225, 6, 0, 0.12);
+      outline-offset: 3px
+    }
+
+    .featured {
+      margin-top: 14px;
+      background: linear-gradient(90deg, rgba(225, 6, 0, 0.04), rgba(0, 0, 0, 0.07));
+      border-radius: 14px;
+      padding: 14px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.03)
+    }
+
+    .featured .meta {
+      flex: 1;
+      min-width: 0
+    }
+
+    .featured h3 {
+      margin: 0;
+      font-size: 1.05rem;
+      color: var(--accent)
+    }
+
+    .featured p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 0.95rem
+    }
+
+    .featured .winner {
+      font-weight: 900;
+      color: #fff;
+      margin-top: 8px
+    }
+
+    .marquee-wrap {
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .marquee {
+      overflow: hidden;
+      white-space: nowrap;
+      width: 100%;
+      border-radius: 12px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      padding: 8px 12px
+    }
+
+    .marquee-track {
+      display: inline-flex;
+      gap: 18px;
+      animation: marquee 16s linear infinite;
+      align-items: center
+    }
+
+    .marquee-item {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.02);
+      min-width: 220px
+    }
+
+    .position-badge {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.03);
+      font-weight: 900;
+      color: var(--accent)
+    }
+
+    @keyframes marquee {
+      0% {
+        transform: translateX(0)
+      }
+
+      100% {
+        transform: translateX(-50%)
+      }
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 18px;
+      margin-top: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      box-shadow: var(--shadow)
+    }
+
+    .loading {
+      text-align: center;
+      color: var(--muted);
+      padding: 20px 0
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 255, 255, 0.06);
+      border-top-color: var(--accent);
+      animation: spin 1s linear infinite;
+      margin-bottom: 8px
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 0.95rem
+    }
+
+    .results-table thead th {
+      text-align: left;
+      padding: 12px;
+      color: var(--muted);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04)
+    }
+
+    .results-table tbody td {
+      padding: 12px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.03);
+      vertical-align: middle
+    }
+
+    .driver-name {
+      font-weight: 800;
+      color: #fff;
+      display: inline-block;
+      margin-right: 6px
+    }
+
+    .driver-nationality {
+      color: var(--muted);
+      font-size: 0.85rem
+    }
+
+    .constructor {
+      color: var(--accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.85rem
+    }
+
+    .muted {
+      color: var(--muted)
+    }
+
+    .empty {
+      text-align: center;
+      padding: 28px;
+      color: var(--muted);
+      font-weight: 700
+    }
+
+    @media (max-width:900px) {
+      .hero {
+        flex-direction: column;
+        align-items: flex-start
+      }
+
+      .marquee-track {
+        animation-duration: 22s
+      }
+
+      .controls {
+        width: 100%;
+        gap: 10px
+      }
+
+      select {
+        min-width: 120px
+      }
+
+      .results-table thead {
+        display: none
+      }
+
+      .results-table,
+      .results-table tbody,
+      .results-table tr,
+      .results-table td {
+        display: block;
+        width: 100%
+      }
+
+      .results-table tr {
+        margin-bottom: 10px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.02);
+        padding: 10px
+      }
+
+      .results-table td {
+        padding: 8px;
+        border-bottom: none
+      }
+
+      .field-label {
+        font-weight: 700;
+        display: inline-block;
+        width: 110px;
+        color: var(--muted)
+      }
+    }
+
+    .muted-quiet {
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 0.9rem
+    }
+
+    .small {
+      font-size: 0.9rem
+    }
+
+    a.link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container" id="app" aria-live="polite">
+    <div class="hero" role="region" aria-label="Race results">
+      <div class="hero-left">
+        <div>
+          <h1>Race Results</h1>
+          <p class="muted">Choose a season and a race — live from the Ergast dataset.</p>
+        </div>
+      </div>
+
+      <div class="controls" aria-hidden="false">
+        <select id="seasonSelect" aria-label="Choose season"></select>
+        <select id="raceSelect" aria-label="Choose race">
+          <option>Pick a season</option>
+        </select>
+        <button id="loadBtn" class="primary" aria-label="Load results">Load</button>
+      </div>
+    </div>
+
+    <div class="featured" id="featured" role="region" aria-label="Featured race" hidden>
+      <div class="meta">
+        <h3 id="featuredRaceName">—</h3>
+        <p id="featuredCircuit" class="muted">—</p>
+        <div class="winner small muted-quiet" id="featuredWinner">Winner: —</div>
+      </div>
+    </div>
+
+    <div class="marquee-wrap" aria-hidden="false" style="margin-top:14px;">
+      <div class="muted-quiet small">Top 5 — </div>
+      <div class="marquee" aria-live="polite">
+        <div class="marquee-track" id="marqueeTrack">
+          <div class="marquee-item small muted-quiet">Loading top drivers…</div>
+        </div>
+      </div>
+    </div>
+
+    <section class="card" id="resultsCard">
+      <div id="meta" class="muted">Select a season and race to load results.</div>
+
+      <div id="loading" class="loading" hidden>
+        <div class="spinner" aria-hidden="true"></div>
+        <div>Loading results…</div>
+      </div>
+
+      <div id="error" class="empty" hidden></div>
+
+      <table id="resultsTable" class="results-table" hidden aria-describedby="meta">
+        <thead>
+          <tr>
+            <th>Pos</th>
+            <th>No</th>
+            <th>Driver</th>
+            <th>Constructor</th>
+            <th>Grid</th>
+            <th>Laps</th>
+            <th>Time</th>
+            <th>Fastest Lap</th>
+            <th>Pts</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script>
+    /* Combined results page script with featured + marquee updater integrated */
+    const API_ROOT = 'https://api.jolpi.ca/ergast/f1';
+
+    // DOM refs
+    const seasonSelect = document.getElementById('seasonSelect');
+    const raceSelect = document.getElementById('raceSelect');
+    const loadBtn = document.getElementById('loadBtn');
+    const loadingEl = document.getElementById('loading');
+    const errorEl = document.getElementById('error');
+    const metaEl = document.getElementById('meta');
+    const table = document.getElementById('resultsTable');
+    const tbody = table?.querySelector('tbody');
+
+    // Featured + marquee elements
+    const featuredEl = document.getElementById('featured');
+    const featuredRaceNameEl = document.getElementById('featuredRaceName');
+    const featuredCircuitEl = document.getElementById('featuredCircuit');
+    const featuredWinnerEl = document.getElementById('featuredWinner');
+    const marqueeTrackEl = document.getElementById('marqueeTrack');
+
+    // helpers
+    function qs() { return new URLSearchParams(location.search); }
+    function escapeHtml(s = '') { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+    function td(text) { const el = document.createElement('td'); el.textContent = text ?? '-'; return el; }
+
+    async function fetchJson(url) {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`Network error ${res.status}`);
+      return res.json();
+    }
+
+    /* ---------------- seasons (pagination) ---------------- */
+    async function fetchAllSeasons() {
+      const all = [];
+      const limit = 100;
+      let offset = 0;
+      let total = Infinity;
+
+      while (offset < total) {
+        const url = `${API_ROOT}/seasons/?limit=${limit}&offset=${offset}`;
+        const json = await fetchJson(url);
+        const page = json?.MRData?.SeasonTable?.Seasons || [];
+        const normalized = page.map(item => typeof item === 'string' ? { season: item } : item);
+        all.push(...normalized);
+        total = Number(json?.MRData?.total ?? (offset + page.length));
+        offset += limit;
+        if (!page.length) break;
+      }
+
+      const map = new Map();
+      all.forEach(s => { if (s && s.season) map.set(String(s.season), { season: String(s.season) }); });
+      return Array.from(map.values()).sort((a, b) => Number(b.season) - Number(a.season));
+    }
+
+    /* ---------------- races & results ---------------- */
+    async function fetchRacesForSeason(season) {
+      const url = `${API_ROOT}/${encodeURIComponent(season)}/races/?limit=500`;
+      const json = await fetchJson(url);
+      return json?.MRData?.RaceTable?.Races || [];
+    }
+
+    async function fetchResultsForSeasonRound(season, round) {
+      const url = `${API_ROOT}/${encodeURIComponent(season)}/${encodeURIComponent(round)}/results/`;
+      const json = await fetchJson(url);
+      const race = json?.MRData?.RaceTable?.Races?.[0] || null;
+      return { race, results: race?.Results || [], hasResults: Array.isArray(race?.Results) && race.Results.length > 0 };
+    }
+
+    /* ---------------- rendering results ---------------- */
+    function renderResults(raceMeta, resultsArray) {
+      if (!metaEl) return;
+      metaEl.innerHTML = `<strong>${escapeHtml(raceMeta.raceName)}</strong> — ${escapeHtml(raceMeta.Circuit?.circuitName || '')} · <span class="muted">${escapeHtml(raceMeta.date || '')}</span>`;
+      if (!tbody || !table) return;
+      tbody.innerHTML = '';
+
+      if (!resultsArray || !resultsArray.length) {
+        table.hidden = true;
+        if (errorEl) { errorEl.hidden = false; errorEl.textContent = 'No results found for this race.'; }
+        return;
+      }
+      if (errorEl) errorEl.hidden = true;
+      table.hidden = false;
+
+      // ensure results sorted by position
+      const sorted = resultsArray.slice().sort((a, b) => {
+        const pa = Number(a.position || a.positionText || 0);
+        const pb = Number(b.position || b.positionText || 0);
+        return pa - pb;
+      });
+
+      sorted.forEach(r => {
+        const tr = document.createElement('tr');
+        tr.appendChild(td(r.positionText || r.position || '-'));
+        tr.appendChild(td(r.number || '-'));
+
+        const driverTd = document.createElement('td');
+        const name = document.createElement('span'); name.className = 'driver-name';
+        name.textContent = `${r.Driver?.givenName || ''} ${r.Driver?.familyName || ''}`.trim() || '-';
+        driverTd.appendChild(name);
+        if (r.Driver?.nationality) {
+          const nat = document.createElement('span'); nat.className = 'driver-nationality'; nat.textContent = ` — ${r.Driver.nationality}`;
+          driverTd.appendChild(nat);
+        }
+        if (r.Driver?.url) {
+          const a = document.createElement('a'); a.href = r.Driver.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.textContent = '↗';
+          a.style.marginLeft = '8px'; a.className = 'muted';
+          driverTd.appendChild(a);
+        }
+        tr.appendChild(driverTd);
+
+        const consTd = document.createElement('td');
+        const consName = document.createElement('span'); consName.className = 'constructor'; consName.textContent = r.Constructor?.name || '-';
+        consTd.appendChild(consName);
+        if (r.Constructor?.url) {
+          const a2 = document.createElement('a'); a2.href = r.Constructor.url; a2.target = '_blank'; a2.rel = 'noopener noreferrer'; a2.textContent = '↗';
+          a2.style.marginLeft = '8px'; a2.className = 'muted';
+          consTd.appendChild(a2);
+        }
+        tr.appendChild(consTd);
+
+        tr.appendChild(td(r.grid || '-'));
+        tr.appendChild(td(r.laps || '-'));
+        tr.appendChild(td(r.Time?.time || r.status || '-'));
+        const flText = r.FastestLap?.Time?.time ? `${r.FastestLap.Time.time} (lap ${r.FastestLap.lap})` : '-';
+        tr.appendChild(td(flText));
+        tr.appendChild(td(r.points ?? '0'));
+        tbody.appendChild(tr);
+      });
+    }
+
+    /* --------------- helpers for picking races ---------------- */
+    function pickMostRecentByDate(races) {
+      if (!races || !races.length) return null;
+      const today = new Date().toISOString().slice(0, 10);
+      const completed = races.filter(r => r.date && String(r.date) <= today);
+      if (!completed.length) return null;
+      completed.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+      return completed[0];
+    }
+
+    function findRaceByCircuitId(races, circuitId) {
+      if (!races || !races.length) return null;
+      return races.find(r => r.Circuit?.circuitId === circuitId) || null;
+    }
+
+    async function findMostRecentCompletedRaceByCircuitAcrossSeasons(circuitId, seasonsList, seasonsLimit = 6) {
+      const limited = seasonsList.slice(0, seasonsLimit);
+      for (const s of limited) {
+        try {
+          const races = await fetchRacesForSeason(s.season);
+          const match = findRaceByCircuitId(races, circuitId);
+          if (!match) continue;
+          const today = new Date().toISOString().slice(0, 10);
+          if (match.date && String(match.date) <= today) {
+            const chk = await fetchResultsForSeasonRound(s.season, match.round);
+            if (chk.hasResults) return { season: s.season, round: match.round, race: chk.race, results: chk.results };
+          } else {
+            const chk = await fetchResultsForSeasonRound(s.season, match.round);
+            if (chk.hasResults) return { season: s.season, round: match.round, race: chk.race, results: chk.results };
+          }
+        } catch (e) {
+          console.warn('checking season failed', s.season, e);
+          continue;
+        }
+      }
+      return null;
+    }
+
+    /* ----------------- Featured & Marquee updater (robust) ----------------- */
+    (function () {
+      // small escape for inserted innerHTML
+      function esc(s = '') { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+
+      function buildMarqueeFromResults(results) {
+        if (!marqueeTrackEl) return;
+        marqueeTrackEl.innerHTML = '';
+
+        const top = (Array.isArray(results) ? results.slice().sort((a, b) => Number(a.position || a.positionText || 0) - Number(b.position || b.positionText || 0)) : []).slice(0, 5);
+
+        if (!top.length) {
+          const empty = document.createElement('div');
+          empty.className = 'marquee-item small muted-quiet';
+          empty.textContent = 'No top drivers';
+          marqueeTrackEl.appendChild(empty);
+          return;
+        }
+
+        const nodes = top.map((r, idx) => {
+          const div = document.createElement('div');
+          div.className = 'marquee-item';
+          const driverName = `${(r.Driver?.givenName || '').trim()} ${(r.Driver?.familyName || '').trim()}`.trim() || 'Unknown';
+          const constructorName = (r.Constructor?.name || '').trim();
+          const points = (r.points != null ? r.points : '0');
+          div.innerHTML = `<div class="position-badge">${idx + 1}</div>
+                       <div>
+                         <div style="font-weight:800">${esc(driverName)}</div>
+                         <div class="muted small">${esc(constructorName)} · ${esc(points)}</div>
+                       </div>`;
+          return div;
+        });
+
+        // duplicate for continuous scroll
+        nodes.concat(nodes).forEach(n => marqueeTrackEl.appendChild(n));
+      }
+
+      function updateFeaturedAndMarquee(race, results) {
+        try {
+          if (featuredEl) {
+            if (!race) {
+              featuredEl.hidden = true;
+            } else {
+              featuredEl.hidden = false;
+              if (featuredRaceNameEl) featuredRaceNameEl.textContent = race.raceName || '—';
+              if (featuredCircuitEl) featuredCircuitEl.textContent = `${race.Circuit?.circuitName || '—'} · ${race.date || ''}`;
+              const winner = Array.isArray(results) && results.length ? results.slice().sort((a, b) => Number(a.position || 0) - Number(b.position || 0))[0] : null;
+              if (featuredWinnerEl) {
+                if (winner) {
+                  const wname = `${winner.Driver?.givenName || ''} ${winner.Driver?.familyName || ''}`.trim();
+                  const wcons = winner.Constructor?.name || '';
+                  featuredWinnerEl.textContent = `Winner: ${wname} — ${wcons}`;
+                } else {
+                  featuredWinnerEl.textContent = 'Winner: —';
+                }
+              }
+            }
+          }
+
+          buildMarqueeFromResults(results);
+        } catch (err) {
+          console.warn('updateFeaturedAndMarquee error', err);
+        }
+      }
+
+      // expose to window for backward compatibility
+      window.updateFeaturedAndMarquee = updateFeaturedAndMarquee;
+    })();
+
+    /* --------------- main auto-load flow ---------------- */
+    async function initResultsPage() {
+      try { if (loadingEl) loadingEl.hidden = false; } catch { }
+
+      const params = qs();
+      const requestedSeason = params.get('season');
+      const requestedCircuit = params.get('circuit');
+
+      try {
+        const seasons = await fetchAllSeasons();
+        if (seasonSelect) {
+          seasonSelect.innerHTML = '';
+          seasons.forEach(s => {
+            const opt = document.createElement('option');
+            opt.value = s.season;
+            opt.textContent = s.season;
+            seasonSelect.appendChild(opt);
+          });
+          seasonSelect.disabled = false;
+          if (requestedSeason && Array.from(seasonSelect.options).some(o => o.value === requestedSeason)) seasonSelect.value = requestedSeason;
+          else seasonSelect.selectedIndex = 0;
+        }
+
+        if (requestedSeason) {
+          const races = await fetchRacesForSeason(requestedSeason);
+          if (raceSelect) {
+            raceSelect.innerHTML = '';
+            races.sort((a, b) => Number(a.round) - Number(b.round));
+            races.forEach(r => {
+              const opt = document.createElement('option');
+              opt.value = r.round;
+              opt.textContent = `${r.round} — ${r.raceName} (${r.date || 'TBA'})`;
+              raceSelect.appendChild(opt);
+            });
+          }
+
+          if (requestedCircuit) {
+            const match = findRaceByCircuitId(races, requestedCircuit);
+            if (match) {
+              const today = new Date().toISOString().slice(0, 10);
+              if ((match.date && String(match.date) <= today)) {
+                const chk = await fetchResultsForSeasonRound(requestedSeason, match.round);
+                if (chk.hasResults) {
+                  if (seasonSelect) seasonSelect.value = requestedSeason;
+                  if (raceSelect) raceSelect.value = match.round;
+                  renderResults(chk.race, chk.results);
+                  window.updateFeaturedAndMarquee(chk.race, chk.results);
+                  if (loadingEl) loadingEl.hidden = true;
+                  return;
+                }
+              }
+            }
+          }
+
+          const recent = pickMostRecentByDate(races);
+          if (recent) {
+            const chk = await fetchResultsForSeasonRound(requestedSeason, recent.round);
+            if (chk.hasResults) {
+              if (seasonSelect) seasonSelect.value = requestedSeason;
+              if (raceSelect) raceSelect.value = recent.round;
+              renderResults(chk.race, chk.results);
+              window.updateFeaturedAndMarquee(chk.race, chk.results);
+              if (loadingEl) loadingEl.hidden = true;
+              return;
+            }
+          }
+
+          if (requestedCircuit) {
+            const cross = await findMostRecentCompletedRaceByCircuitAcrossSeasons(requestedCircuit, seasons, 8);
+            if (cross) {
+              if (seasonSelect) seasonSelect.value = cross.season;
+              const racesForCross = await fetchRacesForSeason(cross.season);
+              if (raceSelect) {
+                raceSelect.innerHTML = '';
+                racesForCross.sort((a, b) => Number(a.round) - Number(b.round));
+                racesForCross.forEach(r => {
+                  const opt = document.createElement('option');
+                  opt.value = r.round;
+                  opt.textContent = `${r.round} — ${r.raceName} (${r.date || 'TBA'})`;
+                  raceSelect.appendChild(opt);
+                });
+                raceSelect.value = cross.round;
+              }
+              renderResults(cross.race, cross.results);
+              window.updateFeaturedAndMarquee(cross.race, cross.results);
+              if (loadingEl) loadingEl.hidden = true;
+              return;
+            } else {
+              if (metaEl) metaEl.textContent = 'No completed races found for this circuit in recent seasons.';
+              if (loadingEl) loadingEl.hidden = true;
+              if (table) table.hidden = true;
+              return;
+            }
+          }
+
+          if (metaEl) metaEl.textContent = 'No completed races found for that season.';
+          if (loadingEl) loadingEl.hidden = true;
+          return;
+        }
+
+        // No requested season: default to most recent season
+        const currentSeason = seasonSelect?.value;
+        if (!currentSeason) {
+          if (loadingEl) loadingEl.hidden = true;
+          if (errorEl) { errorEl.hidden = false; errorEl.textContent = 'No season available.'; }
+          return;
+        }
+
+        const races = await fetchRacesForSeason(currentSeason);
+        if (raceSelect) {
+          raceSelect.innerHTML = '';
+          races.sort((a, b) => Number(a.round) - Number(b.round));
+          races.forEach(r => {
+            const opt = document.createElement('option');
+            opt.value = r.round;
+            opt.textContent = `${r.round} — ${r.raceName} (${r.date || 'TBA'})`;
+            raceSelect.appendChild(opt);
+          });
+        }
+
+        const recent = pickMostRecentByDate(races);
+        if (recent) {
+          const chk = await fetchResultsForSeasonRound(currentSeason, recent.round);
+          if (chk.hasResults) {
+            if (raceSelect) raceSelect.value = recent.round;
+            renderResults(chk.race, chk.results);
+            window.updateFeaturedAndMarquee(chk.race, chk.results);
+            if (loadingEl) loadingEl.hidden = true;
+            return;
+          }
+        }
+
+        // fallback: scan last few seasons
+        for (const s of seasons.slice(0, 6)) {
+          const rlist = await fetchRacesForSeason(s.season);
+          const rec = pickMostRecentByDate(rlist);
+          if (!rec) continue;
+          const chk = await fetchResultsForSeasonRound(s.season, rec.round);
+          if (chk.hasResults) {
+            if (seasonSelect) seasonSelect.value = s.season;
+            if (raceSelect) {
+              raceSelect.innerHTML = '';
+              rlist.sort((a, b) => Number(a.round) - Number(b.round));
+              rlist.forEach(r => {
+                const opt = document.createElement('option');
+                opt.value = r.round;
+                opt.textContent = `${r.round} — ${r.raceName} (${r.date || 'TBA'})`;
+                raceSelect.appendChild(opt);
+              });
+              raceSelect.value = rec.round;
+            }
+            renderResults(chk.race, chk.results);
+            window.updateFeaturedAndMarquee(chk.race, chk.results);
+            if (loadingEl) loadingEl.hidden = true;
+            return;
+          }
+        }
+
+        if (loadingEl) loadingEl.hidden = true;
+        if (errorEl) { errorEl.hidden = false; errorEl.textContent = 'No completed race results found.'; }
+      } catch (err) {
+        console.error('initResultsPage error', err);
+        try { if (loadingEl) loadingEl.hidden = true; } catch { }
+        if (errorEl) { errorEl.hidden = false; errorEl.textContent = 'Failed to initialize results: ' + err.message; }
+      }
+    }
+
+    /* wire manual controls */
+    if (seasonSelect) {
+      seasonSelect.addEventListener('change', async (e) => {
+        const s = e.target.value;
+        if (!s) return;
+        try {
+          const races = await fetchRacesForSeason(s);
+          if (raceSelect) {
+            raceSelect.innerHTML = '';
+            races.sort((a, b) => Number(a.round) - Number(b.round));
+            races.forEach(r => {
+              const opt = document.createElement('option');
+              opt.value = r.round;
+              opt.textContent = `${r.round} — ${r.raceName} (${r.date || 'TBA'})`;
+              raceSelect.appendChild(opt);
+            });
+            raceSelect.disabled = false;
+          }
+          if (metaEl) metaEl.textContent = 'Pick a race and press Load Results.';
+          if (table) table.hidden = true;
+        } catch (err) {
+          console.error('season change failed', err);
+        }
+      });
+    }
+
+    if (loadBtn) {
+      loadBtn.addEventListener('click', async () => {
+        const season = seasonSelect?.value;
+        const round = raceSelect?.value;
+        if (!season || !round) {
+          if (errorEl) { errorEl.hidden = false; errorEl.textContent = 'Select a season and a race to continue.'; }
+          return;
+        }
+        try {
+          if (loadingEl) loadingEl.hidden = false;
+          const chk = await fetchResultsForSeasonRound(season, round);
+          if (!chk.hasResults) {
+            if (errorEl) { errorEl.hidden = false; errorEl.textContent = 'No results for that race yet.'; }
+            if (table) table.hidden = true;
+          } else {
+            renderResults(chk.race, chk.results);
+            window.updateFeaturedAndMarquee(chk.race, chk.results);
+          }
+        } catch (e) {
+          console.error('loadBtn error', e);
+          if (errorEl) { errorEl.hidden = false; errorEl.textContent = 'Failed to load results: ' + e.message; }
+        } finally {
+          if (loadingEl) loadingEl.hidden = true;
+        }
+      });
+    }
+
+    /* kick off */
+    document.addEventListener('DOMContentLoaded', () => {
+      initResultsPage();
+    });
+  </script>
+</body>
+
+</html>

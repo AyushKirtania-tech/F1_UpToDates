@@ -371,9 +371,10 @@
 <body>
 
   <main class="car-main">
-    <a href="../teams.html" class="back-link">
-      <span>←</span> Back to Teams
+    <a href="javascript:void(0)" class="back-link" id="go-back">
+      <span>←</span> Back
     </a>
+
 
     <!-- Hero -->
     <header class="car-hero">
@@ -718,6 +719,19 @@
       await Promise.all([
         includeHTML('footer', '../footer.html')
       ]);
+    });
+
+    document.getElementById("go-back").addEventListener("click", function (e) {
+      e.preventDefault();
+
+      // If user has a referrer (came from another page)
+      if (document.referrer && document.referrer !== window.location.href) {
+        // Go back in history
+        window.history.back();
+      } else {
+        // Otherwise, fallback to teams page
+        window.location.href = "../teams.html";
+      }
     });
   </script>
 </body>

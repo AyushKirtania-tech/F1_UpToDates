@@ -1,5 +1,4 @@
-// F1 Circuits Page
-
+// Script/circuits.js — complete and ready to use
 const API_BASE = 'https://api.jolpi.ca/ergast/f1';
 
 let allCircuits = [];
@@ -272,25 +271,24 @@ const circuitDetails = {
   },
 };
 
-// Fetch circuits from Ergast API
-async function fetchCircuits() {
-  try {
-    const response = await fetch(`${API_BASE}/current/circuits.json`);
-    
-    if (!response.ok) {
-      throw new Error('Failed to fetch circuits');
-    }
-    
-    const data = await response.json();
-    return data.MRData.CircuitTable.Circuits;
-  } catch (error) {
-    console.error('Error fetching circuits:', error);
-    showError();
-    return [];
-  }
+// Helper: escape HTML special characters
+function escapeHtml (str = '') {
+  return String(str)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
 }
 
-// Get circuit details
+// Helper: safely build results page URL for a circuit (defaults to season 2025)
+function buildResultsUrlForCircuit({ circuitId, season = '2025' } = {}) {
+  const q = new URLSearchParams();
+  if (season) q.set('season', String(season));
+  if (circuitId) q.set('circuit', String(circuitId));
+  return `results.html?${q.toString()}`;
+}
+
+// Get circuit details (fallback)
 function getCircuitDetails(circuitId) {
   return circuitDetails[circuitId] || {
     type: 'permanent',
@@ -305,57 +303,65 @@ function getCircuitDetails(circuitId) {
   };
 }
 
-// Create circuit card
+// Create circuit card (includes View 2025 Results button)
 function createCircuitCard(circuit) {
   const details = getCircuitDetails(circuit.circuitId);
   const { circuitName, Location } = circuit;
   const { locality, country } = Location;
 
+  const resultsUrl = buildResultsUrlForCircuit({ circuitId: circuit.circuitId, season: '2025' });
+
   return `
     <div class="circuit-card" 
          data-type="${details.type}" 
          data-classic="${details.classic}"
-         data-name="${circuitName.toLowerCase()}"
-         data-country="${country.toLowerCase()}">
+         data-name="${escapeHtml(circuitName.toLowerCase())}"
+         data-country="${escapeHtml(country.toLowerCase())}">
       
       <div class="circuit-image">
-        <img src="${details.image}" alt="${circuitName}" loading="lazy">
+        <img src="${details.image}" alt="${escapeHtml(circuitName)}" loading="lazy">
         <span class="circuit-type ${details.type}">${details.type}</span>
       </div>
 
       <div class="circuit-content">
         <div class="circuit-header">
-          <div class="gp-badge">${details.grandPrixName}</div>
-          <h3 class="circuit-name">${circuitName}</h3>
-          <p class="circuit-location">${locality}, ${country}</p>
+          <div class="gp-badge">${escapeHtml(details.grandPrixName)}</div>
+          <h3 class="circuit-name">${escapeHtml(circuitName)}</h3>
+          <p class="circuit-location">${escapeHtml(locality)}, ${escapeHtml(country)}</p>
         </div>
 
         <div class="circuit-info">
           <div class="info-item">
             <span class="info-label">Length</span>
-            <span class="info-value">${details.length} km</span>
+            <span class="info-value">${escapeHtml(details.length)} km</span>
           </div>
           <div class="info-item">
             <span class="info-label">Turns</span>
-            <span class="info-value">${details.turns}</span>
+            <span class="info-value">${escapeHtml(details.turns)}</span>
           </div>
           <div class="info-item">
             <span class="info-label">Lap Record</span>
-            <span class="info-value">${details.lapRecord}</span>
+            <span class="info-value">${escapeHtml(details.lapRecord)}</span>
           </div>
           <div class="info-item">
             <span class="info-label">First Race</span>
-            <span class="info-value">${details.firstRace}</span>
+            <span class="info-value">${escapeHtml(details.firstRace)}</span>
           </div>
         </div>
 
-        <p class="circuit-description">${details.description}</p>
+        <p class="circuit-description">${escapeHtml(details.description)}</p>
+
+        <div class="circuit-actions" style="margin-top:12px;">
+          <a class="btn small" href="${resultsUrl}" title="View 2025 results for ${escapeHtml(circuitName)}">
+            View 2025 Results
+          </a>
+        </div>
       </div>
     </div>
   `;
 }
 
-// Render circuits
+// Render circuits into DOM
 function renderCircuits(circuits) {
   const container = document.getElementById('circuits-container');
   container.innerHTML = circuits.map(circuit => createCircuitCard(circuit)).join('');
@@ -397,8 +403,8 @@ function searchCircuits(query) {
   const searchTerm = query.toLowerCase();
 
   cards.forEach(card => {
-    const name = card.dataset.name;
-    const country = card.dataset.country;
+    const name = card.dataset.name || '';
+    const country = card.dataset.country || '';
     const matches = name.includes(searchTerm) || country.includes(searchTerm);
     
     card.classList.toggle('hidden', !matches);
@@ -418,19 +424,13 @@ function sortCircuits(sortBy) {
         return a.dataset.country.localeCompare(b.dataset.country);
       case 'length':
         const getLength = node => {
-          const text = node.querySelector('.info-item .info-value') ?
-                       node.querySelector('.info-item .info-value').textContent :
-                       '';
-          // try to find the first .info-value within the card that contains "km"
           const vals = Array.from(node.querySelectorAll('.info-value'));
           for (let v of vals) {
-            if (v.textContent.includes('km')) return parseFloat(v.textContent);
+            if (v.textContent.includes('km')) return parseFloat(v.textContent) || 0;
           }
-          return parseFloat(text) || 0;
+          return 0;
         };
-        const lengthA = getLength(a);
-        const lengthB = getLength(b);
-        return lengthB - lengthA;
+        return getLength(b) - getLength(a);
       default:
         return 0;
     }
@@ -439,18 +439,19 @@ function sortCircuits(sortBy) {
   cards.forEach(card => container.appendChild(card));
 }
 
-
-// Update stats
+// Update stats in hero
 function updateStats(circuits) {
   const countries = new Set(circuits.map(c => c.Location.country));
-  
-  document.getElementById('total-circuits').textContent = circuits.length;
-  document.getElementById('total-countries').textContent = countries.size;
+  const totalCircuitsEl = document.getElementById('total-circuits');
+  const totalCountriesEl = document.getElementById('total-countries');
+  if (totalCircuitsEl) totalCircuitsEl.textContent = circuits.length;
+  if (totalCountriesEl) totalCountriesEl.textContent = countries.size;
 }
 
-// Show error
+// Show error UI in loading area
 function showError() {
   const loading = document.getElementById('loading');
+  if (!loading) return;
   loading.innerHTML = `
     <div class="error">
       <h3>Unable to load circuits</h3>
@@ -460,41 +461,47 @@ function showError() {
   `;
 }
 
+// Fetch circuits from Ergast API
+async function fetchCircuits() {
+  try {
+    const response = await fetch(`${API_BASE}/current/circuits.json`);
+    if (!response.ok) throw new Error('Failed to fetch circuits');
+    const data = await response.json();
+    return data.MRData.CircuitTable.Circuits || [];
+  } catch (error) {
+    console.error('Error fetching circuits:', error);
+    showError();
+    return [];
+  }
+}
+
 // Initialize circuits page
 async function initCircuits() {
   console.log('Loading F1 Circuits...');
-  
   const loading = document.getElementById('loading');
-  
-  // Fetch circuits
+
+  // Show loading spinner (if present)
+  if (loading) loading.style.display = '';
+
   allCircuits = await fetchCircuits();
-  
-  // Hide loading
-  loading.style.display = 'none';
-  
-  if (allCircuits.length === 0) {
+
+  // Hide loading area
+  if (loading) loading.style.display = 'none';
+
+  if (!allCircuits || allCircuits.length === 0) {
     return;
   }
-  
-  // Render circuits
+
   renderCircuits(allCircuits);
-  
-  // Update stats
   updateStats(allCircuits);
-  
-  // Render featured circuit
-  const featuredSection = document.getElementById('featured-circuit');
-  if (featuredSection) {
-    featuredSection.innerHTML = createFeaturedCircuit();
-  }
-  
+
   // Setup filter buttons
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       filterCircuits(btn.dataset.filter);
     });
   });
-  
+
   // Setup search
   const searchInput = document.getElementById('circuit-search');
   if (searchInput) {
@@ -502,7 +509,7 @@ async function initCircuits() {
       searchCircuits(e.target.value);
     });
   }
-  
+
   // Setup sort
   const sortSelect = document.getElementById('sort-select');
   if (sortSelect) {
@@ -510,7 +517,7 @@ async function initCircuits() {
       sortCircuits(e.target.value);
     });
   }
-  
+
   console.log('Circuits loaded successfully!');
 }
 

@@ -1,11 +1,12 @@
-/* teams.js — cleaned version
-   - Removes Ergast/API & refresh/standings code
+/* teams.js — cleaned version + results-link wiring
    - Keeps includeHTML, filters, reveal-on-scroll, modal, year placeholders, image fallbacks
+   - Adds wiring for a global results link and per-team "Check Results" buttons.
 */
 
 (() => {
   /* --------- Config --------- */
-  // (no external APIs in this lightweight build)
+  const API_ROOT = 'https://api.jolpi.ca/ergast/f1';
+  const FALLBACK_RESULTS_URL = 'results.html';
 
   /* includeHTML: injects external html into a container */
   async function includeHTML(id, path) {
@@ -159,7 +160,7 @@
 
       overlay.querySelector('.modal-desc-text').textContent = desc || '';
 
-      const carPageLink = teamName ? `cars/${teamName}.html` : '#';
+      const carPageLink = teamName ? `cars/${teamName}.html` : '#';   //Kown the car button
       learnMoreBtn.href = carPageLink;
       learnMoreBtn.style.display = teamName ? 'inline-block' : 'none';
 
@@ -221,6 +222,59 @@
     });
   }
 
+  /* --------- Results links wiring --------- */
+  // small helper: fetch seasons and return most recent season as string (e.g. "2025")
+  async function fetchMostRecentSeason() {
+    try {
+      // fetch all seasons (safe) and pick the max (server returns full list)
+      const resp = await fetch(`${API_ROOT}/seasons/?limit=1000`);
+      if (!resp.ok) throw new Error('Network error fetching seasons');
+      const json = await resp.json();
+      const seasons = json?.MRData?.SeasonTable?.Seasons || [];
+      const normalized = seasons
+        .map(s => (typeof s === 'string' ? s : s.season))
+        .filter(Boolean)
+        .map(Number);
+      if (!normalized.length) return null;
+      const max = Math.max(...normalized);
+      return String(max);
+    } catch (err) {
+      console.warn('fetchMostRecentSeason failed', err);
+      return null;
+    }
+  }
+
+  // wire global results button + per-team buttons
+  async function wireResultsLinks() {
+    const resultsLink = document.getElementById('resultsLink');
+    const perTeamLinks = Array.from(document.querySelectorAll('.team-results-link'));
+    const season = await fetchMostRecentSeason();
+    const seasonParam = season ? `season=${encodeURIComponent(season)}` : null;
+
+    // global
+    if (resultsLink) {
+      resultsLink.href = season ? `results.html?season=${encodeURIComponent(season)}` : FALLBACK_RESULTS_URL;
+    }
+
+    // per-team
+    perTeamLinks.forEach(a => {
+      const team = a.dataset.team;
+      if (!team) return;
+      const params = [];
+      if (seasonParam) params.push(seasonParam);
+      params.push('team=' + encodeURIComponent(team));
+      const href = 'results.html' + (params.length ? ('?' + params.join('&')) : '');
+      a.setAttribute('href', href);
+
+      // defensive click handler to avoid "Cannot set properties of null" style errors in some older setups
+      a.addEventListener('click', (e) => {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; // allow open-in-new-tab
+        e.preventDefault();
+        window.location.href = href;
+      });
+    });
+  }
+
   /* --------- Initialize on DOMContentLoaded --------- */
   document.addEventListener('DOMContentLoaded', async () => {
     // include nav & footer (non-blocking)
@@ -238,6 +292,12 @@
 
     // populate stats from markup data-* attributes
     fillTeamStatsFromDataAttributes();
+
+    // wire results links (does a single API call to get latest season)
+    wireResultsLinks().catch(err => {
+      // fail silently; links will still point to results.html fallback
+      console.warn('wireResultsLinks error', err);
+    });
   });
 
 })();

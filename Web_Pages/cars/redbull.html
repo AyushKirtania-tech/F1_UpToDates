@@ -1,24 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>RB20 — Oracle Red Bull Racing</title>
-  <meta name="description" content="Explore the Red Bull RB20 — technical specs, performance and technical details for the 2025 season." />
+  <meta name="description"
+    content="Explore the Red Bull RB20 — technical specs, performance and technical details for the 2025 season." />
   <meta name="keywords" content="F1, Red Bull, RB20, Formula 1, car specifications, 2025" />
 
   <link rel="stylesheet" href="../Styles/teams.css">
   <style>
     /* small layout fixes to prevent stray gaps and match previous layout */
-    *, *::before, *::after { box-sizing: border-box; }
-    img { display: block; max-width: 100%; height: auto; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
 
-    :root{
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    :root {
       --rb-deep: #0600ef;
       --rb-mid: #3671c6;
       --rb-yellow: #fcd700;
       --muted: #bdbdbd;
-      --card-bg: rgba(20,20,20,0.92);
+      --card-bg: rgba(20, 20, 20, 0.92);
     }
 
     .car-hero {
@@ -31,7 +42,7 @@
       overflow: hidden;
       border-radius: 24px;
       margin-bottom: 40px;
-      background: linear-gradient(135deg, #2b068093, #413bed95 );
+      background: linear-gradient(135deg, #2b068093, #413bed95);
     }
 
     .car-hero::before {
@@ -58,12 +69,12 @@
       text-transform: uppercase;
       letter-spacing: 4px;
       color: #fff;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
     }
 
     .car-hero .subtitle {
       font-size: 1.3rem;
-      color: rgba(255,255,255,0.95);
+      color: rgba(255, 255, 255, 0.95);
       margin: 0;
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -84,8 +95,8 @@
       margin-bottom: 24px;
       padding: 10px 16px;
       border-radius: 8px;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       transition: all 0.3s;
     }
 
@@ -107,7 +118,7 @@
       background: var(--card-bg);
       padding: 32px;
       border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid rgba(255, 255, 255, 0.04);
     }
 
     .sidebar {
@@ -121,7 +132,7 @@
       background: var(--card-bg);
       padding: 24px;
       border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid rgba(255, 255, 255, 0.04);
     }
 
     .specs-card h3 {
@@ -136,7 +147,7 @@
       display: flex;
       justify-content: space-between;
       padding: 12px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .spec-item:last-child {
@@ -173,16 +184,16 @@
     }
 
     .feature-card {
-      background: rgba(255,255,255,0.02);
+      background: rgba(255, 255, 255, 0.02);
       padding: 24px;
       border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.06);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       transition: all 0.3s;
     }
 
     .feature-card:hover {
       transform: translateY(-8px);
-      background: rgba(255,255,255,0.04);
+      background: rgba(255, 255, 255, 0.04);
       border-color: var(--rb-mid);
     }
 
@@ -219,10 +230,10 @@
     }
 
     .stat-box {
-      background: rgba(255,255,255,0.02);
+      background: rgba(255, 255, 255, 0.02);
       padding: 20px;
       border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.06);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       text-align: center;
     }
 
@@ -245,14 +256,14 @@
       background: var(--card-bg);
       padding: 40px;
       border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid rgba(255, 255, 255, 0.04);
       margin: 32px 0;
     }
 
     .tech-detail {
       margin: 24px 0;
       padding: 20px;
-      background: rgba(255,255,255,0.02);
+      background: rgba(255, 255, 255, 0.02);
       border-left: 4px solid var(--rb-mid);
       border-radius: 8px;
     }
@@ -282,7 +293,7 @@
       background: var(--card-bg);
       border-radius: 18px;
       overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid rgba(255, 255, 255, 0.04);
       transition: all 0.3s;
     }
 
@@ -294,7 +305,7 @@
     .driver-image-wrap {
       height: 250px;
       overflow: hidden;
-      background: linear-gradient(135deg, rgba(54,113,198,0.08), rgba(6,0,239,0.06));
+      background: linear-gradient(135deg, rgba(54, 113, 198, 0.08), rgba(6, 0, 239, 0.06));
     }
 
     .driver-image-wrap img {
@@ -316,7 +327,7 @@
     .driver-number {
       display: inline-block;
       padding: 4px 12px;
-      background: rgba(54,113,198,0.12);
+      background: rgba(54, 113, 198, 0.12);
       color: var(--rb-mid);
       border-radius: 6px;
       font-weight: 900;
@@ -354,12 +365,14 @@
 
   <meta name="theme-color" content="#3671c6" />
 </head>
+
 <body>
 
   <main class="car-main">
-    <a href="../teams.html" class="back-link">
-      <span>←</span> Back to Teams
+    <a href="javascript:void(0)" class="back-link" id="go-back">
+      <span>←</span> Back
     </a>
+
 
     <!-- Hero -->
     <header class="car-hero">
@@ -394,7 +407,10 @@
       <div class="main-content">
         <h2 class="section-title">Overview</h2>
         <p style="color: var(--muted); line-height: 1.8; margin-bottom: 24px;">
-          The Red Bull RB20 represents the pinnacle of Adrian Newey's aerodynamic philosophy combined with Honda RBPT's powerful hybrid technology. Built at Milton Keynes, the RB20 is designed to dominate across all circuit types with exceptional downforce, mechanical grip, and power delivery. It continues Red Bull's winning legacy with refined aero concepts and championship-winning DNA.
+          The Red Bull RB20 represents the pinnacle of Adrian Newey's aerodynamic philosophy combined with Honda RBPT's
+          powerful hybrid technology. Built at Milton Keynes, the RB20 is designed to dominate across all circuit types
+          with exceptional downforce, mechanical grip, and power delivery. It continues Red Bull's winning legacy with
+          refined aero concepts and championship-winning DNA.
         </p>
 
         <h2 class="section-title">Key Features</h2>
@@ -402,22 +418,26 @@
           <div class="feature-card">
             <div class="feature-icon">⚡</div>
             <h4>Honda RBPT Power Unit</h4>
-            <p>Advanced 1.6L V6 turbo hybrid from Red Bull Powertrains with Honda collaboration, delivering explosive acceleration and race-winning reliability.</p>
+            <p>Advanced 1.6L V6 turbo hybrid from Red Bull Powertrains with Honda collaboration, delivering explosive
+              acceleration and race-winning reliability.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">🔧</div>
             <h4>Aggressive Aero Package</h4>
-            <p>Sophisticated front wing design and optimized floor tunnels create massive downforce while maintaining low-drag efficiency on straights.</p>
+            <p>Sophisticated front wing design and optimized floor tunnels create massive downforce while maintaining
+              low-drag efficiency on straights.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">💨</div>
             <h4>Ground Effect Mastery</h4>
-            <p>Maximized ground effect tunnels and diffuser design extract exceptional performance from underbody aerodynamics for superior cornering speeds.</p>
+            <p>Maximized ground effect tunnels and diffuser design extract exceptional performance from underbody
+              aerodynamics for superior cornering speeds.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">🛞</div>
             <h4>Advanced Suspension</h4>
-            <p>Sophisticated kinematic geometry and damper technology optimize tire temperature management and mechanical grip across all conditions.</p>
+            <p>Sophisticated kinematic geometry and damper technology optimize tire temperature management and
+              mechanical grip across all conditions.</p>
           </div>
         </div>
 
@@ -425,23 +445,27 @@
         <div class="drivers-showcase">
           <div class="driver-card-large">
             <div class="driver-image-wrap">
-              <img src="../images/drivers/max.jpg" alt="Max Verstappen" onerror="this.src='../images/team-fallback.jpg'">
+              <img src="../images/drivers/max.jpg" alt="Max Verstappen"
+                onerror="this.src='../images/team-fallback.jpg'">
             </div>
             <div class="driver-info">
               <span class="driver-number">#1</span>
               <h4>Max Verstappen</h4>
-              <p style="color: var(--muted);">Three-time World Champion and Red Bull's superstar — combining raw speed, tactical brilliance and relentless racecraft.</p>
+              <p style="color: var(--muted);">Three-time World Champion and Red Bull's superstar — combining raw speed,
+                tactical brilliance and relentless racecraft.</p>
             </div>
           </div>
 
           <div class="driver-card-large">
             <div class="driver-image-wrap">
-              <img src="../images/drivers/yuki.webp" alt="Yuki Tsunoda" onerror="this.src='../images/team-fallback.jpg'">
+              <img src="../images/drivers/yuki.webp" alt="Yuki Tsunoda"
+                onerror="this.src='../images/team-fallback.jpg'">
             </div>
             <div class="driver-info">
               <span class="driver-number">#22</span>
               <h4>Yuki Tsunoda</h4>
-              <p style="color: var(--muted);">Dynamic Japanese talent with exceptional feedback and raw pace — bringing energy and precision to the team.</p>
+              <p style="color: var(--muted);">Dynamic Japanese talent with exceptional feedback and raw pace — bringing
+                energy and precision to the team.</p>
             </div>
           </div>
         </div>
@@ -452,13 +476,20 @@
         <!-- Technical Specs -->
         <div class="specs-card">
           <h3>Technical Specifications</h3>
-          <div class="spec-item"><span class="spec-label">Chassis</span><span class="spec-value">Carbon Fiber Monocoque</span></div>
-          <div class="spec-item"><span class="spec-label">Engine</span><span class="spec-value">Honda RBPT 1.6L V6 Turbo</span></div>
-          <div class="spec-item"><span class="spec-label">Power Output</span><span class="spec-value">~1000 HP</span></div>
-          <div class="spec-item"><span class="spec-label">Energy Recovery</span><span class="spec-value">Dual MGU System</span></div>
-          <div class="spec-item"><span class="spec-label">Transmission</span><span class="spec-value">8-Speed Sequential</span></div>
-          <div class="spec-item"><span class="spec-label">Weight</span><span class="spec-value">740 kg (min)</span></div>
-          <div class="spec-item"><span class="spec-label">Fuel Capacity</span><span class="spec-value">110 kg (max)</span></div>
+          <div class="spec-item"><span class="spec-label">Chassis</span><span class="spec-value">Carbon Fiber
+              Monocoque</span></div>
+          <div class="spec-item"><span class="spec-label">Engine</span><span class="spec-value">Honda RBPT 1.6L V6
+              Turbo</span></div>
+          <div class="spec-item"><span class="spec-label">Power Output</span><span class="spec-value">~1000 HP</span>
+          </div>
+          <div class="spec-item"><span class="spec-label">Energy Recovery</span><span class="spec-value">Dual MGU
+              System</span></div>
+          <div class="spec-item"><span class="spec-label">Transmission</span><span class="spec-value">8-Speed
+              Sequential</span></div>
+          <div class="spec-item"><span class="spec-label">Weight</span><span class="spec-value">740 kg (min)</span>
+          </div>
+          <div class="spec-item"><span class="spec-label">Fuel Capacity</span><span class="spec-value">110 kg
+              (max)</span></div>
         </div>
 
         <!-- Performance -->
@@ -466,7 +497,8 @@
           <h3>Performance</h3>
           <div class="spec-item"><span class="spec-label">0-100 km/h</span><span class="spec-value">~2.5 s</span></div>
           <div class="spec-item"><span class="spec-label">0-200 km/h</span><span class="spec-value">~4.5 s</span></div>
-          <div class="spec-item"><span class="spec-label">Top Speed</span><span class="spec-value">360+ km/h</span></div>
+          <div class="spec-item"><span class="spec-label">Top Speed</span><span class="spec-value">360+ km/h</span>
+          </div>
           <div class="spec-item"><span class="spec-label">Max RPM</span><span class="spec-value">15,000 RPM</span></div>
           <div class="spec-item"><span class="spec-label">Max Lateral G</span><span class="spec-value">6.5G</span></div>
         </div>
@@ -474,20 +506,28 @@
         <!-- 2025 Season Goals (dynamic) -->
         <div class="specs-card" id="season-goals-card">
           <h3>2025 Season Goals</h3>
-          <div class="spec-item"><span class="spec-label">Target Position</span><span class="spec-value" id="target-position">1st</span></div>
-          <div class="spec-item"><span class="spec-label">Current Position</span><span class="spec-value" id="current-position">—</span></div>
-          <div class="spec-item"><span class="spec-label">Points Scored</span><span class="spec-value" id="points-scored">—</span></div>
-          <div class="spec-item"><span class="spec-label">Wins</span><span class="spec-value" id="wins-count">—</span></div>
-          <div class="spec-item"><span class="spec-label">Podiums</span><span class="spec-value" id="podiums-count">—</span></div>
+          <div class="spec-item"><span class="spec-label">Target Position</span><span class="spec-value"
+              id="target-position">1st</span></div>
+          <div class="spec-item"><span class="spec-label">Current Position</span><span class="spec-value"
+              id="current-position">—</span></div>
+          <div class="spec-item"><span class="spec-label">Points Scored</span><span class="spec-value"
+              id="points-scored">—</span></div>
+          <div class="spec-item"><span class="spec-label">Wins</span><span class="spec-value" id="wins-count">—</span>
+          </div>
+          <div class="spec-item"><span class="spec-label">Podiums</span><span class="spec-value"
+              id="podiums-count">—</span></div>
         </div>
 
         <!-- Heritage -->
         <div class="specs-card">
           <h3>Red Bull F1 Heritage</h3>
-          <div class="spec-item"><span class="spec-label">Constructors' Championships</span><span class="spec-value">6</span></div>
+          <div class="spec-item"><span class="spec-label">Constructors' Championships</span><span
+              class="spec-value">6</span></div>
           <div class="spec-item"><span class="spec-label">Race Wins</span><span class="spec-value">120+</span></div>
-          <div class="spec-item"><span class="spec-label">Pole Positions</span><span class="spec-value">100+</span></div>
-          <div class="spec-item"><span class="spec-label">Base</span><span class="spec-value">Milton Keynes, United Kingdom</span></div>
+          <div class="spec-item"><span class="spec-label">Pole Positions</span><span class="spec-value">100+</span>
+          </div>
+          <div class="spec-item"><span class="spec-label">Base</span><span class="spec-value">Milton Keynes, United
+              Kingdom</span></div>
         </div>
       </div>
     </div>
@@ -499,28 +539,36 @@
       <div class="tech-detail">
         <h4>🔋 Power Unit & Hybrid System</h4>
         <p>
-          The Honda RBPT power unit delivers exceptional performance through optimized combustion, advanced turbocharger technology, and intelligent energy recovery. The MGU-K and MGU-H systems work seamlessly to maximize both power delivery and fuel efficiency throughout race distance.
+          The Honda RBPT power unit delivers exceptional performance through optimized combustion, advanced turbocharger
+          technology, and intelligent energy recovery. The MGU-K and MGU-H systems work seamlessly to maximize both
+          power delivery and fuel efficiency throughout race distance.
         </p>
       </div>
 
       <div class="tech-detail">
         <h4>⚙️ Aerodynamics & Downforce</h4>
         <p>
-          The RB20's aerodynamic philosophy focuses on maximizing ground effect while maintaining excellent balance. Advanced computational fluid dynamics and wind tunnel testing have refined the floor, diffuser, and wing profiles to create a stable platform with exceptional cornering performance.
+          The RB20's aerodynamic philosophy focuses on maximizing ground effect while maintaining excellent balance.
+          Advanced computational fluid dynamics and wind tunnel testing have refined the floor, diffuser, and wing
+          profiles to create a stable platform with exceptional cornering performance.
         </p>
       </div>
 
       <div class="tech-detail">
         <h4>🏗️ Chassis & Structure</h4>
         <p>
-          The carbon fiber monocoque is engineered for maximum stiffness with minimal weight penalty. Strategic placement of components and advanced composite materials ensure optimal weight distribution and structural integrity under extreme racing loads.
+          The carbon fiber monocoque is engineered for maximum stiffness with minimal weight penalty. Strategic
+          placement of components and advanced composite materials ensure optimal weight distribution and structural
+          integrity under extreme racing loads.
         </p>
       </div>
 
       <div class="tech-detail">
         <h4>🎯 Electronics & Strategy</h4>
         <p>
-          The RB20 utilizes sophisticated electronic control systems for energy deployment, brake balance, and differential management. Real-time telemetry enables precise strategy calls and setup optimization throughout practice, qualifying, and race sessions.
+          The RB20 utilizes sophisticated electronic control systems for energy deployment, brake balance, and
+          differential management. Real-time telemetry enables precise strategy calls and setup optimization throughout
+          practice, qualifying, and race sessions.
         </p>
       </div>
     </section>
@@ -529,17 +577,32 @@
     <section class="main-content" style="margin-top: 32px;">
       <h2 class="section-title">Design Philosophy</h2>
       <p style="color: var(--muted); line-height: 1.8; margin-bottom: 16px;">
-        Red Bull's design philosophy for the RB20 centers on outright performance combined with operational flexibility. The engineering team has focused on creating a car that excels in all conditions while providing drivers with the confidence to push limits consistently.
+        Red Bull's design philosophy for the RB20 centers on outright performance combined with operational flexibility.
+        The engineering team has focused on creating a car that excels in all conditions while providing drivers with
+        the confidence to push limits consistently.
       </p>
 
       <div class="feature-grid">
-        <div class="feature-card"><div class="feature-icon">🎯</div><h4>Peak Performance</h4><p>Uncompromising pursuit of maximum downforce and mechanical grip across all circuit configurations.</p></div>
-        <div class="feature-card"><div class="feature-icon">⚡</div><h4>Efficiency</h4><p>Optimized drag characteristics and energy management systems ensure competitive straight-line speed.</p></div>
-        <div class="feature-card"><div class="feature-icon">🏁</div><h4>Consistency</h4><p>Robust design architecture allows predictable development and reliable performance race after race.</p></div>
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h4>Peak Performance</h4>
+          <p>Uncompromising pursuit of maximum downforce and mechanical grip across all circuit configurations.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h4>Efficiency</h4>
+          <p>Optimized drag characteristics and energy management systems ensure competitive straight-line speed.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🏁</div>
+          <h4>Consistency</h4>
+          <p>Robust design architecture allows predictable development and reliable performance race after race.</p>
+        </div>
       </div>
 
       <p style="color: var(--muted); line-height: 1.8; margin-top: 24px;">
-        With championship-winning experience and cutting-edge technology, the RB20 is Red Bull Racing's weapon to defend their titles and dominate the 2025 season.
+        With championship-winning experience and cutting-edge technology, the RB20 is Red Bull Racing's weapon to defend
+        their titles and dominate the 2025 season.
       </p>
     </section>
 
@@ -679,6 +742,20 @@
         includeHTML('footer', '../footer.html')
       ]);
     });
+
+    document.getElementById("go-back").addEventListener("click", function (e) {
+      e.preventDefault();
+
+      // If user has a referrer (came from another page)
+      if (document.referrer && document.referrer !== window.location.href) {
+        // Go back in history
+        window.history.back();
+      } else {
+        // Otherwise, fallback to teams page
+        window.location.href = "../teams.html";
+      }
+    });
   </script>
 </body>
+
 </html>
