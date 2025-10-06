@@ -3,8 +3,6 @@
 const $ = (selector) => document.querySelector(selector);
 
 const API_SOURCES = [
-  //'https://ergast.com/api/f1',
-  //'http://ergast.com/api/f1',
   'https://api.jolpi.ca/ergast/f1',
   'http://api.jolpi.ca/ergast/f1'
 ];
@@ -127,8 +125,9 @@ function updateNextRaceDisplay(race) {
   if (nameEl) nameEl.textContent = race.raceName;
   if (circuitEl) circuitEl.textContent = race.Circuit.circuitName;
   if (dateEl && race.date) {
-    const timeToUse = race.time ? race.time.substring(0, 8) : '14:00:00';
-    const raceDate = new Date(`${race.date}T${timeToUse}Z`);
+    // Parse the date only (without time) to avoid timezone conversion issues
+    const [year, month, day] = race.date.split('-').map(Number);
+    const raceDate = new Date(year, month - 1, day);
     
     if (!isNaN(raceDate.getTime())) {
       dateEl.textContent = raceDate.toLocaleDateString('en-US', {
@@ -150,7 +149,7 @@ async function setupNextRace() {
   if (nextRace && nextRace.date) {
     updateNextRaceDisplay(nextRace);
     
-    // Parse race date/time correctly
+    // Parse race date/time correctly for countdown
     const timeToUse = nextRace.time ? nextRace.time.substring(0, 8) : '14:00:00';
     const raceDateTime = new Date(`${nextRace.date}T${timeToUse}Z`);
     

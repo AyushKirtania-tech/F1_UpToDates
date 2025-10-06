@@ -1,23 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>W14 — Mercedes-AMG Petronas F1 Team</title>
-  <meta name="description" content="Explore the Mercedes W14 — technical specs, performance and technical details for the 2025 season." />
+  <meta name="description"
+    content="Explore the Mercedes W14 — technical specs, performance and technical details for the 2025 season." />
   <meta name="keywords" content="F1, Mercedes, W14, Formula 1, car specifications, 2025" />
 
   <link rel="stylesheet" href="../Styles/teams.css">
   <style>
     /* small layout fixes to prevent stray gaps and match previous layout */
-    *, *::before, *::after { box-sizing: border-box; }
-    img { display: block; max-width: 100%; height: auto; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
 
-    :root{
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    :root {
       --mer-deep: #071217;
-      --mer-mid: #0bb7a1; /* petronas teal */
+      --mer-mid: #0bb7a1;
+      /* petronas teal */
       --muted: #bdbdbd;
-      --card-bg: rgba(20,20,20,0.92);
+      --card-bg: rgba(20, 20, 20, 0.92);
     }
 
     .car-hero {
@@ -57,12 +69,12 @@
       text-transform: uppercase;
       letter-spacing: 4px;
       color: #fff;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
     }
 
     .car-hero .subtitle {
       font-size: 1.3rem;
-      color: rgba(255,255,255,0.95);
+      color: rgba(255, 255, 255, 0.95);
       margin: 0;
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -83,8 +95,8 @@
       margin-bottom: 24px;
       padding: 10px 16px;
       border-radius: 8px;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       transition: all 0.3s;
     }
 
@@ -99,28 +111,30 @@
       grid-template-columns: 2fr 1fr;
       gap: 32px;
       margin-bottom: 48px;
-      align-items: start; /* keep columns top-aligned to avoid vertical gap */
+      align-items: start;
+      /* keep columns top-aligned to avoid vertical gap */
     }
 
     .main-content {
       background: var(--card-bg);
       padding: 32px;
       border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid rgba(255, 255, 255, 0.04);
     }
 
     .sidebar {
       display: flex;
       flex-direction: column;
       gap: 24px;
-      align-self: start; /* ensure sidebar starts aligned with main */
+      align-self: start;
+      /* ensure sidebar starts aligned with main */
     }
 
     .specs-card {
       background: var(--card-bg);
       padding: 24px;
       border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid rgba(255, 255, 255, 0.04);
     }
 
     .specs-card h3 {
@@ -135,7 +149,7 @@
       display: flex;
       justify-content: space-between;
       padding: 12px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .spec-item:last-child {
@@ -172,16 +186,16 @@
     }
 
     .feature-card {
-      background: rgba(255,255,255,0.02);
+      background: rgba(255, 255, 255, 0.02);
       padding: 24px;
       border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.06);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       transition: all 0.3s;
     }
 
     .feature-card:hover {
       transform: translateY(-8px);
-      background: rgba(255,255,255,0.04);
+      background: rgba(255, 255, 255, 0.04);
       border-color: var(--mer-mid);
     }
 
@@ -218,10 +232,10 @@
     }
 
     .stat-box {
-      background: rgba(255,255,255,0.02);
+      background: rgba(255, 255, 255, 0.02);
       padding: 20px;
       border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.06);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       text-align: center;
     }
 
@@ -244,14 +258,14 @@
       background: var(--card-bg);
       padding: 40px;
       border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid rgba(255, 255, 255, 0.04);
       margin: 32px 0;
     }
 
     .tech-detail {
       margin: 24px 0;
       padding: 20px;
-      background: rgba(255,255,255,0.02);
+      background: rgba(255, 255, 255, 0.02);
       border-left: 4px solid var(--mer-mid);
       border-radius: 8px;
     }
@@ -281,7 +295,7 @@
       background: var(--card-bg);
       border-radius: 18px;
       overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid rgba(255, 255, 255, 0.04);
       transition: all 0.3s;
     }
 
@@ -293,7 +307,7 @@
     .driver-image-wrap {
       height: 250px;
       overflow: hidden;
-      background: linear-gradient(135deg, rgba(11,183,161,0.08), rgba(0,80,60,0.06));
+      background: linear-gradient(135deg, rgba(11, 183, 161, 0.08), rgba(0, 80, 60, 0.06));
     }
 
     .driver-image-wrap img {
@@ -315,7 +329,7 @@
     .driver-number {
       display: inline-block;
       padding: 4px 12px;
-      background: rgba(11,183,161,0.12);
+      background: rgba(11, 183, 161, 0.12);
       color: var(--mer-mid);
       border-radius: 6px;
       font-weight: 900;
@@ -353,6 +367,7 @@
 
   <meta name="theme-color" content="#00b7a1" />
 </head>
+
 <body>
 
   <main class="car-main">
@@ -393,7 +408,9 @@
       <div class="main-content">
         <h2 class="section-title">Overview</h2>
         <p style="color: var(--muted); line-height: 1.8; margin-bottom: 24px;">
-          The Mercedes W14 is the factory's 2025 challenger — combining the team's aero know-how, tightly packaged powertrain integration and focus on driveability. Developed at Brackley and Brixworth, the W14 aims to deliver strong lap-time across a wide range of circuits while keeping reliability top of mind.
+          The Mercedes W14 is the factory's 2025 challenger — combining the team's aero know-how, tightly packaged
+          powertrain integration and focus on driveability. Developed at Brackley and Brixworth, the W14 aims to deliver
+          strong lap-time across a wide range of circuits while keeping reliability top of mind.
         </p>
 
         <h2 class="section-title">Key Features</h2>
@@ -401,22 +418,26 @@
           <div class="feature-card">
             <div class="feature-icon">⚡</div>
             <h4>Mercedes-AMG Power Unit</h4>
-            <p>Latest 1.6L V6 turbo hybrid power unit from Mercedes-AMG High Performance Powertrains, tuned for transient response and efficiency.</p>
+            <p>Latest 1.6L V6 turbo hybrid power unit from Mercedes-AMG High Performance Powertrains, tuned for
+              transient response and efficiency.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">🔧</div>
             <h4>Tight Rear Packaging</h4>
-            <p>Compact gearbox and cooling layout to reduce aerodynamic penalty and improve airflow to the diffuser and rear wing.</p>
+            <p>Compact gearbox and cooling layout to reduce aerodynamic penalty and improve airflow to the diffuser and
+              rear wing.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">💨</div>
             <h4>Aero Balance</h4>
-            <p>Front-to-rear aero balance improvements focusing on consistent yaw behaviour and optimal tyre loading through high-speed corners.</p>
+            <p>Front-to-rear aero balance improvements focusing on consistent yaw behaviour and optimal tyre loading
+              through high-speed corners.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">🛞</div>
             <h4>Suspension & Control</h4>
-            <p>Advanced kinematics with dedicated damper and spring packages to maximise tyre contact and extend performance window.</p>
+            <p>Advanced kinematics with dedicated damper and spring packages to maximise tyre contact and extend
+              performance window.</p>
           </div>
         </div>
 
@@ -424,23 +445,27 @@
         <div class="drivers-showcase">
           <div class="driver-card-large">
             <div class="driver-image-wrap">
-              <img src="../images/drivers/antonelli.avif" alt="Kimi Antonelli" onerror="this.src='../images/team-fallback.jpg'">
+              <img src="../images/drivers/antonelli.avif" alt="Kimi Antonelli"
+                onerror="this.src='../images/team-fallback.jpg'">
             </div>
             <div class="driver-info">
               <span class="driver-number">#12</span>
               <h4>Kimi Antonelli</h4>
-              <p style="color: var(--muted);">Promising Italian talent joining Mercedes for 2025 — quick in qualifying and strong with race development feedback.</p>
+              <p style="color: var(--muted);">Promising Italian talent joining Mercedes for 2025 — quick in qualifying
+                and strong with race development feedback.</p>
             </div>
           </div>
 
           <div class="driver-card-large">
             <div class="driver-image-wrap">
-              <img src="../images/drivers/george.jpg" alt="George Russell" onerror="this.src='../images/team-fallback.jpg'">
+              <img src="../images/drivers/george.jpg" alt="George Russell"
+                onerror="this.src='../images/team-fallback.jpg'">
             </div>
             <div class="driver-info">
               <span class="driver-number">#63</span>
               <h4>George Russell</h4>
-              <p style="color: var(--muted);">Young, precise and exceptionally quick — Russell brings qualifying pace and strong race intelligence.</p>
+              <p style="color: var(--muted);">Young, precise and exceptionally quick — Russell brings qualifying pace
+                and strong race intelligence.</p>
             </div>
           </div>
         </div>
@@ -451,13 +476,20 @@
         <!-- Technical Specs -->
         <div class="specs-card">
           <h3>Technical Specifications</h3>
-          <div class="spec-item"><span class="spec-label">Chassis</span><span class="spec-value">Carbon Fiber Monocoque</span></div>
-          <div class="spec-item"><span class="spec-label">Engine</span><span class="spec-value">Mercedes-AMG 1.6L V6 Turbo</span></div>
-          <div class="spec-item"><span class="spec-label">Power Output</span><span class="spec-value">~1000 HP</span></div>
-          <div class="spec-item"><span class="spec-label">Energy Recovery</span><span class="spec-value">Dual MGU System</span></div>
-          <div class="spec-item"><span class="spec-label">Transmission</span><span class="spec-value">8-Speed Sequential</span></div>
-          <div class="spec-item"><span class="spec-label">Weight</span><span class="spec-value">740 kg (min)</span></div>
-          <div class="spec-item"><span class="spec-label">Fuel Capacity</span><span class="spec-value">110 kg (max)</span></div>
+          <div class="spec-item"><span class="spec-label">Chassis</span><span class="spec-value">Carbon Fiber
+              Monocoque</span></div>
+          <div class="spec-item"><span class="spec-label">Engine</span><span class="spec-value">Mercedes-AMG 1.6L V6
+              Turbo</span></div>
+          <div class="spec-item"><span class="spec-label">Power Output</span><span class="spec-value">~1000 HP</span>
+          </div>
+          <div class="spec-item"><span class="spec-label">Energy Recovery</span><span class="spec-value">Dual MGU
+              System</span></div>
+          <div class="spec-item"><span class="spec-label">Transmission</span><span class="spec-value">8-Speed
+              Sequential</span></div>
+          <div class="spec-item"><span class="spec-label">Weight</span><span class="spec-value">740 kg (min)</span>
+          </div>
+          <div class="spec-item"><span class="spec-label">Fuel Capacity</span><span class="spec-value">110 kg
+              (max)</span></div>
         </div>
 
         <!-- Performance -->
@@ -465,7 +497,8 @@
           <h3>Performance</h3>
           <div class="spec-item"><span class="spec-label">0-100 km/h</span><span class="spec-value">~2.5 s</span></div>
           <div class="spec-item"><span class="spec-label">0-200 km/h</span><span class="spec-value">~4.5 s</span></div>
-          <div class="spec-item"><span class="spec-label">Top Speed</span><span class="spec-value">360+ km/h</span></div>
+          <div class="spec-item"><span class="spec-label">Top Speed</span><span class="spec-value">360+ km/h</span>
+          </div>
           <div class="spec-item"><span class="spec-label">Max RPM</span><span class="spec-value">15,000 RPM</span></div>
           <div class="spec-item"><span class="spec-label">Max Lateral G</span><span class="spec-value">6.5G</span></div>
         </div>
@@ -473,20 +506,28 @@
         <!-- 2025 Season Goals (dynamic) -->
         <div class="specs-card" id="season-goals-card">
           <h3>2025 Season Goals</h3>
-          <div class="spec-item"><span class="spec-label">Target Position</span><span class="spec-value" id="target-position">1st</span></div>
-          <div class="spec-item"><span class="spec-label">Current Position</span><span class="spec-value" id="current-position">—</span></div>
-          <div class="spec-item"><span class="spec-label">Points Scored</span><span class="spec-value" id="points-scored">—</span></div>
-          <div class="spec-item"><span class="spec-label">Wins</span><span class="spec-value" id="wins-count">—</span></div>
-          <div class="spec-item"><span class="spec-label">Podiums</span><span class="spec-value" id="podiums-count">—</span></div>
+          <div class="spec-item"><span class="spec-label">Target Position</span><span class="spec-value"
+              id="target-position">1st</span></div>
+          <div class="spec-item"><span class="spec-label">Current Position</span><span class="spec-value"
+              id="current-position">—</span></div>
+          <div class="spec-item"><span class="spec-label">Points Scored</span><span class="spec-value"
+              id="points-scored">—</span></div>
+          <div class="spec-item"><span class="spec-label">Wins</span><span class="spec-value" id="wins-count">—</span>
+          </div>
+          <div class="spec-item"><span class="spec-label">Podiums</span><span class="spec-value"
+              id="podiums-count">—</span></div>
         </div>
 
         <!-- Heritage -->
         <div class="specs-card">
           <h3>Mercedes F1 Heritage</h3>
-          <div class="spec-item"><span class="spec-label">Constructors' Championships</span><span class="spec-value">8</span></div>
+          <div class="spec-item"><span class="spec-label">Constructors' Championships</span><span
+              class="spec-value">8</span></div>
           <div class="spec-item"><span class="spec-label">Race Wins</span><span class="spec-value">180+</span></div>
-          <div class="spec-item"><span class="spec-label">Pole Positions</span><span class="spec-value">160+</span></div>
-          <div class="spec-item"><span class="spec-label">Base</span><span class="spec-value">Brackley, United Kingdom</span></div>
+          <div class="spec-item"><span class="spec-label">Pole Positions</span><span class="spec-value">160+</span>
+          </div>
+          <div class="spec-item"><span class="spec-label">Base</span><span class="spec-value">Brackley, United
+              Kingdom</span></div>
         </div>
       </div>
     </div>
@@ -498,28 +539,33 @@
       <div class="tech-detail">
         <h4>🔋 Power Unit & Hybrid System</h4>
         <p>
-          Mercedes' 1.6L V6 turbo hybrid package focuses on heat management, drivability, and deployment strategies for the MGU-K and MGU-H. Integrated systems from Brixworth aim to maximise usable power across varied circuits.
+          Mercedes' 1.6L V6 turbo hybrid package focuses on heat management, drivability, and deployment strategies for
+          the MGU-K and MGU-H. Integrated systems from Brixworth aim to maximise usable power across varied circuits.
         </p>
       </div>
 
       <div class="tech-detail">
         <h4>⚙️ Aerodynamics & Balance</h4>
         <p>
-          The W14 emphasizes a stable aerodynamic platform with improved floor efficiency, targeted cooling inlets and an optimised rear diffuser to generate consistent downforce and predictable handling.
+          The W14 emphasizes a stable aerodynamic platform with improved floor efficiency, targeted cooling inlets and
+          an optimised rear diffuser to generate consistent downforce and predictable handling.
         </p>
       </div>
 
       <div class="tech-detail">
         <h4>🏗️ Chassis & Safety</h4>
         <p>
-          Carbon fibre monocoque and FIA-approved crash structures provide the backbone of the car. Design focuses on maintaining stiffness while controlling mass distribution to improve tyre performance and handling.
+          Carbon fibre monocoque and FIA-approved crash structures provide the backbone of the car. Design focuses on
+          maintaining stiffness while controlling mass distribution to improve tyre performance and handling.
         </p>
       </div>
 
       <div class="tech-detail">
         <h4>🎯 Electronics & Controls</h4>
         <p>
-          The W14 uses the standard FIA ECU with team-specific calibration for energy management, brake-by-wire control and traction/torque mapping. Extensive telemetry supports strategy and setup choices throughout a race weekend.
+          The W14 uses the standard FIA ECU with team-specific calibration for energy management, brake-by-wire control
+          and traction/torque mapping. Extensive telemetry supports strategy and setup choices throughout a race
+          weekend.
         </p>
       </div>
     </section>
@@ -528,17 +574,32 @@
     <section class="main-content" style="margin-top: 32px;">
       <h2 class="section-title">Design Philosophy</h2>
       <p style="color: var(--muted); line-height: 1.8; margin-bottom: 16px;">
-        Mercedes' design approach for the W14 is built around aero stability, power unit efficiency and an easy-to-develop platform. The package aims to allow both drivers to extract strong qualifying pace while maintaining race consistency.
+        Mercedes' design approach for the W14 is built around aero stability, power unit efficiency and an
+        easy-to-develop platform. The package aims to allow both drivers to extract strong qualifying pace while
+        maintaining race consistency.
       </p>
 
       <div class="feature-grid">
-        <div class="feature-card"><div class="feature-icon">🎯</div><h4>Stability</h4><p>Predictable handling across yaw angles to help drivers push confidently through corners.</p></div>
-        <div class="feature-card"><div class="feature-icon">⚡</div><h4>Integration</h4><p>Close coupling of PU and cooling systems to reduce aerodynamic penalty and improve thermal efficiency.</p></div>
-        <div class="feature-card"><div class="feature-icon">🏁</div><h4>Development</h4><p>Platform designed for clear development paths across the season for consistent upgrades.</p></div>
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h4>Stability</h4>
+          <p>Predictable handling across yaw angles to help drivers push confidently through corners.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h4>Integration</h4>
+          <p>Close coupling of PU and cooling systems to reduce aerodynamic penalty and improve thermal efficiency.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🏁</div>
+          <h4>Development</h4>
+          <p>Platform designed for clear development paths across the season for consistent upgrades.</p>
+        </div>
       </div>
 
       <p style="color: var(--muted); line-height: 1.8; margin-top: 24px;">
-        With experienced drivers and a proven engineering structure, the W14 is Mercedes' bid to remain at the sharp end of the championship.
+        With experienced drivers and a proven engineering structure, the W14 is Mercedes' bid to remain at the sharp end
+        of the championship.
       </p>
     </section>
 
@@ -660,4 +721,5 @@
     });
   </script>
 </body>
+
 </html>

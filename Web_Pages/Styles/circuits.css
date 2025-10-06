@@ -50,7 +50,8 @@
   font-size: 3rem;
   margin-bottom: 16px;
   font-weight: 900;
-  color: #e10600; /* F1 red */
+  color: #e10600;
+  /* F1 red */
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -148,7 +149,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.45s cubic-bezier(.2,.9,.2,1), filter 0.35s ease;
+  transition: transform 0.45s cubic-bezier(.2, .9, .2, 1), filter 0.35s ease;
   filter: brightness(65%) contrast(105%);
 }
 
@@ -166,7 +167,7 @@
   right: 0;
   bottom: 0;
   top: 0;
-  background: linear-gradient(to top, rgba(2,6,12,0.65), rgba(2,6,12,0.15) 40%, rgba(2,6,12,0));
+  background: linear-gradient(to top, rgba(2, 6, 12, 0.65), rgba(2, 6, 12, 0.15) 40%, rgba(2, 6, 12, 0));
   pointer-events: none;
 }
 
@@ -186,7 +187,7 @@
   font-size: 1.3rem;
   font-weight: 800;
   color: var(--text);
-  text-shadow: 0 6px 18px rgba(0,0,0,0.55);
+  text-shadow: 0 6px 18px rgba(0, 0, 0, 0.55);
 }
 
 /* show count as accent chip */
@@ -196,15 +197,16 @@
   font-weight: 700;
   color: var(--accent);
   margin-bottom: 6px;
-  background: rgba(255,255,255,0.03);
+  background: rgba(255, 255, 255, 0.03);
   padding: 6px 10px;
   border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.04);
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 /* move the list into the lower bar area (inside image but smaller) */
 .region-overlay-text .region-list {
-  --lines: 2; /* Number of lines to show */
+  --lines: 2;
+  /* Number of lines to show */
   margin-top: 8px;
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.85);
@@ -240,7 +242,7 @@
   background: transparent;
   color: var(--muted);
   font-size: 0.9rem;
-  border-top: 1px solid rgba(255,255,255,0.02);
+  border-top: 1px solid rgba(255, 255, 255, 0.02);
 }
 
 /* Controls Section */
@@ -249,7 +251,7 @@
   border-radius: 20px;
   padding: 32px;
   margin-bottom: 40px;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Search Bar */
@@ -260,8 +262,8 @@
 #circuit-search {
   width: 100%;
   padding: 16px 20px;
-  background: rgba(0,0,0,0.3);
-  border: 2px solid rgba(255,255,255,0.1);
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   color: var(--text);
   font-size: 1rem;
@@ -271,7 +273,7 @@
 #circuit-search:focus {
   outline: none;
   border-color: var(--accent);
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 20px rgba(225, 6, 0, 0.3);
 }
 
@@ -290,7 +292,7 @@
 .filter-btn {
   padding: 10px 24px;
   border-radius: 25px;
-  border: 2px solid rgba(255,255,255,0.2);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   background: transparent;
   color: whitesmoke;
   font-weight: 600;
@@ -326,8 +328,8 @@
 
 #sort-select {
   padding: 10px 16px;
-  background: rgba(0,0,0,0.3);
-  border: 2px solid rgba(255,255,255,0.1);
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   color: var(--text);
   font-weight: 600;
@@ -375,7 +377,7 @@
   background: var(--card-bg);
   border-radius: 20px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
   position: relative;
   cursor: pointer;
@@ -436,7 +438,7 @@
   top: 16px;
   right: 16px;
   padding: 6px 14px;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(10px);
   border-radius: 20px;
   font-size: 0.75rem;
@@ -499,10 +501,10 @@
 }
 
 .info-item {
-  background: rgba(255,255,255,0.03);
+  background: rgba(255, 255, 255, 0.03);
   padding: 12px;
   border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.05);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
 }
 
@@ -534,67 +536,95 @@
   line-height: 1.6;
   margin-top: 16px;
   padding-top: 16px;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Circuit Facts Section */
+
+/* Circuits Facts */
 .circuit-facts {
-  margin-top: 80px;
+  color: #fff;
+  padding: 60px 20px;
   text-align: center;
 }
 
 .circuit-facts h2 {
   font-size: 2.5rem;
-  margin-bottom: 48px;
-  font-weight: 900;
-  color: #cf2c27;
-  background-image: red;
-  background-clip: text;
   color: red;
-  text-shadow: 0 2px 8px rgba(246, 243, 243, 0.25);
+  margin-bottom: 40px;
 }
 
 .facts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 25px;
 }
 
+/* Base card style */
 .fact-card {
-  background: var(--card-bg);
-  border-radius: 20px;
-  padding: 40px 24px;
-  border: 1px solid rgba(255,255,255,0.1);
-  transition: all 0.3s ease;
+  position: relative;
+  height: 250px;
+  border-radius: 15px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  text-align: left;
+  background-size: cover;
+  background-position: center;
+  color: #fff;
 }
 
-.fact-card:hover {
-  transform: translateY(-8px);
-  border-color: var(--accent);
-  box-shadow: 0 12px 30px rgba(225, 6, 0, 0.2);
+/* Dark overlay to make text readable */
+.fact-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  transition: background 0.3s ease;
+  z-index: 0;
 }
 
-.fact-icon {
-  font-size: 4rem;
-  margin-bottom: 20px;
+.fact-card:hover::before {
+  background: rgba(0, 0, 0, 0.148);
+  cursor: pointer;
 }
 
-.fact-card h3 {
-  font-size: 1.2rem;
-  margin-bottom: 12px;
-  color: var(--text);
+.fact-card h3,
+.fact-card p {
+  position: relative;
+  z-index: 1;
+  text-align: center;
 }
 
+/* Highlight and detail styling */
 .fact-highlight {
-  color: var(--accent);
-  font-weight: 700;
   font-size: 1.3rem;
-  margin-bottom: 8px;
+  font-weight: bold;
+  color: #ffd700;
 }
 
 .fact-detail {
-  color: var(--muted);
-  font-size: 0.9rem;
+  opacity: 0.9;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* --- Individual circuit background images --- */
+.fact-card.monza {
+  background-image: url('../images/circuits/monza.jpg');
+}
+
+.fact-card.spa {
+  background-image: url('../images/circuits/belgian.avif');
+}
+
+.fact-card.singapore {
+  background-image: url('../images/circuits/singapore.jpg');
+}
+
+.fact-card.monaco {
+  background-image: url('../images/circuits//monaco.jpg');
 }
 
 /* Loading animation */
@@ -603,50 +633,125 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-.circuit-card:nth-child(1) { animation-delay: 0.1s; }
-.circuit-card:nth-child(2) { animation-delay: 0.2s; }
-.circuit-card:nth-child(3) { animation-delay: 0.3s; }
-.circuit-card:nth-child(4) { animation-delay: 0.4s; }
-.circuit-card:nth-child(5) { animation-delay: 0.5s; }
-.circuit-card:nth-child(6) { animation-delay: 0.6s; }
+.circuit-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.circuit-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.circuit-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.circuit-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.circuit-card:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.circuit-card:nth-child(6) {
+  animation-delay: 0.6s;
+}
 
 /* Responsive Design */
 @media (max-width: 968px) {
-  .circuits-hero h1 { font-size: 2.2rem; }
-  .region-cards-grid { grid-template-columns: 1fr; }
+  .circuits-hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .region-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
   .circuits-grid {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
   }
-  .featured-content { grid-template-columns: 1fr; }
-  .featured-stats { grid-template-columns: 1fr; }
-  .filter-buttons { justify-content: center; }
-  .sort-options { flex-direction: column; align-items: flex-start; }
+
+  .featured-content {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-buttons {
+    justify-content: center;
+  }
+
+  .sort-options {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 @media (max-width: 640px) {
-  .circuits-hero { padding: 40px 24px; }
-  .circuits-hero h1 { font-size: 1.8rem; }
-  .stat-num { font-size: 2rem; }
-  .circuits-controls { padding: 20px; }
-  .circuit-info { grid-template-columns: 1fr; }
-  .featured-circuit { padding: 24px; }
-  .featured-header h2 { font-size: 1.8rem; }
-  .facts-grid { grid-template-columns: 1fr; }
+  .circuits-hero {
+    padding: 40px 24px;
+  }
+
+  .circuits-hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .stat-num {
+    font-size: 2rem;
+  }
+
+  .circuits-controls {
+    padding: 20px;
+  }
+
+  .circuit-info {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-circuit {
+    padding: 24px;
+  }
+
+  .featured-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .facts-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 480px) {
-  .circuits-hero { padding: 30px 16px; }
-  .hero-stats { gap: 20px; }
-  .stat-num { font-size: 1.8rem; }
-  .circuit-name { font-size: 1.2rem; }
-  .filter-btn { padding: 8px 16px; font-size: 0.85rem; }
+  .circuits-hero {
+    padding: 30px 16px;
+  }
+
+  .hero-stats {
+    gap: 20px;
+  }
+
+  .stat-num {
+    font-size: 1.8rem;
+  }
+
+  .circuit-name {
+    font-size: 1.2rem;
+  }
+
+  .filter-btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
 }
 
 /* Accessibility focus states */

@@ -719,6 +719,7 @@
       }
     })();
 
+    // Load footer
     async function includeHTML(id, path) {
       const container = document.getElementById(id);
       if (!container) return;
@@ -737,6 +738,7 @@
         includeHTML('footer', '../footer.html')
       ]);
     });
+    
   </script>
 </body>
 </html>
