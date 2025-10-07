@@ -95,7 +95,7 @@ async function fetchNextRace() {
           });
           
           if (nextRace) {
-            console.log('✅ Next race found from API:', nextRace.raceName);
+            console.log(' Next race found from API:', nextRace.raceName);
             return nextRace;
           }
         }
@@ -318,6 +318,80 @@ function setupDriverCarousel() {
   window.addEventListener('resize', updateCarousel);
 }
 
+// Fetch and update race statistics
+async function updateRaceStats() {
+  try {
+    // Try primary API first
+    const response = await fetch('https://api.jolpi.ca/ergast/f1/current.json');
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch race data');
+    }
+    
+    const data = await response.json();
+    const races = data.MRData.RaceTable.Races;
+    
+    if (races && races.length > 0) {
+      const totalRaces = races.length;
+      const now = new Date();
+      
+      // Count completed races (races that have already happened)
+      let completedRaces = 0;
+      races.forEach(race => {
+        const timeToUse = race.time ? race.time.substring(0, 8) : '14:00:00';
+        const raceDate = new Date(`${race.date}T${timeToUse}Z`);
+        if (raceDate < now) {
+          completedRaces++;
+        }
+      });
+      
+      const remainingRaces = totalRaces - completedRaces;
+      
+      // Update the DOM
+      const completedEl = document.getElementById('races-completed');
+      const remainingEl = document.getElementById('races-remaining');
+      
+      if (completedEl) {
+        completedEl.textContent = completedRaces;
+      }
+      
+      if (remainingEl) {
+        remainingEl.textContent = remainingRaces;
+      }
+      
+      console.log(`Race stats updated: ${completedRaces} completed, ${remainingRaces} remaining out of ${totalRaces} total`);
+    }
+  } catch (error) {
+    console.error('Error fetching race stats:', error);
+    
+    // Try fallback calculation if API fails
+    const now = new Date();
+    let completedRaces = 0;
+    
+    FALLBACK_RACES.forEach(race => {
+      const raceDate = new Date(`${race.date}T${race.time}`);
+      if (raceDate < now) {
+        completedRaces++;
+      }
+    });
+    
+    const remainingRaces = FALLBACK_RACES.length - completedRaces;
+    
+    const completedEl = document.getElementById('races-completed');
+    const remainingEl = document.getElementById('races-remaining');
+    
+    if (completedEl) {
+      completedEl.textContent = completedRaces;
+    }
+    
+    if (remainingEl) {
+      remainingEl.textContent = remainingRaces;
+    }
+    
+    console.log(`Using fallback race stats: ${completedRaces} completed, ${remainingRaces} remaining`);
+  }
+}
+
 // Set current year in footer
 function setCurrentYear() {
   const yearElement = $('#year');
@@ -328,10 +402,11 @@ function setCurrentYear() {
 
 // Initialize application
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('🏎️ F1 Racing Website Loaded!');
+  console.log(' F1 Racing Website Loaded!');
   
   setCurrentYear();
   setupNextRace();
   setupNewsletter();
   setupDriverCarousel();
+  updateRaceStats(); // Added race stats function
 });

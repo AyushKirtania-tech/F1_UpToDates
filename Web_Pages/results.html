@@ -356,6 +356,36 @@
       text-decoration: none;
       font-weight: 700
     }
+
+    /* Footer */
+    footer {
+      margin-top: 80px;
+      padding: 40px 24px;
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(15, 15, 15, 0.8));
+      border-top: 3px solid var(--accent);
+      color: var(--muted);
+    }
+
+    .footer-grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .socials a {
+      color: var(--muted);
+      text-decoration: none;
+      margin: 0 8px;
+      transition: color 0.3s ease;
+    }
+
+    .socials a:hover {
+      color: var(--accent);
+    }
   </style>
 </head>
 
@@ -423,6 +453,9 @@
       </table>
     </section>
   </main>
+
+  <div id="footer" aria-hidden="true"></div>
+
 
   <script>
     /* Combined results page script with featured + marquee updater integrated */
@@ -887,6 +920,8 @@
       initResultsPage();
     });
   </script>
+  <script defer src="Script/common.js"></script>
+
 </body>
 
 </html>
