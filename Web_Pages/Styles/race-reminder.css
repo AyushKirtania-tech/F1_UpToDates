@@ -1,0 +1,263 @@
+/* race-reminder.css - Race Reminder System Styles */
+
+/* Container */
+.race-reminder-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* Hero Section */
+.race-reminder-hero {
+  background: linear-gradient(135deg, rgba(225, 6, 0, 0.15) 0%, rgba(0, 0, 0, 0.4) 100%);
+  border-radius: 20px;
+  padding: 40px;
+  margin-bottom: 30px;
+  text-align: center;
+  border: 2px solid rgba(225, 6, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.race-reminder-hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(225, 6, 0, 0.1) 0%, transparent 70%);
+  animation: rotate-glow 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rotate-glow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.race-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #e10600, #ff4500);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 15px rgba(225, 6, 0, 0.4);
+  position: relative;
+  z-index: 1;
+}
+
+.race-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #fff;
+  margin: 0 0 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 1;
+}
+
+.race-circuit {
+  font-size: 1.2rem;
+  color: #e10600;
+  font-weight: 700;
+  margin: 0 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.race-location {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.circuit-icon,
+.location-icon {
+  font-size: 1.2rem;
+}
+
+/* Countdown */
+.race-countdown {
+  background: rgba(20, 20, 20, 0.8);
+  border-radius: 20px;
+  padding: 32px;
+  margin-bottom: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.countdown-title {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 24px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.countdown-item {
+  background: linear-gradient(135deg, #e10600, #ff4500);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(225, 6, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.countdown-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(225, 6, 0, 0.5);
+}
+
+.countdown-value {
+  font-size: 3rem;
+  font-weight: 900;
+  color: white;
+  line-height: 1;
+  margin-bottom: 8px;
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown-label {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.season-ended {
+  text-align: center;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  padding: 20px;
+}
+
+/* Action Buttons */
+.reminder-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.btn-reminder,
+.btn-calendar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 24px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-reminder {
+  background: linear-gradient(135deg, #e10600, #ff4500);
+  color: white;
+  box-shadow: 0 4px 15px rgba(225, 6, 0, 0.4);
+}
+
+.btn-reminder:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(225, 6, 0, 0.6);
+}
+
+.btn-reminder.reminder-active {
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+}
+
+.btn-reminder.reminder-active:hover {
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+}
+
+.btn-calendar {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.btn-calendar:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #e10600;
+  transform: translateY(-2px);
+}
+
+.btn-reminder:disabled,
+.btn-calendar:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn-icon {
+  font-size: 1.2rem;
+}
+
+.btn-text {
+  font-weight: 700;
+}
+
+/* Race Details Grid */
+.race-details-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.detail-card {
+  background: rgba(20, 20, 20, 0.6);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.detail-card:hover {
+  background: rgba(225, 6, 0, 0.1);
+  border-color: rgba(225, 6, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.detail-icon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+.detail-label {
+  font-size:

@@ -205,44 +205,6 @@ function startCountdown(targetDate) {
   setInterval(updateCountdown, 1000);
 }
 
-// Newsletter functionality
-function setupNewsletter() {
-  const form = $('#newsletter-form');
-  const emailInput = $('#email');
-  const messageEl = $('#newsletter-msg');
-
-  if (!form) return;
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    const email = emailInput.value.trim();
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    
-    if (!email) {
-      showMessage('Please enter your email address.', 'error');
-      return;
-    }
-    
-    if (!emailRegex.test(email)) {
-      showMessage('Please enter a valid email address.', 'error');
-      return;
-    }
-
-    showMessage('Welcome to the Paddock Club! Confirmation sent to ' + email, 'success');
-    emailInput.value = '';
-  });
-
-  function showMessage(message, type) {
-    if (!messageEl) return;
-    messageEl.textContent = message;
-    messageEl.style.color = type === 'error' ? '#ff4757' : '#2ed573';
-    
-    setTimeout(() => {
-      messageEl.textContent = '';
-    }, 5000);
-  }
-}
 
 // Driver Carousel functionality
 function setupDriverCarousel() {
@@ -406,7 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   setCurrentYear();
   setupNextRace();
-  setupNewsletter();
+  //setupNewsletter();
   setupDriverCarousel();
   updateRaceStats(); // Added race stats function
 });

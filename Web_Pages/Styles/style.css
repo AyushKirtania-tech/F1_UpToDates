@@ -580,65 +580,24 @@ header {
   }
 }
 
-/* Newsletter */
-.newsletter {
-  max-width: 600px;
+/* Race Reminder Section (Replaces Newsletter) */
+.race-reminder-section {
+  max-width: 1200px;
   margin: 60px auto;
-  padding: 40px;
-  background: var(--card-bg);
-  border-radius: 16px;
-  text-align: center;
-  border: 1px solid rgba(255,255,255,0.1);
+  padding: 0 24px;
 }
 
-.newsletter h2 {
-  margin-bottom: 16px;
+/* Loading spinner animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.newsletter p {
-  color: var(--muted);
-  margin-bottom: 24px;
+.loading .spinner {
+  animation: spin 1s linear infinite;
 }
 
-.newsletter-form {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-}
-
-.newsletter-form input {
-  flex: 1;
-  padding: 12px 16px;
-  border-radius: 8px;
-  border: 2px solid rgba(255,255,255,0.1);
-  background: rgba(0,0,0,0.3);
-  color: var(--text);
-}
-
-.newsletter-form input:focus {
-  outline: none;
-  border-color: var(--accent);
-}
-
-.newsletter-form button {
-  padding: 12px 24px;
-  border-radius: 8px;
-  border: none;
-  background: var(--gradient-primary);
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.newsletter-form button:hover {
-  transform: translateY(-2px);
-}
-
-#newsletter-msg {
-  margin-top: 16px;
-  font-weight: 600;
-}
 
 /* Footer */
 footer {

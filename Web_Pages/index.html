@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Formula One Racing - Feel the Speed Live</title>
   <link rel="stylesheet" href="Styles/style.css">
+  <link rel="stylesheet" href="Styles/race-reminder.css">
   <meta name="description"
     content="Follow every lap, every overtake, and every heart-stopping moment in Formula One racing.">
 </head>
@@ -312,21 +313,21 @@
     </section>
 
 
-    <!-- Newsletter -->
-    <section class="newsletter" id="newsletter">
-      <h2>🏎️ Join the Paddock Club</h2>
-      <p>Get exclusive race updates and news delivered to your inbox.</p>
-      <form id="newsletter-form" class="newsletter-form">
-        <input id="email" type="email" placeholder="Enter your email" required>
-        <button type="submit">Subscribe</button>
-      </form>
-      <p id="newsletter-msg"></p>
+    <!-- Race Reminder System (Replaces Newsletter) -->
+    <section class="race-reminder-section" id="race-reminder-section">
+      <div id="race-reminder-system">
+        <!-- Race reminder will be loaded here by JavaScript -->
+        <div class="loading" style="text-align: center; padding: 60px 20px;">
+          <div class="spinner" style="width: 50px; height: 50px; border: 4px solid rgba(225, 6, 0, 0.1); border-top: 4px solid #e10600; border-radius: 50%; margin: 0 auto 20px; animation: spin 1s linear infinite;"></div>
+          <p style="color: #bdbdbd;">Loading race information...</p>
+        </div>
+      </div>
     </section>
   </main>
 
   <!-- Footer placeholder -->
   <div id="footer"></div>
-
+  <script src="Script/race-reminder.js"></script>
   <script src="Script/script.js"></script>
   <script src="Script/common.js"></script>
 </body>
