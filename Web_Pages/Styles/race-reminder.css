@@ -259,5 +259,159 @@
   margin-bottom: 12px;
 }
 
+/* Completed detail styles */
 .detail-label {
-  font-size:
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 6px;
+}
+
+.detail-value {
+  font-size: 1.15rem;
+  color: #ffffff;
+  font-weight: 800;
+  margin-top: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Weekend schedule */
+.weekend-schedule {
+  margin-bottom: 30px;
+  border-radius: 16px;
+  padding: 20px;
+  background: rgba(20, 20, 20, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.schedule-title {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.schedule-list {
+  display: grid;
+  gap: 10px;
+}
+
+.schedule-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.schedule-item:hover {
+  transform: translateY(-4px);
+  background: rgba(225, 6, 0, 0.06);
+  border-color: rgba(225, 6, 0, 0.18);
+}
+
+.schedule-session {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+.schedule-time {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 700;
+}
+
+/* Sprint special accent */
+.schedule-item.sprint {
+  background: linear-gradient(90deg, rgba(255, 200, 0, 0.06), rgba(255, 255, 255, 0.01));
+  border-color: rgba(255, 200, 0, 0.14);
+  box-shadow: 0 6px 18px rgba(255, 200, 0, 0.05);
+}
+
+/* Tips */
+.reminder-tips {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  margin-bottom: 20px;
+}
+
+.tip-icon {
+  font-size: 1.6rem;
+}
+
+.tip-content {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+/* Message / toast */
+.reminder-message {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 28px;
+  background: rgba(20, 20, 20, 0.95);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+  z-index: 9999;
+  font-weight: 700;
+  display: none;
+}
+
+/* Message types */
+.reminder-message.info { background: rgba(20,20,20,0.95); color: #fff; }
+.reminder-message.success { background: linear-gradient(90deg,#10b981,#059669); color: #fff; }
+.reminder-message.error { background: linear-gradient(90deg,#e10600,#ff4500); color: #fff; }
+.reminder-message.warning { background: linear-gradient(90deg,#f59e0b,#f97316); color: #000; }
+
+/* Loading & spinner keyframes */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Accessibility: focus styles */
+.btn-reminder:focus,
+.btn-calendar:focus,
+.detail-card:focus,
+.schedule-item:focus {
+  outline: 3px solid rgba(225, 6, 0, 0.25);
+  outline-offset: 4px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .countdown-grid { grid-template-columns: repeat(2, 1fr); }
+  .race-details-grid { grid-template-columns: repeat(2, 1fr); }
+  .race-reminder-hero { padding: 28px; }
+}
+
+@media (max-width: 520px) {
+  .countdown-grid { grid-template-columns: 1fr; }
+  .reminder-actions { grid-template-columns: 1fr; }
+  .race-details-grid { grid-template-columns: 1fr; }
+  .race-title { font-size: 1.6rem; }
+  .race-badge { padding: 6px 14px; font-size: 0.75rem; }
+  .race-reminder-container { padding: 0 12px; }
+}
+
+/* Utility */
+.text-muted { color: rgba(255,255,255,0.6); font-weight: 600; }
+.hidden { display: none !important; }
