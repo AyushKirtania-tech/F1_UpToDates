@@ -147,9 +147,7 @@
   border-radius: 4px;
 }
 
-/* ========================================
-   RESPONSIVE BREAKPOINTS
-   ======================================== */
+/* RESPONSIVE BREAKPOINTS */
 
 /* Tablet and below (≤ 968px) */
 @media (max-width: 968px) {
@@ -173,7 +171,6 @@
 
 /* Mobile (≤ 768px) */
 @media (max-width: 768px) {
-  /* Show mobile menu toggle */
   .mobile-menu-toggle {
     display: block;
   }
@@ -252,7 +249,6 @@
     right: 24px;
   }
 
-  /* Logo adjustment */
   .logo h1 {
     font-size: 1.2rem;
   }
@@ -302,9 +298,7 @@
   }
 }
 
-/* ========================================
-   ADDITIONAL ENHANCEMENTS
-   ======================================== */
+/* ADDITIONAL ENHANCEMENTS */
 
 /* Smooth scroll behavior */
 html {
@@ -388,28 +382,5 @@ body.menu-open {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-  }
-}
-
-/* Print styles */
-@media print {
-  .site-header {
-    position: static;
-    border-bottom: 2px solid #000;
-  }
-
-  .mobile-menu-toggle {
-    display: none;
-  }
-
-  .main-nav {
-    position: static;
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .main-nav ul {
-    display: flex;
-    flex-direction: row;
   }
 }

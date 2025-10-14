@@ -20,26 +20,16 @@
   font-family: "Inter", "Segoe UI", system-ui, Arial, sans-serif;
 }
 
-
 body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
-  /* Background */
   background: url("../images/background.png") no-repeat center center fixed;
   background-size: cover;
-  /* Make it cover the whole screen */
   background-attachment: fixed;
-  /* Creates a parallax effect */
   background-color: #000;
-  /* Fallback color if image doesn’t load */
   color: #fff;
-  /* Ensures text is visible */
 }
-
-
-
 
 * {
   box-sizing: border-box
@@ -134,33 +124,88 @@ body::before {
 
 /* FILTERS */
 .filter-section {
-  margin: 36px 0
+  margin: 36px 0;
+  padding: 28px 0 6px;
+}
+
+.filter-section .container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.filter-intro {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 14px;
+}
+
+.filter-intro h3 {
+  font-size: 1.05rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.filter-intro .muted {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+  margin: 0;
 }
 
 .filter-controls {
   display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.03));
+  padding: 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
 }
 
 .filter-btn {
-  cursor: pointer;
-  padding: 10px 18px;
-  border-radius: 24px;
-  border: 1.5px solid rgba(255, 255, 255, 0.06);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
   background: transparent;
-  color: var(--muted);
+  color: #fff;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
   font-weight: 700;
-  letter-spacing: .6px;
-  transition: all .18s;
+  font-size: 0.95rem;
+  transition: all 220ms cubic-bezier(.2, .9, .2, 1);
+  transform-origin: center;
+  outline: none;
+}
+
+.filter-btn svg {
+  opacity: 0.85;
+  display: block;
+}
+
+.filter-btn span {
+  display: inline-block;
 }
 
 .filter-btn:hover,
+.filter-btn:focus {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(225, 6, 0, 0.12);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
 .filter-btn.active {
-  color: var(--accent);
-  border-color: var(--accent);
-  transform: translateY(-3px);
+  background: linear-gradient(90deg, rgba(225, 6, 0, 0.12), rgba(255, 69, 0, 0.08));
+  box-shadow: 0 8px 30px rgba(225, 6, 0, 0.18);
+  color: #fff;
+  border: 1px solid rgba(225, 6, 0, 0.28);
+  transform: translateY(-2px) scale(1.02);
 }
 
 /* DRIVERS GRID */
@@ -279,6 +324,28 @@ body::before {
   letter-spacing: 0.5px;
 }
 
+/* Points hint */
+.points-line {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+/* Standing badge */
+.standing-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 6px 8px;
+  background: rgba(255,255,255,0.04);
+  color: var(--muted);
+  font-weight: 700;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
 /* Driver stats */
 .driver-stats {
   display: grid;
@@ -325,12 +392,12 @@ body::before {
 .reveal {
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity .6s ease, transform .6s ease;
+  transition: opacity .6s ease, transform .6s ease
 }
 
 .reveal.visible {
   opacity: 1;
-  transform: none;
+  transform: none
 }
 
 /* No results */
@@ -341,16 +408,15 @@ body::before {
   background: rgba(255, 255, 255, 0.02);
   color: var(--muted);
   text-align: center;
-  font-weight: 700;
+  font-weight: 700
 }
 
 /* Focus styles */
 .filter-btn:focus,
-.driver-card:focus,
-.driver-modal-close:focus {
+.driver-card:focus {
   outline: 3px solid rgba(225, 6, 0, 0.18);
   outline-offset: 3px;
-  border-radius: 8px;
+  border-radius: 8px
 }
 
 /* RESPONSIVE */
@@ -358,7 +424,6 @@ body::before {
   .driver-image {
     height: 250px
   }
-
   .hero-content h1 {
     font-size: 1.8rem
   }
@@ -369,13 +434,28 @@ body::before {
     flex-direction: column;
     align-items: flex-start
   }
-
   .drivers-grid {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))
   }
-
   .driver-stats {
     grid-template-columns: repeat(2, 1fr)
+  }
+}
+
+@media (max-width:680px) {
+  .filter-controls {
+    gap: 8px;
+    padding: 8px;
+  }
+  .filter-btn {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+    gap: 8px;
+  }
+  .filter-intro {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
   }
 }
 
@@ -383,14 +463,10 @@ body::before {
   .drivers-grid {
     grid-template-columns: 1fr
   }
-
   .driver-stats {
     grid-template-columns: repeat(3, 1fr)
   }
 }
-
-
-
 
 /* Footer */
 footer {
@@ -422,144 +498,19 @@ footer {
   color: var(--accent);
 }
 
-
-/* Filter section styling */
-.filter-section {
-  padding: 28px 0 6px;
-}
-
-.filter-section .container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-.filter-intro {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  margin-bottom: 14px;
-}
-
-.filter-intro h3 {
-  font-size: 1.05rem;
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin: 0;
-}
-
-.filter-intro .muted {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.95rem;
-  margin: 0;
-}
-
-/* Controls */
-.filter-controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.03));
-  padding: 10px;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
-}
-
-.filter-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
-  background: transparent;
-  color: #fff;
-  border-radius: 999px;
-  border: 1px solid transparent;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 0.95rem;
-  transition: all 220ms cubic-bezier(.2, .9, .2, 1);
-  transform-origin: center;
-  outline: none;
-}
-
-.filter-btn svg {
-  opacity: 0.85;
-  display: block;
-}
-
-.filter-btn span {
-  display: inline-block;
-}
-
-/* hover & focus */
-.filter-btn:hover,
-.filter-btn:focus {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 30px rgba(225, 6, 0, 0.12);
-  border-color: rgba(255, 255, 255, 0.06);
-}
-
-/* active look */
-.filter-btn.active {
-  background: linear-gradient(90deg, rgba(225, 6, 0, 0.12), rgba(255, 69, 0, 0.08));
-  box-shadow: 0 8px 30px rgba(225, 6, 0, 0.18);
-  color: #fff;
-  border: 1px solid rgba(225, 6, 0, 0.28);
-  transform: translateY(-2px) scale(1.02);
-}
-
-/* small screens */
-@media (max-width: 680px) {
-  .filter-controls {
-    gap: 8px;
-    padding: 8px;
-  }
-
-  .filter-btn {
-    padding: 8px 10px;
-    font-size: 0.85rem;
-    gap: 8px;
-  }
-
-  .filter-intro {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
+/* Loading spinner */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 
-
-
-
-/* points hint displayed next to team name */
-.points-line {
-  display: inline-block;
-  margin-left: 8px;
-  font-size: 0.85rem;
-  color: var(--muted);
-  font-weight: 700;
-}
-
-/* small badge on header when driver has no current standing returned */
-.standing-badge {
-  display: inline-block;
-  margin-left: 8px;
-  padding: 6px 8px;
-  background: rgba(255,255,255,0.04);
-  color: var(--muted);
-  font-weight: 700;
-  border-radius: 8px;
-  font-size: 0.75rem;
-  border: 1px solid rgba(255,255,255,0.03);
-}
-
-/* driver-stats remain a 3-column block as legends use 3 stats */
-.driver-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin: 16px 0;
+.loading-spinner {
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
 }
