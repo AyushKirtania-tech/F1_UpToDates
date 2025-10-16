@@ -377,3 +377,137 @@
 .race-card.hidden {
   display: none;
 }
+
+/* Season Highlights */
+.season-highlights {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 32px 0;
+  flex-wrap: wrap;
+}
+
+.highlight-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.highlight-icon {
+  font-size: 2.5rem;
+}
+
+.highlight-value {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.highlight-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Quick Navigation Grid */
+.quick-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.quick-nav-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 28px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.quick-nav-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(225,6,0,0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.quick-nav-card:hover::before {
+  left: 100%;
+}
+
+.quick-nav-card:hover {
+  transform: translateY(-8px);
+  background: rgba(225,6,0,0.05);
+  border-color: var(--accent);
+  box-shadow: 0 10px 30px rgba(225,6,0,0.3);
+}
+
+.nav-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 16px;
+  transition: transform 0.3s ease;
+}
+
+.quick-nav-card:hover .nav-icon {
+  transform: scale(1.2) rotate(5deg);
+}
+
+.quick-nav-card h3 {
+  color: var(--text);
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.quick-nav-card p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .season-highlights {
+    gap: 24px;
+  }
+  
+  .highlight-icon {
+    font-size: 2rem;
+  }
+  
+  .highlight-value {
+    font-size: 2rem;
+  }
+  
+  .quick-nav-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .quick-nav-card {
+    padding: 20px;
+  }
+  
+  .nav-icon {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .quick-nav-grid {
+    grid-template-columns: 1fr;
+  }
+}

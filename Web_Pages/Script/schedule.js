@@ -8,7 +8,7 @@ const API_SOURCES = [
 ];
 
 let allRaces = [];
-let currentFilter = 'all';
+let currentFilter = 'upcoming';
 
 // Hardcoded 2024 F1 Schedule as ultimate fallback
 const FALLBACK_SCHEDULE = [
@@ -618,6 +618,7 @@ async function initSchedule() {
   }
   
   renderScheduleCards(allRaces);
+  filterRaces('upcoming');
   updateStats(allRaces);
   
   const nextRace = allRaces.find(r => !isPastRace(r.date, r.time));
