@@ -1,14 +1,13 @@
 // F1 Schedule Page - Multiple API fallbacks with CORS handling
+// DEFAULT VIEW: UPCOMING RACES
 
 const API_SOURCES = [
-  //'https://ergast.com/api/f1',
-  //'http://ergast.com/api/f1',
   'https://api.jolpi.ca/ergast/f1',
   'http://api.jolpi.ca/ergast/f1'
 ];
 
 let allRaces = [];
-let currentFilter = 'upcoming';
+let currentFilter = 'upcoming'; // Changed from 'all' to 'upcoming'
 
 // Hardcoded 2024 F1 Schedule as ultimate fallback
 const FALLBACK_SCHEDULE = [
@@ -399,19 +398,16 @@ function formatTime(timeString) {
 
 // Check if race is in the past
 function isPastRace(dateString, timeString) {
-  // Parse the date and time
   const timeToUse = timeString ? timeString.substring(0, 8) : '23:59:59';
   const raceDateTimeString = `${dateString}T${timeToUse}Z`;
   const raceDateTime = new Date(raceDateTimeString);
   const now = new Date();
   
-  // Check if race date is valid
   if (isNaN(raceDateTime.getTime())) {
     console.warn(`Invalid date: ${raceDateTimeString}`);
     return false;
   }
   
-  // A race is "past" if it ended (add 3 hours for race duration)
   const raceEndTime = new Date(raceDateTime.getTime() + (3 * 60 * 60 * 1000));
   return raceEndTime < now;
 }
@@ -479,41 +475,10 @@ function createRaceCard(race) {
   `;
 }
 
-// Create table row
-function createTableRow(race) {
-  const {
-    round,
-    raceName,
-    Circuit,
-    date
-  } = race;
-
-  const isPast = isPastRace(date, race.time);
-  const status = isPast ? '✓ Completed' : '● Upcoming';
-  const statusClass = isPast ? 'status-completed' : 'status-upcoming';
-  
-  return `
-    <tr>
-      <td>${round}</td>
-      <td>${formatDate(date)}</td>
-      <td><strong>${raceName}</strong></td>
-      <td>${Circuit.circuitName}</td>
-      <td>${Circuit.Location.locality}, ${Circuit.Location.country}</td>
-      <td><span class="${statusClass}">${status}</span></td>
-    </tr>
-  `;
-}
-
 // Render schedule in card view
 function renderScheduleCards(races) {
   const container = document.getElementById('schedule-container');
   container.innerHTML = races.map(race => createRaceCard(race)).join('');
-}
-
-// Render schedule in table view
-function renderScheduleTable(races) {
-  const tbody = document.getElementById('schedule-body');
-  tbody.innerHTML = races.map(race => createTableRow(race)).join('');
 }
 
 // Update statistics
@@ -534,6 +499,7 @@ function filterRaces(filter) {
   currentFilter = filter;
   const cards = document.querySelectorAll('.race-card');
   
+  // Update active button
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.filter === filter);
   });
@@ -561,24 +527,6 @@ function filterRaces(filter) {
     
     card.classList.toggle('hidden', !show);
   });
-}
-
-// Toggle view
-function toggleView() {
-  const cardView = document.querySelector('.schedule-container');
-  const tableView = document.querySelector('.table-view');
-  const toggleBtn = document.getElementById('view-text');
-  
-  if (cardView.style.display === 'none') {
-    cardView.style.display = 'grid';
-    tableView.style.display = 'none';
-    toggleBtn.textContent = 'Switch to Table View';
-  } else {
-    cardView.style.display = 'none';
-    tableView.style.display = 'block';
-    toggleBtn.textContent = 'Switch to Card View';
-    renderScheduleTable(allRaces);
-  }
 }
 
 // Show error
@@ -618,26 +566,24 @@ async function initSchedule() {
   }
   
   renderScheduleCards(allRaces);
-  filterRaces('upcoming');
   updateStats(allRaces);
+  
+  // ✨ AUTOMATICALLY SHOW UPCOMING RACES ON LOAD
+  filterRaces('upcoming');
   
   const nextRace = allRaces.find(r => !isPastRace(r.date, r.time));
   if (nextRace) {
     showNotice(`🏁 Next Race: ${nextRace.raceName} on ${formatDate(nextRace.date)}`);
   }
   
+  // Setup filter buttons
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       filterRaces(btn.dataset.filter);
     });
   });
   
-  const toggleBtn = document.getElementById('toggle-view');
-  if (toggleBtn) {
-    toggleBtn.addEventListener('click', toggleView);
-  }
-  
-  console.log('✅ Schedule loaded successfully!');
+  console.log('✅ Schedule loaded successfully! Showing upcoming races by default.');
 }
 
 document.addEventListener('DOMContentLoaded', initSchedule);

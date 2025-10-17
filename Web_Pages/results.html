@@ -703,7 +703,7 @@
       const params = qs();
       const requestedSeason = params.get('season');
       const requestedCircuit = params.get('circuit');
-
+      
       try {
         const seasons = await fetchAllSeasons();
         if (seasonSelect) {
@@ -925,5 +925,4 @@
   <script src="Script/navbar.js"></script>
 
 </body>
-
 </html>

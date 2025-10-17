@@ -23,7 +23,6 @@
   font-family: "Inter", "Segoe UI", system-ui, Arial, sans-serif;
 }
 
-
 body {
   margin: 0;
   padding: 0;
@@ -40,9 +39,6 @@ body {
   color: #fff;
   /* Ensures text is visible */
 }
-
-
-
 
 * {
   box-sizing: border-box
@@ -423,7 +419,6 @@ body::before {
   transition: background .3s;
 }
 
-
 /* chips */
 .team-color {
   width: 16px;
@@ -540,7 +535,6 @@ body::before {
     font-size: .95rem
   }
 }
-
 
 /* Hero Section */
 .hero {

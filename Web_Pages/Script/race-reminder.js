@@ -467,7 +467,7 @@ END:VCALENDAR`;
       </div>
     `;
   }
-
+  
   // Format date helper
   formatDate(dateString) {
     const date = new Date(dateString);
@@ -478,7 +478,7 @@ END:VCALENDAR`;
       day: 'numeric'
     });
   }
-
+  
   // Format time helper
   formatTime(timeString) {
     if (!timeString) return 'TBA';
@@ -502,14 +502,14 @@ END:VCALENDAR`;
       timeZoneName: 'short'
     });
   }
-
+  
   // Escape HTML
   escapeHtml(str) {
     const div = document.createElement('div');
     div.textContent = str;
     return div.innerHTML;
   }
-
+  
   // Clean up
   destroy() {
     this.stopCountdown();
