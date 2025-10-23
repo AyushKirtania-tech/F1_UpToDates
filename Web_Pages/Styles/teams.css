@@ -1,7 +1,4 @@
-/* teams.css — modernized & compact
-   - Variables, responsive, accessible focus styles
-   - Keeps visual identity from original file
-*/
+/* teams.css — modernized & compact with IMPROVED MODAL */
 * {
   margin: 0;
   padding: 0;
@@ -27,17 +24,11 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
-  /* Background */
   background: url("../images/background.png") no-repeat center center fixed;
   background-size: cover;
-  /* Make it cover the whole screen */
   background-attachment: fixed;
-  /* Creates a parallax effect */
   background-color: #000;
-  /* Fallback color if image doesn’t load */
   color: #fff;
-  /* Ensures text is visible */
 }
 
 * {
@@ -79,7 +70,6 @@ html {
   z-index: 9999
 }
 
-/* subtle page background blobs */
 body::before {
   content: "";
   position: fixed;
@@ -129,7 +119,6 @@ body::before {
   gap: 18px
 }
 
-/* stat items */
 .stat-item {
   padding: 14px;
   background: rgba(255, 255, 255, 0.02);
@@ -198,7 +187,6 @@ body::before {
 /* TEAM CARD */
 .team-card {
   cursor: pointer;
-  ;
   background: var(--card);
   border-radius: 18px;
   overflow: hidden;
@@ -265,7 +253,6 @@ body::before {
   justify-content: center
 }
 
-/* Add this near the end of your teams.css */
 .team-card.hidden {
   opacity: 0;
   transform: scale(0.9);
@@ -275,7 +262,6 @@ body::before {
 .team-card.filtered-out {
   display: none !important;
 }
-
 
 /* IMAGE */
 .team-image {
@@ -346,7 +332,6 @@ body::before {
   font-weight: 700
 }
 
-/* make stat values prominent and avoid clipping */
 .team-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -382,7 +367,6 @@ body::before {
   text-transform: uppercase;
 }
 
-
 /* CHAMPIONSHIP TABLE */
 .championship-section {
   margin: 72px 0
@@ -403,15 +387,12 @@ body::before {
 .championship-table .table-row {
   display: grid;
   grid-template-columns: 60px 1fr 100px;
-  /* Pos, Team, Points */
   padding: 12px;
   align-items: center;
 }
 
-/* adjust header style if you have special styling */
 .table-header {
   font-weight: 800;
-  /* other header styling */
 }
 
 .table-row {
@@ -419,7 +400,7 @@ body::before {
   transition: background .3s;
 }
 
-/* chips */
+/* team color chips */
 .team-color {
   width: 16px;
   height: 14px;
@@ -468,7 +449,6 @@ body::before {
   background: linear-gradient(135deg, #006f62, #004d45)
 }
 
-
 /* reveal animation */
 .reveal {
   opacity: 0;
@@ -492,7 +472,7 @@ body::before {
   font-weight: 700
 }
 
-/* modal focus styles */
+/* focus styles */
 .filter-btn:focus,
 .team-card:focus,
 .team-modal-close:focus {
@@ -500,6 +480,471 @@ body::before {
   outline-offset: 3px;
   border-radius: 8px
 }
+
+/* ==================== IMPROVED MODAL STYLES ==================== */
+
+.team-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(12px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 20px;
+}
+
+.team-modal-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.team-modal {
+  background: linear-gradient(145deg, rgba(25, 25, 35, 0.98), rgba(15, 15, 20, 0.95));
+  border-radius: 24px;
+  max-width: 1000px;
+  width: 100%;
+  max-height: 90vh;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.8), 
+              0 0 0 1px rgba(225, 6, 0, 0.1);
+  position: relative;
+  transform: scale(0.85) translateY(40px);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.team-modal-overlay.visible .team-modal {
+  transform: scale(1) translateY(0);
+}
+
+/* Close Button */
+.team-modal-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 28px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all 0.3s ease;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.team-modal-close:hover {
+  background: rgba(225, 6, 0, 0.2);
+  border-color: var(--accent);
+  transform: rotate(90deg) scale(1.1);
+  box-shadow: 0 0 20px rgba(225, 6, 0, 0.4);
+}
+
+/* Modal Grid Layout */
+.team-modal-grid {
+  display: grid;
+  grid-template-columns: 45% 55%;
+  gap: 0;
+  min-height: 500px;
+  max-height: 90vh;
+  overflow: hidden;
+}
+
+/* Left Side - Image with Overlay Effect */
+.team-modal-image {
+  position: relative;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 24px 0 0 24px;
+}
+
+.team-modal-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, 
+    rgba(225, 6, 0, 0.15) 0%, 
+    transparent 50%, 
+    rgba(0, 0, 0, 0.6) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.team-modal-image::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 150px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.team-modal-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.9) contrast(1.1);
+  transition: transform 0.6s ease;
+}
+
+.team-modal:hover .team-modal-image img {
+  transform: scale(1.05);
+}
+
+/* Right Side - Content */
+.team-modal-content {
+  padding: 50px 45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: auto;
+  max-height: 90vh;
+  background: linear-gradient(to bottom, 
+    rgba(20, 20, 30, 0.6), 
+    rgba(15, 15, 20, 0.9));
+}
+
+/* Custom Scrollbar */
+.team-modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.team-modal-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+}
+
+.team-modal-content::-webkit-scrollbar-thumb {
+  background: rgba(225, 6, 0, 0.5);
+  border-radius: 10px;
+}
+
+.team-modal-content::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Team Name */
+.team-modal-content h2 {
+  font-size: 2.8rem;
+  font-weight: 900;
+  margin: 0 0 12px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  position: relative;
+  animation: fadeInDown 0.6s ease 0.2s both;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Base Location */
+.modal-base {
+  color: var(--muted);
+  margin-bottom: 32px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: fadeInDown 0.6s ease 0.3s both;
+}
+
+.modal-base::before {
+  content: '📍';
+  font-size: 1.2rem;
+}
+
+/* Stats Grid */
+.modal-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 32px 0;
+  animation: fadeInUp 0.6s ease 0.4s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-stat {
+  text-align: center;
+  padding: 20px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-stat::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(225, 6, 0, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.modal-stat:hover::before {
+  left: 100%;
+}
+
+.modal-stat:hover {
+  background: rgba(225, 6, 0, 0.08);
+  border-color: rgba(225, 6, 0, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(225, 6, 0, 0.2);
+}
+
+.modal-value {
+  display: block;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--accent);
+  margin-bottom: 8px;
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(225, 6, 0, 0.3);
+}
+
+.modal-desc {
+  font-size: 0.7rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+/* Description Text */
+.modal-desc-text {
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.8;
+  margin-top: 24px;
+  font-size: 1rem;
+  animation: fadeIn 0.6s ease 0.5s both;
+  border-left: 3px solid var(--accent);
+  padding-left: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 16px 20px;
+  border-radius: 0 12px 12px 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Know The Car Button */
+.modal-learn-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 32px;
+  padding: 16px 32px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(225, 6, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.6s ease 0.6s both;
+}
+
+.modal-learn-more::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.modal-learn-more:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.modal-learn-more:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(225, 6, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.modal-learn-more:active {
+  transform: translateY(-1px);
+}
+
+.modal-learn-more::after {
+  content: '→';
+  font-size: 1.3rem;
+  transition: transform 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.modal-learn-more:hover::after {
+  transform: translateX(5px);
+}
+
+/* RESPONSIVE MODAL */
+@media (max-width: 900px) {
+  .team-modal {
+    max-width: 95%;
+    max-height: 85vh;
+  }
+
+  .team-modal-grid {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .team-modal-image {
+    border-radius: 24px 24px 0 0;
+    height: 280px;
+    min-height: 280px;
+  }
+
+  .team-modal-content {
+    padding: 35px 28px;
+    max-height: 50vh;
+  }
+
+  .team-modal-content h2 {
+    font-size: 2.2rem;
+  }
+
+  .modal-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .modal-stat {
+    padding: 16px 12px;
+  }
+
+  .modal-value {
+    font-size: 1.8rem;
+  }
+
+  .modal-desc {
+    font-size: 0.65rem;
+  }
+
+  .team-modal-close {
+    top: 16px;
+    right: 16px;
+    width: 42px;
+    height: 42px;
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .team-modal-overlay {
+    padding: 10px;
+  }
+
+  .team-modal {
+    border-radius: 20px;
+  }
+
+  .team-modal-image {
+    border-radius: 20px 20px 0 0;
+    height: 220px;
+    min-height: 220px;
+  }
+
+  .team-modal-content {
+    padding: 28px 20px;
+  }
+
+  .team-modal-content h2 {
+    font-size: 1.8rem;
+  }
+
+  .modal-base {
+    font-size: 0.95rem;
+  }
+
+  .modal-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .modal-desc-text {
+    font-size: 0.95rem;
+    padding: 12px 16px;
+  }
+
+  .modal-learn-more {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 24px;
+    font-size: 0.9rem;
+  }
+}
+
+/* ==================== END MODAL STYLES ==================== */
 
 /* RESPONSIVE */
 @media (max-width:1000px) {
@@ -536,7 +981,6 @@ body::before {
   }
 }
 
-/* Hero Section */
 .hero {
   max-width: 1200px;
   margin: 40px auto;
@@ -547,7 +991,7 @@ body::before {
 }
 
 .hero-left {
-  background: var(--card-bg);
+  background: var(--card);
   border-radius: 16px;
   padding: 32px;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -558,7 +1002,7 @@ body::before {
   font-size: 2.5rem;
   font-weight: 900;
   margin-bottom: 16px;
-  background: var(--gradient-primary);
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -577,7 +1021,6 @@ body::before {
   flex-wrap: wrap;
 }
 
-/* Footer */
 footer {
   margin-top: 80px;
   padding: 40px 24px;
@@ -606,212 +1049,6 @@ footer {
 .socials a:hover {
   color: var(--accent);
 }
-
-
-/* MODAL STYLES */
-.team-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(8px);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-}
-
-.team-modal-overlay.visible {
-  opacity: 1;
-  visibility: visible;
-}
-
-.team-modal {
-  background: var(--card);
-  border-radius: 20px;
-  max-width: 800px;
-  width: 90%;
-  max-height: 80vh;
-  overflow-y: auto;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-  position: relative;
-  transform: scale(0.9) translateY(20px);
-  transition: transform 0.3s ease;
-}
-
-.team-modal-overlay.visible .team-modal {
-  transform: scale(1) translateY(0);
-}
-
-.team-modal-close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  color: #fff;
-  font-size: 24px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  transition: all 0.3s ease;
-}
-
-.team-modal-close:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.1);
-}
-
-.team-modal-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-  min-height: 400px;
-}
-
-.team-modal-image {
-  background: rgba(0, 0, 0, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border-radius: 20px 0 0 20px;
-}
-
-.team-modal-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.team-modal-content {
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.team-modal-content h2 {
-  font-size: 2rem;
-  font-weight: 900;
-  margin: 0 0 8px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.modal-base {
-  color: var(--muted);
-  margin-bottom: 20px;
-  font-weight: 600;
-}
-
-.modal-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin: 20px 0;
-}
-
-.modal-stat {
-  text-align: center;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.modal-value {
-  display: block;
-  font-size: 1.2rem;
-  font-weight: 900;
-  color: var(--accent);
-  margin-bottom: 4px;
-}
-
-.modal-desc {
-  font-size: 0.75rem;
-  color: var(--muted);
-  text-transform: uppercase;
-}
-
-.modal-desc-text {
-  color: var(--muted);
-  line-height: 1.6;
-  margin-top: 16px;
-}
-
-/* Responsive modal */
-@media (max-width: 768px) {
-  .team-modal {
-    width: 95%;
-    max-height: 85vh;
-  }
-
-  .team-modal-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .team-modal-image {
-    border-radius: 20px 20px 0 0;
-    height: 200px;
-  }
-
-  .team-modal-content {
-    padding: 20px;
-  }
-
-  .modal-stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Add this to your teams.css file, after the existing modal styles */
-
-.modal-learn-more {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 12px 24px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  color: #fff;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 0.95rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: all 0.3s ease;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(225, 6, 0, 0.3);
-}
-
-.modal-learn-more:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(225, 6, 0, 0.5);
-}
-
-.modal-learn-more:active {
-  transform: translateY(0);
-}
-
-.modal-learn-more:focus {
-  outline: 3px solid rgba(225, 6, 0, 0.4);
-  outline-offset: 3px;
-}
-
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -847,10 +1084,6 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .newsletter-form {
-    flex-direction: column;
-  }
-
   .teams-grid {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
@@ -860,8 +1093,7 @@ footer {
   }
 }
 
-
-/* Quick link / per-team button (consistent with site controls) */
+/* Quick link buttons */
 .btn {
   background: transparent;
   border: 1px solid rgba(255,255,255,0.06);
@@ -894,7 +1126,6 @@ footer {
   border-color: rgba(255,255,255,0.04);
 }
 
-/* per-team Check Results link inside team header */
 .team-header > div:last-child a.team-results-link,
 .team-header-actions a {
   display: inline-flex;
@@ -907,12 +1138,9 @@ footer {
   text-decoration: none;
 }
 
-/* ensure small screen spacing */
 @media (max-width:900px) {
   .team-header > div:last-child a.team-results-link {
     padding: 6px 8px;
     font-size: 0.85rem;
   }
 }
-
-/* ---------- END added styles ---------- */

@@ -7,7 +7,7 @@ const API_SOURCES = [
 ];
 
 let allRaces = [];
-let currentFilter = 'upcoming'; // Changed from 'all' to 'upcoming'
+let currentFilter = 'upcoming'; // Default filter
 
 // Hardcoded 2024 F1 Schedule as ultimate fallback
 const FALLBACK_SCHEDULE = [
@@ -488,10 +488,23 @@ function updateStats(races) {
   const upcoming = totalRaces - completed;
   const sprint = races.filter(r => hasSprint(r)).length;
 
-  document.getElementById('total-races').textContent = totalRaces;
-  document.getElementById('completed-races').textContent = completed;
-  document.getElementById('upcoming-races').textContent = upcoming;
-  document.getElementById('sprint-races').textContent = sprint;
+  // Update stats if elements exist
+  const totalEl = document.getElementById('total-races');
+  const completedEl = document.getElementById('completed-races');
+  const upcomingEl = document.getElementById('upcoming-races');
+  const sprintEl = document.getElementById('sprint-races');
+  
+  if (totalEl) totalEl.textContent = totalRaces;
+  if (completedEl) completedEl.textContent = completed;
+  if (upcomingEl) upcomingEl.textContent = upcoming;
+  if (sprintEl) sprintEl.textContent = sprint;
+
+  // Update season stats
+  const seasonRacesEl = document.getElementById('season-races');
+  const sprintCountEl = document.getElementById('sprint-count');
+  
+  if (seasonRacesEl) seasonRacesEl.textContent = totalRaces;
+  if (sprintCountEl) sprintCountEl.textContent = sprint;
 }
 
 // Filter races
@@ -501,9 +514,13 @@ function filterRaces(filter) {
   
   // Update active button
   document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.filter === filter);
+    btn.classList.remove('active');
+    if (btn.dataset.filter === filter) {
+      btn.classList.add('active');
+    }
   });
 
+  // Filter cards
   cards.forEach(card => {
     const status = card.dataset.status;
     const sprint = card.dataset.sprint === 'true';
@@ -525,7 +542,11 @@ function filterRaces(filter) {
         break;
     }
     
-    card.classList.toggle('hidden', !show);
+    if (show) {
+      card.classList.remove('hidden');
+    } else {
+      card.classList.add('hidden');
+    }
   });
 }
 
@@ -557,33 +578,44 @@ async function initSchedule() {
   
   const loading = document.getElementById('loading');
   
-  allRaces = await fetchRaceSchedule();
-  
-  loading.style.display = 'none';
-  
-  if (allRaces.length === 0) {
-    return;
-  }
-  
-  renderScheduleCards(allRaces);
-  updateStats(allRaces);
-  
-  // ✨ AUTOMATICALLY SHOW UPCOMING RACES ON LOAD
-  filterRaces('upcoming');
-  
-  const nextRace = allRaces.find(r => !isPastRace(r.date, r.time));
-  if (nextRace) {
-    showNotice(`🏁 Next Race: ${nextRace.raceName} on ${formatDate(nextRace.date)}`);
-  }
-  
-  // Setup filter buttons
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterRaces(btn.dataset.filter);
+  try {
+    allRaces = await fetchRaceSchedule();
+    
+    loading.style.display = 'none';
+    
+    if (allRaces.length === 0) {
+      showError();
+      return;
+    }
+    
+    // Render all race cards
+    renderScheduleCards(allRaces);
+    
+    // Update statistics
+    updateStats(allRaces);
+    
+    // Setup filter buttons BEFORE applying filter
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterRaces(btn.dataset.filter);
+      });
     });
-  });
-  
-  console.log('✅ Schedule loaded successfully! Showing upcoming races by default.');
+    
+    // Apply default filter (upcoming races)
+    filterRaces(currentFilter);
+    
+    // Show next race notification
+    const nextRace = allRaces.find(r => !isPastRace(r.date, r.time));
+    if (nextRace) {
+      showNotice(`🏁 Next Race: ${nextRace.raceName} on ${formatDate(nextRace.date)}`);
+    }
+    
+    console.log('✅ Schedule loaded successfully! Showing upcoming races by default.');
+  } catch (error) {
+    console.error('Error initializing schedule:', error);
+    showError();
+  }
 }
 
+// Start when DOM is ready
 document.addEventListener('DOMContentLoaded', initSchedule);
