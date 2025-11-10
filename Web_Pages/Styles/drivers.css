@@ -514,3 +514,114 @@ footer {
   animation: spin 1s linear infinite;
   margin: 20px auto;
 }
+
+/* Add this to your existing drivers.css file - Career Stats Header Styling */
+
+/* Stats header label */
+.stats-header {
+  margin: 12px 0 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.stats-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent);
+  opacity: 0.9;
+}
+
+/* Update existing stat descriptions for clarity */
+.stat-desc {
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* Season info badge - to clarify current season points */
+.season-info {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 10px;
+  background: rgba(225, 6, 0, 0.08);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  color: var(--muted);
+  border: 1px solid rgba(225, 6, 0, 0.15);
+}
+
+.season-year {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* Enhanced points line styling */
+.points-line {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 700;
+}
+
+.points-line::before {
+  content: "•";
+  margin-right: 8px;
+  color: var(--accent);
+}
+
+/* Modal stats - keep consistent */
+.modal-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.modal-stat {
+  text-align: center;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.modal-value {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.modal-desc {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* Info tooltip for career stats */
+.career-stats-tooltip {
+  position: relative;
+  display: inline-block;
+  margin-left: 6px;
+  cursor: help;
+}
+
+.career-stats-tooltip::after {
+  content: "ⓘ";
+  font-size: 0.85rem;
+  color: var(--muted);
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.career-stats-tooltip:hover::after {
+  opacity: 1;
+  color: var(--accent);
+}

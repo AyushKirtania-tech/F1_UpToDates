@@ -45,8 +45,7 @@
       <div class="container">
         <div class="filter-intro">
           <h3>Find drivers</h3>
-          <p class="muted">Refine the grid - spotlight champions, podium winners, legends or current drivers.
-          </p>
+          <p class="muted">Refine the grid - spotlight champions, podium winners, legends or current drivers.</p>
         </div>
 
         <div class="filter-controls" role="tablist" aria-label="Driver filters">
@@ -86,7 +85,7 @@
 
     <!-- DRIVERS GRID - Will be populated with API + Legend drivers -->
     <div class="drivers-grid" id="driversGrid"
-      style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;align-items:start;">
+      style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:28px;align-items:start;">
 
       <!-- Loading state for API drivers -->
       <div id="loadingMessage" style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--muted);">
@@ -107,10 +106,13 @@
         <div class="driver-details">
           <h2>Ayrton Senna</h2>
           <p class="team-name">McLaren / Williams (historical)</p>
+          <div class="stats-header">
+            <span class="stats-label">Career Statistics</span>
+          </div>
           <div class="driver-stats">
             <div class="stat"><span class="stat-value">3</span><span class="stat-desc">Championships</span></div>
-            <div class="stat"><span class="stat-value">41</span><span class="stat-desc">Wins</span></div>
-            <div class="stat"><span class="stat-value">80</span><span class="stat-desc">Podiums</span></div>
+            <div class="stat"><span class="stat-value">41</span><span class="stat-desc">Career Wins</span></div>
+            <div class="stat"><span class="stat-value">80</span><span class="stat-desc">Career Podiums</span></div>
           </div>
           <p class="driver-description">Three-time world champion – a spiritual icon of Formula 1 whose raw speed
             inspired millions.</p>
@@ -129,10 +131,13 @@
         <div class="driver-details">
           <h2>Michael Schumacher</h2>
           <p class="team-name">Ferrari / Benetton (historical)</p>
+          <div class="stats-header">
+            <span class="stats-label">Career Statistics</span>
+          </div>
           <div class="driver-stats">
             <div class="stat"><span class="stat-value">7</span><span class="stat-desc">Championships</span></div>
-            <div class="stat"><span class="stat-value">91</span><span class="stat-desc">Wins</span></div>
-            <div class="stat"><span class="stat-value">155</span><span class="stat-desc">Podiums</span></div>
+            <div class="stat"><span class="stat-value">91</span><span class="stat-desc">Career Wins</span></div>
+            <div class="stat"><span class="stat-value">155</span><span class="stat-desc">Career Podiums</span></div>
           </div>
           <p class="driver-description">Seven-time world champion who redefined domination in the sport.</p>
         </div>
@@ -150,10 +155,13 @@
         <div class="driver-details">
           <h2>Alain Prost</h2>
           <p class="team-name">McLaren / Ferrari (historical)</p>
+          <div class="stats-header">
+            <span class="stats-label">Career Statistics</span>
+          </div>
           <div class="driver-stats">
             <div class="stat"><span class="stat-value">4</span><span class="stat-desc">Championships</span></div>
-            <div class="stat"><span class="stat-value">51</span><span class="stat-desc">Wins</span></div>
-            <div class="stat"><span class="stat-value">106</span><span class="stat-desc">Podiums</span></div>
+            <div class="stat"><span class="stat-value">51</span><span class="stat-desc">Career Wins</span></div>
+            <div class="stat"><span class="stat-value">106</span><span class="stat-desc">Career Podiums</span></div>
           </div>
           <p class="driver-description">Four-time world champion known as 'The Professor' for his cerebral approach.</p>
         </div>
@@ -171,10 +179,13 @@
         <div class="driver-details">
           <h2>Juan Manuel Fangio</h2>
           <p class="team-name">Multiple teams (historical)</p>
+          <div class="stats-header">
+            <span class="stats-label">Career Statistics</span>
+          </div>
           <div class="driver-stats">
             <div class="stat"><span class="stat-value">5</span><span class="stat-desc">Championships</span></div>
-            <div class="stat"><span class="stat-value">24</span><span class="stat-desc">Wins</span></div>
-            <div class="stat"><span class="stat-value">35</span><span class="stat-desc">Podiums</span></div>
+            <div class="stat"><span class="stat-value">24</span><span class="stat-desc">Career Wins</span></div>
+            <div class="stat"><span class="stat-value">35</span><span class="stat-desc">Career Podiums</span></div>
           </div>
           <p class="driver-description">Five-time world champion from F1's early era – tactical brilliance and supreme
             car control.</p>
@@ -193,10 +204,13 @@
         <div class="driver-details">
           <h2>Niki Lauda</h2>
           <p class="team-name">Ferrari / McLaren (historical)</p>
+          <div class="stats-header">
+            <span class="stats-label">Career Statistics</span>
+          </div>
           <div class="driver-stats">
             <div class="stat"><span class="stat-value">3</span><span class="stat-desc">Championships</span></div>
-            <div class="stat"><span class="stat-value">25</span><span class="stat-desc">Wins</span></div>
-            <div class="stat"><span class="stat-value">54</span><span class="stat-desc">Podiums</span></div>
+            <div class="stat"><span class="stat-value">25</span><span class="stat-desc">Career Wins</span></div>
+            <div class="stat"><span class="stat-value">54</span><span class="stat-desc">Career Podiums</span></div>
           </div>
           <p class="driver-description">Three-time champion and motorsport pioneer – famous for courage and technical
             insight.</p>
@@ -215,10 +229,13 @@
         <div class="driver-details">
           <h2>James Hunt</h2>
           <p class="team-name">McLaren (1976) &amp; multiple teams (historical)</p>
+          <div class="stats-header">
+            <span class="stats-label">Career Statistics</span>
+          </div>
           <div class="driver-stats">
             <div class="stat"><span class="stat-value">1</span><span class="stat-desc">Championship</span></div>
-            <div class="stat"><span class="stat-value">10</span><span class="stat-desc">Wins</span></div>
-            <div class="stat"><span class="stat-value">23</span><span class="stat-desc">Podiums</span></div>
+            <div class="stat"><span class="stat-value">10</span><span class="stat-desc">Career Wins</span></div>
+            <div class="stat"><span class="stat-value">23</span><span class="stat-desc">Career Podiums</span></div>
           </div>
           <p class="driver-description">1976 World Champion famed for fearless wheel-to-wheel racing and his intense
             rivalry with Niki Lauda.</p>
@@ -237,10 +254,13 @@
         <div class="driver-details">
           <h2>Jim Clark</h2>
           <p class="team-name">Lotus (historical)</p>
+          <div class="stats-header">
+            <span class="stats-label">Career Statistics</span>
+          </div>
           <div class="driver-stats">
             <div class="stat"><span class="stat-value">2</span><span class="stat-desc">Championships</span></div>
-            <div class="stat"><span class="stat-value">25</span><span class="stat-desc">Wins</span></div>
-            <div class="stat"><span class="stat-value">32</span><span class="stat-desc">Podiums</span></div>
+            <div class="stat"><span class="stat-value">25</span><span class="stat-desc">Career Wins</span></div>
+            <div class="stat"><span class="stat-value">32</span><span class="stat-desc">Career Podiums</span></div>
           </div>
           <p class="driver-description">Two-time champion and one of the purest natural talents the sport has seen.</p>
         </div>
@@ -258,10 +278,13 @@
         <div class="driver-details">
           <h2>Jackie Stewart</h2>
           <p class="team-name">Matra / Tyrrell (historical)</p>
+          <div class="stats-header">
+            <span class="stats-label">Career Statistics</span>
+          </div>
           <div class="driver-stats">
             <div class="stat"><span class="stat-value">3</span><span class="stat-desc">Championships</span></div>
-            <div class="stat"><span class="stat-value">27</span><span class="stat-desc">Wins</span></div>
-            <div class="stat"><span class="stat-value">43</span><span class="stat-desc">Podiums</span></div>
+            <div class="stat"><span class="stat-value">27</span><span class="stat-desc">Career Wins</span></div>
+            <div class="stat"><span class="stat-value">43</span><span class="stat-desc">Career Podiums</span></div>
           </div>
           <p class="driver-description">Three-time world champion and safety pioneer – transformed driver welfare and
             success on track.</p>
@@ -280,10 +303,13 @@
         <div class="driver-details">
           <h2>Stirling Moss</h2>
           <p class="team-name">Multiple teams (historical)</p>
+          <div class="stats-header">
+            <span class="stats-label">Career Statistics</span>
+          </div>
           <div class="driver-stats">
             <div class="stat"><span class="stat-value">0</span><span class="stat-desc">Championships</span></div>
-            <div class="stat"><span class="stat-value">16</span><span class="stat-desc">Wins</span></div>
-            <div class="stat"><span class="stat-value">24</span><span class="stat-desc">Podiums</span></div>
+            <div class="stat"><span class="stat-value">16</span><span class="stat-desc">Career Wins</span></div>
+            <div class="stat"><span class="stat-value">24</span><span class="stat-desc">Career Podiums</span></div>
           </div>
           <p class="driver-description">Often called 'the greatest driver never to win the championship' – versatile and
             revered across eras.</p>
@@ -326,29 +352,24 @@
       .driver-modal-overlay {
         position: fixed;
         inset: 0;
-        /* top:0; right:0; bottom:0; left:0; */
         background: rgba(0, 0, 0, 0.85);
         backdrop-filter: blur(8px);
         z-index: 1000;
         display: flex;
         align-items: center;
         justify-content: center;
-
-        /* hidden state */
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
         transition: opacity 0.3s ease, visibility 0.3s ease;
       }
 
-      /* visible state */
       .driver-modal-overlay.visible {
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
       }
 
-      /* Modal container */
       .driver-modal {
         background: var(--card-bg);
         border-radius: 20px;
@@ -359,18 +380,14 @@
         border: 1px solid rgba(255, 255, 255, 0.1);
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
         position: relative;
-
-        /* entrance transform */
         transform: scale(0.9) translateY(20px);
         transition: transform 0.3s ease;
       }
 
-      /* when overlay visible, pop modal to final transform */
       .driver-modal-overlay.visible .driver-modal {
         transform: scale(1) translateY(0);
       }
 
-      /* close button */
       .driver-modal-close {
         position: absolute;
         top: 16px;
@@ -390,13 +407,11 @@
         justify-content: center;
       }
 
-      /* hover/focus styles for close */
       .driver-modal-close:hover {
         background: var(--accent);
         transform: scale(1.03);
       }
 
-      /* Modal body layout */
       .driver-modal-body {
         padding: 32px;
         display: grid;
@@ -404,7 +419,6 @@
         gap: 24px;
       }
 
-      /* modal image block (top hero image variant also used) */
       .driver-modal-image {
         width: 100%;
         height: 350px;
@@ -422,7 +436,6 @@
         border-radius: inherit;
       }
 
-      /* Modal content */
       .driver-modal-content {
         padding: 30px;
       }
@@ -437,7 +450,6 @@
         -webkit-text-fill-color: transparent;
       }
 
-      /* small team line under title */
       .modal-team {
         color: var(--muted);
         margin-bottom: 20px;
@@ -445,7 +457,6 @@
         font-size: 1.1rem;
       }
 
-      /* stats grid inside modal */
       .modal-stats {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -475,14 +486,12 @@
         text-transform: uppercase;
       }
 
-      /* descriptive paragraph */
       .modal-desc-text {
         color: var(--muted);
         line-height: 1.6;
         margin-top: 16px;
       }
 
-      /* learn more button / CTA */
       .modal-learn-more {
         display: inline-block;
         margin-top: 20px;
@@ -506,7 +515,6 @@
         box-shadow: 0 6px 20px rgba(225, 6, 0, 0.5);
       }
 
-      /* Focus outline helpers for accessibility */
       .filter-btn:focus,
       .driver-card:focus,
       .driver-modal-close:focus {
@@ -515,7 +523,6 @@
         border-radius: 8px;
       }
 
-      /* Alternate modal layout for small screens */
       @media (max-width: 768px) {
         .driver-modal-body {
           grid-template-columns: 1fr;
@@ -536,7 +543,6 @@
         }
       }
 
-      /* Smaller viewports further tweaks */
       @media (max-width: 480px) {
         .driver-modal {
           width: 95%;
@@ -553,7 +559,6 @@
         }
       }
 
-      /* Loading spinner */
       @keyframes spin {
         to {
           transform: rotate(360deg);
@@ -568,6 +573,22 @@
         height: 40px;
         animation: spin 1s linear infinite;
         margin: 20px auto;
+      }
+
+      /* Career Stats Header Styling */
+      .stats-header {
+        margin: 12px 0 8px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .stats-label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--accent);
+        opacity: 0.9;
       }
     </style>
 
