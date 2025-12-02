@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
   <header class="site-header">
     <div class="header-inner">
       <div class="logo">
         <h1><a href="index.html" aria-label="F1 Racing Home">F1 Racing</a></h1>
       </div>
-      
+
       <!-- Mobile Menu Toggle -->
       <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
         <span class="hamburger-icon">
@@ -30,9 +32,16 @@
           <li><a href="teams.html">Teams</a></li>
         </ul>
       </nav>
+
+      <!-- Add this inside .header-inner, before the mobile-menu-toggle -->
+      <button class="search-button" onclick="window.openGlobalSearch()" aria-label="Search">
+        <span>🔍</span>
+      </button>
+
     </div>
   </header>
 
   <!-- Navigation script loaded separately in navbar.js -->
 </body>
+
 </html>

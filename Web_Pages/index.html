@@ -8,6 +8,11 @@
   <link rel="stylesheet" href="Styles/style.css">
   <link rel="stylesheet" href="Styles/race-reminder.css">
   <link rel="stylesheet" href="Styles/navbar.css">
+  <link rel="stylesheet" href="Styles/skeleton.css">
+  <link rel="stylesheet" href="Styles/keyboard-shortcuts.css">
+  <script defer src="Script/keyboard-shortcuts.js"></script>
+  <link rel="stylesheet" href="Styles/global-search.css">
+  <script defer src="Script/global-search.js"></script>
   <meta name="description"
     content="Follow every lap, every overtake, and every heart-stopping moment in Formula One racing.">
 </head>
@@ -45,7 +50,7 @@
 
       <div class="hero-right">
         <div class="car-banner">
-          <img src="images/banner.jpeg" alt="Formula 1 Racing Car" />
+          <img src="images/banner.jpeg" alt="Formula 1 Racing Car" loading="lazy" />
         </div>
 
         <div class="about-f1">
@@ -140,10 +145,11 @@
             </div>
           </div>
         </div>
-        
+
         <div class="results-content">
           <h2>2024 Season Results</h2>
-          <p>Catch up on all the action! View complete race results, fastest laps, and championship battles from this season.</p>
+          <p>Catch up on all the action! View complete race results, fastest laps, and championship battles from this
+            season.</p>
           <ul class="results-features">
             <li>🏁 Complete Race Results</li>
             <li>⚡ Fastest Lap Times</li>
@@ -170,13 +176,13 @@
         <div class="drivers-grid" id="driversGrid">
           <!-- Red Bull -->
           <div class="driver-card">
-            <img src="images/drivers/max.jpg" alt="Max Verstappen">
+            <img src="images/drivers/max.jpg" alt="Max Verstappen" loading="lazy">
             <h3>Max Verstappen</h3>
             <p>World champion and Red Bull's leading driver, dominating in both race pace and strategy.</p>
             <span class="team-badge">Red Bull Racing</span>
           </div>
           <div class="driver-card">
-            <img src="images/drivers/yuki.webp" alt="Yuki Tsunoda">
+            <img src="images/drivers/yuki.webp" alt="Yuki Tsunoda" loading="lazy">
             <h3>Yuki Tsunoda</h3>
             <p>Promoted to the main Red Bull team in 2025, bringing aggressive style and raw speed.</p>
             <span class="team-badge">Red Bull Racing</span>
@@ -184,13 +190,13 @@
 
           <!-- Ferrari -->
           <div class="driver-card">
-            <img src="images/drivers/leclerc.jpg" alt="Charles Leclerc">
+            <img src="images/drivers/leclerc.jpg" alt="Charles Leclerc" loading="lazy">
             <h3>Charles Leclerc</h3>
             <p>Ferrari's benchmark driver - great in qualifying with strong consistency in races.</p>
             <span class="team-badge">Ferrari</span>
           </div>
           <div class="driver-card">
-            <img src="images/drivers/lewis.jpg" alt="Lewis Hamilton">
+            <img src="images/drivers/lewis.jpg" alt="Lewis Hamilton" loading="lazy">
             <h3>Lewis Hamilton</h3>
             <p>Moved to Ferrari in 2025 - brings unmatched experience, racecraft, and leadership.</p>
             <span class="team-badge">Ferrari</span>
@@ -198,13 +204,13 @@
 
           <!-- McLaren -->
           <div class="driver-card">
-            <img src="images/drivers/lando.webp" alt="Lando Norris">
+            <img src="images/drivers/lando.webp" alt="Lando Norris" loading="lazy">
             <h3>Lando Norris</h3>
             <p>McLaren stalwart - fast in mixed conditions and excellent with tyre management.</p>
             <span class="team-badge">McLaren</span>
           </div>
           <div class="driver-card">
-            <img src="images/drivers/piastri.webp" alt="Oscar Piastri">
+            <img src="images/drivers/piastri.webp" alt="Oscar Piastri" loading="lazy">
             <h3>Oscar Piastri</h3>
             <p>Rookie turned star - shows maturity beyond his years and strong race presence.</p>
             <span class="team-badge">McLaren</span>
@@ -212,13 +218,13 @@
 
           <!-- Mercedes -->
           <div class="driver-card">
-            <img src="images/drivers/george.jpg" alt="George Russell">
+            <img src="images/drivers/george.jpg" alt="George Russell" loading="lazy">
             <h3>George Russell</h3>
             <p>Consistent and technically sharp - crucial for Mercedes' development in 2025.</p>
             <span class="team-badge">Mercedes</span>
           </div>
           <div class="driver-card">
-            <img src="images/drivers/antonelli.avif" alt="Kimi Antonelli">
+            <img src="images/drivers/antonelli.avif" alt="Kimi Antonelli" loading="lazy">
             <h3>Kimi Antonelli</h3>
             <p>Young talent brought up to F1 in 2025 - expected to bring fresh speed and ambition.</p>
             <span class="team-badge">Mercedes</span>
@@ -226,13 +232,13 @@
 
           <!-- Aston Martin -->
           <div class="driver-card">
-            <img src="images/drivers/alonso.jpg" alt="Fernando Alonso">
+            <img src="images/drivers/alonso.jpg" alt="Fernando Alonso" loading="lazy">
             <h3>Fernando Alonso</h3>
             <p>Veteran racer with tactical brilliance and still fierce in wheel-to-wheel battles.</p>
             <span class="team-badge">Aston Martin</span>
           </div>
           <div class="driver-card">
-            <img src="images/drivers/lance.jpg" alt="Lance Stroll">
+            <img src="images/drivers/lance.jpg" alt="Lance Stroll" loading="lazy">
             <h3>Lance Stroll</h3>
             <p>Reliable performer in the Aston Martin lineup - solid in adverse conditions.</p>
             <span class="team-badge">Aston Martin</span>
@@ -240,13 +246,13 @@
 
           <!-- Alpine -->
           <div class="driver-card">
-            <img src="images/drivers/gasly.jpg" alt="Pierre Gasly">
+            <img src="images/drivers/gasly.jpg" alt="Pierre Gasly" loading="lazy">
             <h3>Pierre Gasly</h3>
             <p>Experienced and versatile - a strong strategist for Alpine's 2025 campaign.</p>
             <span class="team-badge">Alpine</span>
           </div>
           <div class="driver-card">
-            <img src="images/drivers/franco.webp" alt="Franco Colapinto">
+            <img src="images/drivers/franco.webp" alt="Franco Colapinto" loading="lazy">
             <h3>Franco Colapinto</h3>
             <p>Called up mid-season as the second Alpine driver - promising young talent.</p>
             <span class="team-badge">Alpine</span>
@@ -254,13 +260,13 @@
 
           <!-- Williams -->
           <div class="driver-card">
-            <img src="images/drivers/albon.jpg" alt="Alexander Albon">
+            <img src="images/drivers/albon.jpg" alt="Alexander Albon" loading="lazy">
             <h3>Alexander Albon</h3>
             <p>Williams lead driver - excels at maximizing limited performance.</p>
             <span class="team-badge">Williams</span>
           </div>
           <div class="driver-card">
-            <img src="images/drivers/carlos.jpeg" alt="Carlos Sainz">
+            <img src="images/drivers/carlos.jpeg" alt="Carlos Sainz" loading="lazy">
             <h3>Carlos Sainz</h3>
             <p>Joined Williams in 2025 - veteran presence with solid pace and racecraft.</p>
             <span class="team-badge">Williams</span>
@@ -268,13 +274,13 @@
 
           <!-- Haas -->
           <div class="driver-card">
-            <img src="images/drivers/oliver.webp" alt="Oliver Bearman">
+            <img src="images/drivers/oliver.webp" alt="Oliver Bearman" loading="lazy">
             <h3>Oliver Bearman</h3>
             <p>Young and aggressive - Haas' new driver for 2025, bringing bold moves.</p>
             <span class="team-badge">Haas</span>
           </div>
           <div class="driver-card">
-            <img src="images/drivers/ocon.avif" alt="Esteban Ocon">
+            <img src="images/drivers/ocon.avif" alt="Esteban Ocon" loading="lazy">
             <h3>Esteban Ocon</h3>
             <p>Veteran in the car - provides balance and experience to Haas' lineup.</p>
             <span class="team-badge">Haas</span>
@@ -282,14 +288,14 @@
 
           <!-- Racing Bulls (formerly RB / AlphaTauri) -->
           <div class="driver-card">
-            <img src="images/drivers/liam.avif" alt="Liam Lawson">
+            <img src="images/drivers/liam.avif" alt="Liam Lawson" loading="lazy">
             <h3>Liam Lawson</h3>
             <p>New Zealand driver for Racing Bulls in 2025. Known for tenacity and promising qualifying pace.</p>
             <span class="team-badge">Racing Bulls</span>
           </div>
 
           <div class="driver-card">
-            <img src="images/drivers/isack.webp" alt="Isack Hadjar">
+            <img src="images/drivers/isack.webp" alt="Isack Hadjar" loading="lazy">
             <h3>Isack Hadjar</h3>
             <p>New talent stepping up in Racing Bulls - brings youth and fearlessness to the grid.</p>
             <span class="team-badge">Racing Bulls</span>
@@ -297,13 +303,13 @@
 
           <!-- Alfa Romeo / Sauber -->
           <div class="driver-card">
-            <img src="images/drivers/nico.jpg" alt="Nico Hülkenberg">
+            <img src="images/drivers/nico.jpg" alt="Nico Hülkenberg" loading="lazy">
             <h3>Nico Hülkenberg</h3>
             <p>Experienced driver at Sauber - known for maximizing opportunities under pressure.</p>
             <span class="team-badge">Sauber / Alfa Romeo</span>
           </div>
           <div class="driver-card">
-            <img src="images/drivers/gabriel.webp" alt="Gabriel Bortoleto">
+            <img src="images/drivers/gabriel.webp" alt="Gabriel Bortoleto" loading="lazy">
             <h3>Gabriel Bortoleto</h3>
             <p>Rookie in Sauber - fast rising talent from junior ranks now in F1.</p>
             <span class="team-badge">Sauber / Alfa Romeo</span>
@@ -319,7 +325,9 @@
       <div id="race-reminder-system">
         <!-- Race reminder will be loaded here by JavaScript -->
         <div class="loading" style="text-align: center; padding: 60px 20px;">
-          <div class="spinner" style="width: 50px; height: 50px; border: 4px solid rgba(225, 6, 0, 0.1); border-top: 4px solid #e10600; border-radius: 50%; margin: 0 auto 20px; animation: spin 1s linear infinite;"></div>
+          <div class="spinner"
+            style="width: 50px; height: 50px; border: 4px solid rgba(225, 6, 0, 0.1); border-top: 4px solid #e10600; border-radius: 50%; margin: 0 auto 20px; animation: spin 1s linear infinite;">
+          </div>
           <p style="color: #bdbdbd;">Loading race information...</p>
         </div>
       </div>

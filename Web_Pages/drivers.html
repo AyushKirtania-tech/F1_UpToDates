@@ -9,6 +9,11 @@
   <meta name="keywords" content="F1, drivers, 2024, racing, championship" />
   <link rel="stylesheet" href="Styles/navbar.css">
   <link rel="stylesheet" href="Styles/drivers.css">
+  <link rel="stylesheet" href="Styles/skeleton.css">
+  <link rel="stylesheet" href="Styles/keyboard-shortcuts.css">
+  <script defer src="Script/keyboard-shortcuts.js"></script>
+  <link rel="stylesheet" href="Styles/global-search.css">
+  <script defer src="Script/global-search.js"></script>
   <meta name="theme-color" content="#070707" />
 </head>
 
@@ -88,9 +93,15 @@
       style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:28px;align-items:start;">
 
       <!-- Loading state for API drivers -->
-      <div id="loadingMessage" style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--muted);">
-        <div class="loading-spinner"></div>
-        <p>Loading current drivers from API...</p>
+      <!-- Replace the loading message with skeleton cards -->
+      <div id="loadingMessage" style="grid-column: 1/-1;">
+        <!-- Add 6 skeleton cards -->
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
       </div>
 
       <!-- Legendary Drivers (Static) -->
@@ -296,7 +307,7 @@
         data-link="https://en.wikipedia.org/wiki/Stirling_Moss">
         <div class="driver-header" style="background: linear-gradient(135deg,#151515,#2c241f);">
           <div class="driver-number">LEGEND</div>
-          <div class="country-flag"><img src="images/flags/uk.jpg" alt="United Kingdom"
+          <div class="country-flag"><img src="images/flags/uk.jpg" alt="United Kingdom" loading="lazy"
               onerror="this.style.display='none'"></div>
         </div>
         <div class="driver-image"><img src="images/drivers/moss.jpg" alt="Stirling Moss" loading="lazy"></div>

@@ -5,7 +5,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Race Results - F1 Racing</title>
-  <link rel="stylesheet" href="Styles/navbar.css">
+  <link rel="stylesheet" href="Styles/navbar.css" <link rel="stylesheet" href="Styles/skeleton.css">
+  <link rel="stylesheet" href="Styles/keyboard-shortcuts.css">
+  <script defer src="Script/keyboard-shortcuts.js"></script>
+  <link rel="stylesheet" href="Styles/global-search.css">
+  <script defer src="Script/global-search.js"></script>
   <meta name="description" content="F1 race results (season & round) using Jolpi Ergast API." />
   <style>
     :root {
@@ -703,7 +707,7 @@
       const params = qs();
       const requestedSeason = params.get('season');
       const requestedCircuit = params.get('circuit');
-      
+
       try {
         const seasons = await fetchAllSeasons();
         if (seasonSelect) {
@@ -925,4 +929,5 @@
   <script src="Script/navbar.js"></script>
 
 </body>
+
 </html>

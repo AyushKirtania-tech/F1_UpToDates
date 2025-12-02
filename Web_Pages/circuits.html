@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -7,8 +8,14 @@
   <link rel="stylesheet" href="Styles/style.css">
   <link rel="stylesheet" href="Styles/circuits.css">
   <link rel="stylesheet" href="Styles/navbar.css">
+  <link rel="stylesheet" href="Styles/skeleton.css">
+  <link rel="stylesheet" href="Styles/keyboard-shortcuts.css">
+  <script defer src="Script/keyboard-shortcuts.js"></script>
+  <link rel="stylesheet" href="Styles/global-search.css">
+  <script defer src="Script/global-search.js"></script>
   <meta name="description" content="Explore the world's most iconic Formula 1 racing circuits">
 </head>
+
 <body>
   <!-- Navbar placeholder -->
   <div id="navbar"></div>
@@ -46,11 +53,13 @@
           <!-- Europe -->
           <article class="region-card" role="button" tabindex="0" aria-label="Europe circuits">
             <div class="region-image">
-              <img src="images/regions/europe.jpg" alt="Europe circuits photo" onerror="this.src='https://source.unsplash.com/800x600/?europe,race,track'">
+              <img src="images/regions/europe.jpg" alt="Europe circuits photo"
+                onerror="this.src='https://source.unsplash.com/800x600/?europe,race,track'" loading="lazy">
               <div class="region-overlay-text">
                 <h3>Europe</h3>
                 <div class="region-count">10 Circuits</div>
-                <div class="region-list">Monaco • Silverstone • Spa • Monza • Zandvoort • Imola • Barcelona • Red Bull Ring • Hungaroring • Baku</div>
+                <div class="region-list">Monaco • Silverstone • Spa • Monza • Zandvoort • Imola • Barcelona • Red Bull
+                  Ring • Hungaroring • Baku</div>
               </div>
             </div>
             <div class="region-meta">
@@ -61,7 +70,8 @@
           <!-- Asia & Middle East -->
           <article class="region-card" role="button" tabindex="0" aria-label="Asia and Middle East circuits">
             <div class="region-image">
-              <img src="images/regions/asia_middle_east.jpg" alt="Asia and Middle East circuits photo" onerror="this.src='https://source.unsplash.com/800x600/?asia,grandprix,track'">
+              <img src="images/regions/asia_middle_east.jpg" alt="Asia and Middle East circuits photo"
+                onerror="this.src='https://source.unsplash.com/800x600/?asia,grandprix,track'" loading="lazy">
               <div class="region-overlay-text">
                 <h3>Asia & Middle East</h3>
                 <div class="region-count">7 Circuits</div>
@@ -76,7 +86,8 @@
           <!-- Americas -->
           <article class="region-card" role="button" tabindex="0" aria-label="Americas circuits">
             <div class="region-image">
-              <img src="images/regions/america.webp" alt="Americas circuits photo" onerror="this.src='https://source.unsplash.com/800x600/?america,grandprix,track'">
+              <img src="images/regions/america.webp" alt="Americas circuits photo"
+                onerror="this.src='https://source.unsplash.com/800x600/?america,grandprix,track'" loading="lazy">
               <div class="region-overlay-text">
                 <h3>Americas</h3>
                 <div class="region-count">5 Circuits</div>
@@ -91,7 +102,8 @@
           <!-- Oceania -->
           <article class="region-card" role="button" tabindex="0" aria-label="Oceania circuits">
             <div class="region-image">
-              <img src="images/regions/australia.webp" alt="Oceania circuits photo" onerror="this.src='https://source.unsplash.com/800x600/?australia,grandprix,track'">
+              <img src="images/regions/australia.webp" alt="Oceania circuits photo"
+                onerror="this.src='https://source.unsplash.com/800x600/?australia,grandprix,track'" loading="lazy">
               <div class="region-overlay-text">
                 <h3>Oceania</h3>
                 <div class="region-count">1 Circuit</div>
@@ -178,4 +190,5 @@
   <script src="Script/common.js"></script>
   <script src="Script/navbar.js"></script>
 </body>
+
 </html>
