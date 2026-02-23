@@ -149,3 +149,56 @@
     bottom: 20px;
   }
 }
+
+
+/* =========================================================
+   Subtle Floating Shortcut Button
+   ========================================================= */
+.floating-shortcut-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: rgba(20, 20, 24, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--muted);
+  padding: 8px 14px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  z-index: 9998; /* Just below the modal overlay */
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+.floating-shortcut-btn:hover {
+  background: rgba(30, 30, 35, 0.9);
+  border-color: var(--accent);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(225, 6, 0, 0.2);
+}
+
+.floating-shortcut-btn kbd {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+/* Hide the shortcut hint entirely on mobile, 
+   since mobile users don't have physical keyboards! */
+@media (max-width: 768px) {
+  .floating-shortcut-btn {
+    display: none;
+  }
+}

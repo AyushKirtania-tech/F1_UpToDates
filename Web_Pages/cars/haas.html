@@ -4,13 +4,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>VF-25 — MoneyGram Haas F1 Team</title>
+  <title>VF-26 — MoneyGram Haas F1 Team</title>
   <meta name="description"
-    content="Explore the Haas VF-25 F1 car specifications, performance, and technical details for the 2025 season." />
-  <meta name="keywords" content="F1, Haas, VF-25, Formula 1, car specifications, 2025" />
+    content="Explore the Haas VF-26 F1 car specifications, performance, and technical details for the 2026 season." />
+  <meta name="keywords" content="F1, Haas, VF-26, Formula 1, car specifications, 2026, Toyota Gazoo Racing, Ferrari" />
 
   <link rel="stylesheet" href="../Styles/teams.css">
   <style>
+    /* small layout fixes to prevent stray gaps */
     *,
     *::before,
     *::after {
@@ -40,7 +41,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: url('../images/cars/haas.jpg') center/cover;
+      background: url('../images/cars/haas.avif') center/cover;
       opacity: 0.6;
       z-index: 0;
     }
@@ -231,7 +232,7 @@
       display: block;
       font-size: 2.5rem;
       font-weight: 900;
-      color: #b6babd;
+      color: #ed1c24;
       margin-bottom: 8px;
     }
 
@@ -254,13 +255,13 @@
       margin: 24px 0;
       padding: 20px;
       background: rgba(255, 255, 255, 0.02);
-      border-left: 4px solid #b6babd;
+      border-left: 4px solid #ed1c24;
       border-radius: 8px;
     }
 
     .tech-detail h4 {
       margin: 0 0 12px;
-      color: #b6babd;
+      color: #ed1c24;
       font-size: 1.1rem;
       text-transform: uppercase;
     }
@@ -289,19 +290,24 @@
 
     .driver-card-large:hover {
       transform: translateY(-8px);
-      border-color: #b6babd;
+      border-color: #ed1c24;
     }
 
-    .driver-image-wrap {
-      height: 250px;
-      overflow: hidden;
-      background: linear-gradient(135deg, rgba(182, 186, 189, 0.2), rgba(237, 28, 36, 0.1));
+    .driver-image-wrap { 
+      height: 250px; 
+      overflow: hidden; 
+      background: linear-gradient(135deg, rgba(237, 28, 36, 0.2), rgba(182, 186, 189, 0.2)); 
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
     }
 
-    .driver-image-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .driver-image-wrap img { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: contain; 
+      object-position: bottom center; 
+      padding-top: 15px; 
     }
 
     .driver-info {
@@ -317,8 +323,8 @@
     .driver-number {
       display: inline-block;
       padding: 4px 12px;
-      background: rgba(182, 186, 189, 0.2);
-      color: #b6babd;
+      background: rgba(237, 28, 36, 0.2);
+      color: #ed1c24;
       border-radius: 6px;
       font-weight: 900;
       margin-bottom: 12px;
@@ -362,27 +368,25 @@
       <span>←</span> Back
     </a>
 
-    <!-- Hero -->
     <header class="car-hero">
       <div class="car-hero-content">
-        <h1>VF-25</h1>
-        <p class="subtitle">MoneyGram Haas F1 Team 2025 Formula One Car</p>
+        <h1>VF-26</h1>
+        <p class="subtitle">MoneyGram Haas F1 Team 2026 Formula One Car</p>
       </div>
     </header>
 
-    <!-- Stats Highlight -->
     <div class="stat-highlight">
       <div class="stat-box">
-        <span class="stat-number">~1000</span>
+        <span class="stat-number">1000+</span>
         <span class="stat-text">Horsepower</span>
       </div>
       <div class="stat-box">
         <span class="stat-number">1.6L</span>
-        <span class="stat-text">V6 Turbo Hybrid</span>
+        <span class="stat-text">Ferrari V6 Hybrid</span>
       </div>
       <div class="stat-box">
-        <span class="stat-number">740</span>
-        <span class="stat-text">kg Minimum Weight</span>
+        <span class="stat-number">50%</span>
+        <span class="stat-text">Electric Power</span>
       </div>
       <div class="stat-box">
         <span class="stat-number">360+</span>
@@ -390,130 +394,102 @@
       </div>
     </div>
 
-    <!-- Main Content Grid -->
     <div class="content-grid">
       <div class="main-content">
         <h2 class="section-title">Overview</h2>
         <p style="color: #bdbdbd; line-height: 1.8; margin-bottom: 24px;">
-          The Haas VF-25 represents America's Formula One team's continued development as they establish themselves in the sport. Based in North Carolina with operations in the UK, this machine combines Ferrari power unit excellence with cost-effective engineering solutions. The VF-25 focuses on consistent point-scoring performances while managing budget constraints intelligently.
+          The Haas VF-26 represents a massive structural leap forward for America's Formula One team. Entering the new 2026 regulatory era, Haas combines their long-standing Ferrari power unit supply with a groundbreaking technical alliance with Toyota Gazoo Racing. This infusion of Japanese manufacturing and aerodynamic expertise elevates the VF-26 far beyond a traditional customer car, pushing the team to challenge the sharp end of the midfield.
         </p>
 
         <h2 class="section-title">Key Features</h2>
         <div class="feature-grid">
           <div class="feature-card">
-            <div class="feature-icon">⚡</div>
-            <h4>Ferrari Power Unit</h4>
-            <p>Latest specification 1.6L V6 turbocharged engine from Scuderia Ferrari, providing competitive power and proven reliability.</p>
+            <div class="feature-icon">🤝</div>
+            <h4>Toyota Alliance</h4>
+            <p>Leveraging Toyota Gazoo Racing's world-class design, manufacturing, and simulation capabilities to fast-track chassis development.</p>
           </div>
           <div class="feature-card">
-            <div class="feature-icon">🔧</div>
-            <h4>Efficient Operations</h4>
-            <p>Smart resource allocation maximizing performance within budget cap constraints through strategic partnerships.</p>
+            <div class="feature-icon">⚡</div>
+            <h4>Ferrari 2026 PU</h4>
+            <p>Utilizing Maranello's latest 2026-specification power unit, prioritizing the massive new 350kW electrical deployment system.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">💨</div>
-            <h4>Proven Aero Concepts</h4>
-            <p>Focused aerodynamic development building on established principles to deliver consistent downforce.</p>
+            <h4>Active Aerodynamics</h4>
+            <p>Implementing the mandatory 2026 active aero (X-Mode and Z-Mode) with crucial wind-tunnel input from Toyota's Cologne facility.</p>
           </div>
           <div class="feature-card">
-            <div class="feature-icon">🛑</div>
-            <h4>Reliability Focus</h4>
-            <p>Emphasis on finishing races and accumulating points through dependable mechanical performance.</p>
+            <div class="feature-icon">🌿</div>
+            <h4>Sustainable Racing</h4>
+            <p>Adapting to the new engine architecture requiring 100% sustainable fuels, achieving a perfect 50/50 power split between combustion and electrical energy.</p>
           </div>
         </div>
 
-        <h2 class="section-title">2025 Driver Lineup</h2>
+        <h2 class="section-title">2026 Driver Lineup</h2>
         <div class="drivers-showcase">
           <div class="driver-card-large">
             <div class="driver-image-wrap">
               <img src="../images/drivers/ocon.avif" alt="Esteban Ocon"
-                onerror="this.src='../images/team-fallback.jpg'">
+                onerror="this.src='../images/driver-fallback.jpg'">
             </div>
             <div class="driver-info">
               <span class="driver-number">#31</span>
               <h4>Esteban Ocon</h4>
-              <p style="color: #bdbdbd;">Race winner bringing valuable experience and technical expertise to lead Haas's development direction forward.</p>
+              <p style="color: #bdbdbd;">The experienced French Grand Prix winner acts as the crucial benchmark and team leader, spearheading the setup direction of the radically new VF-26.</p>
             </div>
           </div>
           <div class="driver-card-large">
             <div class="driver-image-wrap">
               <img src="../images/drivers/oliver.webp" alt="Oliver Bearman"
-                onerror="this.src='../images/team-fallback.jpg'">
+                onerror="this.src='../images/driver-fallback.jpg'">
             </div>
             <div class="driver-info">
               <span class="driver-number">#87</span>
               <h4>Oliver Bearman</h4>
-              <p style="color: #bdbdbd;">British rookie from Ferrari's junior program bringing fresh perspective and impressive junior series credentials.</p>
+              <p style="color: #bdbdbd;">The highly rated Ferrari junior enters his sophomore season, bringing vital youth and aggression as he continues to adapt to the pinnacle of motorsport.</p>
             </div>
           </div>
         </div>
       </div>
 
       <div class="sidebar">
-        <!-- Technical Specs -->
         <div class="specs-card">
           <h3>Technical Specifications</h3>
           <div class="spec-item">
             <span class="spec-label">Chassis</span>
-            <span class="spec-value">Carbon Fiber Monocoque</span>
+            <span class="spec-value">Haas/Dallara Monocoque</span>
           </div>
           <div class="spec-item">
             <span class="spec-label">Engine</span>
-            <span class="spec-value">Ferrari 1.6L V6 Turbo</span>
+            <span class="spec-value">Ferrari 1.6L V6 Hybrid</span>
           </div>
           <div class="spec-item">
             <span class="spec-label">Power Output</span>
-            <span class="spec-value">~1000 HP</span>
+            <span class="spec-value">1000+ HP Total</span>
           </div>
           <div class="spec-item">
-            <span class="spec-label">Energy Recovery</span>
-            <span class="spec-value">Dual MGU System</span>
+            <span class="spec-label">Electrical Power</span>
+            <span class="spec-value">350 kW (~470 HP)</span>
           </div>
           <div class="spec-item">
             <span class="spec-label">Transmission</span>
-            <span class="spec-value">8-Speed Sequential</span>
+            <span class="spec-value">Ferrari 8-Speed</span>
           </div>
           <div class="spec-item">
             <span class="spec-label">Weight</span>
-            <span class="spec-value">740 kg (min)</span>
+            <span class="spec-value">TBA (2026 Regs)</span>
           </div>
           <div class="spec-item">
-            <span class="spec-label">Fuel Capacity</span>
-            <span class="spec-value">110 kg (max)</span>
+            <span class="spec-label">Fuel</span>
+            <span class="spec-value">100% Sustainable</span>
           </div>
         </div>
 
-        <!-- Performance -->
-        <div class="specs-card">
-          <h3>Performance</h3>
-          <div class="spec-item">
-            <span class="spec-label">0-100 km/h</span>
-            <span class="spec-value">~2.5 seconds</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-label">0-200 km/h</span>
-            <span class="spec-value">~4.5 seconds</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-label">Top Speed</span>
-            <span class="spec-value">360+ km/h</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-label">Max RPM</span>
-            <span class="spec-value">15,000 RPM</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-label">Max Lateral G</span>
-            <span class="spec-value">6.5G</span>
-          </div>
-        </div>
-
-        <!-- 2025 Season Goals (dynamic) -->
         <div class="specs-card" id="season-goals-card">
-          <h3>2025 Season Goals</h3>
+          <h3>2026 Live Stats</h3>
           <div class="spec-item">
             <span class="spec-label">Target Position</span>
-            <span class="spec-value" id="target-position">Points Finish</span>
+            <span class="spec-value" id="target-position">Midfield Leaders</span>
           </div>
           <div class="spec-item">
             <span class="spec-label">Current Position</span>
@@ -533,94 +509,70 @@
           </div>
         </div>
 
-        <!-- Heritage -->
         <div class="specs-card">
-          <h3>Haas F1 Heritage</h3>
+          <h3>Team Information</h3>
           <div class="spec-item">
             <span class="spec-label">Team Debut</span>
             <span class="spec-value">2016</span>
           </div>
           <div class="spec-item">
-            <span class="spec-label">Best Finish</span>
-            <span class="spec-value">5th (2018)</span>
+            <span class="spec-label">New Era</span>
+            <span class="spec-value">2026 (Toyota Tie-up)</span>
           </div>
           <div class="spec-item">
-            <span class="spec-label">Country</span>
-            <span class="spec-value">USA</span>
+            <span class="spec-label">PU Supplier</span>
+            <span class="spec-value">Ferrari</span>
           </div>
           <div class="spec-item">
-            <span class="spec-label">Base</span>
-            <span class="spec-value">Kannapolis, NC</span>
+            <span class="spec-label">HQ</span>
+            <span class="spec-value">Kannapolis & Banbury</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Technical Deep Dive -->
     <section class="technical-section">
       <h2 class="section-title">Technical Deep Dive</h2>
 
       <div class="tech-detail">
-        <h4>🔋 Ferrari Power Unit Partnership</h4>
+        <h4>🔋 Toyota and Ferrari Synergy</h4>
         <p>
-          The VF-25 benefits from Haas's technical partnership with Ferrari, utilizing the latest specification 1.6-liter V6 turbocharged power unit. This customer relationship provides Haas with competitive power delivery and proven reliability, allowing the team to focus resources on chassis development and operations rather than power unit engineering.
+          The VF-26 represents a unique tripartite engineering effort. While Ferrari continues to supply the 2026 specification Power Unit, gearbox, and rear suspension hardware, the chassis and aerodynamic surfaces are heavily influenced by Haas's new technical partnership with Toyota Gazoo Racing. This allows Haas to tap into Toyota's vast manufacturing and carbon composite resources.
         </p>
       </div>
 
       <div class="tech-detail">
-        <h4>⚙️ Cost-Effective Development</h4>
+        <h4>⚙️ Adapting to the 2026 Dimensions</h4>
         <p>
-          Haas's approach emphasizes intelligent resource allocation within budget cap regulations. The team leverages strategic partnerships and focuses development efforts on high-impact areas. The VF-25's aerodynamic package builds on proven concepts with targeted improvements to floor efficiency and front-end balance for consistent performance.
-        </p>
-      </div>
-
-      <div class="tech-detail">
-        <h4>🏗️ Chassis Engineering</h4>
-        <p>
-          The carbon-fiber monocoque chassis meets FIA safety standards while achieving competitive weight targets. Haas focuses on fundamental mechanical performance and reliable component integration to ensure consistent race finishes. The chassis design prioritizes straightforward setup procedures and predictable handling characteristics.
-        </p>
-      </div>
-
-      <div class="tech-detail">
-        <h4>🛑 Operational Reliability</h4>
-        <p>
-          The VF-25 emphasizes mechanical reliability to maximize point-scoring opportunities. The braking system uses carbon-carbon discs with proven brake-by-wire technology. The team's operational philosophy focuses on executing clean race weekends with minimal errors to capitalize on midfield battles and strategic opportunities.
-        </p>
-      </div>
-
-      <div class="tech-detail">
-        <h4>🎯 Strategic Approach</h4>
-        <p>
-          Using the standardized FIA ECU, Haas optimizes software parameters for their Ferrari power unit. The team's race strategy focuses on tire management, smart pit stop timing, and maximizing points from every opportunity. Comprehensive data analysis supports continuous improvement throughout the season.
+          To meet the 2026 regulations, the VF-26 features a shorter wheelbase and narrower track width compared to its predecessor. With Toyota's simulator expertise in Cologne, the engineering team has focused on making the car highly predictable and mechanically compliant, compensating for the drastic drop in overall downforce dictated by the new FIA rulebook.
         </p>
       </div>
     </section>
 
-    <!-- Design Philosophy -->
     <section class="main-content" style="margin-top: 32px;">
       <h2 class="section-title">Design Philosophy</h2>
       <p style="color: #bdbdbd; line-height: 1.8; margin-bottom: 16px;">
-        Haas's design philosophy for the VF-25 centers on maximizing results within available resources. The team's approach focuses on three core principles:
+        Haas is no longer just surviving; they are building. The design philosophy for the VF-26 shifts away from simple parts-purchasing toward integrated technical collaboration:
       </p>
       <div class="feature-grid">
         <div class="feature-card">
           <div class="feature-icon">🎯</div>
-          <h4>Smart Partnerships</h4>
-          <p>Leveraging technical relationships to access competitive components and focus resources efficiently.</p>
+          <h4>In-House Expansion</h4>
+          <p>Gradually moving more component design and manufacturing in-house through the Toyota Gazoo Racing partnership.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">⚡</div>
-          <h4>Consistent Performance</h4>
-          <p>Building reliable machinery that delivers predictable results and accumulates championship points steadily.</p>
+          <h4>Driver-Focused Setup</h4>
+          <p>Providing Ocon and Bearman with a predictable, mechanically stable platform that gives them confidence in dirty air.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🏁</div>
-          <h4>Continuous Growth</h4>
-          <p>Developing organizational capability and technical understanding to progress up the competitive order.</p>
+          <h4>Upgrade Efficiency</h4>
+          <p>Improving the mid-season upgrade correlation from the wind tunnel to the track, historically a weak point for the team.</p>
         </div>
       </div>
       <p style="color: #bdbdbd; line-height: 1.8; margin-top: 24px;">
-        The VF-25 represents Haas's determination to establish themselves as consistent point scorers in Formula One. Carrying American racing spirit with MoneyGram backing, the team continues building toward long-term competitiveness in the world's premier motorsport championship.
+        The VF-26 is the most ambitious project in the history of the American squad. Backed by MoneyGram and bolstered by Japanese engineering might, Haas enters the 2026 season looking to permanently disrupt the established midfield hierarchy.
       </p>
     </section>
   </main>

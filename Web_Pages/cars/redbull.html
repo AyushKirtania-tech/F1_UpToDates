@@ -4,10 +4,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>RB20 — Oracle Red Bull Racing</title>
+  <title>RB22 — Oracle Red Bull Racing</title>
   <meta name="description"
-    content="Explore the Red Bull RB20 — technical specs, performance and technical details for the 2025 season." />
-  <meta name="keywords" content="F1, Red Bull, RB20, Formula 1, car specifications, 2025" />
+    content="Explore the Red Bull RB22 — technical specs, performance and technical details for the 2026 season." />
+  <meta name="keywords" content="F1, Red Bull, RB22, Formula 1, car specifications, 2026, Ford, Red Bull Powertrains, Max Verstappen" />
 
   <link rel="stylesheet" href="../Styles/teams.css">
   <style>
@@ -49,7 +49,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: url('../images/cars/redbull.webp') center/cover;
+      background: url('../images/cars/redbull.avif') center/cover;
       opacity: 0.8;
       z-index: 0;
       mix-blend-mode: overlay;
@@ -302,16 +302,22 @@
       border-color: var(--rb-mid);
     }
 
-    .driver-image-wrap {
-      height: 250px;
-      overflow: hidden;
-      background: linear-gradient(135deg, rgba(54, 113, 198, 0.08), rgba(6, 0, 239, 0.06));
+    /* UPDATED DRIVER IMAGE WRAP */
+    .driver-image-wrap { 
+      height: 250px; 
+      overflow: hidden; 
+      background: linear-gradient(135deg, rgba(6, 0, 239, 0.2), rgba(54, 113, 198, 0.4)); 
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
     }
 
-    .driver-image-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .driver-image-wrap img { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: contain; 
+      object-position: bottom center; 
+      padding-top: 15px; 
     }
 
     .driver-info {
@@ -374,27 +380,25 @@
     </a>
 
 
-    <!-- Hero -->
     <header class="car-hero">
       <div class="car-hero-content">
-        <h1>RB20</h1>
-        <p class="subtitle">Oracle Red Bull Racing — 2025 Formula One Car</p>
+        <h1>RB22</h1>
+        <p class="subtitle">Oracle Red Bull Racing — 2026 Formula One Works Entry</p>
       </div>
     </header>
 
-    <!-- Stats Highlight -->
     <div class="stat-highlight">
       <div class="stat-box">
-        <span class="stat-number">~1000</span>
+        <span class="stat-number">1000+</span>
         <span class="stat-text">Horsepower</span>
       </div>
       <div class="stat-box">
         <span class="stat-number">1.6L</span>
-        <span class="stat-text">V6 Turbo Hybrid</span>
+        <span class="stat-text">Ford V6 Hybrid</span>
       </div>
       <div class="stat-box">
-        <span class="stat-number">740</span>
-        <span class="stat-text">kg Minimum Weight</span>
+        <span class="stat-number">50%</span>
+        <span class="stat-text">Electric Power</span>
       </div>
       <div class="stat-box">
         <span class="stat-number">360+</span>
@@ -402,70 +406,60 @@
       </div>
     </div>
 
-    <!-- Main Content Grid -->
     <div class="content-grid">
       <div class="main-content">
         <h2 class="section-title">Overview</h2>
         <p style="color: var(--muted); line-height: 1.8; margin-bottom: 24px;">
-          The Red Bull RB20 represents the pinnacle of Adrian Newey's aerodynamic philosophy combined with Honda RBPT's
-          powerful hybrid technology. Built at Milton Keynes, the RB20 is designed to dominate across all circuit types
-          with exceptional downforce, mechanical grip, and power delivery. It continues Red Bull's winning legacy with
-          refined aero concepts and championship-winning DNA.
+          The Red Bull RB22 is arguably the most significant car in the team's history. Entering the 2026 regulatory era, Red Bull has officially become a fully independent works team, building their own engine in Milton Keynes through Red Bull Powertrains (RBPT) in partnership with Ford. Combining their legendary aerodynamic prowess with an entirely bespoke power unit, the RB22 aims to re-establish Red Bull dominance under the new active aero and 50/50 electrical regulations.
         </p>
 
         <h2 class="section-title">Key Features</h2>
         <div class="feature-grid">
           <div class="feature-card">
             <div class="feature-icon">⚡</div>
-            <h4>Honda RBPT Power Unit</h4>
-            <p>Advanced 1.6L V6 turbo hybrid from Red Bull Powertrains with Honda collaboration, delivering explosive
-              acceleration and race-winning reliability.</p>
+            <h4>RBPT-Ford Power Unit</h4>
+            <p>A ground-up 1.6L V6 turbo hybrid built entirely in Milton Keynes, with Ford providing deep technical expertise in battery cell and software development.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">🔧</div>
-            <h4>Aggressive Aero Package</h4>
-            <p>Sophisticated front wing design and optimized floor tunnels create massive downforce while maintaining
-              low-drag efficiency on straights.</p>
+            <h4>True Works Integration</h4>
+            <p>For the first time ever, Red Bull has total control over both the chassis and the engine, allowing for unparalleled packaging synergy.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">💨</div>
-            <h4>Ground Effect Mastery</h4>
-            <p>Maximized ground effect tunnels and diffuser design extract exceptional performance from underbody
-              aerodynamics for superior cornering speeds.</p>
+            <h4>Active Aerodynamics</h4>
+            <p>Mastering the new FIA rules with X-Mode (low drag) and Z-Mode (high downforce) shifting wings to maximize efficiency and minimize battery drain.</p>
           </div>
           <div class="feature-card">
-            <div class="feature-icon">🛞</div>
-            <h4>Advanced Suspension</h4>
-            <p>Sophisticated kinematic geometry and damper technology optimize tire temperature management and
-              mechanical grip across all conditions.</p>
+            <div class="feature-icon">🌿</div>
+            <h4>Sustainable Racing</h4>
+            <p>Fully compliant with the 2026 regulations, running exclusively on 100% sustainable "drop-in" fuels optimized specifically for the Ford combustion engine.</p>
           </div>
         </div>
 
-        <h2 class="section-title">2025 Driver Lineup</h2>
+        <h2 class="section-title">2026 Driver Lineup</h2>
         <div class="drivers-showcase">
           <div class="driver-card-large">
             <div class="driver-image-wrap">
               <img src="../images/drivers/max.jpg" alt="Max Verstappen"
-                onerror="this.src='../images/team-fallback.jpg'">
+                onerror="this.src='../images/driver-fallback.jpg'">
             </div>
             <div class="driver-info">
-              <span class="driver-number">#1</span>
+              <span class="driver-number">#3</span>
               <h4>Max Verstappen</h4>
-              <p style="color: var(--muted);">Three-time World Champion and Red Bull's superstar — combining raw speed,
-                tactical brilliance and relentless racecraft.</p>
+              <p style="color: var(--muted);">Reverting to his iconic #3, the multi-time World Champion continues to lead the team into the unknown territory of the new engine era.</p>
             </div>
           </div>
 
           <div class="driver-card-large">
             <div class="driver-image-wrap">
-              <img src="../images/drivers/yuki.webp" alt="Yuki Tsunoda"
-                onerror="this.src='../images/team-fallback.jpg'">
+              <img src="../images/drivers/isack.webp" alt="Isack Hadjar"
+                onerror="this.src='../images/driver-fallback.jpg'">
             </div>
             <div class="driver-info">
-              <span class="driver-number">#22</span>
-              <h4>Yuki Tsunoda</h4>
-              <p style="color: var(--muted);">Dynamic Japanese talent with exceptional feedback and raw pace — bringing
-                energy and precision to the team.</p>
+              <span class="driver-number">#6</span>
+              <h4>Isack Hadjar</h4>
+              <p style="color: var(--muted);">Promoted from the junior squad, the fiercely competitive Frenchman brings youth and raw speed to the most highly pressured seat in Formula 1.</p>
             </div>
           </div>
         </div>
@@ -473,41 +467,21 @@
       </div>
 
       <div class="sidebar">
-        <!-- Technical Specs -->
         <div class="specs-card">
           <h3>Technical Specifications</h3>
-          <div class="spec-item"><span class="spec-label">Chassis</span><span class="spec-value">Carbon Fiber
-              Monocoque</span></div>
-          <div class="spec-item"><span class="spec-label">Engine</span><span class="spec-value">Honda RBPT 1.6L V6
-              Turbo</span></div>
-          <div class="spec-item"><span class="spec-label">Power Output</span><span class="spec-value">~1000 HP</span>
-          </div>
-          <div class="spec-item"><span class="spec-label">Energy Recovery</span><span class="spec-value">Dual MGU
-              System</span></div>
-          <div class="spec-item"><span class="spec-label">Transmission</span><span class="spec-value">8-Speed
-              Sequential</span></div>
-          <div class="spec-item"><span class="spec-label">Weight</span><span class="spec-value">740 kg (min)</span>
-          </div>
-          <div class="spec-item"><span class="spec-label">Fuel Capacity</span><span class="spec-value">110 kg
-              (max)</span></div>
+          <div class="spec-item"><span class="spec-label">Chassis</span><span class="spec-value">Red Bull Monocoque</span></div>
+          <div class="spec-item"><span class="spec-label">Engine</span><span class="spec-value">RBPT-Ford 1.6L V6 Hybrid</span></div>
+          <div class="spec-item"><span class="spec-label">Power Output</span><span class="spec-value">1000+ HP Total</span></div>
+          <div class="spec-item"><span class="spec-label">Electrical Power</span><span class="spec-value">350 kW (~470 HP)</span></div>
+          <div class="spec-item"><span class="spec-label">Transmission</span><span class="spec-value">Red Bull 8-Speed</span></div>
+          <div class="spec-item"><span class="spec-label">Weight</span><span class="spec-value">TBA (2026 Regs)</span></div>
+          <div class="spec-item"><span class="spec-label">Fuel Capacity</span><span class="spec-value">100% Sustainable</span></div>
         </div>
 
-        <!-- Performance -->
-        <div class="specs-card">
-          <h3>Performance</h3>
-          <div class="spec-item"><span class="spec-label">0-100 km/h</span><span class="spec-value">~2.5 s</span></div>
-          <div class="spec-item"><span class="spec-label">0-200 km/h</span><span class="spec-value">~4.5 s</span></div>
-          <div class="spec-item"><span class="spec-label">Top Speed</span><span class="spec-value">360+ km/h</span>
-          </div>
-          <div class="spec-item"><span class="spec-label">Max RPM</span><span class="spec-value">15,000 RPM</span></div>
-          <div class="spec-item"><span class="spec-label">Max Lateral G</span><span class="spec-value">6.5G</span></div>
-        </div>
-
-        <!-- 2025 Season Goals (dynamic) -->
         <div class="specs-card" id="season-goals-card">
-          <h3>2025 Season Goals</h3>
+          <h3>2026 Live Stats</h3>
           <div class="spec-item"><span class="spec-label">Target Position</span><span class="spec-value"
-              id="target-position">1st</span></div>
+              id="target-position">Title Contender</span></div>
           <div class="spec-item"><span class="spec-label">Current Position</span><span class="spec-value"
               id="current-position">—</span></div>
           <div class="spec-item"><span class="spec-label">Points Scored</span><span class="spec-value"
@@ -518,91 +492,60 @@
               id="podiums-count">—</span></div>
         </div>
 
-        <!-- Heritage -->
         <div class="specs-card">
           <h3>Red Bull F1 Heritage</h3>
-          <div class="spec-item"><span class="spec-label">Constructors' Championships</span><span
-              class="spec-value">6</span></div>
-          <div class="spec-item"><span class="spec-label">Race Wins</span><span class="spec-value">120+</span></div>
-          <div class="spec-item"><span class="spec-label">Pole Positions</span><span class="spec-value">100+</span>
-          </div>
-          <div class="spec-item"><span class="spec-label">Base</span><span class="spec-value">Milton Keynes, United
-              Kingdom</span></div>
+          <div class="spec-item"><span class="spec-label">Constructors' Champs</span><span class="spec-value">6</span></div>
+          <div class="spec-item"><span class="spec-label">New Era</span><span class="spec-value">2026 (Ford Power)</span></div>
+          <div class="spec-item"><span class="spec-label">Chassis Base</span><span class="spec-value">Milton Keynes, UK</span></div>
+          <div class="spec-item"><span class="spec-label">Engine Base</span><span class="spec-value">Milton Keynes, UK</span></div>
         </div>
       </div>
     </div>
 
-    <!-- Technical Deep Dive -->
     <section class="technical-section">
       <h2 class="section-title">Technical Deep Dive</h2>
 
       <div class="tech-detail">
-        <h4>🔋 Power Unit & Hybrid System</h4>
+        <h4>🔋 Red Bull Powertrains (RBPT) x Ford</h4>
         <p>
-          The Honda RBPT power unit delivers exceptional performance through optimized combustion, advanced turbocharger
-          technology, and intelligent energy recovery. The MGU-K and MGU-H systems work seamlessly to maximize both
-          power delivery and fuel efficiency throughout race distance.
+          For the first time, the heart of the Red Bull beats in Milton Keynes. Taking on the massive challenge of building an F1 engine from scratch, Red Bull partnered with American giant Ford to tackle the 2026 hybrid rules. With the MGU-H banned, Ford's expertise was critical in developing the massively upscaled 350kW MGU-K and the sophisticated software required to deploy that electrical energy without "clipping" at high speeds.
         </p>
       </div>
 
       <div class="tech-detail">
-        <h4>⚙️ Aerodynamics & Downforce</h4>
+        <h4>⚙️ Aerodynamics & Active Balance</h4>
         <p>
-          The RB20's aerodynamic philosophy focuses on maximizing ground effect while maintaining excellent balance.
-          Advanced computational fluid dynamics and wind tunnel testing have refined the floor, diffuser, and wing
-          profiles to create a stable platform with exceptional cornering performance.
-        </p>
-      </div>
-
-      <div class="tech-detail">
-        <h4>🏗️ Chassis & Structure</h4>
-        <p>
-          The carbon fiber monocoque is engineered for maximum stiffness with minimal weight penalty. Strategic
-          placement of components and advanced composite materials ensure optimal weight distribution and structural
-          integrity under extreme racing loads.
-        </p>
-      </div>
-
-      <div class="tech-detail">
-        <h4>🎯 Electronics & Strategy</h4>
-        <p>
-          The RB20 utilizes sophisticated electronic control systems for energy deployment, brake balance, and
-          differential management. Real-time telemetry enables precise strategy calls and setup optimization throughout
-          practice, qualifying, and race sessions.
+          Adapting to a narrower chassis and shorter wheelbase, the RB22's aerodynamic philosophy centers on the flawless transition of active aero states. The team has heavily focused its wind tunnel time on ensuring that when the front and rear wings shift from the low-drag X-Mode to the high-downforce Z-Mode under braking, the center of pressure remains perfectly stable for Max Verstappen's aggressive corner-entry style.
         </p>
       </div>
     </section>
 
-    <!-- Design Philosophy -->
     <section class="main-content" style="margin-top: 32px;">
       <h2 class="section-title">Design Philosophy</h2>
       <p style="color: var(--muted); line-height: 1.8; margin-bottom: 16px;">
-        Red Bull's design philosophy for the RB20 centers on outright performance combined with operational flexibility.
-        The engineering team has focused on creating a car that excels in all conditions while providing drivers with
-        the confidence to push limits consistently.
+        Red Bull's design philosophy for the RB22 is one of total independence. No longer reliant on Renault or Honda, the team has absorbed immense risk for the ultimate reward: total synergy.
       </p>
 
       <div class="feature-grid">
         <div class="feature-card">
           <div class="feature-icon">🎯</div>
-          <h4>Peak Performance</h4>
-          <p>Uncompromising pursuit of maximum downforce and mechanical grip across all circuit configurations.</p>
+          <h4>Total Synergy</h4>
+          <p>Uncompromising packaging where the chassis designers and the engine builders are working under the exact same roof.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">⚡</div>
-          <h4>Efficiency</h4>
-          <p>Optimized drag characteristics and energy management systems ensure competitive straight-line speed.</p>
+          <h4>Electrical Efficiency</h4>
+          <p>Maximizing kinetic energy recovery to feed the massive new battery requirements of the 2026 regulations.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🏁</div>
-          <h4>Consistency</h4>
-          <p>Robust design architecture allows predictable development and reliable performance race after race.</p>
+          <h4>Agile Architecture</h4>
+          <p>Creating a mechanically compliant car that thrives in low-speed traction zones, compensating for the global reduction in overall downforce.</p>
         </div>
       </div>
 
       <p style="color: var(--muted); line-height: 1.8; margin-top: 24px;">
-        With championship-winning experience and cutting-edge technology, the RB20 is Red Bull Racing's weapon to defend
-        their titles and dominate the 2025 season.
+        With independence comes pressure. The RB22, draped in its iconic matte blue, yellow, and red, is Red Bull's ultimate statement: proving they can win entirely on their own terms.
       </p>
     </section>
 
@@ -612,18 +555,15 @@
   <script defer src="../Script/common.js"></script>
 
   <script>
-    // --- Dynamic Season Stats (wins/podiums/current position) from API ---
     (function () {
       const API_BASE = 'https://api.jolpi.ca/ergast/f1';
-      const constructorId = 'red_bull'; // page constructor id
+      const constructorId = 'red_bull'; 
 
-      // DOM elements to update
       const elCurrentPos = document.getElementById('current-position');
       const elPoints = document.getElementById('points-scored');
       const elWins = document.getElementById('wins-count');
       const elPodiums = document.getElementById('podiums-count');
 
-      // show loading state
       if (elCurrentPos) elCurrentPos.textContent = 'Loading…';
       if (elPoints) elPoints.textContent = 'Loading…';
       if (elWins) elWins.textContent = 'Loading…';
@@ -637,7 +577,6 @@
 
       async function loadSeasonStats() {
         try {
-          // 1) Constructor standings for current position & points
           const standingsUrl = `${API_BASE}/current/constructorStandings.json`;
           const standingsJson = await fetchJson(standingsUrl);
           const standingsLists = standingsJson?.MRData?.StandingsTable?.StandingsLists || [];
@@ -653,15 +592,12 @@
             } else {
               if (elCurrentPos) elCurrentPos.textContent = '—';
               if (elPoints) elPoints.textContent = '—';
-              console.warn('Constructor standing not found for', constructorId);
             }
           } else {
             if (elCurrentPos) elCurrentPos.textContent = '—';
             if (elPoints) elPoints.textContent = '—';
-            console.warn('No standings data');
           }
 
-          // 2) Current season race results to compute wins & podiums
           const resultsUrl = `${API_BASE}/current/results.json?limit=1000`;
           const resultsJson = await fetchJson(resultsUrl);
           const races = resultsJson?.MRData?.RaceTable?.Races || [];
@@ -678,7 +614,7 @@
                   if (pos === 1) wins += 1;
                   if (pos >= 1 && pos <= 3) podiums += 1;
                 }
-                break; // found constructor entry for this race
+                break; 
               }
             }
           }
@@ -695,7 +631,6 @@
         }
       }
 
-      // run on DOM ready
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', loadSeasonStats);
       } else {
@@ -703,27 +638,6 @@
       }
     })();
 
-    // Load navbar and footer
-    async function includeHTML(id, path) {
-      const container = document.getElementById(id);
-      if (!container) return;
-      try {
-        const resp = await fetch(path);
-        if (!resp.ok) throw new Error('Not found');
-        const html = await resp.text();
-        container.innerHTML = html;
-      } catch (err) {
-        console.warn(`Could not load ${path}`);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', async () => {
-      await Promise.all([
-        includeHTML('footer', '../footer.html')
-      ]);
-    });
-
-    // Load footer
     async function includeHTML(id, path) {
       const container = document.getElementById(id);
       if (!container) return;
@@ -745,13 +659,9 @@
 
     document.getElementById("go-back").addEventListener("click", function (e) {
       e.preventDefault();
-
-      // If user has a referrer (came from another page)
       if (document.referrer && document.referrer !== window.location.href) {
-        // Go back in history
         window.history.back();
       } else {
-        // Otherwise, fallback to teams page
         window.location.href = "../teams.html";
       }
     });

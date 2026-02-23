@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Schedule - F1 Racing</title>
+  <title>2026 Schedule - F1 Racing</title>
   <link rel="stylesheet" href="Styles/style.css">
   <link rel="stylesheet" href="Styles/navbar.css">
   <link rel="stylesheet" href="Styles/schedule.css">
@@ -14,17 +14,15 @@
   <link rel="stylesheet" href="Styles/global-search.css">
   <script defer src="Script/global-search.js"></script>
   <meta name="description"
-    content="Complete Formula 1 race schedule with practice sessions, qualifying, and race times">
+    content="Complete 2026 Formula 1 race schedule with practice sessions, qualifying, and race times">
 </head>
 
 <body>
-  <!-- Navbar placeholder -->
   <div id="navbar"></div>
 
   <main class="schedule-main">
-    <!-- Hero Section -->
     <section class="schedule-hero">
-      <h1>🏁 <span id="season-title">2024 F1 Race Calendar</span></h1>
+      <h1>🏁 <span id="season-title">2026 F1 Race Calendar</span></h1>
       <p>Complete schedule with practice sessions, qualifying, and race times</p>
 
       <div class="schedule-filters">
@@ -35,33 +33,27 @@
       </div>
     </section>
 
-    <!-- Notice/Loading State -->
     <div id="loading" class="loading">
       <div class="spinner"></div>
-      <p>Loading race schedule...</p>
+      <p>Loading 2026 race schedule...</p>
     </div>
 
     <div id="notice" class="notice" aria-live="polite"></div>
 
-    <!-- Schedule Container -->
     <section id="schedule" class="schedule-section">
       <div id="schedule-container" class="schedule-container">
-        <!-- Race cards will be dynamically inserted here -->
-      </div>
+        </div>
     </section>
 
-
-    <!-- Season Overview & Quick Links -->
     <section class="schedule-cta">
       <div class="cta-content">
-        <h2>🏆 2025 Season Overview</h2>
-        <p>Explore drivers, teams, circuits, and race results from this season</p>
+        <h2>🏆 2026 Season Overview</h2>
+        <p>Explore drivers, teams, circuits, and race results from the new era</p>
 
-        <!-- Season Stats -->
         <div class="season-highlights">
           <div class="highlight-stat">
             <span class="highlight-icon">🏁</span>
-            <span class="highlight-value" id="season-races">24</span>
+            <span class="highlight-value" id="total-races">24</span>
             <span class="highlight-label">Total Races</span>
           </div>
           <div class="highlight-stat">
@@ -76,18 +68,17 @@
           </div>
         </div>
 
-        <!-- Quick Navigation -->
         <div class="quick-nav-grid">
           <a href="drivers.html" class="quick-nav-card">
             <div class="nav-icon">👤</div>
             <h3>Drivers</h3>
-            <p>Meet the 2025 grid</p>
+            <p>Meet the 2026 grid</p>
           </a>
 
           <a href="teams.html" class="quick-nav-card">
             <div class="nav-icon">🏎️</div>
             <h3>Teams</h3>
-            <p>Constructor standings</p>
+            <p>11 Constructors</p>
           </a>
 
           <a href="circuits.html" class="quick-nav-card">
@@ -105,12 +96,13 @@
       </div>
     </section>
 
-    <!-- Footer placeholder -->
-    <div id="footer"></div>
+  </main>
+  
+  <div id="footer"></div>
 
-    <script src="Script/schedule.js"></script>
-    <script src="Script/common.js"></script>
-    <script src="Script/navbar.js"></script>
+  <script src="Script/schedule.js"></script>
+  <script src="Script/common.js"></script>
+  <script src="Script/navbar.js"></script>
 </body>
 
 </html>

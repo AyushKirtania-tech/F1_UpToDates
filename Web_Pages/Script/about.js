@@ -1,29 +1,36 @@
-// about.js
+// Script/about.js - Smooth Scroll Animations
 
-// Reveal animation on scroll
-function revealOnScroll() {
-  const reveals = document.querySelectorAll(".reveal");
+document.addEventListener('DOMContentLoaded', () => {
+    // Select all elements with the 'fade-in' class
+    const faders = document.querySelectorAll('.fade-in');
 
-  for (let i = 0; i < reveals.length; i++) {
-    const windowHeight = window.innerHeight;
-    const elementTop = reveals[i].getBoundingClientRect().top;
-    const elementVisible = 100; // adjust trigger point
+    // Create an Intersection Observer
+    const appearOptions = {
+        threshold: 0.15, // Trigger when 15% of the element is visible
+        rootMargin: "0px 0px -50px 0px" // Triggers slightly before it hits the very bottom
+    };
 
-    if (elementTop < windowHeight - elementVisible) {
-      reveals[i].classList.add("visible");
-    } else {
-      reveals[i].classList.remove("visible");
-    }
-  }
-}
+    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+                return;
+            } else {
+                // Add the 'visible' class to trigger CSS animation
+                entry.target.classList.add('visible');
+                // Stop observing once it has animated in
+                observer.unobserve(entry.target);
+            }
+        });
+    }, appearOptions);
 
-window.addEventListener("scroll", revealOnScroll);
-window.addEventListener("load", revealOnScroll);
-
-// Set dynamic current year in footer
-document.addEventListener("DOMContentLoaded", () => {
-  const yearSpan = document.getElementById("currentYear");
-  if (yearSpan) {
-    yearSpan.textContent = new Date().getFullYear();
-  }
+    // Apply observer to each fader element
+    faders.forEach(fader => {
+        appearOnScroll.observe(fader);
+    });
+    
+    // Quick load for the hero section so it doesn't wait for scroll
+    setTimeout(() => {
+        const hero = document.querySelector('.about-hero.fade-in');
+        if (hero) hero.classList.add('visible');
+    }, 100);
 });

@@ -367,6 +367,51 @@ body::before {
   text-transform: uppercase;
 }
 
+/* TEAM BACKGROUNDS */
+.team-card.mercedes { background-image: url("../images/teams/merce.jpg"); }
+.team-card.redbull { background-image: url("../images/teams/redbull.jpg"); }
+.team-card.ferrari { background-image: url("../images/teams/ferrari.jpg"); }
+.team-card.mclaren { background-image: url("../images/teams/mclaren.jpg"); }
+.team-card.alpine { background-image: url("../images/teams/alpine.jpg"); }
+.team-card.astonmartin { background-image: url("../images/teams/aston.jpg"); }
+.team-card.williams { background-image: url("../images/teams/williams.jpeg"); }
+.team-card.sauber { background-image: url("../images/teams/sauber.webp"); }
+.team-card.haas { background-image: url("../images/teams/haas.webp"); }
+.team-card.rb { background-image: url("../images/teams/racingbulls.webp"); }
+.team-card.cadillac { background-image: url("../images/teams/cadillac.jpg"); } /* Fallback image just in case */
+
+/* ==========================================================================
+   CADILLAC LIVERY FIX: Forces dark headers and crisp white text
+   ========================================================================== */
+.team-card.cadillac .team-header,
+[data-team="cadillac"] .team-header,
+.team-modal.cadillac .team-header,
+.team-modal.cadillac .modal-header,
+div[data-team="cadillac"] > div:first-child,
+div[style*="background: #e0e0e0;"],
+div[style*="background: rgb(224, 224, 224)"] {
+  background: linear-gradient(135deg, #111111, #000000) !important;
+  color: #ffffff !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.team-card.cadillac .team-header h2,
+.team-card.cadillac .team-header p,
+.team-card.cadillac .championship-position,
+.team-card.cadillac .team-base,
+[data-team="cadillac"] .team-header h2,
+[data-team="cadillac"] .team-header p,
+[data-team="cadillac"] .team-base,
+[data-team="cadillac"] .championship-position,
+div[data-team="cadillac"] > div:first-child h2,
+div[data-team="cadillac"] > div:first-child p,
+div[data-team="cadillac"] > div:first-child span,
+div[style*="background: #e0e0e0;"] h2,
+div[style*="background: #e0e0e0;"] p,
+div[style*="background: #e0e0e0;"] span {
+  color: #ffffff !important;
+}
+
 /* CHAMPIONSHIP TABLE */
 .championship-section {
   margin: 72px 0
@@ -409,45 +454,17 @@ body::before {
   margin-right: 8px
 }
 
-.team-color.mclaren {
-  background: linear-gradient(135deg, #ff8c00, #ff6600)
-}
-
-.team-color.ferrari {
-  background: linear-gradient(135deg, #dc2626, #991b1b)
-}
-
-.team-color.mercedes {
-  background: linear-gradient(135deg, #00d2be, #00a19c)
-}
-
-.team-color.redbull {
-  background: linear-gradient(135deg, #1e3a8a, #3730a3)
-}
-
-.team-color.williams {
-  background: linear-gradient(135deg, #00a0de, #0073a3)
-}
-
-.team-color.sauber {
-  background: linear-gradient(135deg, #52b700, #3d8a00)
-}
-
-.team-color.haas {
-  background: linear-gradient(135deg, #ffffff, #b91c1c)
-}
-
-.team-color.alpine {
-  background: linear-gradient(135deg, #0084c7, #005a8f)
-}
-
-.team-color.racingbulls {
-  background: linear-gradient(135deg, #9b2c2c, #3730a3)
-}
-
-.team-color.astonmartin {
-  background: linear-gradient(135deg, #006f62, #004d45)
-}
+.team-color.mclaren { background: linear-gradient(135deg, #ff8c00, #ff6600) }
+.team-color.ferrari { background: linear-gradient(135deg, #dc2626, #991b1b) }
+.team-color.mercedes { background: linear-gradient(135deg, #00d2be, #00a19c) }
+.team-color.redbull { background: linear-gradient(135deg, #1e3a8a, #3730a3) }
+.team-color.williams { background: linear-gradient(135deg, #00a0de, #0073a3) }
+.team-color.sauber { background: linear-gradient(135deg, #52b700, #3d8a00) }
+.team-color.haas { background: linear-gradient(135deg, #ffffff, #b91c1c) }
+.team-color.alpine { background: linear-gradient(135deg, #0084c7, #005a8f) }
+.team-color.racingbulls { background: linear-gradient(135deg, #9b2c2c, #3730a3) }
+.team-color.astonmartin { background: linear-gradient(135deg, #006f62, #004d45) }
+.team-color.cadillac { background: linear-gradient(135deg, #ffffff, #888888) } /* Cadillac chip */
 
 /* reveal animation */
 .reveal {
@@ -782,6 +799,35 @@ body::before {
   }
 }
 
+footer {
+  margin-top: 80px;
+  padding: 40px 24px;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(15, 15, 15, 0.8));
+  border-top: 3px solid var(--accent);
+  color: var(--muted);
+}
+
+.footer-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.socials a {
+  color: var(--muted);
+  text-decoration: none;
+  margin: 0 8px;
+  transition: color 0.3s ease;
+}
+
+.socials a:hover {
+  color: var(--accent);
+}
+
 /* Know The Car Button */
 .modal-learn-more {
   display: inline-flex;
@@ -981,118 +1027,6 @@ body::before {
   }
 }
 
-.hero {
-  max-width: 1200px;
-  margin: 40px auto;
-  display: grid;
-  grid-template-columns: 1fr 400px;
-  gap: 40px;
-  padding: 0 24px;
-}
-
-.hero-left {
-  background: var(--card);
-  border-radius: 16px;
-  padding: 32px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: var(--shadow);
-}
-
-.hero h2 {
-  font-size: 2.5rem;
-  font-weight: 900;
-  margin-bottom: 16px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.lead {
-  color: var(--muted);
-  font-size: 1.1rem;
-  margin-bottom: 24px;
-}
-
-.hero-ctas {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 32px;
-  flex-wrap: wrap;
-}
-
-footer {
-  margin-top: 80px;
-  padding: 40px 24px;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(15, 15, 15, 0.8));
-  border-top: 3px solid var(--accent);
-  color: var(--muted);
-}
-
-.footer-grid {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.socials a {
-  color: var(--muted);
-  text-decoration: none;
-  margin: 0 8px;
-  transition: color 0.3s ease;
-}
-
-.socials a:hover {
-  color: var(--accent);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .header-inner {
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .main-nav ul {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-  }
-
-  .hero {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-
-  .hero-right {
-    order: -1;
-  }
-
-  .hero h2 {
-    font-size: 2rem;
-  }
-
-  .countdown {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .f1-stats {
-    grid-template-columns: 1fr;
-  }
-
-  .teams-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  }
-
-  .drivers-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* Quick link buttons */
 .btn {
   background: transparent;
@@ -1142,5 +1076,42 @@ footer {
   .team-header > div:last-child a.team-results-link {
     padding: 6px 8px;
     font-size: 0.85rem;
+  }
+}
+
+
+/* =========================================================
+   EDGE-TO-EDGE OVERRIDE FOR TEAMS & DRIVERS
+   ========================================================= */
+
+/* Override the old 1200px container variable */
+:root {
+  --container: 100% !important;
+}
+
+.teams-main, 
+.drivers-main, 
+.container {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Ensure grids expand to fill the newly available space */
+.teams-grid,
+.drivers-grid {
+  width: 100%;
+}
+
+/* Shrink side padding on mobile screens */
+@media (max-width: 768px) {
+  .teams-main, 
+  .drivers-main, 
+  .container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
   }
 }

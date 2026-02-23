@@ -4,10 +4,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ferrari SF-25 — F1 Racing</title>
+  <title>SF-26 — Scuderia Ferrari F1 Team</title>
   <meta name="description"
-    content="Explore the Ferrari SF-25 F1 car specifications, performance, and technical details for the 2025 season." />
-  <meta name="keywords" content="F1, Ferrari, SF-25, Formula 1, car specifications, 2025" />
+    content="Explore the Ferrari SF-26 F1 car specifications, performance, and technical details for the 2026 season." />
+  <meta name="keywords" content="F1, Ferrari, SF-26, Formula 1, car specifications, 2026, Lewis Hamilton, Charles Leclerc" />
 
   <link rel="stylesheet" href="../Styles/teams.css">
   <style>
@@ -104,7 +104,6 @@
       gap: 32px;
       margin-bottom: 48px;
       align-items: start;
-      /* keep both columns top-aligned to avoid vertical gap */
     }
 
     .main-content {
@@ -119,7 +118,6 @@
       flex-direction: column;
       gap: 24px;
       align-self: start;
-      /* ensure sidebar starts at same vertical position as main column */
     }
 
     .specs-card {
@@ -295,16 +293,22 @@
       border-color: #dc2626;
     }
 
-    .driver-image-wrap {
-      height: 250px;
-      overflow: hidden;
-      background: linear-gradient(135deg, rgba(220, 38, 38, 0.2), rgba(153, 27, 27, 0.2));
+    /* UPDATED DRIVER IMAGE WRAP */
+    .driver-image-wrap { 
+      height: 250px; 
+      overflow: hidden; 
+      background: linear-gradient(135deg, rgba(220, 38, 38, 0.2), rgba(153, 27, 27, 0.4)); 
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
     }
 
-    .driver-image-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .driver-image-wrap img { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: contain; 
+      object-position: bottom center; 
+      padding-top: 15px; 
     }
 
     .driver-info {
@@ -365,28 +369,25 @@
       <span>←</span> Back
     </a>
 
-
-    <!-- Hero -->
     <header class="car-hero">
       <div class="car-hero-content">
-        <h1>SF-25</h1>
-        <p class="subtitle">Scuderia Ferrari 2025 Formula One Car</p>
+        <h1>SF-26</h1>
+        <p class="subtitle">Scuderia Ferrari 2026 Formula One Works Entry</p>
       </div>
     </header>
 
-    <!-- Stats Highlight -->
     <div class="stat-highlight">
       <div class="stat-box">
-        <span class="stat-number">~1000</span>
+        <span class="stat-number">1000+</span>
         <span class="stat-text">Horsepower</span>
       </div>
       <div class="stat-box">
         <span class="stat-number">1.6L</span>
-        <span class="stat-text">V6 Turbo Hybrid</span>
+        <span class="stat-text">Ferrari V6 Hybrid</span>
       </div>
       <div class="stat-box">
-        <span class="stat-number">740</span>
-        <span class="stat-text">kg Minimum Weight</span>
+        <span class="stat-number">50%</span>
+        <span class="stat-text">Electric Power</span>
       </div>
       <div class="stat-box">
         <span class="stat-number">360+</span>
@@ -394,140 +395,102 @@
       </div>
     </div>
 
-    <!-- Main Content Grid -->
     <div class="content-grid">
       <div class="main-content">
         <h2 class="section-title">Overview</h2>
         <p style="color: #bdbdbd; line-height: 1.8; margin-bottom: 24px;">
-          The Ferrari SF-25 represents a complete evolution in Ferrari's Formula One engineering philosophy. Designed to
-          compete at the highest level in the 2025 World Championship, this machine combines cutting-edge aerodynamics,
-          advanced hybrid power unit technology, and the legendary Prancing Horse racing spirit. With significant
-          changes from its predecessor, the SF-25 showcases Ferrari's commitment to returning to championship-winning
-          form.
+          The Ferrari SF-26 represents Maranello's aggressive attack on the new 2026 Formula 1 regulations. Built to accommodate the most sweeping aerodynamic and powertrain changes in a decade, this entirely new chassis brings the iconic Prancing Horse into the future. Tasked with developing this radical new machine is arguably the strongest driver pairing in F1 history: Charles Leclerc and seven-time World Champion Lewis Hamilton.
         </p>
 
         <h2 class="section-title">Key Features</h2>
         <div class="feature-grid">
           <div class="feature-card">
             <div class="feature-icon">⚡</div>
-            <h4>Hybrid Power Unit</h4>
-            <p>Advanced 1.6L V6 turbocharged engine paired with dual MGU systems delivering approximately 1,000
-              horsepower.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">🔧</div>
-            <h4>Carbon Fiber Chassis</h4>
-            <p>Lightweight monocoque construction using carbon-fiber composite honeycomb structures for maximum rigidity
-              and safety.</p>
+            <h4>2026 Power Unit</h4>
+            <p>Maranello's bespoke 1.6L V6 turbocharged engine, shedding the MGU-H in favor of a vastly expanded 350kW MGU-K system.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">💨</div>
-            <h4>Advanced Aerodynamics</h4>
-            <p>Completely redesigned aero package with optimized front wing, floor, and diffuser configurations for
-              enhanced downforce.</p>
+            <h4>Active Aerodynamics</h4>
+            <p>Pioneering the new FIA-mandated X-Mode (low drag) and Z-Mode (high downforce) shifting front and rear wing profiles.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🌿</div>
+            <h4>Sustainable Racing</h4>
+            <p>Running entirely on advanced 100% sustainable "drop-in" fuel, developed intimately alongside Ferrari's fuel partners.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">🛑</div>
-            <h4>Brembo Braking</h4>
-            <p>Carbon self-ventilated disc brakes with electronically controlled hydraulic system for precise stopping
-              power.</p>
+            <h4>Nimble Architecture</h4>
+            <p>Capitalizing on the shorter wheelbase and narrower chassis dimensions mandated for 2026 to improve overall agility.</p>
           </div>
         </div>
 
-        <h2 class="section-title">2025 Driver Lineup</h2>
+        <h2 class="section-title">2026 Driver Lineup</h2>
         <div class="drivers-showcase">
           <div class="driver-card-large">
             <div class="driver-image-wrap">
               <img src="../images/drivers/leclerc.jpg" alt="Charles Leclerc"
-                onerror="this.src='../images/team-fallback.jpg'">
+                onerror="this.src='../images/driver-fallback.jpg'">
             </div>
             <div class="driver-info">
               <span class="driver-number">#16</span>
               <h4>Charles Leclerc</h4>
-              <p style="color: #bdbdbd;">The Monegasque talent continues to lead Ferrari's charge with speed,
-                consistency, and racecraft honed over multiple seasons with the team.</p>
+              <p style="color: #bdbdbd;">The Monegasque Prince leads his beloved Ferrari into the new era, his aggressive driving style perfectly adapted to the agile 2026 chassis.</p>
             </div>
           </div>
           <div class="driver-card-large">
             <div class="driver-image-wrap">
               <img src="../images/drivers/lewis.jpg" alt="Lewis Hamilton"
-                onerror="this.src='../images/team-fallback.jpg'">
+                onerror="this.src='../images/driver-fallback.jpg'">
             </div>
             <div class="driver-info">
               <span class="driver-number">#44</span>
               <h4>Lewis Hamilton</h4>
-              <p style="color: #bdbdbd;">The seven-time World Champion joins Ferrari in 2025, bringing championship
-                experience and legendary skill to the Prancing Horse.</p>
+              <p style="color: #bdbdbd;">Now fully integrated into Maranello, the seven-time champion's unparalleled development experience is critical in mastering the radical 2026 regulations.</p>
             </div>
           </div>
         </div>
       </div>
 
       <div class="sidebar">
-        <!-- Technical Specs -->
         <div class="specs-card">
           <h3>Technical Specifications</h3>
           <div class="spec-item">
             <span class="spec-label">Chassis</span>
-            <span class="spec-value">Carbon Fiber Monocoque</span>
+            <span class="spec-value">Ferrari Carbon Monocoque</span>
           </div>
           <div class="spec-item">
             <span class="spec-label">Engine</span>
-            <span class="spec-value">Ferrari 1.6L V6 Turbo</span>
+            <span class="spec-value">Ferrari 1.6L V6 Hybrid</span>
           </div>
           <div class="spec-item">
             <span class="spec-label">Power Output</span>
-            <span class="spec-value">~1000 HP</span>
+            <span class="spec-value">1000+ HP Total</span>
           </div>
           <div class="spec-item">
-            <span class="spec-label">Energy Recovery</span>
-            <span class="spec-value">Dual MGU System</span>
+            <span class="spec-label">Electrical Power</span>
+            <span class="spec-value">350 kW (~470 HP)</span>
           </div>
           <div class="spec-item">
             <span class="spec-label">Transmission</span>
-            <span class="spec-value">8-Speed Sequential</span>
+            <span class="spec-value">Ferrari 8-Speed</span>
           </div>
           <div class="spec-item">
             <span class="spec-label">Weight</span>
-            <span class="spec-value">740 kg (min)</span>
+            <span class="spec-value">TBA (2026 Regs)</span>
           </div>
           <div class="spec-item">
-            <span class="spec-label">Fuel Capacity</span>
-            <span class="spec-value">110 kg (max)</span>
+            <span class="spec-label">Fuel</span>
+            <span class="spec-value">100% Sustainable</span>
           </div>
         </div>
 
-        <!-- Performance -->
-        <div class="specs-card">
-          <h3>Performance</h3>
-          <div class="spec-item">
-            <span class="spec-label">0-100 km/h</span>
-            <span class="spec-value">~2.5 seconds</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-label">0-200 km/h</span>
-            <span class="spec-value">~4.5 seconds</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-label">Top Speed</span>
-            <span class="spec-value">360+ km/h</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-label">Max RPM</span>
-            <span class="spec-value">15,000 RPM</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-label">Max Lateral G</span>
-            <span class="spec-value">6.5G</span>
-          </div>
-        </div>
-
-        <!-- 2025 Season Goals (dynamic) -->
         <div class="specs-card" id="season-goals-card">
-          <h3>2025 Season Goals</h3>
+          <h3>2026 Live Stats</h3>
           <div class="spec-item">
             <span class="spec-label">Target Position</span>
-            <span class="spec-value" id="target-position">1st</span>
+            <span class="spec-value" id="target-position">World Champions</span>
           </div>
           <div class="spec-item">
             <span class="spec-label">Current Position</span>
@@ -547,7 +510,6 @@
           </div>
         </div>
 
-        <!-- Heritage -->
         <div class="specs-card">
           <h3>Ferrari F1 Heritage</h3>
           <div class="spec-item">
@@ -563,105 +525,55 @@
             <span class="spec-value">250+</span>
           </div>
           <div class="spec-item">
-            <span class="spec-label">Founded</span>
-            <span class="spec-value">1947</span>
+            <span class="spec-label">Base</span>
+            <span class="spec-value">Maranello, Italy</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Technical Deep Dive -->
     <section class="technical-section">
       <h2 class="section-title">Technical Deep Dive</h2>
 
       <div class="tech-detail">
-        <h4>🔋 Power Unit & Hybrid System</h4>
+        <h4>🔋 The 50/50 Power Unit</h4>
         <p>
-          The SF-25 is powered by Ferrari's latest evolution of their turbocharged 1.6-liter V6 internal combustion
-          engine. This power unit works in harmony with two Motor Generator Units (MGUs): the MGU-K recovers kinetic
-          energy during braking, while the MGU-H harvests energy from exhaust gases through the turbocharger. Together,
-          the system produces approximately 1,000 horsepower, with the hybrid components adding around 160 HP of
-          electrical boost. The engine revs to 15,000 RPM and features direct fuel injection for optimal efficiency and
-          power delivery.
+          The SF-26 features an all-new power unit dictated by the 2026 regulations. The complex MGU-H has been banned, replaced by a massively upscaled MGU-K system on the rear axle. The electrical deployment now accounts for nearly 50% of the car's total 1,000+ horsepower. Ferrari's engine department has focused extensively on harvesting efficiency and battery deployment strategies to prevent electrical "clipping" on long straights.
         </p>
       </div>
 
       <div class="tech-detail">
-        <h4>⚙️ Aerodynamics & Downforce</h4>
+        <h4>⚙️ X-Mode and Z-Mode Aero</h4>
         <p>
-          The SF-25 features a completely redesigned aerodynamic package compared to its predecessor. The front wing has
-          been optimized for better airflow management, while the floor and diffuser have been extensively reworked to
-          maximize ground effect downforce. The rear wing features a DRS (Drag Reduction System) that can be deployed in
-          designated zones for increased straight-line speed. The bodywork is sculpted to minimize drag while maximizing
-          cooling efficiency for the power unit and brakes. At high speeds, the car can generate up to 5 times its own
-          weight in downforce.
-        </p>
-      </div>
-
-      <div class="tech-detail">
-        <h4>🏗️ Chassis & Construction</h4>
-        <p>
-          Built around a carbon-fiber composite monocoque chassis with honeycomb structures, the SF-25 achieves an
-          optimal balance between strength, rigidity, and weight. The chassis must meet the FIA's minimum weight
-          requirement of 740 kg (including driver). Every component is engineered to save weight while maintaining
-          structural integrity and safety. The survival cell protects the driver in the event of an impact,
-          incorporating advanced crash structures that have been rigorously tested to exceed FIA safety standards.
-        </p>
-      </div>
-
-      <div class="tech-detail">
-        <h4>🛑 Braking System</h4>
-        <p>
-          The SF-25 utilizes Brembo carbon-carbon disc brakes, which are capable of operating at temperatures exceeding
-          1,000°C. The system features self-ventilated discs at both the front and rear, with an electronically
-          controlled hydraulic braking system on the rear wheels that works in conjunction with the energy recovery
-          system. Under heavy braking, the car can decelerate at forces exceeding 5G, with the carbon discs providing
-          consistent performance lap after lap throughout a race distance.
-        </p>
-      </div>
-
-      <div class="tech-detail">
-        <h4>🎯 Electronics & Control Systems</h4>
-        <p>
-          The SF-25's electronics are governed by a standardized FIA ECU, but Ferrari has optimized every parameter
-          within the regulations. The car features advanced traction control algorithms, energy management systems for
-          the hybrid components, and sophisticated brake-by-wire technology. The steering wheel serves as the driver's
-          interface, featuring dozens of switches and rotary dials for adjusting everything from differential settings
-          to energy deployment modes. Real-time telemetry allows the team to monitor hundreds of sensors throughout the
-          car during every session.
+          For the first time in F1 history, the SF-26 features active aerodynamics on both the front and rear wings. Downstraights, the driver engages "X-Mode," stalling the wings to drastically reduce drag and battery consumption. In cornering, "Z-Mode" snaps the flaps into a high-downforce configuration. Mastering the mechanical transition between these two states was Maranello's primary focus in the wind tunnel.
         </p>
       </div>
     </section>
 
-    <!-- Design Philosophy -->
     <section class="main-content" style="margin-top: 32px;">
       <h2 class="section-title">Design Philosophy</h2>
       <p style="color: #bdbdbd; line-height: 1.8; margin-bottom: 16px;">
-        Ferrari described the SF-25 as "a completely new car" that uses the 2024 machine only as a basic foundation. The
-        design philosophy focuses on three core principles:
+        With the slate wiped clean for 2026, Ferrari's engineers were tasked with taking bold risks rather than evolving past concepts. The philosophy of the SF-26 is built on three pillars:
       </p>
       <div class="feature-grid">
         <div class="feature-card">
           <div class="feature-icon">🎯</div>
-          <h4>Efficiency</h4>
-          <p>Maximizing performance from every component while staying within weight and budget regulations.</p>
+          <h4>Agility</h4>
+          <p>Exploiting the narrower chassis and shorter wheelbase rules to create a car that dances through low-speed chicanes.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">⚡</div>
-          <h4>Innovation</h4>
-          <p>Implementing bold aerodynamic concepts and power unit optimizations to find performance advantages.</p>
+          <h4>Electrical Dominance</h4>
+          <p>Building the most efficient MGU-K harvesting system on the grid to ensure power is always available when Leclerc and Hamilton demand it.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🏁</div>
-          <h4>Reliability</h4>
-          <p>Ensuring the car can consistently finish races at the front while maintaining pace throughout the season.
-          </p>
+          <h4>Seamless Aero</h4>
+          <p>Ensuring the shift between high-downforce and low-drag active aero states is invisible to the driver's balance and confidence.</p>
         </div>
       </div>
       <p style="color: #bdbdbd; line-height: 1.8; margin-top: 24px;">
-        The SF-25 represents Ferrari's ambition to reclaim championship glory, combining decades of Formula One
-        expertise with cutting-edge technology. With a darker shade of Ferrari red and a distinctive white stripe on the
-        engine cover, the car honors the Scuderia's heritage while looking firmly to the future.
+        The SF-26 represents the ultimate ambition of Scuderia Ferrari. Dressed in the classic Rosso Corsa with dynamic carbon accents, the team pairs the most extensive rule changes in modern history with the most decorated driver lineup on the grid.
       </p>
     </section>
   </main>
@@ -669,26 +581,15 @@
   <script defer src="../Script/common.js"></script>
 
   <script>
-    // --- Dynamic Season Stats (wins/podiums/current position) from API ---
     (function () {
       const API_BASE = 'https://api.jolpi.ca/ergast/f1';
-      // constructorId mapping (expandable)
-      const CONSTRUCTOR_IDS = {
-        ferrari: 'ferrari',
-        mercedes: 'mercedes',
-        mclaren: 'mclaren',
-        redbull: 'red_bull' // if needed - note some constructors use 'red_bull' or 'red_bull_racing' depending on API
-      };
+      const constructorId = 'ferrari';
 
-      const constructorId = CONSTRUCTOR_IDS.ferrari; // change as needed
-
-      // DOM elements to update
       const elCurrentPos = document.getElementById('current-position');
       const elPoints = document.getElementById('points-scored');
       const elWins = document.getElementById('wins-count');
       const elPodiums = document.getElementById('podiums-count');
 
-      // show loading state
       if (elCurrentPos) elCurrentPos.textContent = 'Loading…';
       if (elPoints) elPoints.textContent = 'Loading…';
       if (elWins) elWins.textContent = 'Loading…';
@@ -702,14 +603,12 @@
 
       async function loadSeasonStats() {
         try {
-          // 1) Get constructor standings for current position & points
           const standingsUrl = `${API_BASE}/current/constructorStandings.json`;
           const standingsJson = await fetchJson(standingsUrl);
           const standingsLists = standingsJson?.MRData?.StandingsTable?.StandingsLists || [];
           if (standingsLists.length > 0) {
             const constructorStandings = standingsLists[0]?.ConstructorStandings || [];
             const myStanding = constructorStandings.find(c => {
-              // some APIs use constructor.constructorId or constructorId field; defensive checks
               const cid = (c?.Constructor?.constructorId || c?.constructorId || '').toLowerCase();
               return cid === constructorId.toLowerCase();
             });
@@ -717,19 +616,14 @@
               if (elCurrentPos) elCurrentPos.textContent = myStanding.position || '—';
               if (elPoints) elPoints.textContent = myStanding.points || '—';
             } else {
-              // constructor not found: clear or fallback
               if (elCurrentPos) elCurrentPos.textContent = '—';
               if (elPoints) elPoints.textContent = '—';
-              console.warn('Constructor standing not found for', constructorId, standingsUrl);
             }
           } else {
             if (elCurrentPos) elCurrentPos.textContent = '—';
             if (elPoints) elPoints.textContent = '—';
-            console.warn('No standings data found at', standingsUrl);
           }
 
-          // 2) Get current season race results and count wins & podiums for constructor
-          // request large limit to get whole season (ergast supports limit param)
           const resultsUrl = `${API_BASE}/current/results.json?limit=1000`;
           const resultsJson = await fetchJson(resultsUrl);
           const races = resultsJson?.MRData?.RaceTable?.Races || [];
@@ -746,7 +640,6 @@
                   if (pos === 1) wins += 1;
                   if (pos >= 1 && pos <= 3) podiums += 1;
                 }
-                // break after we find the constructor in this race
                 break;
               }
             }
@@ -757,7 +650,6 @@
 
         } catch (err) {
           console.error('Error loading season stats:', err);
-          // fallback: show hyphens
           if (elCurrentPos) elCurrentPos.textContent = '—';
           if (elPoints) elPoints.textContent = '—';
           if (elWins) elWins.textContent = '—';
@@ -765,7 +657,6 @@
         }
       }
 
-      // run on DOM ready (script is at end, but be safe)
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', loadSeasonStats);
       } else {
@@ -773,7 +664,6 @@
       }
     })();
 
-    // Load footer
     async function includeHTML(id, path) {
       const container = document.getElementById(id);
       if (!container) return;
@@ -795,13 +685,9 @@
 
     document.getElementById("go-back").addEventListener("click", function (e) {
       e.preventDefault();
-
-      // If user has a referrer (came from another page)
       if (document.referrer && document.referrer !== window.location.href) {
-        // Go back in history
         window.history.back();
       } else {
-        // Otherwise, fallback to teams page
         window.location.href = "../teams.html";
       }
     });

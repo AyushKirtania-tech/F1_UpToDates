@@ -625,3 +625,104 @@ footer {
   opacity: 1;
   color: var(--accent);
 }
+
+/* --- Live Season Stats Modal Upgrades --- */
+.modal-section-title {
+  font-size: 1.1rem;
+  color: #fff;
+  margin: 25px 0 15px 0;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.live-title {
+  color: #ff2800; /* F1 Red */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.live-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.live-stat-box {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.live-stat-box:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.ls-label {
+  display: block;
+  font-size: 0.8rem;
+  color: #aaa;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.ls-val {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.stat-loading, .no-data {
+  text-align: center;
+  padding: 20px;
+  color: #aaa;
+  font-style: italic;
+  background: rgba(255,255,255,0.02);
+  border-radius: 8px;
+}
+
+
+
+/* =========================================================
+   EDGE-TO-EDGE OVERRIDE FOR TEAMS & DRIVERS
+   ========================================================= */
+
+/* Override the old 1200px container variable */
+:root {
+  --container: 100% !important;
+}
+
+.teams-main, 
+.drivers-main, 
+.container {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Ensure grids expand to fill the newly available space */
+.teams-grid,
+.drivers-grid {
+  width: 100%;
+}
+
+/* Shrink side padding on mobile screens */
+@media (max-width: 768px) {
+  .teams-main, 
+  .drivers-main, 
+  .container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}

@@ -141,4 +141,23 @@
       setTimeout(() => hint.remove(), 5000);
     }, 2000);
   }
+
+  // --- ADD THIS AT THE BOTTOM OF THE FILE ---
+  function createFloatingShortcutButton() {
+    const btn = document.createElement('button');
+    btn.className = 'floating-shortcut-btn';
+    // The inner HTML contains a keyboard icon and the ? key hint
+    btn.innerHTML = '⌨️ <kbd>?</kbd>';
+    btn.title = 'View Keyboard Shortcuts';
+    btn.setAttribute('aria-label', 'Keyboard Shortcuts');
+
+    // Clicking it opens the same modal as pressing '?'
+    btn.addEventListener('click', showShortcutsModal);
+
+    document.body.appendChild(btn);
+  }
+
+  // Initialize the floating button
+  createFloatingShortcutButton();
+
 })();

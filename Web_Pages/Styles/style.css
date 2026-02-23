@@ -1,4 +1,7 @@
-/* Reset & Variables */
+/* =========================================================
+   F1 Racing Hub - Premium 2026 Global Styles
+   ========================================================= */
+
 * {
   margin: 0;
   padding: 0;
@@ -6,580 +9,609 @@
 }
 
 :root {
-  --bg: #070707;
-  --text: #f5f5f5;
-  --muted: #bdbdbd;
+  --bg-color: #050505;
+  --text-primary: #f5f5f5;
+  --text-muted: #a1a1aa;
   --accent: #e10600;
-  --accent-hover: #ff1e00;
-  --card-bg: rgba(20, 20, 20, 0.92);
-  --shadow: 0 8px 32px rgba(0,0,0,0.3);
-  --gradient-primary: linear-gradient(135deg, #e10600 0%, #ff4500 100%);
+  --accent-hover: #ff4500;
+  
+  --card-bg: rgba(20, 20, 24, 0.6);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  
+  --gradient-accent: linear-gradient(135deg, #e10600 0%, #ff6a00 100%);
+  --glass-blur: blur(16px);
+}
+
+html {
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+  min-height: 100vh;
+  /* Restored your original background image */
   background: url("../images/background.png") no-repeat center center fixed;
   background-size: cover;
-  background-attachment: fixed;
-  background-color: #000;
-  color: #fff;
+  background-color: #000; /* Fallback */
 }
 
-/* Global Styles */
-html {
-  font-family: "Inter", "Segoe UI", system-ui, Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
-  scroll-behavior: smooth;
+/* Optional: Add a very slight dark overlay so the glassmorphism cards pop perfectly against your image */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6); /* Adjust this (0.1 to 0.9) to make the background image brighter or darker */
+  z-index: -1;
 }
 
-/* Header */
-header {
-  background: rgba(0,0,0,0.9);
-  border-bottom: 3px solid var(--accent);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.header-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 10px 5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo h1 {
-  font-size: 1.5rem;
-  font-weight: 900;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  background: red;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.main-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 1rem;
-}
-
-.main-nav a {
-  text-decoration: none;
-  color: var(--text);
-  font-weight: 600;
-  padding: 8px 16px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
-
-.main-nav a:hover,
-.main-nav a.active {
-  color: var(--accent);
-  background: rgba(225, 6, 0, 0.1);
-}
-
-/* Hero Section */
-.hero {
-  max-width: 1200px;
-  margin: 40px auto;
-  display: grid;
-  grid-template-columns: 1fr 400px;
-  gap: 40px;
-  padding: 0 24px;
-}
-
-.hero-left {
-  background: var(--card-bg);
-  border-radius: 16px;
-  padding: 32px;
-  border: 1px solid rgba(255,255,255,0.1);
-  box-shadow: var(--shadow);
-}
-
-.hero h2 {
-  font-size: 2.5rem;
-  font-weight: 900;
-  margin-bottom: 16px;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.lead {
-  color: var(--muted);
-  font-size: 1.1rem;
-  margin-bottom: 24px;
-}
-
-.hero-ctas {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 32px;
-  flex-wrap: wrap;
-}
-
-/* Buttons */
+/* ================== GLOBAL BUTTONS ================== */
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   padding: 12px 24px;
-  border-radius: 8px;
+  border-radius: 12px;
   text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  border: none;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+  border: none;
 }
 
 .btn-primary {
-  background: var(--gradient-primary);
+  background: var(--gradient-accent);
   color: white;
-  box-shadow: 0 4px 15px rgba(225,6,0,0.3);
+  box-shadow: 0 4px 15px rgba(225, 6, 0, 0.3);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(225,6,0,0.4);
+  box-shadow: 0 8px 25px rgba(225, 6, 0, 0.5);
 }
 
 .btn-outline {
-  border: 2px solid rgba(255,255,255,0.2);
-  color: var(--text);
-  background: transparent;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  backdrop-filter: blur(5px);
 }
 
 .btn-outline:hover {
-  border-color: var(--accent);
-  background: rgba(225,6,0,0.1);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
 }
 
-/* Next Race Card */
-.next-race {
-  background: var(--card-bg);
-  border-radius: 12px;
-  padding: 24px;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-
-.next-race h3 {
-  color: var(--accent);
-  font-size: 1rem;
-  margin-bottom: 12px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.race-name {
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-
-.race-info,
-.race-date {
-  color: var(--muted);
+.btn-small {
+  padding: 8px 16px;
   font-size: 0.9rem;
-  margin-bottom: 8px;
 }
 
-.countdown {
+/* ================== BENTO DASHBOARD LAYOUT ================== */
+.dashboard-main {
+  max-width: 100%; /* Changed from 1400px to 100% to stretch edge-to-edge */
+  margin: 40px auto;
+  padding: 0 40px; /* Keeps a nice breathing gap on the left and right edges */
+  min-height: calc(100vh - 150px); /* Ensures the grid stretches downward to the footer */
+}
+
+.bento-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin: 16px 0;
+  grid-template-rows: auto;
+  gap: 24px;
 }
 
-.countdown div {
-  background: rgba(255,255,255,0.05);
-  padding: 12px;
-  border-radius: 8px;
-  text-align: center;
-}
-
-.countdown span {
-  display: block;
-  font-size: 1.2rem;
-  font-weight: 900;
-  color: var(--accent);
-}
-
-.countdown small {
-  color: var(--muted);
-  font-size: 0.8rem;
-  text-transform: uppercase;
-}
-
-/* Hero Right */
-.hero-right {
+/* Base Bento Card Style */
+.bento-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+  box-shadow: var(--card-shadow);
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 
-.car-banner {
-  background: var(--card-bg);
-  border-radius: 16px;
-  padding: 20px;
-  border: 1px solid rgba(255,255,255,0.1);
+.bento-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
 }
 
-.car-banner img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.about-f1 {
-  background: var(--card-bg);
-  padding: 24px;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-
-.about-title {
-  color: var(--accent);
-  font-weight: 700;
-  margin-bottom: 12px;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-}
-
-.about-f1 h4 {
-  font-size: 1.3rem;
-  margin-bottom: 12px;
-}
-
-.about-f1 p {
-  color: var(--muted);
-  margin-bottom: 16px;
-}
-
-.f1-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
-
-.stat-item {
-  text-align: center;
-  padding: 12px 8px;
-  background: rgba(255,255,255,0.03);
-  border-radius: 8px;
-}
-
-.stat-number {
-  display: block;
-  font-size: 1.5rem;
-  font-weight: 900;
-  color: var(--accent);
-}
-
-.stat-label {
-  font-size: 0.8rem;
-  color: var(--muted);
-  text-transform: uppercase;
-}
-
-/* Teams Section */
-.teams-section {
-  max-width: 1200px;
-  margin: 60px auto;
-  padding: 0 24px;
-}
-
-.teams-section h2 {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 40px;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 900;
-}
-
-.teams-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem 0;
-}
-
-.team-card {
+.bento-content {
+  padding: 32px;
   position: relative;
-  height: 180px;
-  border-radius: 12px;
-  color: white;
-  font-size: 1.2rem;
-  font-weight: bold;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Box Headers */
+.box-header {
   display: flex;
   align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.box-header h3, .box-header span {
+  font-size: 1.2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.flex-between {
+  justify-content: space-between;
+}
+
+/* ================== SPECIFIC BENTO WIDGETS ================== */
+
+/* Hero Widget */
+.bento-hero {
+  grid-column: span 2;
+  grid-row: span 2;
+  background: linear-gradient(145deg, rgba(30, 30, 35, 0.8) 0%, rgba(15, 15, 18, 0.9) 100%);
   justify-content: center;
-  text-align: center;
-  overflow: hidden;
-  cursor: pointer;
-  background-size: cover;
-  background-position: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.team-card::after {
-  content: "";
+.card-glow {
   position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0);
-}
-
-.team-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
-}
-
-.team-card span,
-.team-card {
-  position: relative;
-  z-index: 1;
-}
-
-/* Team Backgrounds */
-.team-card.mercedes { background-image: url("../images/teams/merce.jpg"); }
-.team-card.redbull { background-image: url("../images/teams/redbull.jpg"); }
-.team-card.ferrari { background-image: url("../images/teams/ferrari.jpg"); }
-.team-card.mclaren { background-image: url("../images/teams/mclaren.jpg"); }
-.team-card.alpine { background-image: url("../images/teams/alpine.jpg"); }
-.team-card.astonmartin { background-image: url("../images/teams/aston.jpg"); }
-.team-card.williams { background-image: url("../images/teams/williams.jpeg"); }
-.team-card.sauber { background-image: url("../images/teams/sauber.webp"); }
-.team-card.haas { background-image: url("../images/teams/haas.webp"); }
-.team-card.rb { background-image: url("../images/teams/racingbulls.webp"); }
-
-/* Drivers Section */
-.drivers-section {
-  max-width: 1200px;
-  margin: 60px auto;
-  padding: 0 24px;
-}
-
-.drivers-section h2 {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 40px;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 900;
-}
-
-.drivers-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-}
-
-.driver-card {
-  background: var(--card-bg);
-  border-radius: 16px;
-  padding: 24px;
-  text-align: center;
-  border: 1px solid rgba(255,255,255,0.1);
-  transition: transform 0.3s ease;
-}
-
-.driver-card:hover {
-  transform: translateY(-8px);
-}
-
-.driver-card img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-bottom: 16px;
-  object-fit: cover;
-  border: 3px solid rgba(255,255,255,0.1);
-}
-
-.driver-card h3 {
-  margin-bottom: 8px;
-}
-
-.driver-card p {
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-/* Driver Carousel */
-.carousel-container {
-  position: relative;
-  overflow: hidden;
-  padding: 20px 0;
-  width: 100%;
-}
-
-.drivers-section .drivers-grid {
-  display: flex;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  gap: 24px;
-}
-
-.drivers-section .driver-card {
-  flex-shrink: 0;
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(145deg, rgba(30, 30, 46, 0.6), rgba(42, 42, 62, 0.8));
-  backdrop-filter: blur(10px);
-}
-
-.driver-card::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, rgba(225, 6, 0, 0.15) 0%, transparent 60%);
-  transform: translate(-50%, -50%);
-  animation: pulse 3s ease-in-out infinite;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(225, 6, 0, 0.1) 0%, transparent 50%);
   pointer-events: none;
   z-index: 0;
 }
 
-@keyframes pulse {
-  0%, 100% {
-    opacity: 0.3;
-    transform: translate(-50%, -50%) scale(0.9);
-  }
-  50% {
-    opacity: 0.6;
-    transform: translate(-50%, -50%) scale(1.1);
-  }
+.era-badge {
+  display: inline-block;
+  background: rgba(225, 6, 0, 0.15);
+  color: #ff4500;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(225, 6, 0, 0.3);
 }
 
-.driver-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 40px rgba(225, 6, 0, 0.3);
+.bento-hero h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  letter-spacing: -1px;
 }
 
-.driver-card:hover::before {
-  animation: pulse 1.5s ease-in-out infinite;
+.text-gradient {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.driver-card img {
-  width: 150px;
-  height: 150px;
+.bento-hero p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 32px;
+  max-width: 90%;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+}
+
+/* Next Race Countdown Widget */
+.bento-countdown-box {
+  grid-column: span 2;
+}
+
+.live-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #10b981;
   border-radius: 50%;
-  margin-bottom: 16px;
-  object-fit: cover;
-  border: 3px solid rgba(225, 6, 0, 0.8);
-  position: relative;
-  z-index: 2;
-  transition: all 0.3s ease;
-  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px #10b981;
+  animation: pulse 2s infinite;
 }
 
-.driver-card img:hover {
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.race-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.race-details {
+  display: flex;
+  gap: 20px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  font-size: 0.95rem;
+}
+
+.race-details p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: auto;
+}
+
+.time-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 16px 10px;
+  text-align: center;
+}
+
+.time-box span {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 900;
+  font-family: 'Courier New', Courier, monospace;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.time-box small {
+  color: var(--accent);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Champions Widget */
+.bento-champions {
+  grid-column: span 2;
+  background: linear-gradient(135deg, rgba(255, 140, 0, 0.05) 0%, rgba(20, 20, 20, 0.8) 100%);
+}
+
+.champs-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  gap: 20px;
+}
+
+.champ-driver, .champ-team {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 16px 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  flex: 1;
+}
+
+.champ-driver img, .champ-team img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 140, 0, 0.5);
+}
+
+.champ-team img {
+  border-radius: 12px;
+  background: rgba(255,255,255,0.1);
+  object-fit: contain;
+}
+
+.champs-content small {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.champs-content strong {
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+/* Race Reminder Widget */
+.bento-reminder {
+  grid-column: span 4; /* CHANGED: Now stretches across the entire screen! */
+  display: flex;
+  flex-direction: column;
+}
+
+.bento-reminder .bento-content {
+  flex: 1; 
+}
+
+.race-reminder-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Fix race reminder styles to match glassmorphism natively */
+.race-reminder-container .reminder-card {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 12px !important;
+  padding: 12px !important;
+}
+
+.race-reminder-container h3, .race-reminder-container h4 {
+  color: #fff !important;
+}
+
+/* Drivers Carousel Widget */
+.bento-drivers {
+  grid-column: span 4;
+}
+
+.view-all {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+.view-all:hover { color: #fff; }
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.drivers-grid {
+  display: flex;
+  transition: transform 0.4s ease-out; /* Smooth snapping transition */
+  gap: 20px;
+}
+
+.driver-portrait {
+  flex-shrink: 0;
+  width: calc(25% - 15px); /* Show 4 at a time */
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  height: 280px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.driver-portrait:hover {
+  transform: translateY(-5px);
   border-color: var(--accent);
-  box-shadow: 
-    0 0 20px rgba(225, 6, 0, 0.4),
-    0 0 40px rgba(225, 6, 0, 0.2),
-    0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.driver-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.5s ease;
+}
+
+.driver-portrait:hover img {
   transform: scale(1.05);
 }
 
-.driver-card h3,
-.driver-card p {
-  position: relative;
-  z-index: 2;
+.portrait-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
 }
 
-.driver-card h3 {
-  transition: color 0.3s ease;
+.d-num {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 900;
+  color: #ffffff;
+  font-size: 1.2rem;
+  display: block;
+  margin-bottom: 4px;
 }
 
-.driver-card:hover h3 {
-  color: var(--accent);
+.portrait-info h4 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-bottom: 4px;
 }
 
-.team-badge {
-  display: inline-block;
-  padding: 6px 16px;
-  background: rgba(225, 6, 0, 0.15);
-  border-radius: 20px;
-  font-size: 0.85rem;
-  margin-top: 10px;
-  border: 1px solid rgba(225, 6, 0, 0.4);
-  position: relative;
-  z-index: 2;
-  transition: all 0.3s ease;
-}
-
-.driver-card:hover .team-badge {
-  background: rgba(225, 6, 0, 0.25);
-  border-color: var(--accent);
-  box-shadow: 0 0 10px rgba(225, 6, 0, 0.3);
+.d-team {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
 }
 
 .carousel-controls {
   display: flex;
   justify-content: center;
-  gap: 15px;
-  margin-top: 40px;
+  gap: 10px;
+  margin-top: 24px;
+  flex-wrap: wrap; /* allows dots to wrap on mobile if needed */
 }
 
 .carousel-dot {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.2);
-  border: 2px solid rgba(225, 6, 0, 0.5);
   cursor: pointer;
   transition: all 0.3s ease;
-}
-
-.carousel-dot:hover {
-  background: rgba(225, 6, 0, 0.5);
-  border-color: var(--accent);
-  transform: scale(1.15);
 }
 
 .carousel-dot.active {
   background: var(--accent);
   transform: scale(1.3);
-  box-shadow: 0 0 15px rgba(225, 6, 0, 0.6);
-  border-color: var(--accent);
+  box-shadow: 0 0 10px rgba(225, 6, 0, 0.5);
 }
 
-/* Race Reminder Section */
-.race-reminder-section {
-  max-width: 1200px;
-  margin: 60px auto;
-  padding: 0 24px;
+/* Results & Constructors Mini Widgets */
+.bento-results {
+  grid-column: span 2;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
+.bento-results .bento-content {
+  flex-direction: row;
+  align-items: center;
+  gap: 32px;
+}
+
+.results-visual {
+  width: 100px;
+  height: 100px;
+  background: rgba(225, 6, 0, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(225, 6, 0, 0.3);
+  flex-shrink: 0;
+}
+
+.podium-icon {
+  font-size: 3rem;
+  animation: bounce 2s infinite ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.results-text h3 {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+.results-text p {
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+
+.bento-constructors {
+  grid-column: span 2;
+}
+
+.bento-constructors h3 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.bento-constructors p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.mini-teams-grid {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.mini-team {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: #333;
+}
+
+/* Team Colors for Mini Grid */
+.mini-team.mclaren { background: #ff8000; }
+.mini-team.ferrari { background: #e10600; }
+.mini-team.redbull { background: #0600ef; }
+.mini-team.mercedes { background: #00d2be; }
+.mini-team.astonmartin { background: #006f62; }
+.mini-team.williams { background: #00539f; }
+.mini-team.haas { background: #ffffff; }
+.mini-team.rb { background: #1432d1; }
+.mini-team.alpine { background: #0090ff; }
+.mini-team.sauber { background: #00e701; }
+.mini-team.cadillac { background: #222222; border: 1px solid #fff; }
+
+.mt-3 { margin-top: auto; align-self: flex-start; }
+
+/* ================== RESPONSIVE DESIGN ================== */
+@media (max-width: 1100px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
+  .bento-hero { grid-column: span 2; grid-row: span 1; }
+  .bento-countdown-box { grid-column: span 2; }
+  .bento-champions { grid-column: span 2; }
+  .bento-reminder { grid-column: span 2; }
+  .bento-drivers { grid-column: span 2; }
+  .bento-results { grid-column: span 2; }
+  .bento-constructors { grid-column: span 2; }
+  
+  .driver-portrait { width: calc(50% - 10px); } /* Show 2 on tablet */
 }
 
-.loading .spinner {
-  animation: spin 1s linear infinite;
+@media (max-width: 640px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+  .bento-hero, .bento-countdown-box, .bento-champions, .bento-reminder, .bento-drivers, .bento-results, .bento-constructors {
+    grid-column: span 1;
+  }
+  .bento-hero h1 { font-size: 2.5rem; }
+  .hero-actions { flex-direction: column; }
+  .champs-content { flex-direction: column; align-items: stretch; }
+  .bento-results .bento-content { flex-direction: column; text-align: center; }
+  .driver-portrait { width: 100%; } /* Show 1 on mobile */
 }
 
 /* Footer */
 footer {
   margin-top: 80px;
   padding: 40px 24px;
-  background: linear-gradient(135deg, rgba(0,0,0,0.9), rgba(15,15,15,0.8));
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(15, 15, 15, 0.8));
   border-top: 3px solid var(--accent);
   color: var(--muted);
 }
@@ -605,311 +637,109 @@ footer {
   color: var(--accent);
 }
 
-/* Responsive Design */
+
+
+
+
+/* =========================================================
+   GLOBAL EDGE-TO-EDGE LAYOUT OVERRIDE
+   Forces all pages to span the full width of the screen
+   ========================================================= */
+
+.dashboard-main,
+.about-main,
+.schedule-main,
+.circuits-main,
+.drivers-main,
+.teams-main,
+.results-main,
+.container,
+#schedule-container,
+#circuits-container,
+.schedule-stats,
+.schedule-cta {
+  max-width: 100% !important;
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Ensure the Schedule CTA box doesn't overflow horizontally */
+.schedule-cta {
+  width: calc(100% - 80px) !important; /* Accounts for the 40px left/right padding */
+}
+
+/* Smart Mobile Adjustments: Shrinks the side gaps on small screens */
 @media (max-width: 768px) {
-  .header-inner {
-    flex-direction: column;
-    gap: 16px;
+  .dashboard-main,
+  .about-main,
+  .schedule-main,
+  .circuits-main,
+  .drivers-main,
+  .teams-main,
+  .results-main,
+  .container,
+  #schedule-container,
+  #circuits-container,
+  .schedule-stats,
+  .schedule-cta {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
   }
-  .main-nav ul {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-  }
-  .hero {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-  .hero-right {
-    order: -1;
-  }
-  .hero h2 {
-    font-size: 2rem;
-  }
-  .countdown {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .f1-stats {
-    grid-template-columns: 1fr;
-  }
-  .teams-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  }
-  .drivers-grid {
-    grid-template-columns: 1fr;
+  
+  .schedule-cta {
+    width: calc(100% - 40px) !important;
   }
 }
 
-/* Results CTA Section */
-.results-cta-section {
-  max-width: 1200px;
-  margin: 80px auto;
-  padding: 0 24px;
-}
 
-.results-cta-card {
-  background: linear-gradient(135deg, rgba(225, 6, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%);
-  border-radius: 24px;
-  padding: 50px;
-  border: 2px solid var(--accent);
-  position: relative;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 40px;
-  align-items: center;
-  box-shadow: 0 10px 40px rgba(225, 6, 0, 0.3);
-  transition: all 0.3s ease;
-}
 
-.results-cta-card::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(225, 6, 0, 0.15) 0%, transparent 60%);
-  animation: rotate-glow 15s linear infinite;
-  pointer-events: none;
-}
+/* =========================================================
+   ULTRA-WIDE SCREEN POLISH (The Perfect Stretch Fix)
+   ========================================================= */
 
-@keyframes rotate-glow {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.results-cta-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 50px rgba(225, 6, 0, 0.5);
-}
-
-.results-left {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  position: relative;
-  z-index: 1;
-}
-
-.results-icon {
-  font-size: 5rem;
-  animation: bounce 2s ease-in-out infinite;
-  filter: drop-shadow(0 0 20px rgba(225, 6, 0, 0.5));
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-}
-
-.results-stats-mini {
-  display: flex;
-  gap: 12px;
-}
-
-.mini-stat {
-  background: rgba(0, 0, 0, 0.5);
-  padding: 12px 16px;
-  border-radius: 12px;
-  text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
-}
-
-.mini-stat:hover {
-  background: rgba(225, 6, 0, 0.1);
-  border-color: var(--accent);
-  transform: translateY(-3px);
-}
-
-.mini-stat-number {
-  display: block;
-  font-size: 2rem;
-  font-weight: 900;
-  color: var(--accent);
-  line-height: 1;
-  margin-bottom: 4px;
-}
-
-.mini-stat-label {
-  font-size: 0.7rem;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.results-content {
-  position: relative;
-  z-index: 1;
-}
-
-.results-content h2 {
-  font-size: 2.2rem;
-  margin-bottom: 12px;
-  background: var(--gradient-primary);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-background-clip: text;
-  -moz-text-fill-color: transparent;
-  font-weight: 900;
-  color: var(--accent);
-}
-
-@supports (background-clip: text) or (-webkit-background-clip: text) {
-  .results-content h2 {
-    color: transparent;
-  }
-}
-
-.results-content p {
-  color: var(--muted);
-  font-size: 1rem;
-  margin-bottom: 20px;
-  line-height: 1.6;
-}
-
-.results-features {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-}
-
-.results-features li {
-  color: var(--text);
-  font-size: 0.9rem;
-  font-weight: 600;
-  padding: 8px 12px;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 8px;
-  border-left: 3px solid var(--accent);
-  transition: all 0.3s ease;
-}
-
-.results-features li:hover {
-  background: rgba(225, 6, 0, 0.1);
-  transform: translateX(5px);
-}
-
-.results-action {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  position: relative;
-  z-index: 1;
-}
-
-.btn-results {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 18px 32px;
-  background: var(--gradient-primary);
-  color: white;
-  text-decoration: none;
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 25px rgba(225, 6, 0, 0.4);
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-results::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
+/* Use 'auto-fit' and '1fr' to force cards to stretch and fill all empty space */
+.teams-main .teams-grid, 
+.drivers-main .drivers-grid {
+  display: grid !important;
+  /* This is the magic line: it fits as many 320px cards as it can, then stretches them (1fr) to fill the row perfectly! */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+  gap: 30px;
   width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s ease;
 }
 
-.btn-results:hover::before {
-  left: 100%;
+/* Ensure individual cards are allowed to stretch fully */
+.teams-main .team-card, 
+.drivers-main .driver-card {
+  display: flex !important;
+  flex-direction: column;
+  max-width: none !important; /* Removes any old maximum width caps */
+  width: 100% !important;
 }
 
-.btn-results:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(225, 6, 0, 0.6);
+/* 2. Contain and beautify the Championship Table */
+.championship-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.btn-arrow {
-  font-size: 1.5rem;
-  transition: transform 0.3s ease;
+.championship-table {
+  width: 100%;
+  max-width: 1000px !important; /* Keeps the table sleek and readable */
+  background: rgba(20, 20, 20, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 24px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  margin: 0 auto;
 }
 
-.btn-results:hover .btn-arrow {
-  transform: translateX(5px);
-}
-
-.results-hint {
-  font-size: 0.75rem;
-  color: var(--muted);
+/* 3. Center the Section Titles above the contained tables */
+.championship-section .section-title,
+.filter-intro {
   text-align: center;
-  font-style: italic;
-}
-
-/* Responsive for Results CTA */
-@media (max-width: 968px) {
-  .results-cta-card {
-    grid-template-columns: 1fr;
-    text-align: center;
-    padding: 40px 30px;
-    gap: 30px;
-  }
-  .results-left {
-    flex-direction: row;
-    justify-content: center;
-  }
-  .results-icon {
-    font-size: 4rem;
-  }
-  .results-content h2 {
-    font-size: 1.8rem;
-  }
-  .results-features {
-    grid-template-columns: 1fr;
-  }
-  .results-features li {
-    text-align: left;
-  }
-}
-
-@media (max-width: 640px) {
-  .results-cta-card {
-    padding: 30px 20px;
-  }
-  .results-left {
-    flex-direction: column;
-  }
-  .results-icon {
-    font-size: 3.5rem;
-  }
-  .results-content h2 {
-    font-size: 1.5rem;
-  }
-  .results-stats-mini {
-    flex-direction: row;
-    width: 100%;
-    justify-content: center;
-  }
-  .mini-stat {
-    flex: 1;
-  }
-  .btn-results {
-    width: 100%;
-    justify-content: center;
-    padding: 16px 24px;
-  }
-  .driver-card img {
-    width: 120px;
-    height: 120px;
-  }
+  width: 100%;
 }

@@ -4,14 +4,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>W17 — Mercedes-AMG Petronas F1 Team</title>
+  <title>Audi F1-26 — Audi F1 Team</title>
   <meta name="description"
-    content="Explore the Mercedes W17 — technical specs, performance and technical details for the 2026 season." />
-  <meta name="keywords" content="F1, Mercedes, W17, Formula 1, car specifications, 2026, George Russell, Kimi Antonelli" />
+    content="Explore the Audi F1-26 car specifications, performance, and technical details for the 2026 season." />
+  <meta name="keywords" content="F1, Audi, Audi F1 Team, Formula 1, car specifications, 2026" />
 
   <link rel="stylesheet" href="../Styles/teams.css">
   <style>
-    /* small layout fixes to prevent stray gaps and match previous layout */
     *,
     *::before,
     *::after {
@@ -24,14 +23,6 @@
       height: auto;
     }
 
-    :root {
-      --mer-deep: #071217;
-      --mer-mid: #0bb7a1;
-      /* petronas teal */
-      --muted: #bdbdbd;
-      --card-bg: rgba(20, 20, 20, 0.92);
-    }
-
     .car-hero {
       position: relative;
       height: 60vh;
@@ -42,17 +33,16 @@
       overflow: hidden;
       border-radius: 24px;
       margin-bottom: 40px;
-      background: linear-gradient(135deg, #0b0b0b, #002b24 30%, #008f7ccc);
+      background: linear-gradient(135deg, #000000, #ff0000);
     }
 
     .car-hero::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: url('../images/cars/mercedes.avif') center/cover;
-      opacity: 0.52;
+      background: url('../images/cars/audi.jpg') center/cover;
+      opacity: 0.6;
       z-index: 0;
-      mix-blend-mode: overlay;
     }
 
     .car-hero-content {
@@ -69,15 +59,16 @@
       text-transform: uppercase;
       letter-spacing: 4px;
       color: #fff;
-      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     }
 
     .car-hero .subtitle {
       font-size: 1.3rem;
-      color: rgba(255, 255, 255, 0.95);
+      color: rgba(255, 255, 255, 0.9);
       margin: 0;
       text-transform: uppercase;
       letter-spacing: 2px;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.721);
     }
 
     .car-main {
@@ -90,7 +81,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      color: var(--muted);
+      color: #bdbdbd;
       text-decoration: none;
       margin-bottom: 24px;
       padding: 10px 16px;
@@ -101,8 +92,8 @@
     }
 
     .back-link:hover {
-      color: var(--mer-mid);
-      border-color: var(--mer-mid);
+      color: #ff0000;
+      border-color: #ff0000;
       transform: translateX(-4px);
     }
 
@@ -115,7 +106,7 @@
     }
 
     .main-content {
-      background: var(--card-bg);
+      background: rgba(20, 20, 20, 0.92);
       padding: 32px;
       border-radius: 18px;
       border: 1px solid rgba(255, 255, 255, 0.04);
@@ -129,7 +120,7 @@
     }
 
     .specs-card {
-      background: var(--card-bg);
+      background: rgba(20, 20, 20, 0.92);
       padding: 24px;
       border-radius: 18px;
       border: 1px solid rgba(255, 255, 255, 0.04);
@@ -138,7 +129,7 @@
     .specs-card h3 {
       margin: 0 0 20px;
       font-size: 1.3rem;
-      color: var(--mer-mid);
+      color: #ff0000;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
@@ -155,7 +146,7 @@
     }
 
     .spec-label {
-      color: var(--muted);
+      color: #bdbdbd;
       font-weight: 600;
     }
 
@@ -169,7 +160,7 @@
       font-size: 2rem;
       font-weight: 900;
       margin: 0 0 24px;
-      background: linear-gradient(135deg, var(--mer-mid), #004b40);
+      background: linear-gradient(135deg, #ff4d4d, #ff0000);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -194,20 +185,19 @@
     .feature-card:hover {
       transform: translateY(-8px);
       background: rgba(255, 255, 255, 0.04);
-      border-color: var(--mer-mid);
+      border-color: #ff0000;
     }
 
     .feature-icon {
       width: 48px;
       height: 48px;
-      background: linear-gradient(135deg, var(--mer-mid), #00584d);
+      background: linear-gradient(135deg, #000000, #ff0000);
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 24px;
       margin-bottom: 16px;
-      color: #fff;
     }
 
     .feature-card h4 {
@@ -217,7 +207,7 @@
     }
 
     .feature-card p {
-      color: var(--muted);
+      color: #bdbdbd;
       line-height: 1.6;
       margin: 0;
     }
@@ -241,19 +231,19 @@
       display: block;
       font-size: 2.5rem;
       font-weight: 900;
-      color: var(--mer-mid);
+      color: #ff0000;
       margin-bottom: 8px;
     }
 
     .stat-text {
-      color: var(--muted);
+      color: #bdbdbd;
       font-size: 0.9rem;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
     .technical-section {
-      background: var(--card-bg);
+      background: rgba(20, 20, 20, 0.92);
       padding: 40px;
       border-radius: 18px;
       border: 1px solid rgba(255, 255, 255, 0.04);
@@ -264,19 +254,19 @@
       margin: 24px 0;
       padding: 20px;
       background: rgba(255, 255, 255, 0.02);
-      border-left: 4px solid var(--mer-mid);
+      border-left: 4px solid #ff0000;
       border-radius: 8px;
     }
 
     .tech-detail h4 {
       margin: 0 0 12px;
-      color: var(--mer-mid);
+      color: #ff0000;
       font-size: 1.1rem;
       text-transform: uppercase;
     }
 
     .tech-detail p {
-      color: var(--muted);
+      color: #bdbdbd;
       line-height: 1.7;
       margin: 0;
     }
@@ -290,7 +280,7 @@
     }
 
     .driver-card-large {
-      background: var(--card-bg);
+      background: rgba(20, 20, 20, 0.92);
       border-radius: 18px;
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.04);
@@ -299,25 +289,28 @@
 
     .driver-card-large:hover {
       transform: translateY(-8px);
-      border-color: var(--mer-mid);
+      border-color: #ff0000;
     }
 
-    /* UPDATED DRIVER IMAGE WRAP */
-    .driver-image-wrap { 
-      height: 250px; 
-      overflow: hidden; 
-      background: linear-gradient(135deg, rgba(11, 183, 161, 0.2), rgba(0, 80, 60, 0.4)); 
+    .driver-image-wrap {
+      height: 250px;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.4));
+      /* Keep your team's specific gradient here */
       display: flex;
       align-items: flex-end;
       justify-content: center;
     }
 
-    .driver-image-wrap img { 
-      width: 100%; 
-      height: 100%; 
-      object-fit: contain; 
-      object-position: bottom center; 
-      padding-top: 15px; 
+    .driver-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      /* Ensures the whole image fits without zooming/cropping */
+      object-position: bottom center;
+      /* Anchors the driver to the bottom of the box */
+      padding-top: 15px;
+      /* Gives a little breathing room above their heads */
     }
 
     .driver-info {
@@ -333,8 +326,8 @@
     .driver-number {
       display: inline-block;
       padding: 4px 12px;
-      background: rgba(11, 183, 161, 0.2);
-      color: var(--mer-mid);
+      background: rgba(255, 0, 0, 0.2);
+      color: #ff4d4d;
       border-radius: 6px;
       font-weight: 900;
       margin-bottom: 12px;
@@ -368,8 +361,7 @@
       }
     }
   </style>
-
-  <meta name="theme-color" content="#00b7a1" />
+  <meta name="theme-color" content="#ff0000" />
 </head>
 
 <body>
@@ -381,8 +373,8 @@
 
     <header class="car-hero">
       <div class="car-hero-content">
-        <h1>W17</h1>
-        <p class="subtitle">Mercedes-AMG Petronas F1 Team 2026 Works Entry</p>
+        <h1>Audi F1-26</h1>
+        <p class="subtitle">Audi F1 Team 2026 Formula One Works Entry</p>
       </div>
     </header>
 
@@ -393,7 +385,7 @@
       </div>
       <div class="stat-box">
         <span class="stat-number">1.6L</span>
-        <span class="stat-text">Mercedes V6 Hybrid</span>
+        <span class="stat-text">Audi V6 Turbo</span>
       </div>
       <div class="stat-box">
         <span class="stat-number">50%</span>
@@ -408,31 +400,37 @@
     <div class="content-grid">
       <div class="main-content">
         <h2 class="section-title">Overview</h2>
-        <p style="color: var(--muted); line-height: 1.8; margin-bottom: 24px;">
-          The Mercedes W17 marks the dawn of the 2026 regulatory era. Drawing historical parallels to their absolute dominance at the start of the previous engine cycle in 2014, the Brixworth and Brackley operations have poured immense resources into mastering the new 50/50 electrical power split and active aerodynamics. With the team fully structured around its new identity, George Russell leads the charge alongside the fiercely quick young prodigy, Kimi Antonelli.
+        <p style="color: #bdbdbd; line-height: 1.8; margin-bottom: 24px;">
+          The 2026 season marks a historic moment as Audi enters Formula 1 as a full-fledged works team. Taking over the
+          operations of Sauber in Hinwil and developing a proprietary power unit at their new state-of-the-art facility
+          in Neuburg an der Donau, Germany, Audi is poised to make a massive impact under the new engine regulations.
         </p>
 
         <h2 class="section-title">Key Features</h2>
         <div class="feature-grid">
           <div class="feature-card">
             <div class="feature-icon">⚡</div>
-            <h4>Brixworth 2026 PU</h4>
-            <p>Brand new 1.6L V6 paired with a massive 350kW MGU-K, engineered for maximum thermal efficiency following the removal of the MGU-H.</p>
+            <h4>Proprietary Audi PU</h4>
+            <p>A brand new 1.6L V6 turbocharged engine built entirely in-house in Germany, optimized for the 2026 50/50
+              electrical split.</p>
           </div>
           <div class="feature-card">
-            <div class="feature-icon">💨</div>
-            <h4>Active Aero Integration</h4>
-            <p>Seamlessly blending the FIA's new X-Mode (low drag) and Z-Mode (high downforce) into the W17's aggressive aerodynamic philosophy.</p>
+            <div class="feature-icon">🤝</div>
+            <h4>Hinwil & Neuburg</h4>
+            <p>Seamless integration between the historic Swiss chassis factory and the cutting-edge German engine
+              facility.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">🌿</div>
-            <h4>Petronas Synergy</h4>
-            <p>Operating entirely on 100% advanced sustainable "drop-in" fuel, developed intimately alongside title partner Petronas.</p>
+            <h4>Sustainable Racing</h4>
+            <p>Running on 100% sustainable fuels as mandated by the 2026 regulations, aligning perfectly with Audi's
+              corporate vision.</p>
           </div>
           <div class="feature-card">
-            <div class="feature-icon">🛞</div>
-            <h4>Agile Dynamics</h4>
-            <p>Capitalizing on the mandated shorter wheelbase and narrower track width, matched with Mercedes' renowned mechanical suspension mastery.</p>
+            <div class="feature-icon">🏆</div>
+            <h4>Works Team Status</h4>
+            <p>Total control over both chassis and power unit design allows for unmatched packaging and aerodynamic
+              synergy.</p>
           </div>
         </div>
 
@@ -440,110 +438,93 @@
         <div class="drivers-showcase">
           <div class="driver-card-large">
             <div class="driver-image-wrap">
-              <img src="../images/drivers/george.jpg" alt="George Russell"
+              <img src="../images/drivers/nico.webp" alt="Nico Hülkenberg"
                 onerror="this.src='../images/driver-fallback.jpg'">
             </div>
             <div class="driver-info">
-              <span class="driver-number">#63</span>
-              <h4>George Russell</h4>
-              <p style="color: var(--muted);">The undisputed team leader. Russell's meticulous engineering feedback and blistering qualifying pace are the foundation of the W17's development.</p>
+              <span class="driver-number">#27</span>
+              <h4>Nico Hülkenberg</h4>
+              <p style="color: #bdbdbd;">The veteran German driver spearheads Audi's entry, providing invaluable
+                feedback and consistent pace to develop the new chassis.</p>
             </div>
           </div>
-          
           <div class="driver-card-large">
             <div class="driver-image-wrap">
-              <img src="../images/drivers/antonelli.avif" alt="Kimi Antonelli"
+              <img src="../images/drivers/gabriel.webp" alt="Gabriel Bortoleto"
                 onerror="this.src='../images/driver-fallback.jpg'">
             </div>
             <div class="driver-info">
-              <span class="driver-number">#12</span>
-              <h4>Kimi Antonelli</h4>
-              <p style="color: var(--muted);">The highly-touted Italian prodigy enters his second season, bringing youthful aggression and lightning-fast reflexes to the new era.</p>
+              <span class="driver-number">#5</span>
+              <h4>Gabriel Bortoleto</h4>
+              <p style="color: #bdbdbd;">The highly-rated young Brazilian steps up to the works team, bringing raw speed
+                and representing Audi's commitment to the future.</p>
             </div>
           </div>
         </div>
-
       </div>
 
       <div class="sidebar">
         <div class="specs-card">
           <h3>Technical Specifications</h3>
-          <div class="spec-item"><span class="spec-label">Chassis</span><span class="spec-value">Mercedes Carbon Monocoque</span></div>
-          <div class="spec-item"><span class="spec-label">Engine</span><span class="spec-value">Mercedes 1.6L V6 Hybrid</span></div>
-          <div class="spec-item"><span class="spec-label">Power Output</span><span class="spec-value">1000+ HP Total</span></div>
-          <div class="spec-item"><span class="spec-label">Electrical Power</span><span class="spec-value">350 kW (~470 HP)</span></div>
-          <div class="spec-item"><span class="spec-label">Transmission</span><span class="spec-value">Mercedes 8-Speed</span></div>
-          <div class="spec-item"><span class="spec-label">Weight</span><span class="spec-value">TBA (2026 Regs)</span></div>
-          <div class="spec-item"><span class="spec-label">Fuel</span><span class="spec-value">100% Sustainable</span></div>
+          <div class="spec-item"><span class="spec-label">Chassis</span><span class="spec-value">Audi Carbon
+              Monocoque</span></div>
+          <div class="spec-item"><span class="spec-label">Engine</span><span class="spec-value">Audi 1.6L V6
+              Hybrid</span></div>
+          <div class="spec-item"><span class="spec-label">Power Output</span><span class="spec-value">1000+ HP
+              Total</span></div>
+          <div class="spec-item"><span class="spec-label">Electrical Power</span><span class="spec-value">350 kW (~470
+              HP)</span></div>
+          <div class="spec-item"><span class="spec-label">Transmission</span><span class="spec-value">8-Speed
+              Sequential</span></div>
+          <div class="spec-item"><span class="spec-label">Weight</span><span class="spec-value">TBA (2026 Regs)</span>
+          </div>
+          <div class="spec-item"><span class="spec-label">Fuel</span><span class="spec-value">100% Sustainable</span>
+          </div>
         </div>
 
         <div class="specs-card" id="season-goals-card">
           <h3>2026 Live Stats</h3>
-          <div class="spec-item"><span class="spec-label">Target Position</span><span class="spec-value" id="target-position">Title Contender</span></div>
-          <div class="spec-item"><span class="spec-label">Current Position</span><span class="spec-value" id="current-position">—</span></div>
-          <div class="spec-item"><span class="spec-label">Points Scored</span><span class="spec-value" id="points-scored">—</span></div>
-          <div class="spec-item"><span class="spec-label">Wins</span><span class="spec-value" id="wins-count">—</span></div>
-          <div class="spec-item"><span class="spec-label">Podiums</span><span class="spec-value" id="podiums-count">—</span></div>
+          <div class="spec-item"><span class="spec-label">Target Position</span><span class="spec-value">Midfield
+              Leadership</span></div>
+          <div class="spec-item"><span class="spec-label">Current Position</span><span class="spec-value"
+              id="current-position">—</span></div>
+          <div class="spec-item"><span class="spec-label">Points Scored</span><span class="spec-value"
+              id="points-scored">—</span></div>
+          <div class="spec-item"><span class="spec-label">Wins</span><span class="spec-value" id="wins-count">—</span>
+          </div>
+          <div class="spec-item"><span class="spec-label">Podiums</span><span class="spec-value"
+              id="podiums-count">—</span></div>
         </div>
 
         <div class="specs-card">
-          <h3>Mercedes F1 Heritage</h3>
-          <div class="spec-item"><span class="spec-label">Constructors' Champs</span><span class="spec-value">8</span></div>
-          <div class="spec-item"><span class="spec-label">Race Wins</span><span class="spec-value">128+</span></div>
-          <div class="spec-item"><span class="spec-label">Pole Positions</span><span class="spec-value">130+</span></div>
-          <div class="spec-item"><span class="spec-label">Base</span><span class="spec-value">Brackley & Brixworth, UK</span></div>
+          <h3>Team Information</h3>
+          <div class="spec-item"><span class="spec-label">Founded</span><span class="spec-value">2026 (Works
+              Entry)</span></div>
+          <div class="spec-item"><span class="spec-label">Predecessor</span><span class="spec-value">Sauber
+              Motorsport</span></div>
+          <div class="spec-item"><span class="spec-label">Chassis Base</span><span class="spec-value">Hinwil,
+              Switzerland</span></div>
+          <div class="spec-item"><span class="spec-label">Engine Base</span><span class="spec-value">Neuburg,
+              Germany</span></div>
         </div>
       </div>
     </div>
 
     <section class="technical-section">
       <h2 class="section-title">Technical Deep Dive</h2>
-
       <div class="tech-detail">
-        <h4>🔋 The 2026 Brixworth Power Unit</h4>
-        <p>
-          Mercedes-AMG High Performance Powertrains (HPP) has entirely redesigned the internal combustion engine to meet the 100% sustainable fuel mandate. With the MGU-H removed by the FIA, the reliance on the upscaled MGU-K requires unprecedented battery harvesting and deployment strategies to prevent electrical "clipping" on long straights.
-        </p>
+        <h4>🔋 2026 Regulation Power Unit</h4>
+        <p>The 2026 regulations drop the complex MGU-H and significantly increase the reliance on the MGU-K. Audi has
+          built their engine from the ground up in Neuburg, achieving a nearly 50/50 power distribution between the
+          internal combustion engine and the electrical systems.</p>
       </div>
-
       <div class="tech-detail">
-        <h4>⚙️ Mastering Active Aero</h4>
-        <p>
-          The Brackley aerodynamicists have focused extensively on the mechanical transition between the high-downforce Z-Mode and low-drag X-Mode. Maintaining aerodynamic balance and center-of-pressure stability during this shift is absolutely critical for providing Russell and Antonelli with confidence under heavy braking.
-        </p>
+        <h4>⚙️ Works Team Synergy</h4>
+        <p>Because Audi develops both the power unit and the chassis, the aerodynamic packaging at the rear of the car
+          is incredibly tight. There are no compromises required for fitting a customer engine, allowing for optimal
+          cooling and downforce generation.</p>
       </div>
-
     </section>
-
-    <section class="main-content" style="margin-top: 32px;">
-      <h2 class="section-title">Design Philosophy</h2>
-      <p style="color: var(--muted); line-height: 1.8; margin-bottom: 16px;">
-        Mercedes approaches 2026 not as an evolution, but as a chance to re-establish supremacy. Their design approach for the W17 is built on three core pillars:
-      </p>
-
-      <div class="feature-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🎯</div>
-          <h4>Powertrain Supremacy</h4>
-          <p>Aiming to replicate the immense engine advantage that defined their dominant 2014-2020 championship run.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">⚡</div>
-          <h4>Driver Confidence</h4>
-          <p>Building a mechanically stable, predictable rear end to allow the drivers to push the limits of the new, lower-downforce chassis.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🏁</div>
-          <h4>Unrelenting Development</h4>
-          <p>A modular chassis architecture explicitly designed to accept aggressive in-season upgrades as the new 2026 formula is better understood.</p>
-        </div>
-      </div>
-
-      <p style="color: var(--muted); line-height: 1.8; margin-top: 24px;">
-        Clad in their iconic silver and black, accented by Petronas teal, the W17 is the Silver Arrows' ultimate weapon to conquer Formula 1's newest frontier.
-      </p>
-    </section>
-
   </main>
 
   <div id="footer"></div>
@@ -552,17 +533,12 @@
   <script>
     (function () {
       const API_BASE = 'https://api.jolpi.ca/ergast/f1';
-      const constructorId = 'mercedes'; 
+      const constructorId = 'audi'; // Changed to Audi
 
       const elCurrentPos = document.getElementById('current-position');
       const elPoints = document.getElementById('points-scored');
       const elWins = document.getElementById('wins-count');
       const elPodiums = document.getElementById('podiums-count');
-
-      if (elCurrentPos) elCurrentPos.textContent = 'Loading…';
-      if (elPoints) elPoints.textContent = 'Loading…';
-      if (elWins) elWins.textContent = 'Loading…';
-      if (elPodiums) elPodiums.textContent = 'Loading…';
 
       async function fetchJson(url) {
         const resp = await fetch(url);
@@ -584,20 +560,13 @@
             if (myStanding) {
               if (elCurrentPos) elCurrentPos.textContent = myStanding.position || '—';
               if (elPoints) elPoints.textContent = myStanding.points || '—';
-            } else {
-              if (elCurrentPos) elCurrentPos.textContent = '—';
-              if (elPoints) elPoints.textContent = '—';
             }
-          } else {
-            if (elCurrentPos) elCurrentPos.textContent = '—';
-            if (elPoints) elPoints.textContent = '—';
           }
 
           const resultsUrl = `${API_BASE}/current/results.json?limit=1000`;
           const resultsJson = await fetchJson(resultsUrl);
           const races = resultsJson?.MRData?.RaceTable?.Races || [];
-          let wins = 0;
-          let podiums = 0;
+          let wins = 0, podiums = 0;
 
           for (const race of races) {
             const results = race.Results || [];
@@ -609,7 +578,7 @@
                   if (pos === 1) wins += 1;
                   if (pos >= 1 && pos <= 3) podiums += 1;
                 }
-                break; 
+                break;
               }
             }
           }
@@ -619,47 +588,25 @@
 
         } catch (err) {
           console.error('Error loading season stats:', err);
-          if (elCurrentPos) elCurrentPos.textContent = '—';
-          if (elPoints) elPoints.textContent = '—';
-          if (elWins) elWins.textContent = '—';
-          if (elPodiums) elPodiums.textContent = '—';
         }
       }
 
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', loadSeasonStats);
-      } else {
-        loadSeasonStats();
-      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', loadSeasonStats); }
+      else { loadSeasonStats(); }
     })();
 
     async function includeHTML(id, path) {
       const container = document.getElementById(id);
       if (!container) return;
-      try {
-        const resp = await fetch(path);
-        if (!resp.ok) throw new Error('Not found');
-        const html = await resp.text();
-        container.innerHTML = html;
-      } catch (err) {
-        console.warn(`Could not load ${path}`);
-      }
+      try { container.innerHTML = await (await fetch(path)).text(); } catch (err) { }
     }
 
-    document.addEventListener('DOMContentLoaded', async () => {
-      await Promise.all([
-        includeHTML('footer', '../footer.html')
-      ]);
-    });
-
+    document.addEventListener('DOMContentLoaded', async () => { await includeHTML('footer', '../footer.html'); });
     document.getElementById("go-back").addEventListener("click", function (e) {
       e.preventDefault();
-      if (document.referrer && document.referrer !== window.location.href) {
-        window.history.back();
-      } else {
-        window.location.href = "../teams.html";
-      }
+      document.referrer && document.referrer !== window.location.href ? window.history.back() : window.location.href = "../teams.html";
     });
   </script>
 </body>
+
 </html>

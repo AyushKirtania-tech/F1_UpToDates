@@ -1,4 +1,4 @@
-// F1 Racing Website - Updated for 2026 Transition
+// F1 Racing Website - 2026 Bento Dashboard Logic
 
 const $ = (selector) => document.querySelector(selector);
 
@@ -7,66 +7,19 @@ const API_SOURCES = [
   'http://api.jolpi.ca/ergast/f1'
 ];
 
-// 2026 START DATES FOR COUNTDOWN
+// 2026 START DATES FOR COUNTDOWN FALLBACK
 const FALLBACK_RACES = [
   {
     raceName: "Australian Grand Prix",
     Circuit: { circuitName: "Albert Park Circuit", Location: { locality: "Melbourne", country: "Australia" } },
-    date: "2026-03-08", time: "05:00:00Z"
-  },
-  {
-    raceName: "Chinese Grand Prix",
-    Circuit: { circuitName: "Shanghai International Circuit", Location: { locality: "Shanghai", country: "China" } },
-    date: "2026-03-15", time: "07:00:00Z"
+    date: "2026-03-08", time: "04:00:00Z"
   }
 ];
 
-// 1. INJECT CHAMPIONSHIP DETAILS (NEW)
-function injectChampionshipBanner() {
-    const heroSection = document.querySelector('.hero');
-    if (!heroSection) return;
-
-    const banner = document.createElement('div');
-    banner.className = 'championship-banner';
-    banner.style.cssText = `
-        background: linear-gradient(90deg, #000 0%, #ff8000 100%);
-        color: white;
-        padding: 20px;
-        margin-bottom: 20px;
-        border-radius: 8px;
-        text-align: center;
-        box-shadow: 0 4px 15px rgba(255, 128, 0, 0.3);
-        border: 1px solid #ff8000;
-    `;
-
-    banner.innerHTML = `
-        <h3 style="margin:0; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px;">🏆 2025 World Champions 🏆</h3>
-        <div style="display: flex; justify-content: center; gap: 40px; margin-top: 15px; flex-wrap: wrap;">
-            <div>
-                <span style="display:block; font-size: 0.9rem; color: #ddd;">Driver's Champion</span>
-                <strong style="font-size: 1.5rem;">Lando Norris 🇬🇧</strong>
-                <div style="font-size: 0.9rem;">423 Points</div>
-            </div>
-            <div style="border-left: 1px solid rgba(255,255,255,0.3); padding-left: 40px;">
-                <span style="display:block; font-size: 0.9rem; color: #ddd;">Constructor's Champion</span>
-                <strong style="font-size: 1.5rem;">McLaren 🟧</strong>
-                <div style="font-size: 0.9rem;">833 Points</div>
-            </div>
-        </div>
-    `;
-
-    heroSection.parentNode.insertBefore(banner, heroSection);
-}
-
-
 // Fetch next race logic
 async function fetchNextRace() {
-  // If 2025 is over, force fallback to 2026
   const now = new Date();
-  if (now.getFullYear() === 2025 && now.getMonth() > 10) {
-      return FALLBACK_RACES[0];
-  }
-
+  
   for (const apiBase of API_SOURCES) {
     try {
       const response = await fetch(`${apiBase}/current.json`);
@@ -87,11 +40,7 @@ async function fetchNextRace() {
     }
   }
   
-  const nextRace = FALLBACK_RACES.find(race => {
-    const raceDate = new Date(`${race.date}T${race.time}`);
-    return raceDate > now;
-  });
-  return nextRace || FALLBACK_RACES[0];
+  return FALLBACK_RACES[0];
 }
 
 function updateNextRaceDisplay(race) {
@@ -100,16 +49,16 @@ function updateNextRaceDisplay(race) {
   const dateEl = $('#nr-date');
 
   if (nameEl) nameEl.textContent = race.raceName;
-  if (circuitEl) circuitEl.textContent = race.Circuit.circuitName;
+  
+  if (circuitEl) {
+    circuitEl.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> ${race.Circuit.circuitName}, ${race.Circuit.Location.country}`;
+  }
+  
   if (dateEl && race.date) {
     const [year, month, day] = race.date.split('-').map(Number);
     const raceDate = new Date(year, month - 1, day);
     if (!isNaN(raceDate.getTime())) {
-      dateEl.textContent = raceDate.toLocaleDateString('en-US', {
-        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-      });
-    } else {
-      dateEl.textContent = 'Date TBA';
+      dateEl.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> ${raceDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}`;
     }
   }
 }
@@ -122,9 +71,6 @@ async function setupNextRace() {
     const raceDateTime = new Date(`${nextRace.date}T${timeToUse}Z`);
     if (!isNaN(raceDateTime.getTime())) {
       startCountdown(raceDateTime);
-    } else {
-      const countdownEl = document.querySelector('.countdown');
-      if (countdownEl) countdownEl.innerHTML = '<div style="grid-column:1/-1;text-align:center;">⚠️ Date TBA</div>';
     }
   }
 }
@@ -134,89 +80,132 @@ function startCountdown(targetDate) {
   const hoursEl = $('#cd-hours');
   const minsEl = $('#cd-mins');
   const secsEl = $('#cd-secs');
+  
   if (!daysEl) return;
 
   function updateCountdown() {
     const now = new Date().getTime();
     const distance = targetDate.getTime() - now;
+    
     if (distance < 0) {
-      const countdownEl = document.querySelector('.countdown');
-      if (countdownEl) countdownEl.innerHTML = '<div style="grid-column:1/-1;text-align:center;">🏁 LIVE 🏁</div>';
+      const countdownEl = document.querySelector('.countdown-grid');
+      if (countdownEl) countdownEl.innerHTML = '<div style="grid-column:1/-1;text-align:center;font-size:2rem;color:#10b981;font-weight:900;">🏁 RACE IS LIVE 🏁</div>';
       return;
     }
+    
     daysEl.textContent = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
     hoursEl.textContent = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
     minsEl.textContent = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
     secsEl.textContent = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
   }
+  
   updateCountdown();
   setInterval(updateCountdown, 1000);
 }
 
+// Carousel Logic adapted for 22 Drivers & Bento Grid sizing
 function setupDriverCarousel() {
   const grid = document.getElementById('driversGrid');
   const dotsContainer = document.getElementById('carouselDots');
   if (!grid || !dotsContainer) return;
-  const cards = document.querySelectorAll('.driver-card');
+  
+  const cards = document.querySelectorAll('.driver-portrait');
   const totalCards = cards.length;
-  const cardsPerView = window.innerWidth <= 640 ? 1 : window.innerWidth <= 968 ? 2 : 3;
-  const totalSlides = Math.ceil(totalCards / cardsPerView);
-  let currentSlide = 0;
+  
+  let cardsPerView = window.innerWidth <= 640 ? 1 : (window.innerWidth <= 1100 ? 2 : 4);
+  
+  // Calculate maximum number of steps we can slide without showing empty space
+  // E.g. 22 cards, view 4 -> max starting index is 22 - 4 = 18.
+  let maxSlideIndex = Math.max(0, totalCards - cardsPerView);
+  let currentSlide = 0; // Represents the index of the first visible card
   let autoplayInterval;
 
+  // Generate dots (one dot per card, capped at maxSlideIndex)
   dotsContainer.innerHTML = '';
-  for (let i = 0; i < totalSlides; i++) {
+  for (let i = 0; i <= maxSlideIndex; i++) {
     const dot = document.createElement('div');
     dot.className = 'carousel-dot';
     if (i === 0) dot.classList.add('active');
     dot.addEventListener('click', () => goToSlide(i));
     dotsContainer.appendChild(dot);
   }
-  const dots = document.querySelectorAll('.carousel-dot');
 
   function updateCarousel() {
+    const gap = 20; // Matches CSS gap
+    
+    // Recalculate view dimensions
+    cardsPerView = window.innerWidth <= 640 ? 1 : (window.innerWidth <= 1100 ? 2 : 4);
+    maxSlideIndex = Math.max(0, totalCards - cardsPerView);
+    
+    if (currentSlide > maxSlideIndex) {
+        currentSlide = maxSlideIndex; // Correct out of bounds on resize
+    }
+    
     const containerWidth = grid.parentElement.offsetWidth;
-    const gap = 24;
-    const totalGaps = (cardsPerView - 1) * gap;
-    const cardWidth = (containerWidth - totalGaps) / cardsPerView;
+    const cardWidth = (containerWidth - (gap * (cardsPerView - 1))) / cardsPerView;
+    
     cards.forEach(card => {
       card.style.width = `${cardWidth}px`;
-      card.style.minWidth = `${cardWidth}px`;
     });
-    const offset = currentSlide * (cardWidth + gap) * cardsPerView;
+    
+    // Calculate precise offset
+    const offset = currentSlide * (cardWidth + gap);
     grid.style.transform = `translateX(-${offset}px)`;
-    dots.forEach((dot, index) => dot.classList.toggle('active', index === currentSlide));
+    
+    // Update active dot
+    const dots = document.querySelectorAll('.carousel-dot');
+    dots.forEach((dot, index) => {
+      if(index <= maxSlideIndex) {
+        dot.style.display = 'block';
+        dot.classList.toggle('active', index === currentSlide);
+      } else {
+        dot.style.display = 'none'; // Hide extra dots dynamically
+      }
+    });
   }
-  function nextSlide() { currentSlide = (currentSlide + 1) % totalSlides; updateCarousel(); }
-  function goToSlide(index) { currentSlide = index; updateCarousel(); resetAutoplay(); }
-  function startAutoplay() { autoplayInterval = setInterval(nextSlide, 2000); }
-  function resetAutoplay() { clearInterval(autoplayInterval); startAutoplay(); }
+  
+  function nextSlide() { 
+    // Advance by cardsPerView if possible, otherwise jump to end, or wrap to start
+    if (currentSlide === maxSlideIndex) {
+        currentSlide = 0; // Wrap around to start
+    } else {
+        currentSlide += cardsPerView;
+        if (currentSlide > maxSlideIndex) currentSlide = maxSlideIndex; // Cap to end
+    }
+    updateCarousel(); 
+  }
+  
+  function goToSlide(index) { 
+    currentSlide = index; 
+    updateCarousel(); 
+    resetAutoplay(); 
+  }
+  
+  function startAutoplay() { 
+    autoplayInterval = setInterval(nextSlide, 3500); 
+  }
+  
+  function resetAutoplay() { 
+    clearInterval(autoplayInterval); 
+    startAutoplay(); 
+  }
 
-  updateCarousel();
+  // Init
+  setTimeout(updateCarousel, 100); 
   startAutoplay();
+  
+  // Pause on hover
   grid.addEventListener('mouseenter', () => clearInterval(autoplayInterval));
   grid.addEventListener('mouseleave', startAutoplay);
-  window.addEventListener('resize', updateCarousel);
-}
-
-function updateRaceStats() {
-    // Force reset for 2026 season start
-    const completedEl = document.getElementById('races-completed');
-    const remainingEl = document.getElementById('races-remaining');
-    if (completedEl) completedEl.textContent = '24'; // 2025 Completed
-    if (remainingEl) remainingEl.textContent = '0'; // 2025 Remaining
-}
-
-function setCurrentYear() {
-  const yearElement = $('#year');
-  if (yearElement) yearElement.textContent = new Date().getFullYear();
+  
+  // Handle resize safely
+  window.addEventListener('resize', () => {
+      updateCarousel();
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log(' F1 Racing Website Loaded!');
-  setCurrentYear();
+  console.log('F1 Bento Dashboard Loaded');
   setupNextRace();
-  injectChampionshipBanner(); // New function called here
   setupDriverCarousel();
-  updateRaceStats();
 });

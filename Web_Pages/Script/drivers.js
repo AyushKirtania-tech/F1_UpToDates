@@ -1,52 +1,42 @@
-/* drivers.js — FIXED: Status Counts, Filters, and 2025 Grid */
+/* drivers.js — Updated for 2026 Grid with Live Stats Modal */
 
 (() => {
-  /* ---------- Configuration ---------- */
   const API_BASE = 'https://api.jolpi.ca/ergast/f1';
-  
-  /* ---------- DOM helpers ---------- */
   const $ = sel => document.querySelector(sel);
 
-  /* ---------- 1. THE 2025 GRID (Manually Defined) ---------- */
+  /* ---------- THE 2026 GRID ---------- */
   const currentDrivers = [
-    { driverId: 'max_verstappen', givenName: 'Max', familyName: 'Verstappen', nationality: 'Dutch', permanentNumber: '1', teamId: 'red_bull' },
-    { driverId: 'norris', givenName: 'Lando', familyName: 'Norris', nationality: 'British', permanentNumber: '4', teamId: 'mclaren' },
+    { driverId: 'norris', givenName: 'Lando', familyName: 'Norris', nationality: 'British', permanentNumber: '1', teamId: 'mclaren' },
+    { driverId: 'piastri', givenName: 'Oscar', familyName: 'Piastri', nationality: 'Australian', permanentNumber: '81', teamId: 'mclaren' },
+    { driverId: 'max_verstappen', givenName: 'Max', familyName: 'Verstappen', nationality: 'Dutch', permanentNumber: '3', teamId: 'red_bull' },
+    { driverId: 'hadjar', givenName: 'Isack', familyName: 'Hadjar', nationality: 'French', permanentNumber: '6', teamId: 'red_bull' },
     { driverId: 'leclerc', givenName: 'Charles', familyName: 'Leclerc', nationality: 'Monegasque', permanentNumber: '16', teamId: 'ferrari' },
     { driverId: 'hamilton', givenName: 'Lewis', familyName: 'Hamilton', nationality: 'British', permanentNumber: '44', teamId: 'ferrari' },
     { driverId: 'russell', givenName: 'George', familyName: 'Russell', nationality: 'British', permanentNumber: '63', teamId: 'mercedes' },
-    { driverId: 'piastri', givenName: 'Oscar', familyName: 'Piastri', nationality: 'Australian', permanentNumber: '81', teamId: 'mclaren' },
-    { driverId: 'sainz', givenName: 'Carlos', familyName: 'Sainz', nationality: 'Spanish', permanentNumber: '55', teamId: 'williams' },
+    { driverId: 'antonelli', givenName: 'Kimi', familyName: 'Antonelli', nationality: 'Italian', permanentNumber: '12', teamId: 'mercedes' },
     { driverId: 'alonso', givenName: 'Fernando', familyName: 'Alonso', nationality: 'Spanish', permanentNumber: '14', teamId: 'aston_martin' },
     { driverId: 'stroll', givenName: 'Lance', familyName: 'Stroll', nationality: 'Canadian', permanentNumber: '18', teamId: 'aston_martin' },
-    { driverId: 'gasly', givenName: 'Pierre', familyName: 'Gasly', nationality: 'French', permanentNumber: '10', teamId: 'alpine' },
-    { driverId: 'ocon', givenName: 'Esteban', familyName: 'Ocon', nationality: 'French', permanentNumber: '31', teamId: 'haas' },
+    { driverId: 'sainz', givenName: 'Carlos', familyName: 'Sainz', nationality: 'Spanish', permanentNumber: '55', teamId: 'williams' },
     { driverId: 'albon', givenName: 'Alexander', familyName: 'Albon', nationality: 'Thai', permanentNumber: '23', teamId: 'williams' },
-    { driverId: 'tsunoda', givenName: 'Yuki', familyName: 'Tsunoda', nationality: 'Japanese', permanentNumber: '22', teamId: 'red_bull' },
-    { driverId: 'hulkenberg', givenName: 'Nico', familyName: 'Hülkenberg', nationality: 'German', permanentNumber: '27', teamId: 'sauber' },
     { driverId: 'lawson', givenName: 'Liam', familyName: 'Lawson', nationality: 'New Zealander', permanentNumber: '30', teamId: 'racing_bulls' },
+    { driverId: 'lindblad', givenName: 'Arvid', familyName: 'Lindblad', nationality: 'British', permanentNumber: '41', teamId: 'racing_bulls' },
     { driverId: 'bearman', givenName: 'Oliver', familyName: 'Bearman', nationality: 'British', permanentNumber: '87', teamId: 'haas' },
-    { driverId: 'antonelli', givenName: 'Kimi', familyName: 'Antonelli', nationality: 'Italian', permanentNumber: '12', teamId: 'mercedes' },
-    { driverId: 'doohan', givenName: 'Jack', familyName: 'Doohan', nationality: 'Australian', permanentNumber: '61', teamId: 'alpine' },
-    { driverId: 'colapinto', givenName: 'Franco', familyName: 'Colapinto', nationality: 'Argentine', permanentNumber: '43', teamId: 'alpine' }
+    { driverId: 'ocon', givenName: 'Esteban', familyName: 'Ocon', nationality: 'French', permanentNumber: '31', teamId: 'haas' },
+    { driverId: 'hulkenberg', givenName: 'Nico', familyName: 'Hülkenberg', nationality: 'German', permanentNumber: '27', teamId: 'audi' },
+    { driverId: 'bortoleto', givenName: 'Gabriel', familyName: 'Bortoleto', nationality: 'Brazilian', permanentNumber: '5', teamId: 'audi' },
+    { driverId: 'gasly', givenName: 'Pierre', familyName: 'Gasly', nationality: 'French', permanentNumber: '10', teamId: 'alpine' },
+    { driverId: 'colapinto', givenName: 'Franco', familyName: 'Colapinto', nationality: 'Argentine', permanentNumber: '43', teamId: 'alpine' },
+    { driverId: 'bottas', givenName: 'Valtteri', familyName: 'Bottas', nationality: 'Finnish', permanentNumber: '77', teamId: 'cadillac' },
+    { driverId: 'perez', givenName: 'Sergio', familyName: 'Perez', nationality: 'Mexican', permanentNumber: '11', teamId: 'cadillac' }
   ];
 
-  /* ---------- 2. THE 2026 ROOKIES ---------- */
-  const manualDrivers = [
-    { driverId: 'lindblad', givenName: 'Arvid', familyName: 'Lindblad', nationality: 'British', permanentNumber: 'TBA', season: 2026, teamId: 'racing_bulls' },
-    { driverId: 'hadjar', givenName: 'Isack', familyName: 'Hadjar', nationality: 'French', permanentNumber: 'TBA', season: 2026, teamId: 'red_bull' },
-    { driverId: 'bortoleto', givenName: 'Gabriel', familyName: 'Bortoleto', nationality: 'Brazilian', permanentNumber: 'TBA', season: 2026, teamId: 'sauber' }
-  ];
-
-  /* ---------- Manual Stats (Backup) ---------- */
   const manualChampionships = {
     'max_verstappen': 4, 'leclerc': 0, 'hamilton': 7, 'russell': 0, 'perez': 0, 'sainz': 0, 
-    'norris': 1, 'piastri': 0, 'alonso': 2, 'stroll': 0, 'tsunoda': 0, 'gasly': 0, 
-    'albon': 0, 'ocon': 0, 'hulkenberg': 0, 'zhou': 0, 'bottas': 0, 'magnussen': 0, 
-    'doohan': 0, 'lawson': 0, 'antonelli': 0, 'bearman': 0, 'colapinto': 0, 'hadjar': 0, 
-    'bortoleto': 0, 'lindblad': 0 
+    'norris': 1, 'piastri': 0, 'alonso': 2, 'stroll': 0, 'gasly': 0, 'albon': 0, 'ocon': 0, 
+    'hulkenberg': 0, 'bottas': 0, 'lawson': 0, 'antonelli': 0, 'bearman': 0, 
+    'hadjar': 0, 'bortoleto': 0, 'lindblad': 0, 'colapinto': 0 
   };
 
-  /* ---------- API Helpers ---------- */
   async function fetchJSON(url) {
     try {
       const r = await fetch(url);
@@ -57,8 +47,9 @@
     }
   }
 
+  // Fetch Career Stats
   async function fetchDriverStats(driverId) {
-    if (['lindblad', 'hadjar', 'bortoleto', 'antonelli', 'bearman', 'doohan', 'colapinto'].includes(driverId)) {
+    if (['lindblad', 'hadjar', 'bortoleto', 'antonelli', 'bearman', 'colapinto'].includes(driverId)) {
        return { wins: 0, podiums: 0, championships: 0, races: 0 };
     }
     try {
@@ -86,7 +77,59 @@
     }
   }
 
-  /* ---------- Visual Helpers ---------- */
+  // Fetch Live 2026 Season Stats
+  async function loadCurrentSeasonData(driverId, container) {
+    container.innerHTML = '<div class="stat-loading">Fetching live 2026 data from API...</div>';
+    
+    // Normalize driver ID for API
+    const apiDriverId = driverId === 'max_verstappen' ? 'max_verstappen' : driverId;
+
+    try {
+      const [standingsRes, resultsRes] = await Promise.all([
+        fetchJSON(`${API_BASE}/current/drivers/${apiDriverId}/driverStandings.json`),
+        fetchJSON(`${API_BASE}/current/drivers/${apiDriverId}/results.json`)
+      ]);
+
+      const standing = standingsRes?.MRData?.StandingsTable?.StandingsLists?.[0]?.DriverStandings?.[0];
+      const races = resultsRes?.MRData?.RaceTable?.Races || [];
+
+      // Handle 0 races scenario
+      if (races.length === 0 && !standing) {
+          container.innerHTML = '<div class="no-data">Live stats will appear here automatically after Round 1.</div>';
+          return;
+      }
+
+      let bestFinish = 999, bestGrid = 999, dnfs = 0;
+      
+      races.forEach(r => {
+          const res = r.Results[0];
+          const pos = parseInt(res.position);
+          const grid = parseInt(res.grid);
+          
+          if (pos < bestFinish) bestFinish = pos;
+          if (grid > 0 && grid < bestGrid) bestGrid = grid;
+          if (!res.status.includes('Finished') && !res.status.match(/\+\d/)) dnfs++;
+      });
+
+      const points = standing?.points || '0';
+      const position = standing?.position || '-';
+      const seasonWins = standing?.wins || '0';
+
+      container.innerHTML = `
+        <div class="live-stats-grid">
+          <div class="live-stat-box"><span class="ls-label">WDC Pos</span><span class="ls-val">P${position}</span></div>
+          <div class="live-stat-box"><span class="ls-label">Points</span><span class="ls-val">${points}</span></div>
+          <div class="live-stat-box"><span class="ls-label">Season Wins</span><span class="ls-val">${seasonWins}</span></div>
+          <div class="live-stat-box"><span class="ls-label">Best Finish</span><span class="ls-val">${bestFinish === 999 ? '-' : 'P'+bestFinish}</span></div>
+          <div class="live-stat-box"><span class="ls-label">Best Grid</span><span class="ls-val">${bestGrid === 999 ? '-' : 'P'+bestGrid}</span></div>
+          <div class="live-stat-box"><span class="ls-label">Retirements</span><span class="ls-val">${dnfs}</span></div>
+        </div>
+      `;
+    } catch(e) {
+      container.innerHTML = '<div class="no-data">⚠️ Failed to connect to F1 Live API.</div>';
+    }
+  }
+
   const teamColors = {
     'red_bull': 'linear-gradient(135deg,#1e3a8a,#3730a3)',
     'ferrari': 'linear-gradient(135deg,#dc2626,#991b1b)',
@@ -95,20 +138,19 @@
     'alpine': 'linear-gradient(135deg,#0084c7,#005a8f)',
     'aston_martin': 'linear-gradient(135deg,#006a4e,#004d3b)',
     'williams': 'linear-gradient(135deg,#00a0de,#0073a3)',
-    'rb': 'linear-gradient(135deg,#0f172a,#1e293b)',
     'racing_bulls': 'linear-gradient(135deg,#0f172a,#1e293b)',
-    'sauber': 'linear-gradient(135deg,#0b3b1f,#0f5a2f)',
-    'kick_sauber': 'linear-gradient(135deg,#0b3b1f,#0f5a2f)',
-    'haas': 'linear-gradient(135deg,#6b7280,#374151)'
+    'audi': 'linear-gradient(135deg,#000000,#ff0000)',
+    'haas': 'linear-gradient(135deg,#6b7280,#374151)',
+    'cadillac': 'linear-gradient(135deg,#ffffff,#a2a2a2)'
   };
   
   function getTeamColor(teamId) { return teamColors[teamId] || 'linear-gradient(135deg,#333,#555)'; }
   
   const flagMap = {
     'British': 'uk.jpg','Dutch': 'netherlands.webp','Monegasque': 'monaco.png','Spanish': 'spain.png','Mexican': 'mexico.png',
-    'Thai': 'thailand.png','Japanese': 'japan.png','French': 'france.png','Australian': 'australia.png','German': 'germany.jpg',
-    'Canadian': 'canada.png','Finnish': 'finland.svg','Danish': 'denmark.png','Chinese': 'china.png','American': 'usa.png',
-    'Italian': 'italy.webp','Brazilian': 'brazil.png','Argentine': 'argentina.png','New Zealander': 'new-zealand.png'
+    'Thai': 'thailand.png','French': 'france.png','Australian': 'australia.png','German': 'germany.jpg',
+    'Canadian': 'canada.png','Finnish': 'finland.svg','Italian': 'italy.webp','Brazilian': 'brazil.png','New Zealander': 'new-zealand.png',
+    'Argentine': 'argentina.png'
   };
   function getFlagImage(nat) { return flagMap[nat] || 'default.png'; }
 
@@ -116,45 +158,37 @@
     const map = {
       'max_verstappen': 'max.jpg','norris': 'lando.webp','leclerc': 'leclerc.jpg','hamilton': 'lewis.jpg',
       'russell': 'george.jpg','sainz': 'carlos.jpeg','piastri': 'piastri.webp','alonso': 'alonso.jpg',
-      'stroll': 'lance.jpg','tsunoda': 'yuki.webp','gasly': 'gasly.jpg','albon': 'albon.jpg',
-      'ocon': 'ocon.avif','hulkenberg': 'nico.jpg','perez': 'perez.jpg','zhou': 'zhou.jpg',
-      'bottas': 'bottas.jpg','sargeant': 'logan.jpg','magnussen': 'kevin.jpg','doohan': 'Doohan.webp',
-      'lawson': 'liam.avif','de_vries': 'devries.jpg','bearman': 'oliver.webp','antonelli': 'antonelli.avif',
-      'colapinto': 'franco.webp','hadjar': 'isack.webp','bortoleto': 'gabriel.webp', 'lindblad': 'lindblad.avif'
+      'stroll': 'lance.jpg','gasly': 'gasly.jpg','albon': 'albon.jpg', 'ocon': 'ocon.avif',
+      'hulkenberg': 'nico.webp','perez': 'Sergio.jpg','bottas': 'bottas.jpg', 'lawson': 'liam.avif',
+      'bearman': 'oliver.webp','antonelli': 'antonelli.avif', 'colapinto': 'franco.webp',
+      'hadjar': 'isack.webp','bortoleto': 'gabriel.webp', 'lindblad': 'lindblad.avif'
     };
     return map[driverId] || `${driverId}.jpg`;
   }
 
-  /* ---------- Create Card ---------- */
   function createDriverCard(driver, stats) {
-    const { driverId, givenName, familyName, nationality, permanentNumber, teamId, season } = driver;
-    const isRookie = season === 2026;
+    const { driverId, givenName, familyName, nationality, permanentNumber, teamId } = driver;
     const champs = manualChampionships[driverId] || 0;
     const teamName = (teamId || 'Unknown').replace('_', ' ').toUpperCase();
 
-    let pointsText = isRookie ? 'Debut Season' : '2025 Driver';
-    let descText = isRookie ? `Confirmed for 2026 Grid — ${nationality} talent.` 
-                            : (champs > 0 ? `${champs}x World Champion.` : `Official Driver for ${teamName}.`);
+    let pointsText = '2026 Driver';
+    let descText = champs > 0 ? `${champs}x World Champion.` : `Official Driver for ${teamName}.`;
 
     const card = document.createElement('article');
     card.className = 'driver-card reveal';
     card.dataset.team = teamId;
+    card.dataset.driverId = driverId; // Added for live stats
     
-    // Categories for Filtering
-    const categories = ['all'];
-    if (!isRookie) categories.push('current');
+    const categories = ['all', 'current'];
     if (stats.wins > 0) categories.push('winner');
     if (stats.podiums > 0) categories.push('podium');
     if (stats.championships > 0) categories.push('champion');
     card.dataset.category = categories.join(' ');
 
-    const standingBadge = isRookie ? `<div class="standing-badge">2026 Rookie</div>` : '';
-
     card.innerHTML = `
       <div class="driver-header" style="background: ${getTeamColor(teamId)};">
         <div>
           <div class="driver-number">#${permanentNumber || '?'}</div>
-          ${standingBadge}
         </div>
         <div class="country-flag">
           <img src="images/flags/${getFlagImage(nationality)}" alt="${nationality}" onerror="this.style.display='none'">
@@ -178,49 +212,37 @@
     return card;
   }
 
-  /* ---------- Main Load Function ---------- */
   async function loadDrivers() {
     const grid = $('#driversGrid');
     const loadingMsg = $('#loadingMessage');
     const totalDriversEl = $('#totalDrivers');
     const totalCountriesEl = $('#totalCountries');
-    
     if (!grid) return;
 
-    // 1. Save Legends
     const existingLegends = Array.from(document.querySelectorAll('.legend-card'));
-    
-    // FIX: Add 'podium' and 'winner' categories to legends automatically so filters work
     existingLegends.forEach(legend => {
         let currentCats = legend.dataset.category || '';
         if (!currentCats.includes('podium')) legend.dataset.category = currentCats + ' podium winner';
     });
 
-    grid.innerHTML = ''; // Clear skeleton
+    grid.innerHTML = ''; 
 
     try {
       if (loadingMsg) loadingMsg.innerHTML = '<div class="loading-spinner"></div><p>Loading...</p>';
 
-      const allDrivers = [...currentDrivers, ...manualDrivers];
-
-      // 2. Fetch Stats
-      const statsPromises = allDrivers.map(driver => fetchDriverStats(driver.driverId));
+      const statsPromises = currentDrivers.map(driver => fetchDriverStats(driver.driverId));
       const allStats = await Promise.all(statsPromises);
 
-      // 3. Render Cards
-      allDrivers.forEach((driver, index) => {
+      currentDrivers.forEach((driver, index) => {
         const stats = allStats[index];
         const card = createDriverCard(driver, stats);
         grid.appendChild(card);
       });
 
-      // 4. Add Back Legends
       existingLegends.forEach(legend => grid.appendChild(legend));
 
-      // 5. UPDATE STATUS BOX (FIXED DASHES)
-      const totalCount = allDrivers.length + existingLegends.length;
-      const uniqueCountries = new Set(allDrivers.map(d => d.nationality));
-      // Manually add legend countries to the count
+      const totalCount = currentDrivers.length + existingLegends.length;
+      const uniqueCountries = new Set(currentDrivers.map(d => d.nationality));
       ['Brazilian', 'German', 'French', 'Argentine', 'Austrian', 'British'].forEach(c => uniqueCountries.add(c));
       
       if (totalDriversEl) totalDriversEl.textContent = totalCount;
@@ -233,12 +255,10 @@
       initFilters();
 
     } catch (err) {
-      console.error('Error:', err);
-      existingLegends.forEach(legend => grid.appendChild(legend)); // Restore legends on error
+      existingLegends.forEach(legend => grid.appendChild(legend));
     }
   }
 
-  /* ---------- UI Functions ---------- */
   function initFilters() {
     const buttons = Array.from(document.querySelectorAll('.filter-btn'));
     const noResults = $('#noResults');
@@ -246,7 +266,6 @@
 
     function applyFilter(filter) {
       const f = (filter || 'all').toLowerCase();
-      // Map 'podiums' -> 'podium' to match category
       const map = {'podiums':'podium', 'winners':'winner', 'legends':'legends'}; 
       const target = map[f] || f;
       
@@ -285,13 +304,34 @@
     }
   }
 
+  // Upgraded Modal Function mapped with Live Stats
   function initDriverModal() {
     const grid = document.querySelector('.drivers-grid');
     if (!grid || document.querySelector('.driver-modal-overlay')) return;
 
     const overlay = document.createElement('div');
     overlay.className = 'driver-modal-overlay';
-    overlay.innerHTML = `<div class="driver-modal"><button class="driver-modal-close">&times;</button><div class="driver-modal-body"><div class="driver-modal-image"><img alt=""></div><div class="driver-modal-content"><h2 class="modal-name"></h2><div class="modal-team"></div><div class="modal-stats"></div><p class="modal-desc-text"></p></div></div></div>`;
+    
+    // Updated HTML structure for the modal
+    overlay.innerHTML = `
+      <div class="driver-modal">
+        <button class="driver-modal-close">&times;</button>
+        <div class="driver-modal-body">
+          <div class="driver-modal-image"><img alt=""></div>
+          <div class="driver-modal-content">
+            <h2 class="modal-name"></h2>
+            <div class="modal-team"></div>
+            <p class="modal-desc-text"></p>
+            
+            <h3 class="modal-section-title">Career Statistics</h3>
+            <div class="modal-stats"></div>
+
+            <h3 class="modal-section-title live-title">🔴 2026 Live Season Stats</h3>
+            <div class="modal-live-stats" id="modalLiveStats"></div>
+          </div>
+        </div>
+      </div>
+    `;
     document.body.appendChild(overlay);
 
     const close = () => overlay.classList.remove('visible');
@@ -307,9 +347,16 @@
         overlay.querySelector('.modal-team').textContent = card.querySelector('.team-name').textContent;
         overlay.querySelector('.modal-desc-text').textContent = card.querySelector('.driver-description').textContent;
         
+        // Populate Career Stats
         const stats = overlay.querySelector('.modal-stats');
         stats.innerHTML = '';
-        card.querySelectorAll('.stat').forEach(s => stats.appendChild(s.cloneNode(true)));
+        card.querySelectorAll('.driver-stats .stat').forEach(s => stats.appendChild(s.cloneNode(true)));
+        
+        // Fire API call for Live Stats
+        const driverId = card.dataset.driverId;
+        const liveStatsContainer = overlay.querySelector('#modalLiveStats');
+        loadCurrentSeasonData(driverId, liveStatsContainer);
+
         overlay.classList.add('visible');
       }
     });

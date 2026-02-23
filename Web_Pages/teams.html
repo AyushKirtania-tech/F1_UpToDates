@@ -5,11 +5,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Teams — F1 Racing</title>
-  <meta name="description" content="Explore Formula One teams, drivers and standings for the 2025 season." />
-  <meta name="keywords" content="F1, teams, constructors, 2025, McLaren, Ferrari, Mercedes" />
+  <meta name="description" content="Explore Formula One teams, drivers and standings for the 2026 season." />
+  <meta name="keywords" content="F1, teams, constructors, 2026, McLaren, Ferrari, Mercedes, Audi, Cadillac" />
 
-  <!-- Styles: adjust path if needed -->
-  <link rel="stylesheet" href="Styles/navbar.css">
+  <link rel="stylesheet" href="Styles/style.css"> <link rel="stylesheet" href="Styles/navbar.css">
   <link rel="stylesheet" href="Styles/teams.css">
   <link rel="stylesheet" href="Styles/skeleton.css">
   <link rel="stylesheet" href="Styles/keyboard-shortcuts.css">
@@ -17,37 +16,33 @@
   <link rel="stylesheet" href="Styles/global-search.css">
   <script defer src="Script/global-search.js"></script>
 
-  <!-- Favicons / theme color -->
   <meta name="theme-color" content="#070707" />
 </head>
 
 <body>
-  <!-- Navbar placeholder (included by teams.js includeHTML) -->
   <div id="navbar"></div>
 
   <main id="main" class="teams-main" tabindex="-1">
-    <!-- Hero -->
     <header class="teams-hero" aria-labelledby="teams-heading">
       <div class="hero-content">
         <h1 id="teams-heading">Championship Constructors</h1>
-        <p class="hero-subtitle">Meet the ten teams competing for glory in the 2025 Formula One World Championship.</p>
+        <p class="hero-subtitle">Meet the 11 teams competing for glory in the 2026 Formula One World Championship.</p>
       </div>
 
       <div class="teams-stats" aria-hidden="false">
         <div class="stat-item" role="group" aria-label="Total teams">
-          <span class="stat-number">10</span>
+          <span class="stat-number">11</span>
           <span class="stat-label">Teams</span>
         </div>
         <div class="stat-item" role="group" aria-label="Total drivers">
-          <span class="stat-number">20</span>
+          <span class="stat-number">22</span>
           <span class="stat-label">Drivers</span>
         </div>
         <div class="stat-item" role="group" aria-label="Total races">
-          <span class="stat-number">23</span>
+          <span class="stat-number">24</span>
           <span class="stat-label">Races</span>
         </div>
 
-        <!-- global results quick link (teams.js will wire this to results.html?season=YYYY) -->
         <div style="display:flex;align-items:center;margin-left:12px;">
           <a id="resultsLink" class="btn primary" href="results.html" aria-label="View latest race results">View
             Results</a>
@@ -55,14 +50,13 @@
       </div>
     </header>
 
-    <!-- Filters -->
     <section class="filter-section" aria-label="Filters">
       <div class="container">
         <div class="filter-controls" role="tablist" aria-label="Team filters">
           <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All Teams</button>
-          <button class="filter-btn" data-filter="top" role="tab" aria-selected="false">Top 3</button>
+          <button class="filter-btn" data-filter="top" role="tab" aria-selected="false">Top Tier</button>
           <button class="filter-btn" data-filter="midfield" role="tab" aria-selected="false">Midfield</button>
-          <button class="filter-btn" data-filter="backmarkers" role="tab" aria-selected="false">Backmarkers</button>
+          <button class="filter-btn" data-filter="backmarkers" role="tab" aria-selected="false">Challengers</button>
         </div>
       </div>
     </section>
@@ -71,12 +65,11 @@
       <div class="container">
         <div class="teams-grid" id="teamsGrid">
 
-          <!-- McLaren -->
           <article class="team-card reveal" data-category="top" data-team="mclaren"
             data-link="https://www.mclaren.com/racing/" aria-labelledby="team-mclaren">
             <div class="team-header" style="background: linear-gradient(135deg,#ff8c00,#ff6600);">
               <div class="team-logo" aria-hidden="true">
-                <img src="images/logos/mclaren.avif" alt="" onerror="this.style.display='none'">
+                <img src="images/logos/mclaren.avif" alt="McLaren Logo" onerror="this.style.display='none'">
               </div>
               <div class="team-info">
                 <h2 id="team-mclaren">McLaren</h2>
@@ -86,19 +79,19 @@
             </div>
 
             <div class="team-image">
-              <img src="images/cars/mclaren.jpg" alt="McLaren car" loading="lazy"
+              <img src="images/cars/mclaren.webp" alt="McLaren car" loading="lazy"
                 data-fallback="images/team-fallback.jpg">
             </div>
 
             <div class="team-details">
               <div class="drivers-section">
-                <h3>Drivers 2025</h3>
+                <h3>Drivers 2026</h3>
                 <div class="drivers">
                   <div class="driver" title="Lando Norris">
                     <img src="images/drivers/lando.webp" alt="Lando Norris" loading="lazy"
                       data-fallback="images/team-fallback.jpg">
                     <span>Lando Norris</span>
-                    <small>#4</small>
+                    <small>#1</small>
                   </div>
                   <div class="driver" title="Oscar Piastri">
                     <img src="images/drivers/piastri.webp" alt="Oscar Piastri" loading="lazy"
@@ -109,7 +102,7 @@
                 </div>
               </div>
 
-              <div class="team-stats" data-championships="10" data-wins="201" data-founded="1963">
+              <div class="team-stats" data-championships="8" data-wins="188" data-founded="1966">
                 <div class="stat">
                   <span class="stat-value"></span>
                   <span class="stat-desc">Championships</span>
@@ -124,12 +117,10 @@
                 </div>
               </div>
 
-              <p class="team-description">McLaren wins the 2025 Constructors' Championship with consistent pace and
-                strong driver pairings.</p>
+              <p class="team-description">The defending Constructors' Champions look to maintain their dominance with Norris sporting the #1 on his car.</p>
             </div>
           </article>
 
-          <!-- Ferrari -->
           <article class="team-card reveal" data-category="top" data-team="ferrari"
             data-link="https://www.ferrari.com/en-EN/formula1" aria-labelledby="team-ferrari">
             <div class="team-header" style="background: linear-gradient(135deg, #dc2626, #991b1b);">
@@ -137,7 +128,7 @@
                 <img src="images/logos/ferrari.avif" alt="Ferrari Logo" onerror="this.style.display='none'">
               </div>
               <div class="team-info">
-                <h2 id="team-ferrari">Ferrari</h2>
+                <h2 id="team-ferrari">Scuderia Ferrari</h2>
                 <p class="team-base">Maranello, Italy</p>
               </div>
               <div class="championship-position">#2</div>
@@ -150,7 +141,7 @@
 
             <div class="team-details">
               <div class="drivers-section">
-                <h3>Drivers 2025</h3>
+                <h3>Drivers 2026</h3>
                 <div class="drivers">
                   <div class="driver">
                     <img src="images/drivers/leclerc.jpg" alt="Charles Leclerc" loading="lazy">
@@ -166,7 +157,7 @@
                 </div>
               </div>
 
-              <div class="team-stats" data-championships="16" data-wins="248" data-founded="1947">
+              <div class="team-stats" data-championships="16" data-wins="248" data-founded="1950">
                 <div class="stat">
                   <span class="stat-value"></span>
                   <span class="stat-desc">Championships</span>
@@ -181,12 +172,10 @@
                 </div>
               </div>
 
-              <p class="team-description">Ferrari holds legendary status in F1. With past glories and passionate
-                support, they're pushing hard to reclaim the top spots this season.</p>
+              <p class="team-description">A historic super-team is formed as seven-time champion Lewis Hamilton officially joins Charles Leclerc in red.</p>
             </div>
           </article>
 
-          <!-- Mercedes -->
           <article class="team-card reveal" data-category="top" data-team="mercedes"
             data-link="https://www.mercedesamgf1.com/" aria-labelledby="team-mercedes">
             <div class="team-header" style="background: linear-gradient(135deg, #00d2be, #00a19c);">
@@ -194,7 +183,7 @@
                 <img src="images/logos/mercedes.avif" alt="Mercedes Logo" onerror="this.style.display='none'">
               </div>
               <div class="team-info">
-                <h2 id="team-mercedes">Mercedes</h2>
+                <h2 id="team-mercedes">Mercedes AMG F1</h2>
                 <p class="team-base">Brackley, United Kingdom</p>
               </div>
               <div class="championship-position">#3</div>
@@ -207,7 +196,7 @@
 
             <div class="team-details">
               <div class="drivers-section">
-                <h3>Drivers 2025</h3>
+                <h3>Drivers 2026</h3>
                 <div class="drivers">
                   <div class="driver">
                     <img src="images/drivers/george.jpg" alt="George Russell" loading="lazy">
@@ -215,15 +204,15 @@
                     <small>#63</small>
                   </div>
                   <div class="driver">
-                    <img src="images/drivers/antonelli.avif" alt="Andrea Kimi Antonelli" loading="lazy"
+                    <img src="images/drivers/antonelli.avif" alt="Kimi Antonelli" loading="lazy"
                       onerror="this.src='images/team-fallback.jpg'">
-                    <span>Andrea Kimi Antonelli</span>
+                    <span>Kimi Antonelli</span>
                     <small>#12</small>
                   </div>
                 </div>
               </div>
 
-              <div class="team-stats" data-championships="8" data-wins="130" data-founded="1954">
+              <div class="team-stats" data-championships="8" data-wins="128" data-founded="1954">
                 <div class="stat">
                   <span class="stat-value"></span>
                   <span class="stat-desc">Championships</span>
@@ -238,13 +227,11 @@
                 </div>
               </div>
 
-              <p class="team-description">Mercedes continues its rebuild with youth and experience — Russell and new
-                talent Antonelli aim to climb up the standings in 2025.</p>
+              <p class="team-description">A new era begins for the Silver Arrows with George Russell leading the charge alongside young prodigy Kimi Antonelli.</p>
             </div>
           </article>
 
-          <!-- Red Bull Racing -->
-          <article class="team-card reveal" data-category="midfield" data-team="redbull"
+          <article class="team-card reveal" data-category="top" data-team="redbull"
             data-link="https://www.redbullracing.com/" aria-labelledby="team-redbull">
             <div class="team-header" style="background: linear-gradient(135deg, #1e3a8a, #3730a3);">
               <div class="team-logo">
@@ -258,29 +245,29 @@
             </div>
 
             <div class="team-image">
-              <img src="images/cars/redbull.webp" alt="Red Bull Car" loading="lazy"
+              <img src="images/cars/redbull.avif" alt="Red Bull Car" loading="lazy"
                 onerror="this.src='images/team-fallback.jpg'">
             </div>
 
             <div class="team-details">
               <div class="drivers-section">
-                <h3>Drivers 2025</h3>
+                <h3>Drivers 2026</h3>
                 <div class="drivers">
                   <div class="driver">
                     <img src="images/drivers/max.jpg" alt="Max Verstappen" loading="lazy">
                     <span>Max Verstappen</span>
-                    <small>#1</small>
+                    <small>#3</small>
                   </div>
                   <div class="driver">
-                    <img src="images/drivers/yuki.webp" alt="Yuki Tsunoda" loading="lazy"
+                    <img src="images/drivers/isack.webp" alt="Isack Hadjar" loading="lazy"
                       onerror="this.src='images/team-fallback.jpg'">
-                    <span>Yuki Tsunoda</span>
-                    <small>#22</small>
+                    <span>Isack Hadjar</span>
+                    <small>#6</small>
                   </div>
                 </div>
               </div>
 
-              <div class="team-stats" data-championships="6" data-wins="126" data-founded="2005">
+              <div class="team-stats" data-championships="6" data-wins="121" data-founded="2005">
                 <div class="stat">
                   <span class="stat-value"></span>
                   <span class="stat-desc">Championships</span>
@@ -295,12 +282,10 @@
                 </div>
               </div>
 
-              <p class="team-description">Red Bull is adapting to tougher competition this season. Their focus is growth
-                and extracting performance with consistency.</p>
+              <p class="team-description">Entering the new engine era, Max Verstappen returns to his iconic #3, partnering with promoted rookie Isack Hadjar.</p>
             </div>
           </article>
 
-          <!-- Williams -->
           <article class="team-card reveal" data-category="midfield" data-team="williams"
             data-link="https://www.williamsf1.com/" aria-labelledby="team-williams">
             <div class="team-header" style="background: linear-gradient(135deg, #00a0de, #0073a3);">
@@ -315,12 +300,12 @@
             </div>
 
             <div class="team-image">
-              <img src="images/cars/williams.webp" alt="Williams Car" loading="lazy">
+              <img src="images/cars/williams.avif" alt="Williams Car" loading="lazy">
             </div>
 
             <div class="team-details">
               <div class="drivers-section">
-                <h3>Drivers 2025</h3>
+                <h3>Drivers 2026</h3>
                 <div class="drivers">
                   <div class="driver">
                     <img src="images/drivers/albon.jpg" alt="Alex Albon" loading="lazy">
@@ -328,9 +313,9 @@
                     <small>#23</small>
                   </div>
                   <div class="driver">
-                    <img src="images/drivers/carlos.jpeg" alt="Carlos Sainz Jr." loading="lazy"
+                    <img src="images/drivers/carlos.jpeg" alt="Carlos Sainz" loading="lazy"
                       onerror="this.src='images/team-fallback.jpg'">
-                    <span>Carlos Sainz Jr.</span>
+                    <span>Carlos Sainz</span>
                     <small>#55</small>
                   </div>
                 </div>
@@ -351,147 +336,31 @@
                 </div>
               </div>
 
-              <p class="team-description">Williams Racing is improving steadily, with a renewed sense of purpose as they
-                aim higher in 2025's standings.</p>
+              <p class="team-description">Boasting one of the strongest driver pairings on the grid, Williams looks to firmly establish themselves at the front of the midfield.</p>
             </div>
           </article>
 
-          <!-- Sauber -->
-          <article class="team-card reveal" data-category="backmarkers" data-team="sauber"
-            data-link="https://www.sauber-group.com/" aria-labelledby="team-sauber">
-            <div class="team-header" style="background: linear-gradient(135deg, #52b700, #3d8a00);">
-              <div class="team-logo">
-                <img src="images/logos/sauber.avif" alt="Sauber Logo" onerror="this.style.display='none'">
-              </div>
-              <div class="team-info">
-                <h2 id="team-sauber">Kick Sauber</h2>
-                <p class="team-base">Hinwil, Switzerland</p>
-              </div>
-              <div class="championship-position">#6</div>
-            </div>
-
-            <div class="team-image">
-              <img src="images/cars/sauber.avif" alt="Sauber Car" loading="lazy"
-                onerror="this.src='images/team-fallback.jpg'">
-            </div>
-
-            <div class="team-details">
-              <div class="drivers-section">
-                <h3>Drivers 2025</h3>
-                <div class="drivers">
-                  <div class="driver">
-                    <img src="images/drivers/nico.jpg" alt="Nico Hülkenberg" loading="lazy">
-                    <span>Nico Hülkenberg</span>
-                    <small>#27</small>
-                  </div>
-                  <div class="driver">
-                    <img src="images/drivers/gabriel.webp" alt="Gabriel Bortoleto" loading="lazy"
-                      onerror="this.src='images/team-fallback.jpg'">
-                    <span>Gabriel Bortoleto</span>
-                    <small>#28</small>
-                  </div>
-                </div>
-              </div>
-
-              <div class="team-stats" data-championships="0" data-wins="0" data-founded="1993">
-                <div class="stat">
-                  <span class="stat-value"></span>
-                  <span class="stat-desc">Championships</span>
-                </div>
-                <div class="stat">
-                  <span class="stat-value"></span>
-                  <span class="stat-desc">Race Wins</span>
-                </div>
-                <div class="stat">
-                  <span class="stat-value"></span>
-                  <span class="stat-desc">Founded</span>
-                </div>
-              </div>
-
-              <p class="team-description">A team with history and ambition, Sauber remains competitive and looking to
-                make gains in 2025.</p>
-            </div>
-          </article>
-
-          <!-- Racing Bulls -->
-          <article class="team-card reveal" data-category="backmarkers" data-team="racingbulls"
-            data-link="https://www.visacashapprb.com/" aria-labelledby="team-racingbulls">
-            <div class="team-header" style="background: linear-gradient(135deg, #1e3a8a, #ff4500);">
-              <div class="team-logo">
-                <img src="images/logos/racingbulls.avif" alt="Racing Bulls Logo" onerror="this.style.display='none'">
-              </div>
-              <div class="team-info">
-                <h2 id="team-racingbulls">Racing Bulls</h2>
-                <p class="team-base">Location TBD</p>
-              </div>
-              <div class="championship-position">#7</div>
-            </div>
-
-            <div class="team-image">
-              <img src="images/cars/racingbulls.webp" alt="Racing Bulls Car" loading="lazy"
-                onerror="this.src='images/team-fallback.jpg'">
-            </div>
-
-            <div class="team-details">
-              <div class="drivers-section">
-                <h3>Drivers 2025</h3>
-                <div class="drivers">
-                  <div class="driver">
-                    <img src="images/drivers/liam.avif" alt="Liam Lawson" loading="lazy">
-                    <span>Liam Lawson</span>
-                    <small>#30</small>
-                  </div>
-                  <div class="driver">
-                    <img src="images/drivers/isack.webp" alt="Isack Hadjar" loading="lazy"
-                      onerror="this.src='images/team-fallback.jpg'">
-                    <span>Isack Hadjar</span>
-                    <small>#25</small>
-                  </div>
-                </div>
-              </div>
-
-              <div class="team-stats" data-championships="0" data-wins="0" data-founded="2005">
-                <div class="stat">
-                  <span class="stat-value"></span>
-                  <span class="stat-desc">Championships</span>
-                </div>
-                <div class="stat">
-                  <span class="stat-value"></span>
-                  <span class="stat-desc">Race Wins</span>
-                </div>
-                <div class="stat">
-                  <span class="stat-value"></span>
-                  <span class="stat-desc">Founded</span>
-                </div>
-              </div>
-
-              <p class="team-description">Racing Bulls is a newer entry, building its presence and preparing to compete
-                with a growing field of teams.</p>
-            </div>
-          </article>
-
-          <!-- Aston Martin -->
-          <article class="team-card reveal" data-category="backmarkers" data-team="astonmartin"
+          <article class="team-card reveal" data-category="midfield" data-team="astonmartin"
             data-link="https://www.astonmartinf1.com/" aria-labelledby="team-astonmartin">
             <div class="team-header" style="background: linear-gradient(135deg, #006a4e, #004d3b);">
               <div class="team-logo">
                 <img src="images/logos/aston.avif" alt="Aston Martin Logo" onerror="this.style.display='none'">
               </div>
               <div class="team-info">
-                <h2 id="team-astonmartin">Aston Martin</h2>
+                <h2 id="team-astonmartin">Aston Martin F1</h2>
                 <p class="team-base">Silverstone, United Kingdom</p>
               </div>
-              <div class="championship-position">#8</div>
+              <div class="championship-position">#6</div>
             </div>
 
             <div class="team-image">
-              <img src="images/cars/aston.jpg" alt="Aston Martin Car" loading="lazy"
+              <img src="images/cars/aston.avif" alt="Aston Martin Car" loading="lazy"
                 onerror="this.src='images/team-fallback.jpg'">
             </div>
 
             <div class="team-details">
               <div class="drivers-section">
-                <h3>Drivers 2025</h3>
+                <h3>Drivers 2026</h3>
                 <div class="drivers">
                   <div class="driver">
                     <img src="images/drivers/alonso.jpg" alt="Fernando Alonso" loading="lazy">
@@ -503,121 +372,6 @@
                       onerror="this.src='images/team-fallback.jpg'">
                     <span>Lance Stroll</span>
                     <small>#18</small>
-                  </div>
-                </div>
-              </div>
-
-              <div class="team-stats" data-championships="0" data-wins="0" data-founded="2018">
-                <div class="stat">
-                  <span class="stat-value"></span>
-                  <span class="stat-desc">Championships</span>
-                </div>
-                <div class="stat">
-                  <span class="stat-value"></span>
-                  <span class="stat-desc">Race Wins</span>
-                </div>
-                <div class="stat">
-                  <span class="stat-value"></span>
-                  <span class="stat-desc">Founded</span>
-                </div>
-              </div>
-
-              <p class="team-description">Aston Martin continues its campaign, balancing design, consistency and
-                performance gains in 2025.</p>
-            </div>
-          </article>
-
-          <!-- Haas -->
-          <article class="team-card reveal" data-category="backmarkers" data-team="haas"
-            data-link="https://www.haasf1team.com/" aria-labelledby="team-haas">
-            <div class="team-header" style="background: linear-gradient(135deg, #ffffff, #b91c1c);">
-              <div class="team-logo">
-                <img src="images/logos/haas.avif" alt="Haas Logo" onerror="this.style.display='none'">
-              </div>
-              <div class="team-info">
-                <h2 id="team-haas">Haas</h2>
-                <p class="team-base">Kannapolis, USA</p>
-              </div>
-
-              <div class="championship-position">#9</div>
-
-            </div>
-
-            <div class="team-image">
-              <img src="images/cars/haas.jpg" alt="Haas Car" loading="lazy"
-                onerror="this.src='images/team-fallback.jpg'">
-            </div>
-
-            <div class="team-details">
-              <div class="drivers-section">
-                <h3>Drivers 2025</h3>
-                <div class="drivers">
-                  <div class="driver">
-                    <img src="images/drivers/oliver.webp" alt="Oliver Bearman" loading="lazy">
-                    <span>Oliver Bearman</span>
-                    <small>#21</small>
-                  </div>
-                  <div class="driver">
-                    <img src="images/drivers/ocon.avif" alt="Esteban Ocon" loading="lazy">
-                    <span>Esteban Ocon</span>
-                    <small>#31</small>
-                  </div>
-                </div>
-              </div>
-
-              <div class="team-stats" data-championships="0" data-wins="0" data-founded="2016">
-                <div class="stat">
-                  <span class="stat-value"></span>
-                  <span class="stat-desc">Championships</span>
-                </div>
-                <div class="stat">
-                  <span class="stat-value"></span>
-                  <span class="stat-desc">Race Wins</span>
-                </div>
-                <div class="stat">
-                  <span class="stat-value"></span>
-                  <span class="stat-desc">Founded</span>
-                </div>
-              </div>
-
-              <p class="team-description">Haas works to improve consistency and performance under challenging conditions
-                this season.</p>
-            </div>
-          </article>
-
-          <!-- Alpine -->
-          <article class="team-card reveal" data-category="backmarkers" data-team="alpine"
-            data-link="https://www.alpinecars.com/en/formula-1/" aria-labelledby="team-alpine">
-            <div class="team-header" style="background: linear-gradient(135deg, #0084c7, #005a8f);">
-              <div class="team-logo">
-                <img src="images/logos/alpine.avif" alt="Alpine Logo" onerror="this.style.display='none'">
-              </div>
-              <div class="team-info">
-                <h2 id="team-alpine">Alpine</h2>
-                <p class="team-base">Enstone, United Kingdom</p>
-              </div>
-
-              <div class="championship-position">#10</div>
-
-            </div>
-
-            <div class="team-image">
-              <img src="images/cars/alpine.avif" alt="Alpine Car" loading="lazy">
-            </div>
-
-            <div class="team-details">
-              <div class="drivers-section">
-                <h3>Drivers 2025</h3>
-                <div class="drivers">
-                  <div class="driver">
-                    <img src="images/drivers/gasly.jpg" alt="Pierre Gasly" loading="lazy">
-                    <span>Pierre Gasly</span>
-                    <small>#10</small>
-                  </div>
-                  <div class="driver">
-                    <img src="images/drivers/franco.webp" alt="Franco Colapinto" loading="lazy">
-                    <span>Franco Colapinto</span>
-                    <small>#29</small>
                   </div>
                 </div>
               </div>
@@ -637,8 +391,279 @@
                 </div>
               </div>
 
-              <p class="team-description">Alpine continues its efforts in adapting mid-season, bringing in fresh driver
-                dynamics and technical changes.</p>
+              <p class="team-description">Now a works Honda team and guided by Adrian Newey, Aston Martin aims to return to the front with their experienced duo.</p>
+            </div>
+          </article>
+
+          <article class="team-card reveal" data-category="midfield" data-team="alpine"
+            data-link="https://www.alpinecars.com/en/formula-1/" aria-labelledby="team-alpine">
+            <div class="team-header" style="background: linear-gradient(135deg, #0084c7, #005a8f);">
+              <div class="team-logo">
+                <img src="images/logos/alpine.avif" alt="Alpine Logo" onerror="this.style.display='none'">
+              </div>
+              <div class="team-info">
+                <h2 id="team-alpine">Alpine F1 Team</h2>
+                <p class="team-base">Enstone, United Kingdom</p>
+              </div>
+              <div class="championship-position">#7</div>
+            </div>
+
+            <div class="team-image">
+              <img src="images/cars/alpine.avif" alt="Alpine Car" loading="lazy">
+            </div>
+
+            <div class="team-details">
+              <div class="drivers-section">
+                <h3>Drivers 2026</h3>
+                <div class="drivers">
+                  <div class="driver">
+                    <img src="images/drivers/gasly.jpg" alt="Pierre Gasly" loading="lazy">
+                    <span>Pierre Gasly</span>
+                    <small>#10</small>
+                  </div>
+                  <div class="driver">
+                    <img src="images/drivers/franco.webp" alt="Franco Colapinto" loading="lazy">
+                    <span>Franco Colapinto</span>
+                    <small>#43</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="team-stats" data-championships="2" data-wins="1" data-founded="2021">
+                <div class="stat">
+                  <span class="stat-value"></span>
+                  <span class="stat-desc">Championships</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value"></span>
+                  <span class="stat-desc">Race Wins</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value"></span>
+                  <span class="stat-desc">Founded</span>
+                </div>
+              </div>
+
+              <p class="team-description">Alpine brings in fan-favorite Franco Colapinto to partner with Gasly as they push for consistent points finishes.</p>
+            </div>
+          </article>
+
+          <article class="team-card reveal" data-category="backmarkers" data-team="racingbulls"
+            data-link="https://www.visacashapprb.com/" aria-labelledby="team-racingbulls">
+            <div class="team-header" style="background: linear-gradient(135deg, #0f172a, #1e293b);">
+              <div class="team-logo">
+                <img src="images/logos/racingbulls.avif" alt="Racing Bulls Logo" onerror="this.style.display='none'">
+              </div>
+              <div class="team-info">
+                <h2 id="team-racingbulls">Racing Bulls</h2>
+                <p class="team-base">Faenza, Italy</p>
+              </div>
+              <div class="championship-position">#8</div>
+            </div>
+
+            <div class="team-image">
+              <img src="images/cars/racingbulls.jpeg" alt="Racing Bulls Car" loading="lazy"
+                onerror="this.src='images/team-fallback.jpg'">
+            </div>
+
+            <div class="team-details">
+              <div class="drivers-section">
+                <h3>Drivers 2026</h3>
+                <div class="drivers">
+                  <div class="driver">
+                    <img src="images/drivers/liam.avif" alt="Liam Lawson" loading="lazy">
+                    <span>Liam Lawson</span>
+                    <small>#30</small>
+                  </div>
+                  <div class="driver">
+                    <img src="images/drivers/lindblad.avif" alt="Arvid Lindblad" loading="lazy"
+                      onerror="this.src='images/team-fallback.jpg'">
+                    <span>Arvid Lindblad</span>
+                    <small>#41</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="team-stats" data-championships="0" data-wins="2" data-founded="2006">
+                <div class="stat">
+                  <span class="stat-value"></span>
+                  <span class="stat-desc">Championships</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value"></span>
+                  <span class="stat-desc">Race Wins</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value"></span>
+                  <span class="stat-desc">Founded</span>
+                </div>
+              </div>
+
+              <p class="team-description">Red Bull's sister squad fields an incredibly exciting, young lineup to challenge the midfield order.</p>
+            </div>
+          </article>
+
+          <article class="team-card reveal" data-category="backmarkers" data-team="haas"
+            data-link="https://www.haasf1team.com/" aria-labelledby="team-haas">
+            <div class="team-header" style="background: linear-gradient(135deg, #6b7280, #374151);">
+              <div class="team-logo">
+                <img src="images/logos/haas.avif" alt="Haas Logo" onerror="this.style.display='none'">
+              </div>
+              <div class="team-info">
+                <h2 id="team-haas">Haas F1 Team</h2>
+                <p class="team-base">Kannapolis, USA</p>
+              </div>
+              <div class="championship-position">#9</div>
+            </div>
+
+            <div class="team-image">
+              <img src="images/cars/haas.avif" alt="Haas Car" loading="lazy"
+                onerror="this.src='images/team-fallback.jpg'">
+            </div>
+
+            <div class="team-details">
+              <div class="drivers-section">
+                <h3>Drivers 2026</h3>
+                <div class="drivers">
+                  <div class="driver">
+                    <img src="images/drivers/ocon.avif" alt="Esteban Ocon" loading="lazy">
+                    <span>Esteban Ocon</span>
+                    <small>#31</small>
+                  </div>
+                  <div class="driver">
+                    <img src="images/drivers/oliver.webp" alt="Oliver Bearman" loading="lazy">
+                    <span>Oliver Bearman</span>
+                    <small>#87</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="team-stats" data-championships="0" data-wins="0" data-founded="2016">
+                <div class="stat">
+                  <span class="stat-value"></span>
+                  <span class="stat-desc">Championships</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value"></span>
+                  <span class="stat-desc">Race Wins</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value"></span>
+                  <span class="stat-desc">Founded</span>
+                </div>
+              </div>
+
+              <p class="team-description">The American squad looks to maximize their package with the experience of Ocon and the raw speed of Bearman.</p>
+            </div>
+          </article>
+
+          <article class="team-card reveal" data-category="backmarkers" data-team="audi"
+            data-link="https://www.audi.com/" aria-labelledby="team-audi">
+            <div class="team-header" style="background: linear-gradient(135deg, #000000, #ff0000);">
+              <div class="team-logo">
+                <img src="images/logos/audi.avif" alt="Audi Logo" onerror="this.style.display='none'">
+              </div>
+              <div class="team-info">
+                <h2 id="team-audi">Audi F1 Team</h2>
+                <p class="team-base">Hinwil, Switzerland</p>
+              </div>
+              <div class="championship-position">#10</div>
+            </div>
+
+            <div class="team-image">
+              <img src="images/cars/audi.jpg" alt="Audi Car" loading="lazy"
+                onerror="this.src='images/team-fallback.jpg'">
+            </div>
+
+            <div class="team-details">
+              <div class="drivers-section">
+                <h3>Drivers 2026</h3>
+                <div class="drivers">
+                  <div class="driver">
+                    <img src="images/drivers/nico.jpg" alt="Nico Hülkenberg" loading="lazy">
+                    <span>Nico Hülkenberg</span>
+                    <small>#27</small>
+                  </div>
+                  <div class="driver">
+                    <img src="images/drivers/gabriel.webp" alt="Gabriel Bortoleto" loading="lazy"
+                      onerror="this.src='images/team-fallback.jpg'">
+                    <span>Gabriel Bortoleto</span>
+                    <small>#5</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="team-stats" data-championships="0" data-wins="0" data-founded="2026">
+                <div class="stat">
+                  <span class="stat-value"></span>
+                  <span class="stat-desc">Championships</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value"></span>
+                  <span class="stat-desc">Race Wins</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value"></span>
+                  <span class="stat-desc">Founded</span>
+                </div>
+              </div>
+
+              <p class="team-description">Taking over the Sauber entry, Audi makes their highly anticipated debut as a full factory works team.</p>
+            </div>
+          </article>
+
+          <article class="team-card reveal" data-category="backmarkers" data-team="cadillac"
+            data-link="https://www.cadillac.com/" aria-labelledby="team-cadillac">
+            <div class="team-header" style="background: linear-gradient(135deg, #ffffff, #a2a2a2); color: #000;">
+              <div class="team-logo">
+                <img src="images/logos/cadillac.avif" alt="Cadillac Logo" onerror="this.style.display='none'">
+              </div>
+              <div class="team-info">
+                <h2 id="team-cadillac">Cadillac F1</h2>
+                <p class="team-base">Charlotte, USA</p>
+              </div>
+              <div class="championship-position" style="color:#000;">#11</div>
+            </div>
+
+            <div class="team-image">
+              <img src="images/cars/cadillac.avif" alt="Cadillac Car" loading="lazy"
+                onerror="this.src='images/team-fallback.jpg'">
+            </div>
+
+            <div class="team-details">
+              <div class="drivers-section">
+                <h3>Drivers 2026</h3>
+                <div class="drivers">
+                  <div class="driver">
+                    <img src="images/drivers/Sergio.jpg" alt="Sergio Perez" loading="lazy">
+                    <span>Sergio Perez</span>
+                    <small>#11</small>
+                  </div>
+                  <div class="driver">
+                    <img src="images/drivers/bottas.jpg" alt="Valtteri Bottas" loading="lazy"
+                      onerror="this.src='images/team-fallback.jpg'">
+                    <span>Valtteri Bottas</span>
+                    <small>#77</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="team-stats" data-championships="0" data-wins="0" data-founded="2026">
+                <div class="stat">
+                  <span class="stat-value"></span>
+                  <span class="stat-desc">Championships</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value"></span>
+                  <span class="stat-desc">Race Wins</span>
+                </div>
+                <div class="stat">
+                  <span class="stat-value"></span>
+                  <span class="stat-desc">Founded</span>
+                </div>
+              </div>
+
+              <p class="team-description">F1's newest team officially joins the grid with a highly experienced lineup, aiming to disrupt the pack immediately.</p>
             </div>
           </article>
 
@@ -648,10 +673,9 @@
       </div>
     </section>
 
-    <!-- Championship Table -->
     <section class="championship-section">
       <div class="container">
-        <h2 class="section-title">2025 Constructor Standings</h2>
+        <h2 class="section-title">2026 Constructor Starting Standings</h2>
         <div class="championship-table" role="table" aria-label="Constructor standings">
           <div class="table-header" role="row">
             <div role="columnheader">Pos</div>
@@ -660,64 +684,67 @@
           </div>
 
           <div class="table-row" role="row">
-            <div>1</div>
-            <div><span class="team-color mclaren" aria-hidden="true"></span>McLaren</div>
-            <div>623</div>
+            <div>-</div>
+            <div><span class="team-color mclaren" aria-hidden="true" style="background:#ff8c00;"></span>McLaren</div>
+            <div>0</div>
           </div>
           <div class="table-row" role="row">
-            <div>2</div>
-            <div><span class="team-color mercedes" aria-hidden="true"></span>Mercedes</div>
-            <div>290</div>
+            <div>-</div>
+            <div><span class="team-color ferrari" aria-hidden="true" style="background:#dc2626;"></span>Scuderia Ferrari</div>
+            <div>0</div>
           </div>
           <div class="table-row" role="row">
-            <div>3</div>
-            <div><span class="team-color ferrari" aria-hidden="true"></span>Ferrari</div>
-            <div>286</div>
+            <div>-</div>
+            <div><span class="team-color mercedes" aria-hidden="true" style="background:#00d2be;"></span>Mercedes AMG</div>
+            <div>0</div>
           </div>
           <div class="table-row" role="row">
-            <div>4</div>
-            <div><span class="team-color redbull" aria-hidden="true"></span>Red Bull Racing</div>
-            <div>272</div>
+            <div>-</div>
+            <div><span class="team-color redbull" aria-hidden="true" style="background:#1e3a8a;"></span>Red Bull Racing</div>
+            <div>0</div>
           </div>
           <div class="table-row" role="row">
-            <div>5</div>
-            <div><span class="team-color williams" aria-hidden="true"></span>Williams Racing</div>
-            <div>101</div>
+            <div>-</div>
+            <div><span class="team-color williams" aria-hidden="true" style="background:#00a0de;"></span>Williams Racing</div>
+            <div>0</div>
           </div>
           <div class="table-row" role="row">
-            <div>6</div>
-            <div><span class="team-color racingbulls" aria-hidden="true"></span>Racing Bulls</div>
-            <div>72</div>
+            <div>-</div>
+            <div><span class="team-color astonmartin" aria-hidden="true" style="background:#006a4e;"></span>Aston Martin</div>
+            <div>0</div>
           </div>
           <div class="table-row" role="row">
-            <div>7</div>
-            <div><span class="team-color astonmartin" aria-hidden="true"></span>Aston Martin</div>
-            <div>62</div>
+            <div>-</div>
+            <div><span class="team-color alpine" aria-hidden="true" style="background:#0084c7;"></span>Alpine</div>
+            <div>0</div>
           </div>
           <div class="table-row" role="row">
-            <div>8</div>
-            <div><span class="team-color sauber" aria-hidden="true"></span>Kick Sauber</div>
-            <div>55</div>
+            <div>-</div>
+            <div><span class="team-color racingbulls" aria-hidden="true" style="background:#0f172a;"></span>Racing Bulls</div>
+            <div>0</div>
           </div>
           <div class="table-row" role="row">
-            <div>9</div>
-            <div><span class="team-color haas" aria-hidden="true"></span>Haas</div>
-            <div>44</div>
+            <div>-</div>
+            <div><span class="team-color haas" aria-hidden="true" style="background:#ffffff;"></span>Haas</div>
+            <div>0</div>
           </div>
           <div class="table-row" role="row">
-            <div>10</div>
-            <div><span class="team-color alpine" aria-hidden="true"></span>Alpine</div>
-            <div>20</div>
+            <div>-</div>
+            <div><span class="team-color audi" aria-hidden="true" style="background:#ff0000;"></span>Audi</div>
+            <div>0</div>
+          </div>
+          <div class="table-row" role="row">
+            <div>-</div>
+            <div><span class="team-color cadillac" aria-hidden="true" style="background:#a2a2a2;"></span>Cadillac</div>
+            <div>0</div>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Footer injection point (included by teams.js includeHTML) -->
-  <div id="footer" aria-hidden="true"></div>
+  <div id="footer"></div>
 
-  <!-- Scripts (defer to improve load) -->
   <script defer src="Script/teams.js"></script>
   <script defer src="Script/common.js"></script>
   <script src="Script/navbar.js"></script>

@@ -1,417 +1,144 @@
-/* race-reminder.css - Race Reminder System Styles */
+/* Styles/race-reminder.css - Sleek Local Time Table for Bento Box */
 
-/* Container */
 .race-reminder-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0;
-}
-
-/* Hero Section */
-.race-reminder-hero {
-  background: linear-gradient(135deg, rgba(225, 6, 0, 0.15) 0%, rgba(0, 0, 0, 0.4) 100%);
-  border-radius: 20px;
-  padding: 40px;
-  margin-bottom: 30px;
-  text-align: center;
-  border: 2px solid rgba(225, 6, 0, 0.3);
-  position: relative;
-  overflow: hidden;
-}
-
-.race-reminder-hero::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(225, 6, 0, 0.1) 0%, transparent 70%);
-  animation: rotate-glow 20s linear infinite;
-  pointer-events: none;
-}
-
-@keyframes rotate-glow {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.race-badge {
-  display: inline-block;
-  background: linear-gradient(135deg, #e10600, #ff4500);
-  color: white;
-  padding: 8px 20px;
-  border-radius: 25px;
-  font-size: 0.85rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-bottom: 16px;
-  box-shadow: 0 4px 15px rgba(225, 6, 0, 0.4);
-  position: relative;
-  z-index: 1;
-}
-
-.race-title {
-  font-size: 2.5rem;
-  font-weight: 900;
-  color: #fff;
-  margin: 0 0 12px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  position: relative;
-  z-index: 1;
-}
-
-.race-circuit {
-  font-size: 1.2rem;
-  color: #e10600;
-  font-weight: 700;
-  margin: 0 0 8px;
+  width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  position: relative;
-  z-index: 1;
+  flex-direction: column;
 }
 
-.race-location {
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.8);
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  position: relative;
-  z-index: 1;
-}
-
-.circuit-icon,
-.location-icon {
-  font-size: 1.2rem;
-}
-
-/* Countdown */
-.race-countdown {
-  background: rgba(20, 20, 20, 0.8);
-  border-radius: 20px;
-  padding: 32px;
-  margin-bottom: 30px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-}
-
-.countdown-title {
+.timetable-msg {
+  color: var(--text-muted);
+  font-size: 0.9rem;
   text-align: center;
-  font-size: 1.3rem;
-  font-weight: 800;
-  color: #fff;
-  margin: 0 0 24px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  padding: 20px 0;
+  font-style: italic;
 }
 
-.countdown-grid {
+.timetable-msg.error {
+  color: #ff4500;
+}
+
+.timetable-list {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  /* Automatically places the sessions side-by-side on desktop, and stacks them on mobile! */
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 16px;
+  margin-top: 10px;
 }
 
-.countdown-item {
-  background: linear-gradient(135deg, #e10600, #ff4500);
+.timetable-item {
+  display: flex;
+  flex-direction: column; /* Stacks the text vertically inside the mini-card */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 20px 16px;
   border-radius: 16px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 4px 15px rgba(225, 6, 0, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.countdown-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(225, 6, 0, 0.5);
-}
-
-.countdown-value {
-  font-size: 3rem;
-  font-weight: 900;
-  color: white;
-  line-height: 1;
-  margin-bottom: 8px;
-  font-variant-numeric: tabular-nums;
-}
-
-.countdown-label {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.9);
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-.season-ended {
-  text-align: center;
-  font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.7);
-  margin: 0;
-  padding: 20px;
-}
-
-/* Action Buttons */
-.reminder-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 30px;
-}
-
-.btn-reminder,
-.btn-calendar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 16px 24px;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 700;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-reminder {
-  background: linear-gradient(135deg, #e10600, #ff4500);
-  color: white;
-  box-shadow: 0 4px 15px rgba(225, 6, 0, 0.4);
-}
-
-.btn-reminder:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(225, 6, 0, 0.6);
-}
-
-.btn-reminder.reminder-active {
-  background: linear-gradient(135deg, #10b981, #059669);
-  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
-}
-
-.btn-reminder.reminder-active:hover {
-  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
-}
-
-.btn-calendar {
-  background: rgba(255, 255, 255, 0.05);
-  color: white;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-}
-
-.btn-calendar:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: #e10600;
-  transform: translateY(-2px);
-}
-
-.btn-reminder:disabled,
-.btn-calendar:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  transform: none !important;
-}
-
-.btn-icon {
-  font-size: 1.2rem;
-}
-
-.btn-text {
-  font-weight: 700;
-}
-
-/* Race Details Grid */
-.race-details-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-bottom: 30px;
-}
-
-.detail-card {
-  background: rgba(20, 20, 20, 0.6);
-  border-radius: 16px;
-  padding: 20px;
-  text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
-}
-
-.detail-card:hover {
-  background: rgba(225, 6, 0, 0.1);
-  border-color: rgba(225, 6, 0, 0.3);
-  transform: translateY(-2px);
-}
-
-.detail-icon {
-  font-size: 2rem;
-  margin-bottom: 12px;
-}
-
-/* Completed detail styles */
-.detail-label {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.8);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  margin-bottom: 6px;
-}
-
-.detail-value {
-  font-size: 1.15rem;
-  color: #ffffff;
-  font-weight: 800;
-  margin-top: 4px;
-  font-variant-numeric: tabular-nums;
-}
-
-/* Weekend schedule */
-.weekend-schedule {
-  margin-bottom: 30px;
-  border-radius: 16px;
-  padding: 20px;
-  background: rgba(20, 20, 20, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.schedule-title {
-  margin: 0 0 12px;
-  font-size: 1.1rem;
-  font-weight: 900;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.schedule-list {
-  display: grid;
-  gap: 10px;
-}
-
-.schedule-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 14px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  transition: transform 0.18s ease, background 0.18s ease;
-}
-
-.schedule-item:hover {
-  transform: translateY(-4px);
-  background: rgba(225, 6, 0, 0.06);
-  border-color: rgba(225, 6, 0, 0.18);
-}
-
-.schedule-session {
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 0.9rem;
-  color: #fff;
-}
-
-.schedule-time {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 700;
-}
-
-/* Sprint special accent */
-.schedule-item.sprint {
-  background: linear-gradient(90deg, rgba(255, 200, 0, 0.06), rgba(255, 255, 255, 0.01));
-  border-color: rgba(255, 200, 0, 0.14);
-  box-shadow: 0 6px 18px rgba(255, 200, 0, 0.05);
-}
-
-/* Tips */
-.reminder-tips {
-  display: flex;
   gap: 12px;
+}
+
+.timetable-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-4px); /* Floats up instead of sliding right */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.tt-left, .tt-right {
+  display: flex;
+  flex-direction: column; /* Centers all the text cleanly */
   align-items: center;
-  padding: 14px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  margin-bottom: 20px;
+  gap: 8px;
 }
 
-.tip-icon {
-  font-size: 1.6rem;
-}
-
-.tip-content {
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 700;
-  font-size: 0.95rem;
-}
-
-/* Message / toast */
-.reminder-message {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 28px;
-  background: rgba(20, 20, 20, 0.95);
+.tt-name {
+  font-weight: 800;
+  font-size: 1.1rem;
   color: #fff;
-  padding: 12px 18px;
-  border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
-  z-index: 9999;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.tt-day {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Update the colored borders to be on the BOTTOM since the cards are now horizontal */
+.session-race {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(225, 6, 0, 0.1));
+  border-bottom: 4px solid #e10600;
+  border-left: 1px solid rgba(255, 255, 255, 0.05); /* Reset left border */
+}
+
+.session-quali {
+  border-bottom: 4px solid #34d399;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.session-sprint {
+  border-bottom: 4px solid #a78bfa;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Past Sessions fade out so you know what's coming next */
+.session-past {
+  opacity: 0.4;
+  filter: grayscale(100%);
+}
+
+.session-past:hover {
+  opacity: 0.8;
+  filter: grayscale(50%);
+}
+
+/* ==========================================================
+   Timezone Clarity Additions
+   ========================================================== */
+
+/* The little note at the top of the box */
+.tz-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: #10b981; /* A reassuring green color */
+  margin-bottom: 12px;
   font-weight: 700;
-  display: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
-/* Message types */
-.reminder-message.info { background: rgba(20,20,20,0.95); color: #fff; }
-.reminder-message.success { background: linear-gradient(90deg,#10b981,#059669); color: #fff; }
-.reminder-message.error { background: linear-gradient(90deg,#e10600,#ff4500); color: #fff; }
-.reminder-message.warning { background: linear-gradient(90deg,#f59e0b,#f97316); color: #000; }
-
-/* Loading & spinner keyframes */
-@keyframes spin {
-  to { transform: rotate(360deg); }
+/* Grouping the time and the timezone abbreviation */
+.tt-time-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Accessibility: focus styles */
-.btn-reminder:focus,
-.btn-calendar:focus,
-.detail-card:focus,
-.schedule-item:focus {
-  outline: 3px solid rgba(225, 6, 0, 0.25);
-  outline-offset: 4px;
+/* Remove the background from the original .tt-time since we moved it to the wrapper */
+.tt-time {
+  background: transparent !important; 
+  padding: 0 !important;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-  .countdown-grid { grid-template-columns: repeat(2, 1fr); }
-  .race-details-grid { grid-template-columns: repeat(2, 1fr); }
-  .race-reminder-hero { padding: 28px; }
+/* The small "IST" or "EST" text next to the time */
+.tt-tz {
+  font-size: 0.7rem;
+  color: var(--accent);
+  font-weight: 800;
+  letter-spacing: 1px;
 }
-
-@media (max-width: 520px) {
-  .countdown-grid { grid-template-columns: 1fr; }
-  .reminder-actions { grid-template-columns: 1fr; }
-  .race-details-grid { grid-template-columns: 1fr; }
-  .race-title { font-size: 1.6rem; }
-  .race-badge { padding: 6px 14px; font-size: 0.75rem; }
-  .race-reminder-container { padding: 0 12px; }
-}
-
-/* Utility */
-.text-muted { color: rgba(255,255,255,0.6); font-weight: 600; }
-.hidden { display: none !important; }

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>F1 Circuits - Formula One Racing</title>
+  <title>F1 Circuits - 2026 Formula One Racing</title>
   <link rel="stylesheet" href="Styles/style.css">
   <link rel="stylesheet" href="Styles/circuits.css">
   <link rel="stylesheet" href="Styles/navbar.css">
@@ -13,19 +13,17 @@
   <script defer src="Script/keyboard-shortcuts.js"></script>
   <link rel="stylesheet" href="Styles/global-search.css">
   <script defer src="Script/global-search.js"></script>
-  <meta name="description" content="Explore the world's most iconic Formula 1 racing circuits">
+  <meta name="description" content="Explore the world's most iconic Formula 1 racing circuits for the 2026 season">
 </head>
 
 <body>
-  <!-- Navbar placeholder -->
   <div id="navbar"></div>
 
   <main class="circuits-main">
-    <!-- Hero Section -->
     <section class="circuits-hero">
       <div class="hero-content">
-        <h1>F1 Circuits Around The World</h1>
-        <p>Explore the most iconic and challenging racing tracks in Formula 1</p>
+        <h1>2026 F1 Circuits</h1>
+        <p>Explore the 24 iconic and challenging racing tracks of the new era</p>
         <div class="hero-stats">
           <div class="hero-stat">
             <span class="stat-num" id="total-circuits">24</span>
@@ -43,14 +41,12 @@
       </div>
     </section>
 
-    <!-- Regional Overview Cards -->
     <section class="world-circuits-section">
       <h2>F1 Circuits Worldwide</h2>
 
       <section class="regional-overview">
         <div class="region-cards-grid">
 
-          <!-- Europe -->
           <article class="region-card" role="button" tabindex="0" aria-label="Europe circuits">
             <div class="region-image">
               <img src="images/regions/europe.jpg" alt="Europe circuits photo"
@@ -58,16 +54,15 @@
               <div class="region-overlay-text">
                 <h3>Europe</h3>
                 <div class="region-count">10 Circuits</div>
-                <div class="region-list">Monaco • Silverstone • Spa • Monza • Zandvoort • Imola • Barcelona • Red Bull
+                <div class="region-list">Monaco • Silverstone • Spa • Monza • Zandvoort • Madrid • Barcelona • Red Bull
                   Ring • Hungaroring • Baku</div>
               </div>
             </div>
             <div class="region-meta">
-              <div style="flex:1; color:var(--muted); font-size:0.9rem;">Historic venues & high-speed straights</div>
+              <div style="flex:1; color:var(--muted); font-size:0.9rem;">Historic venues & brand-new street circuits</div>
             </div>
           </article>
 
-          <!-- Asia & Middle East -->
           <article class="region-card" role="button" tabindex="0" aria-label="Asia and Middle East circuits">
             <div class="region-image">
               <img src="images/regions/asia_middle_east.jpg" alt="Asia and Middle East circuits photo"
@@ -79,27 +74,25 @@
               </div>
             </div>
             <div class="region-meta">
-              <div style="flex:1; color:var(--muted); font-size:0.9rem;">Night races & desert speedways</div>
+              <div style="flex:1; color:var(--muted); font-size:0.9rem;">Spectacular night races & desert speedways</div>
             </div>
           </article>
 
-          <!-- Americas -->
           <article class="region-card" role="button" tabindex="0" aria-label="Americas circuits">
             <div class="region-image">
               <img src="images/regions/america.webp" alt="Americas circuits photo"
                 onerror="this.src='https://source.unsplash.com/800x600/?america,grandprix,track'" loading="lazy">
               <div class="region-overlay-text">
                 <h3>Americas</h3>
-                <div class="region-count">5 Circuits</div>
+                <div class="region-count">6 Circuits</div>
                 <div class="region-list">USA (Miami, Austin, Las Vegas) • Canada • Brazil • Mexico</div>
               </div>
             </div>
             <div class="region-meta">
-              <div style="flex:1; color:var(--muted); font-size:0.9rem;">Street races meet fast permanent circuits</div>
+              <div style="flex:1; color:var(--muted); font-size:0.9rem;">Glamorous street races & fast permanent circuits</div>
             </div>
           </article>
 
-          <!-- Oceania -->
           <article class="region-card" role="button" tabindex="0" aria-label="Oceania circuits">
             <div class="region-image">
               <img src="images/regions/australia.webp" alt="Oceania circuits photo"
@@ -111,7 +104,7 @@
               </div>
             </div>
             <div class="region-meta">
-              <div style="flex:1; color:var(--muted); font-size:0.9rem;">Season opener classics</div>
+              <div style="flex:1; color:var(--muted); font-size:0.9rem;">The traditional season opener classic</div>
             </div>
           </article>
 
@@ -119,7 +112,6 @@
       </section>
     </section>
 
-    <!-- Filter & Search -->
     <section class="circuits-controls">
       <div class="search-bar">
         <input type="text" id="circuit-search" placeholder="Search circuits by name or country..." />
@@ -143,18 +135,14 @@
       </div>
     </section>
 
-    <!-- Loading State -->
     <div id="loading" class="loading" hidden>
       <div class="spinner"></div>
-      <p>Loading circuits...</p>
+      <p>Loading 2026 circuits...</p>
     </div>
 
-    <!-- Circuits Grid -->
     <section id="circuits-container" class="circuits-grid" aria-live="polite">
-      <!-- Circuit cards will be dynamically inserted here -->
-    </section>
+      </section>
 
-    <!-- Circuit Fun Facts -->
     <section class="circuit-facts">
       <h2>Circuit Facts</h2>
       <div class="facts-grid">
@@ -174,16 +162,15 @@
           <p class="fact-detail">First F1 night street race</p>
         </div>
         <div class="fact-card monaco">
-          <h3>Most Historic</h3>
-          <p class="fact-highlight">Monaco</p>
-          <p class="fact-detail">Racing since 1950</p>
+          <h3>Brand New Entry</h3>
+          <p class="fact-highlight">Madrid, Spain</p>
+          <p class="fact-detail">Joining the calendar in 2026</p>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- Footer placeholder -->
   <div id="footer"></div>
 
   <script src="Script/circuits.js"></script>

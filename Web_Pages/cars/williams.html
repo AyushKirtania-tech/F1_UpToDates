@@ -4,10 +4,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>FW46 — Williams Racing</title>
+  <title>FW47 — Williams Racing</title>
   <meta name="description"
-    content="Explore the Williams FW46 — technical specs, performance and technical details for the 2025 season." />
-  <meta name="keywords" content="F1, Williams, FW46, Formula 1, car specifications, 2025" />
+    content="Explore the Williams FW47 — technical specs, performance and technical details for the 2026 season." />
+  <meta name="keywords" content="F1, Williams, FW47, Formula 1, car specifications, 2026, Carlos Sainz, Alex Albon, Mercedes Power" />
 
   <link rel="stylesheet" href="../Styles/teams.css">
   <style>
@@ -49,7 +49,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: url('../images/cars/williams.webp') center/cover;
+      background: url('../images/cars/williams.avif') center/cover;
       opacity: 0.52;
       z-index: 0;
       mix-blend-mode: overlay;
@@ -302,16 +302,22 @@
       border-color: var(--wil-mid);
     }
 
-    .driver-image-wrap {
-      height: 250px;
-      overflow: hidden;
-      background: linear-gradient(135deg, rgba(0, 160, 222, 0.08), rgba(0, 83, 159, 0.06));
+    /* UPDATED DRIVER IMAGE WRAP */
+    .driver-image-wrap { 
+      height: 250px; 
+      overflow: hidden; 
+      background: linear-gradient(135deg, rgba(0, 160, 222, 0.2), rgba(0, 83, 159, 0.4)); 
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
     }
 
-    .driver-image-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .driver-image-wrap img { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: contain; 
+      object-position: bottom center; 
+      padding-top: 15px; 
     }
 
     .driver-info {
@@ -328,7 +334,7 @@
       display: inline-block;
       padding: 4px 12px;
       background: rgba(0, 130, 200, 0.12);
-      color: var(--wil-mid);
+      color: var(--wil-light);
       border-radius: 6px;
       font-weight: 900;
       margin-bottom: 12px;
@@ -373,28 +379,25 @@
       <span>←</span> Back
     </a>
 
-
-    <!-- Hero -->
     <header class="car-hero">
       <div class="car-hero-content">
-        <h1>FW46</h1>
-        <p class="subtitle">Williams Racing — 2025 Formula One Car</p>
+        <h1>FW47</h1>
+        <p class="subtitle">Williams Racing — 2026 Formula One Car</p>
       </div>
     </header>
 
-    <!-- Stats Highlight -->
     <div class="stat-highlight">
       <div class="stat-box">
-        <span class="stat-number">~1000</span>
+        <span class="stat-number">1000+</span>
         <span class="stat-text">Horsepower</span>
       </div>
       <div class="stat-box">
         <span class="stat-number">1.6L</span>
-        <span class="stat-text">V6 Turbo Hybrid</span>
+        <span class="stat-text">Mercedes V6 Hybrid</span>
       </div>
       <div class="stat-box">
-        <span class="stat-number">740</span>
-        <span class="stat-text">kg Minimum Weight</span>
+        <span class="stat-number">50%</span>
+        <span class="stat-text">Electric Power</span>
       </div>
       <div class="stat-box">
         <span class="stat-number">360+</span>
@@ -402,111 +405,81 @@
       </div>
     </div>
 
-    <!-- Main Content Grid -->
     <div class="content-grid">
       <div class="main-content">
         <h2 class="section-title">Overview</h2>
         <p style="color: var(--muted); line-height: 1.8; margin-bottom: 24px;">
-          The Williams FW46 represents the team's commitment to returning to competitiveness with Mercedes power. Built
-          at Grove, the FW46 combines traditional Williams racing spirit with modern engineering approaches. The car
-          focuses on aerodynamic efficiency, reliability, and providing a solid platform for development throughout the
-          season.
+          The Williams FW47 is the culmination of James Vowles' long-term restructuring masterplan. Entering the transformative 2026 regulatory era, the FW47 marries heavily upgraded Grove infrastructure with the formidable 2026 Mercedes-AMG power unit. Driven by one of the strongest driver pairings on the grid in Alex Albon and Carlos Sainz, Williams looks to firmly establish themselves at the front of the midfield and challenge for regular podiums.
         </p>
 
         <h2 class="section-title">Key Features</h2>
         <div class="feature-grid">
           <div class="feature-card">
             <div class="feature-icon">⚡</div>
-            <h4>Mercedes Power Unit</h4>
-            <p>Proven 1.6L V6 turbo hybrid from Mercedes-AMG High Performance Powertrains, delivering reliable power and
-              excellent fuel efficiency.</p>
+            <h4>Mercedes 2026 PU</h4>
+            <p>Utilizing the cutting-edge 2026 specification Mercedes-AMG hybrid engine, maximizing the massive new 350kW MGU-K output.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">🔧</div>
-            <h4>Efficient Packaging</h4>
-            <p>Optimized component layout to reduce weight and improve center of gravity, enhancing overall balance and
-              handling characteristics.</p>
+            <h4>Upgraded Infrastructure</h4>
+            <p>The first Williams chassis fully developed using the team's newly modernized composite and simulation facilities in Grove.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">💨</div>
-            <h4>Aerodynamic Development</h4>
-            <p>Focus on clean airflow management and efficient downforce generation to maximize performance within
-              budget constraints.</p>
+            <h4>Active Aero Philosophy</h4>
+            <p>Mastering the new X-Mode and Z-Mode active aerodynamics to ensure the FW47 retains its historical straight-line speed advantage without sacrificing cornering stability.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">🛞</div>
-            <h4>Mechanical Platform</h4>
-            <p>Refined suspension geometry designed to extract maximum performance from Pirelli tires across varying
-              track conditions.</p>
+            <h4>Mercedes Rear-End</h4>
+            <p>Continuing to purchase the gearbox and rear suspension hardware from Mercedes, allowing Grove engineers to focus entirely on chassis and aero development.</p>
           </div>
         </div>
 
-        <h2 class="section-title">2025 Driver Lineup</h2>
+        <h2 class="section-title">2026 Driver Lineup</h2>
         <div class="drivers-showcase">
           <div class="driver-card-large">
             <div class="driver-image-wrap">
               <img src="../images/drivers/albon.jpg" alt="Alexander Albon"
-                onerror="this.src='../images/team-fallback.jpg'">
+                onerror="this.src='../images/driver-fallback.jpg'">
             </div>
             <div class="driver-info">
               <span class="driver-number">#23</span>
               <h4>Alexander Albon</h4>
-              <p style="color: var(--muted);">Experienced racer and team leader — providing crucial development
-                direction and consistent point-scoring performances.</p>
+              <p style="color: var(--muted);">The established team leader whose precise feedback and unyielding loyalty have been the bedrock of Williams' modern resurgence.</p>
             </div>
           </div>
 
           <div class="driver-card-large">
             <div class="driver-image-wrap">
               <img src="../images/drivers/carlos.jpeg" alt="Carlos Sainz Jr."
-                onerror="this.src='../images/team-fallback.jpg'">
+                onerror="this.src='../images/driver-fallback.jpg'">
             </div>
             <div class="driver-info">
               <span class="driver-number">#55</span>
-              <h4>Carlos Sainz Jr.</h4>
-              <p style="color: #bdbdbd;">The experienced race winner joins Williams in 2025, bringing
-                championship-caliber speed and development expertise to accelerate the team's progress.</p>
+              <h4>Carlos Sainz</h4>
+              <p style="color: var(--muted);">Entering his second season with the team, the brilliant Spanish race winner provides championship-tier technical direction to the new 2026 project.</p>
             </div>
           </div>
         </div>
       </div>
 
       <div class="sidebar">
-        <!-- Technical Specs -->
         <div class="specs-card">
           <h3>Technical Specifications</h3>
-          <div class="spec-item"><span class="spec-label">Chassis</span><span class="spec-value">Carbon Fiber
-              Monocoque</span></div>
-          <div class="spec-item"><span class="spec-label">Engine</span><span class="spec-value">Mercedes-AMG 1.6L V6
-              Turbo</span></div>
-          <div class="spec-item"><span class="spec-label">Power Output</span><span class="spec-value">~1000 HP</span>
-          </div>
-          <div class="spec-item"><span class="spec-label">Energy Recovery</span><span class="spec-value">Dual MGU
-              System</span></div>
-          <div class="spec-item"><span class="spec-label">Transmission</span><span class="spec-value">8-Speed
-              Sequential</span></div>
-          <div class="spec-item"><span class="spec-label">Weight</span><span class="spec-value">740 kg (min)</span>
-          </div>
-          <div class="spec-item"><span class="spec-label">Fuel Capacity</span><span class="spec-value">110 kg
-              (max)</span></div>
+          <div class="spec-item"><span class="spec-label">Chassis</span><span class="spec-value">Williams Carbon Monocoque</span></div>
+          <div class="spec-item"><span class="spec-label">Engine</span><span class="spec-value">Mercedes 1.6L V6 Hybrid</span></div>
+          <div class="spec-item"><span class="spec-label">Power Output</span><span class="spec-value">1000+ HP Total</span></div>
+          <div class="spec-item"><span class="spec-label">Electrical Power</span><span class="spec-value">350 kW (~470 HP)</span></div>
+          <div class="spec-item"><span class="spec-label">Transmission</span><span class="spec-value">Mercedes 8-Speed</span></div>
+          <div class="spec-item"><span class="spec-label">Weight</span><span class="spec-value">TBA (2026 Regs)</span></div>
+          <div class="spec-item"><span class="spec-label">Fuel</span><span class="spec-value">100% Sustainable</span></div>
         </div>
 
-        <!-- Performance -->
-        <div class="specs-card">
-          <h3>Performance</h3>
-          <div class="spec-item"><span class="spec-label">0-100 km/h</span><span class="spec-value">~2.5 s</span></div>
-          <div class="spec-item"><span class="spec-label">0-200 km/h</span><span class="spec-value">~4.5 s</span></div>
-          <div class="spec-item"><span class="spec-label">Top Speed</span><span class="spec-value">360+ km/h</span>
-          </div>
-          <div class="spec-item"><span class="spec-label">Max RPM</span><span class="spec-value">15,000 RPM</span></div>
-          <div class="spec-item"><span class="spec-label">Max Lateral G</span><span class="spec-value">6.5G</span></div>
-        </div>
-
-        <!-- 2025 Season Goals (dynamic) -->
         <div class="specs-card" id="season-goals-card">
-          <h3>2025 Season Goals</h3>
+          <h3>2026 Live Stats</h3>
           <div class="spec-item"><span class="spec-label">Target Position</span><span class="spec-value"
-              id="target-position">Top 5</span></div>
+              id="target-position">Podium Contenders</span></div>
           <div class="spec-item"><span class="spec-label">Current Position</span><span class="spec-value"
               id="current-position">—</span></div>
           <div class="spec-item"><span class="spec-label">Points Scored</span><span class="spec-value"
@@ -517,90 +490,61 @@
               id="podiums-count">—</span></div>
         </div>
 
-        <!-- Heritage -->
         <div class="specs-card">
           <h3>Williams F1 Heritage</h3>
-          <div class="spec-item"><span class="spec-label">Constructors' Championships</span><span
-              class="spec-value">9</span></div>
+          <div class="spec-item"><span class="spec-label">Constructors' Champs</span><span class="spec-value">9</span></div>
           <div class="spec-item"><span class="spec-label">Race Wins</span><span class="spec-value">114</span></div>
           <div class="spec-item"><span class="spec-label">Pole Positions</span><span class="spec-value">128</span></div>
-          <div class="spec-item"><span class="spec-label">Base</span><span class="spec-value">Grove, United
-              Kingdom</span></div>
+          <div class="spec-item"><span class="spec-label">Base</span><span class="spec-value">Grove, United Kingdom</span></div>
         </div>
       </div>
     </div>
 
-    <!-- Technical Deep Dive -->
     <section class="technical-section">
       <h2 class="section-title">Technical Deep Dive</h2>
 
       <div class="tech-detail">
-        <h4>🔋 Power Unit & Integration</h4>
+        <h4>🔋 Maximizing the Mercedes Partnership</h4>
         <p>
-          The Mercedes-AMG power unit provides Williams with proven performance and reliability. The team has focused on
-          optimal integration to maximize cooling efficiency while minimizing aerodynamic drag from radiator inlets and
-          exhausts.
+          By extending their power unit agreement with Mercedes-AMG through the 2026 regulation change, Williams secured access to what is historically the most reliable and powerful engine package at the start of a new era. The FW47 wraps its chassis tightly around the new, battery-heavy Mercedes PU, ensuring efficient cooling for the massively expanded MGU-K system.
         </p>
       </div>
 
       <div class="tech-detail">
-        <h4>⚙️ Aerodynamics & Efficiency</h4>
+        <h4>⚙️ Adapting to the Shorter Wheelbase</h4>
         <p>
-          The FW46's aerodynamic concept emphasizes efficiency over outright downforce. The floor, sidepods, and rear
-          end have been optimized through CFD and wind tunnel work to provide stable, predictable performance across
-          different circuit types.
+          The 2026 rules mandate a significantly shorter wheelbase and narrower car. The Grove engineering team utilized this opportunity to completely overhaul their weight distribution philosophy. By purchasing the Mercedes gearbox, Williams saved crucial developmental cap space, allocating those funds entirely into mastering the complex active aerodynamics required to keep the FW47 stable under heavy braking.
         </p>
       </div>
 
-      <div class="tech-detail">
-        <h4>🏗️ Chassis & Weight Distribution</h4>
-        <p>
-          The carbon fiber monocoque meets all FIA safety standards while achieving competitive weight targets.
-          Strategic component placement ensures optimal weight distribution for improved tire management and handling
-          balance.
-        </p>
-      </div>
-
-      <div class="tech-detail">
-        <h4>🎯 Development & Strategy</h4>
-        <p>
-          Williams' approach for 2025 focuses on understanding the car's behavior and implementing targeted upgrades.
-          The team uses comprehensive data analysis and driver feedback to guide development priorities throughout the
-          season.
-        </p>
-      </div>
     </section>
 
-    <!-- Design Philosophy -->
     <section class="main-content" style="margin-top: 32px;">
       <h2 class="section-title">Design Philosophy</h2>
       <p style="color: var(--muted); line-height: 1.8; margin-bottom: 16px;">
-        Williams' design philosophy for the FW46 centers on building a solid foundation for sustained progress. The team
-        has prioritized reliability, efficient aerodynamics, and creating a car that allows drivers to extract
-        consistent performance while providing clear development paths.
+        Williams' design philosophy for the FW47 is the ultimate realization of their rebuilding phase. The team is no longer surviving; they are attacking:
       </p>
 
       <div class="feature-grid">
         <div class="feature-card">
           <div class="feature-icon">🎯</div>
-          <h4>Reliability</h4>
-          <p>Robust engineering to ensure consistent race finishes and maximize point-scoring opportunities.</p>
+          <h4>Resource Efficiency</h4>
+          <p>Intelligently allocating budget cap funds into aerodynamic simulation rather than reinventing mechanical components supplied by Mercedes.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">⚡</div>
-          <h4>Efficiency</h4>
-          <p>Optimized aerodynamic and mechanical efficiency to compete effectively within budget constraints.</p>
+          <h4>Sustained Velocity</h4>
+          <p>Ensuring the active aero X-Mode operates flawlessly to maintain Williams' trademark low-drag advantage on long straights.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🏁</div>
-          <h4>Progress</h4>
-          <p>Clear development roadmap focused on steady improvement throughout the season and beyond.</p>
+          <h4>Driver Synergy</h4>
+          <p>Providing Albon and Sainz with a highly communicative front-end, a specific request from both drivers to maximize their aggressive corner-entry styles.</p>
         </div>
       </div>
 
       <p style="color: var(--muted); line-height: 1.8; margin-top: 24px;">
-        With legendary racing heritage and renewed determination, Williams is focused on climbing back up the grid and
-        reclaiming their position as a competitive force in Formula One.
+        Dressed in their iconic deep blue, the FW47 represents the true rebirth of a giant. With elite drivers, elite engines, and modernized infrastructure, Williams enters 2026 looking to shock the grid.
       </p>
     </section>
 
@@ -610,18 +554,15 @@
   <script defer src="../Script/common.js"></script>
 
   <script>
-    // --- Dynamic Season Stats (wins/podiums/current position) from API ---
     (function () {
       const API_BASE = 'https://api.jolpi.ca/ergast/f1';
-      const constructorId = 'williams'; // page constructor id
+      const constructorId = 'williams'; 
 
-      // DOM elements to update
       const elCurrentPos = document.getElementById('current-position');
       const elPoints = document.getElementById('points-scored');
       const elWins = document.getElementById('wins-count');
       const elPodiums = document.getElementById('podiums-count');
 
-      // show loading state
       if (elCurrentPos) elCurrentPos.textContent = 'Loading…';
       if (elPoints) elPoints.textContent = 'Loading…';
       if (elWins) elWins.textContent = 'Loading…';
@@ -635,7 +576,6 @@
 
       async function loadSeasonStats() {
         try {
-          // 1) Constructor standings for current position & points
           const standingsUrl = `${API_BASE}/current/constructorStandings.json`;
           const standingsJson = await fetchJson(standingsUrl);
           const standingsLists = standingsJson?.MRData?.StandingsTable?.StandingsLists || [];
@@ -651,15 +591,12 @@
             } else {
               if (elCurrentPos) elCurrentPos.textContent = '—';
               if (elPoints) elPoints.textContent = '—';
-              console.warn('Constructor standing not found for', constructorId);
             }
           } else {
             if (elCurrentPos) elCurrentPos.textContent = '—';
             if (elPoints) elPoints.textContent = '—';
-            console.warn('No standings data');
           }
 
-          // 2) Current season race results to compute wins & podiums
           const resultsUrl = `${API_BASE}/current/results.json?limit=1000`;
           const resultsJson = await fetchJson(resultsUrl);
           const races = resultsJson?.MRData?.RaceTable?.Races || [];
@@ -676,7 +613,7 @@
                   if (pos === 1) wins += 1;
                   if (pos >= 1 && pos <= 3) podiums += 1;
                 }
-                break; // found constructor entry for this race
+                break;
               }
             }
           }
@@ -693,7 +630,6 @@
         }
       }
 
-      // run on DOM ready
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', loadSeasonStats);
       } else {
@@ -701,7 +637,6 @@
       }
     })();
 
-    // Load navbar and footer
     async function includeHTML(id, path) {
       const container = document.getElementById(id);
       if (!container) return;
@@ -723,13 +658,9 @@
 
     document.getElementById("go-back").addEventListener("click", function (e) {
       e.preventDefault();
-
-      // If user has a referrer (came from another page)
       if (document.referrer && document.referrer !== window.location.href) {
-        // Go back in history
         window.history.back();
       } else {
-        // Otherwise, fallback to teams page
         window.location.href = "../teams.html";
       }
     });
