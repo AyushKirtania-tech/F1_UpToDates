@@ -122,25 +122,7 @@
     }
   }
 
-  // Show hint on first visit
-  if (!localStorage.getItem('shortcuts-hint-shown')) {
-    setTimeout(() => {
-      const hint = document.createElement('div');
-      hint.className = 'shortcuts-hint';
-      hint.innerHTML = `
-        <span>💡 Press <kbd>?</kbd> for keyboard shortcuts</span>
-        <button aria-label="Dismiss">x</button>
-      `;
-      document.body.appendChild(hint);
 
-      hint.querySelector('button').addEventListener('click', () => {
-        hint.remove();
-        localStorage.setItem('shortcuts-hint-shown', 'true');
-      });
-
-      setTimeout(() => hint.remove(), 5000);
-    }, 2000);
-  }
 
   // --- ADD THIS AT THE BOTTOM OF THE FILE ---
   function createFloatingShortcutButton() {
