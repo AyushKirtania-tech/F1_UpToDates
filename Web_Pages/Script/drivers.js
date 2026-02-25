@@ -304,7 +304,7 @@
     }
   }
 
-  // Upgraded Modal Function mapped with Live Stats
+  // Upgraded Modal Function mapped with Live Stats (Legend Check Integrated)
   function initDriverModal() {
     const grid = document.querySelector('.drivers-grid');
     if (!grid || document.querySelector('.driver-modal-overlay')) return;
@@ -352,10 +352,22 @@
         stats.innerHTML = '';
         card.querySelectorAll('.driver-stats .stat').forEach(s => stats.appendChild(s.cloneNode(true)));
         
-        // Fire API call for Live Stats
+        // --- THE FIX: Handle Live Stats visibility ---
         const driverId = card.dataset.driverId;
         const liveStatsContainer = overlay.querySelector('#modalLiveStats');
-        loadCurrentSeasonData(driverId, liveStatsContainer);
+        const liveTitle = overlay.querySelector('.live-title');
+
+        // If it's a legend card (has no driverId), hide the 2026 stats section entirely
+        if (!driverId || card.classList.contains('legend-card')) {
+          liveTitle.style.display = 'none';
+          liveStatsContainer.style.display = 'none';
+          liveStatsContainer.innerHTML = '';
+        } else {
+          // If it's a 2026 driver, show the section and fire the API call
+          liveTitle.style.display = 'block';
+          liveStatsContainer.style.display = 'block';
+          loadCurrentSeasonData(driverId, liveStatsContainer);
+        }
 
         overlay.classList.add('visible');
       }

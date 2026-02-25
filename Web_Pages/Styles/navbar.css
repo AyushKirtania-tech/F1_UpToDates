@@ -167,6 +167,14 @@
   transform: translateY(-8px) rotate(-45deg);
 }
 
+/* Container to group search and hamburger menu together */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 1001; /* Keeps it above the mobile menu overlay */
+}
+
 /* Focus styles for accessibility */
 .main-nav a:focus-visible,
 .search-button:focus-visible {
