@@ -29,3 +29,38 @@ fetch("footer.html")
       yearSpan.textContent = new Date().getFullYear();
     }
   });
+
+
+
+
+
+  /* =========================================================
+   SMART "BACK TO TOP" BUTTON LOGIC
+   ========================================================= */
+document.addEventListener('DOMContentLoaded', () => {
+  // We use a slight delay or mutation observer because the footer is loaded dynamically
+  const initBackToTop = setInterval(() => {
+    const topBtn = document.getElementById('backToTop');
+    
+    if (topBtn) {
+      clearInterval(initBackToTop); // Stop checking once we find the button
+      
+      // Show button when scrolled down 300px
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          topBtn.classList.add('show');
+        } else {
+          topBtn.classList.remove('show');
+        }
+      });
+
+      // Smooth scroll to top on click
+      topBtn.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+  }, 500); // Checks every half second until the footer is loaded
+});

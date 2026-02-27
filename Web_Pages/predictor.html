@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Championship Oracle - F1 Racing Hub</title>
+
+  <!-- GLOBAL STYLES -->
+  <link rel="stylesheet" href="Styles/style.css">
+  <link rel="stylesheet" href="Styles/mobile.css">
+  <link rel="stylesheet" href="Styles/navbar.css">
+  <link rel="stylesheet" href="Styles/predictor.css">
+  <link rel="stylesheet" href="Styles/global-search.css">
+  <link rel="stylesheet" href="Styles/keyboard-shortcuts.css">
+
+  <!-- GLOBAL SCRIPTS -->
+  <script defer src="Script/common.js"></script>
+  <script defer src="Script/navbar.js"></script>
+  <script defer src="Script/predictor.js"></script>
+  <script defer src="Script/keyboard-shortcuts.js"></script>
+  <script defer src="Script/global-search.js"></script>
+</head>
+
+<body>
+
+  <!-- Ambient background glow -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+
+  <!-- Navbar -->
+  <div id="navbar"></div>
+
+  <!-- =========================
+       MAIN DASHBOARD
+  ========================== -->
+  <main class="dashboard-main container" style="margin-top: 100px; padding-bottom: 80px;">
+
+    <!-- HERO SECTION -->
+    <section class="predictor-hero text-center" style="margin-bottom: 60px;">
+      <span class="era-badge">F1 Analytics</span>
+
+      <h1 style="font-size: 3.5rem; text-transform: uppercase; font-weight: 900; margin: 10px 0; letter-spacing: 2px;">
+        Championship <span class="text-gradient">Oracle</span>
+      </h1>
+
+      <p style="color: var(--text-muted); max-width: 700px; margin: 0 auto 30px; font-size: 1.1rem; line-height: 1.6;">
+        Switch between live fan sentiment and our AI-powered championship probability engine.
+        Experience the 2026 title fight through data.
+      </p>
+
+      <!-- VIEW TOGGLE -->
+      <div class="view-toggle">
+        <button id="btnFanView" class="toggle-btn active">Live Fan Vote</button>
+        <button id="btnAiView" class="toggle-btn">AI Prediction Model</button>
+      </div>
+    </section>
+
+    <!-- =========================
+         FAN VIEW (Ranking Tower)
+    ========================== -->
+    <div id="fanViewContainer">
+
+      <div class="ranking-layout">
+
+        <div class="ranking-header">
+          <h2>Live Fan Championship Tower</h2>
+          <p>Select a driver to cast your prediction.</p>
+        </div>
+
+        <!-- Dynamic Ranking Rows Injected by JS -->
+        <div class="ranking-tower" id="rankingTower"></div>
+
+      </div>
+
+    </div>
+
+    <!-- =========================
+         AI VIEW (Probability Bars)
+    ========================== -->
+    <div id="aiViewContainer" style="display:none;">
+
+      <div class="ai-layout">
+
+        <div class="ai-metrics">
+          <h2>AI Championship Probability Engine</h2>
+          <p>
+            Probabilities dynamically generated using weighted seasonal metrics,
+            momentum scoring, and adaptive performance modeling.
+          </p>
+        </div>
+
+        <!-- Dynamic AI Bars Injected by JS -->
+        <div class="ai-bars" id="aiBarsContainer"></div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+  <footer class="site-footer">
+    <div class="footer-glow"></div>
+
+    <div class="container">
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          <h2>F1 Racing <span>Hub</span></h2>
+          <p>
+            Independent fan-built analytics platform exploring the future of Formula 1.
+            Built for performance. Designed for racing.
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <h3>Explore</h3>
+          <ul>
+            <li><a href="drivers.html">Drivers</a></li>
+            <li><a href="teams.html">Teams</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+            <li><a href="results.html">Results</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links">
+          <h3>Tools</h3>
+          <ul>
+            <li><a href="predictor.html">Championship Oracle</a></li>
+            <li><a href="about.html">About 2026 Era</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-cta">
+          <h3>Stay Connected</h3>
+          <p style="color: var(--text-muted); margin-bottom: 15px;">
+            Built for motorsport enthusiasts and data analysts.
+          </p>
+          <a href="#" class="btn btn-primary">Follow Updates</a>
+        </div>
+
+      </div>
+
+      <div style="text-align:center; color: var(--text-muted); font-size: 0.8rem; margin-top: 30px;">
+        © 2026 F1 Racing Hub. Not affiliated with Formula 1®.
+      </div>
+    </div>
+
+  </footer>
+
+</body>
+</html>

@@ -209,3 +209,56 @@ document.addEventListener('DOMContentLoaded', () => {
   setupNextRace();
   setupDriverCarousel();
 });
+
+
+/* =========================================================
+   ADD TO CALENDAR (GOOGLE CALENDAR REMINDER)
+   ========================================================= */
+document.addEventListener('DOMContentLoaded', async () => {
+  const btn = document.getElementById('addToCalendarBtn');
+  if (!btn) return;
+
+  try {
+    // Fetch the Next Race details from the API
+    const res = await fetch('https://api.jolpi.ca/ergast/f1/current/next.json');
+    if (!res.ok) throw new Error('API Error');
+    const data = await res.json();
+    const nextRace = data?.MRData?.RaceTable?.Races?.[0];
+    
+    // If there is no next race (season over), do nothing
+    if (!nextRace || !nextRace.date || !nextRace.time) return;
+
+    const raceName = nextRace.raceName;
+    const raceDate = nextRace.date; 
+    const raceTime = nextRace.time; 
+    const circuit = nextRace.Circuit.circuitName;
+
+    // Convert F1 API Time (UTC) to a valid Javascript Date Object
+    const startDate = new Date(`${raceDate}T${raceTime}`);
+    
+    // Estimate race duration as 2 hours for the calendar block
+    const endDate = new Date(startDate.getTime() + (2 * 60 * 60 * 1000)); 
+
+    // Google Calendar requires a very specific Date format: YYYYMMDDTHHMMSSZ
+    const formatGCalDate = (date) => {
+      return date.toISOString().replace(/-|:|\.\d{3}/g, '');
+    };
+
+    const gCalStart = formatGCalDate(startDate);
+    const gCalEnd = formatGCalDate(endDate);
+
+    // Build the dynamic URL
+    const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=🏎️+F1:+${encodeURIComponent(raceName)}&dates=${gCalStart}/${gCalEnd}&details=Don't+miss+the+${encodeURIComponent(raceName)}!&location=${encodeURIComponent(circuit)}`;
+
+    // Show the button now that the link is ready
+    btn.style.display = 'inline-flex';
+    
+    // Open the Google Calendar tab when clicked
+    btn.addEventListener('click', () => {
+      window.open(gCalUrl, '_blank');
+    });
+
+  } catch (error) {
+    console.error("Could not load Calendar data:", error);
+  }
+});

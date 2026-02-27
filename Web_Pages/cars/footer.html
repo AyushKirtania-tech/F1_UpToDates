@@ -1,14 +1,42 @@
-<footer>
-  <div class="footer-grid">
-    <div>© <span id="currentYear"></span> F1 Racing Hub - Unofficial Fan Site</div>
-    <div class="socials">
-      <a href="https://github.com/AyushKirtania-tech" target="_blank" rel="noopener noreferrer" aria-label="Follow us on GitHub">GitHub</a> ·
-      <a href="https://www.linkedin.com/in/ayush-kirtania-45464021a" target="_blank" rel="noopener noreferrer" aria-label="Connect on LinkedIn">LinkedIn</a> ·
-      <a href="https://www.instagram.com/punkifiedayush/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">Instagram</a>
+<footer class="site-footer">
+  <div class="footer-glow"></div>
+  <div class="container footer-grid">
+    
+    <div class="footer-brand">
+      <h2>F1 <span>RACING</span></h2>
+      <p>The ultimate hub for the 2026 Formula One era. Track the apex, follow the telemetry, and witness the revolution.</p>
     </div>
+
+    <div class="footer-links">
+      <h3>Explore</h3>
+      <ul>
+        <li><a href="../index.html">Dashboard</a></li>
+        <li><a href="../schedule.html">2026 Calendar</a></li>
+        <li><a href="../results.html">Race Results</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-links">
+      <h3>The Grid</h3>
+      <ul>
+        <li><a href="../teams.html">Constructors</a></li>
+        <li><a href="../drivers.html">Drivers</a></li>
+        <li><a href="../circuits.html">Circuits</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-cta">
+      <h3>Keep Exploring</h3>
+      <a href="../about.html" class="btn btn-outline" style="width: 100%;">Discover the 2026 Rules →</a>
+    </div>
+
+  </div>
+  
+  <div class="footer-bottom container">
+    <p>&copy; 2026 F1 Racing Hub. Not affiliated with Formula One Administration.</p>
+    
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+      ↑ Top
+    </button>
   </div>
 </footer>
-<script>
-  // Setting current year in footer
-  document.getElementById('currentYear').textContent = new Date().getFullYear();
-</script>

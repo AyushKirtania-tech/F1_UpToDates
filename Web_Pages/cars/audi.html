@@ -603,7 +603,7 @@
       try { container.innerHTML = await (await fetch(path)).text(); } catch (err) { }
     }
 
-    document.addEventListener('DOMContentLoaded', async () => { await includeHTML('footer', '../footer.html'); });
+    document.addEventListener('DOMContentLoaded', async () => { await includeHTML('footer', 'footer.html'); });
     document.getElementById("go-back").addEventListener("click", function (e) {
       e.preventDefault();
       document.referrer && document.referrer !== window.location.href ? window.history.back() : window.location.href = "../teams.html";
