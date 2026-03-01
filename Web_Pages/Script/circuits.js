@@ -223,3 +223,33 @@ async function initCircuits() {
 }
 
 document.addEventListener('DOMContentLoaded', initCircuits);
+
+
+
+// Mobile Click to open Circuit Details
+document.addEventListener('click', function(e) {
+  const card = e.target.closest('.circuit-card');
+  if (!card || window.innerWidth > 768) return; // Only trigger on mobile
+
+  const name = card.querySelector('.circuit-name').innerText;
+  const location = card.querySelector('.circuit-location').innerHTML; // Extract location
+  const imageHtml = card.querySelector('.circuit-image').innerHTML;
+  const infoGrid = card.querySelector('.circuit-info').innerHTML;
+  const desc = card.querySelector('.circuit-description').innerText;
+
+  showMobileModal(`
+    <div class="circuit-image" style="position: relative; overflow: hidden; margin-top: 10px;">
+      ${imageHtml}
+    </div>
+    <div style="margin-bottom: 16px;">
+      <h2 style="margin-bottom: 4px !important;">${name}</h2>
+      <div style="color: var(--f1-red); font-weight: 700; font-size: 0.95rem;">
+        ${location}
+      </div>
+    </div>
+    <p class="circuit-description">${desc}</p>
+    <div class="circuit-info">
+      ${infoGrid}
+    </div>
+  `);
+});

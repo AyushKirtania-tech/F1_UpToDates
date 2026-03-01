@@ -390,7 +390,7 @@ body::before {
 div[data-team="cadillac"] > div:first-child,
 div[style*="background: #e0e0e0;"],
 div[style*="background: rgb(224, 224, 224)"] {
-  background: linear-gradient(135deg, #111111, #000000) !important;
+  background: linear-gradient(278deg, #1111116e, #00000000) !important;
   color: #ffffff !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
 }

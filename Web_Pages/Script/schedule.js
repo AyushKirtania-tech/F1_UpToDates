@@ -239,3 +239,27 @@ async function initSchedule() {
 }
 
 document.addEventListener('DOMContentLoaded', initSchedule);
+
+
+
+// Mobile Click to open Schedule Details
+document.addEventListener('click', function(e) {
+  const card = e.target.closest('.race-card');
+  if (!card || window.innerWidth > 768) return; // Only trigger on mobile
+
+  const raceName = card.querySelector('h2').innerText;
+  const round = card.querySelector('.race-round').innerText;
+  const circuitDetails = card.querySelector('.circuit-details').innerHTML;
+  const sessions = card.querySelector('.sessions-grid').innerHTML;
+
+  showMobileModal(`
+    <div style="margin-bottom: 12px;"><span style="background: rgba(225,6,0,0.1); color: #e10600; padding: 4px 8px; font-size: 0.8rem; border-radius: 0 8px 0 0;">${round}</span></div>
+    <h2>${raceName}</h2>
+    <div style="color: #aaa; font-size: 0.95rem; border-bottom: 1px solid #333; padding-bottom: 16px;">
+      ${circuitDetails}
+    </div>
+    <div class="sessions-grid">
+      ${sessions}
+    </div>
+  `);
+});
