@@ -244,126 +244,230 @@
   }
 
   /* =========================================================
-     6. RESULTS PAGE (Sleek Leaderboard App Style)
+     6. RESULTS PAGE CONTROLS (GRID FIX)
      ========================================================= */
-  .hero { 
-    flex-direction: column !important; 
-    align-items: flex-start !important; 
-    border-radius: 0 16px 0 0 !important;
-    background: var(--f1-dark) !important;
-    border: 1px solid var(--f1-grey) !important;
-    border-right: 4px solid var(--f1-red) !important;
-  }
   
-  .controls { 
-    flex-direction: column !important; 
-    width: 100% !important; 
-    gap: 12px !important; 
-  }
-  
-  .controls select, .controls button { 
-    width: 100% !important; 
-    border-radius: 0 12px 0 0 !important; 
-    padding: 14px !important;
-    font-size: 1rem !important;
-  }
-
-  .featured {
-    background: linear-gradient(90deg, rgba(225,6,0,0.15), transparent) !important;
-    border-left: 4px solid var(--f1-red) !important;
-    border-radius: 0 12px 0 0 !important;
-  }
-
-  .results-table thead { display: none !important; }
-  
-  .results-table tbody { 
-    display: flex !important; 
-    flex-direction: column !important; 
-    gap: 12px !important; 
-  }
-
-  .results-table tr {
+  .controls {
     display: grid !important;
-    grid-template-columns: 40px 1fr auto !important; 
-    gap: 2px 12px !important;
-    background: var(--f1-dark) !important;
-    border: 1px solid var(--f1-grey) !important;
-    border-left: 4px solid var(--f1-red) !important;
-    border-radius: 0 16px 0 0 !important;
-    padding: 14px !important;
-    align-items: center !important;
+    /* Season gets fixed 85px, Race takes the rest of the space */
+    grid-template-columns: 85px 1fr !important; 
+    width: 100% !important;
+    gap: 10px !important;
+    margin-top: 16px !important;
+    /* Remove any previous horizontal scrolling */
+    overflow: visible !important; 
+    flex-direction: unset !important; 
   }
 
-  .results-table td { 
-    display: flex !important; 
-    align-items: center !important; 
-    padding: 0 !important; 
-    border: none !important; 
-  }
-
-  .results-table td:nth-child(1) { 
-    grid-column: 1; 
-    grid-row: 1 / span 2; 
-    font-size: 1.8rem !important; 
-    font-weight: 900 !important; 
-    color: #fff !important; 
-    justify-content: center !important;
-  }
-
-  .results-table td:nth-child(2) { display: none !important; } 
-
-  .results-table td:nth-child(3) { 
-    grid-column: 2; 
-    grid-row: 1; 
-    font-size: 1.15rem !important; 
-    font-weight: 900 !important; 
-    text-transform: uppercase !important;
-    color: #fff !important;
-  }
-
-  .results-table td:nth-child(4) { 
-    grid-column: 2; 
-    grid-row: 2; 
-    font-size: 0.85rem !important; 
-    color: #aaa !important; 
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px;
-  }
-
-  .results-table td:nth-child(9) { 
-    grid-column: 3; 
-    grid-row: 1 / span 2; 
-    font-size: 1.4rem !important; 
-    font-weight: 900 !important; 
-    color: var(--f1-red) !important; 
-    justify-content: flex-end !important;
-  }
-  
-  .results-table td:nth-child(9):after {
-    content: " PTS";
-    font-size: 0.7rem;
-    margin-left: 4px;
-    color: #888;
-  }
-
-  .results-table td:nth-child(5),
-  .results-table td:nth-child(6),
-  .results-table td:nth-child(7),
-  .results-table td:nth-child(8) {
-    grid-column: 1 / -1; 
+  .controls select, .controls button {
+    width: 100% !important;
+    min-width: 0 !important; /* Crucial to prevent text from blowing out the grid */
+    border-radius: 12px !important; 
+    padding: 12px 14px !important;
     font-size: 0.9rem !important;
-    color: #eee !important;
-    justify-content: space-between !important; 
-    border-top: 1px solid rgba(255,255,255,0.08) !important;
-    padding-top: 8px !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+    font-weight: 700 !important;
+    white-space: nowrap !important;
+  }
+
+  /* Position elements on the grid */
+  #seasonSelect {
+    grid-column: 1 !important;
+  }
+
+  #raceSelect {
+    grid-column: 2 !important;
+  }
+
+  #loadBtn {
+    grid-column: 1 / -1 !important; /* Spans the full width across both columns */
+    background: var(--f1-red) !important;
+    border-color: var(--f1-red) !important;
     margin-top: 4px !important;
   }
-  
-  .results-table td:nth-child(5):before { content: "Grid Position:"; color: #888; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; }
-  .results-table td:nth-child(6):before { content: "Laps Completed:"; color: #888; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; }
-  .results-table td:nth-child(7):before { content: "Race Time / Gap:"; color: #888; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; }
-  .results-table td:nth-child(8):before { content: "Fastest Lap:"; color: #888; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; }
 
+  /* Custom Dropdown Arrow to prevent text overlap */
+  .controls select {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 12px center !important;
+    background-size: 16px !important;
+    padding-right: 36px !important; /* Strict padding so text never touches the arrow */
+    overflow: hidden !important;
+    text-overflow: ellipsis !important; /* Adds the "..." when race names are too long */
+  }
+
+  /* Rip out the table structure and convert to an App List */
+  .results-table, .results-table tbody {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important; 
+    background: transparent !important;
+    border: none !important;
+    width: 100% !important;
+    box-shadow: none !important;
+  }
+
+  .results-table thead { 
+    display: none !important; 
+  }
+
+  /* Main Leaderboard Card */
+  .results-table tr {
+    display: grid !important;
+    grid-template-columns: 45px 1fr auto !important;
+    grid-template-rows: auto auto !important;
+    background: #111115 !important;
+    border: 1px solid #222 !important;
+    border-radius: 16px !important;
+    padding: 16px !important;
+    align-items: center !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  .results-table td {
+    border: none !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    background: transparent !important;
+  }
+
+  /* 1. Position Number (Massive & Italicized) */
+  .results-table td:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    font-size: 1.8rem !important;
+    font-weight: 900 !important;
+    color: #fff !important;
+    justify-content: center !important;
+    font-style: italic !important;
+  }
+
+  /* 2. Driver Number - Hide to save space */
+  .results-table td:nth-child(2) { display: none !important; }
+
+  /* 3. Driver Name */
+  .results-table td:nth-child(3) {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 1.15rem !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    color: #fff !important;
+    letter-spacing: 0.5px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  /* 4. Constructor / Team Name */
+  .results-table td:nth-child(4) {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: 0.8rem !important;
+    color: #888 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+  }
+
+  /* 9. Points (Big Red Number on the right) */
+  .results-table td:nth-child(9) {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    font-size: 1.5rem !important;
+    font-weight: 900 !important;
+    color: var(--f1-red) !important;
+    justify-content: flex-end !important;
+    text-align: right !important;
+    min-width: 60px !important;
+  }
+
+  .results-table td:nth-child(9)::after {
+    content: "PTS";
+    font-size: 0.65rem !important;
+    font-weight: 700 !important;
+    color: #666 !important;
+    margin-left: 4px !important;
+    margin-top: 6px !important; 
+  }
+
+  /* -- TECHNICAL STATS ACCORDION -- */
+  /* Hide Clutter (Grid Pos, Laps, Fastest Lap) and isolate the GAP/Time */
+  .results-table td:nth-child(5), 
+  .results-table td:nth-child(6), 
+  .results-table td:nth-child(8) {
+    display: none !important; 
+  }
+
+  .results-table td:nth-child(7) {
+    grid-column: 1 / -1; 
+    font-size: 0.9rem !important;
+    color: #aaa !important;
+    font-family: monospace !important;
+    justify-content: space-between !important;
+    border-top: 1px solid rgba(255,255,255,0.06) !important;
+    padding-top: 10px !important;
+    margin-top: 10px !important;
+  }
+
+  .results-table td:nth-child(7)::before {
+    content: "GAP / STATUS";
+    font-family: var(--font-main, sans-serif) !important;
+    font-size: 0.7rem !important;
+    font-weight: 700 !important;
+    color: #555 !important;
+    letter-spacing: 1px !important;
+  }
+
+  /* =========================================================
+     PODIUM SPECIAL METALLIC STYLING (P1, P2, P3)
+     ========================================================= */
+  
+  /* P1 - Pure Gold */
+  .results-table tr:nth-child(1) {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), #111115) !important;
+    border: 1px solid rgba(212, 175, 55, 0.4) !important;
+    border-left: 6px solid #d4af37 !important;
+    transform: scale(1.02) !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4) !important;
+    margin-bottom: 8px !important;
+    z-index: 3 !important;
+  }
+  .results-table tr:nth-child(1) td:nth-child(1) { color: #d4af37 !important; }
+
+  /* P2 - Silver */
+  .results-table tr:nth-child(2) {
+    background: linear-gradient(135deg, rgba(192, 192, 192, 0.1), #111115) !important;
+    border: 1px solid rgba(192, 192, 192, 0.3) !important;
+    border-left: 6px solid #c0c0c0 !important;
+    transform: scale(1.01) !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+    margin-bottom: 4px !important;
+    z-index: 2 !important;
+  }
+  .results-table tr:nth-child(2) td:nth-child(1) { color: #c0c0c0 !important; }
+
+  /* P3 - Bronze */
+  .results-table tr:nth-child(3) {
+    background: linear-gradient(135deg, rgba(205, 127, 50, 0.1), #111115) !important;
+    border: 1px solid rgba(205, 127, 50, 0.3) !important;
+    border-left: 6px solid #cd7f32 !important;
+    margin-bottom: 16px !important; /* Deep split separating the podium from the rest */
+    z-index: 1 !important;
+  }
+  .results-table tr:nth-child(3) td:nth-child(1) { color: #cd7f32 !important; }
+
+  /* Standard Border for the rest (P4 - P20) */
+  .results-table tr:nth-child(n+4) {
+    border-left: 4px solid var(--f1-grey) !important;
+  }
+  
   /* =========================================================
      7. F1 OFFICIAL FOOTER STYLE
      ========================================================= */

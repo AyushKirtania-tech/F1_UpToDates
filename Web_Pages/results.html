@@ -302,22 +302,66 @@
     @media (max-width:900px) {
       .hero {
         flex-direction: column;
-        align-items: flex-start
+        align-items: flex-start;
+      }
+
+      /* 1. Force the controls into a clean mobile grid */
+      .controls {
+        display: grid;
+        grid-template-columns: 1fr 2fr; /* Season takes 1 part, Race takes 2 parts */
+        width: 100%;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      #seasonSelect { grid-column: 1; }
+      #raceSelect { grid-column: 2; }
+      
+      /* Load button spans the full width underneath */
+      #loadBtn { 
+        grid-column: 1 / -1; 
+        padding: 14px;
+        margin-top: 4px;
+      }
+
+      /* 2. Fix the pill shapes and text overflow */
+      .controls select, .controls button {
+        width: 100%;
+        min-width: 0; /* Prevents grid blowout */
+        border-radius: 12px; /* App-style rounded edges instead of extreme pills */
+        font-size: 0.95rem;
+      }
+
+      /* 3. Kill the native overlapping arrows and add custom spacing */
+      .controls select {
+        appearance: none;
+        -webkit-appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        background-size: 16px;
+        padding-right: 36px; /* Strict padding so text never hits the arrow */
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      /* 4. Marquee layout fix */
+      .marquee-wrap {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+      
+      .marquee {
+        width: 100%;
       }
 
       .marquee-track {
         animation-duration: 22s
       }
 
-      .controls {
-        width: 100%;
-        gap: 10px
-      }
-
-      select {
-        min-width: 120px
-      }
-
+      /* 5. Existing Table Mobile Fixes */
       .results-table thead {
         display: none
       }

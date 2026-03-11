@@ -225,17 +225,22 @@ async function initCircuits() {
 document.addEventListener('DOMContentLoaded', initCircuits);
 
 
-
 // Mobile Click to open Circuit Details
 document.addEventListener('click', function(e) {
   const card = e.target.closest('.circuit-card');
   if (!card || window.innerWidth > 768) return; // Only trigger on mobile
 
+  // Prevent opening the modal if they clicked the "View Results" link
+  if (e.target.closest('a')) return;
+
   const name = card.querySelector('.circuit-name').innerText;
-  const location = card.querySelector('.circuit-location').innerHTML; // Extract location
+  const location = card.querySelector('.circuit-location').innerHTML; 
   const imageHtml = card.querySelector('.circuit-image').innerHTML;
   const infoGrid = card.querySelector('.circuit-info').innerHTML;
   const desc = card.querySelector('.circuit-description').innerText;
+
+  // BROWSER HISTORY API FIX (Push State)
+  history.pushState({ modalOpen: true }, "", window.location.href);
 
   showMobileModal(`
     <div class="circuit-image" style="position: relative; overflow: hidden; margin-top: 10px;">
@@ -252,4 +257,21 @@ document.addEventListener('click', function(e) {
       ${infoGrid}
     </div>
   `);
+});
+
+// --- GLOBAL MOBILE MODAL BACK BUTTON HANDLERS ---
+window.addEventListener('popstate', () => {
+  const overlay = document.querySelector('.mobile-modal-overlay');
+  if (overlay && overlay.classList.contains('active')) {
+    overlay.classList.remove('active'); // Close modal on physical back button
+  }
+});
+
+document.addEventListener('click', e => {
+  // If closing via the 'X' button or clicking the background overlay manually
+  if (e.target.closest('.mobile-modal-close') || e.target.classList.contains('mobile-modal-overlay')) {
+    if (history.state && history.state.modalOpen) {
+      history.back(); // Clear the dummy state so history stays clean
+    }
+  }
 });

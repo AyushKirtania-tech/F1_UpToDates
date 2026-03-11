@@ -202,9 +202,6 @@ function showNotice(message) {
   
   // Shows the notice
   notice.classList.add('show');
-  
-  // I REMOVED the setTimeout here! 
-  // The notice will now stay beautifully pinned to the top of your schedule.
 }
 
 async function initSchedule() {
@@ -241,7 +238,6 @@ async function initSchedule() {
 document.addEventListener('DOMContentLoaded', initSchedule);
 
 
-
 // Mobile Click to open Schedule Details
 document.addEventListener('click', function(e) {
   const card = e.target.closest('.race-card');
@@ -251,6 +247,9 @@ document.addEventListener('click', function(e) {
   const round = card.querySelector('.race-round').innerText;
   const circuitDetails = card.querySelector('.circuit-details').innerHTML;
   const sessions = card.querySelector('.sessions-grid').innerHTML;
+
+  // BROWSER HISTORY API FIX (Push State)
+  history.pushState({ modalOpen: true }, "", window.location.href);
 
   showMobileModal(`
     <div style="margin-bottom: 12px;"><span style="background: rgba(225,6,0,0.1); color: #e10600; padding: 4px 8px; font-size: 0.8rem; border-radius: 0 8px 0 0;">${round}</span></div>
@@ -262,4 +261,21 @@ document.addEventListener('click', function(e) {
       ${sessions}
     </div>
   `);
+});
+
+// --- GLOBAL MOBILE MODAL BACK BUTTON HANDLERS ---
+window.addEventListener('popstate', () => {
+  const overlay = document.querySelector('.mobile-modal-overlay');
+  if (overlay && overlay.classList.contains('active')) {
+    overlay.classList.remove('active'); // Close modal on physical back button
+  }
+});
+
+document.addEventListener('click', e => {
+  // If closing via the 'X' button or clicking the background overlay manually
+  if (e.target.closest('.mobile-modal-close') || e.target.classList.contains('mobile-modal-overlay')) {
+    if (history.state && history.state.modalOpen) {
+      history.back(); // Clear the dummy state so history stays clean
+    }
+  }
 });
