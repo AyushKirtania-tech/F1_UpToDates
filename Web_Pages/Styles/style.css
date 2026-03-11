@@ -400,13 +400,23 @@ body::before {
 
 .drivers-grid {
   display: flex;
-  transition: transform 0.4s ease-out; /* Smooth snapping transition */
   gap: 20px;
+  overflow-x: auto; /* Enables manual horizontal scroll */
+  scroll-snap-type: x mandatory; /* Snaps cards perfectly into view */
+  scrollbar-width: none; /* Hides scrollbar in Firefox */
+  -ms-overflow-style: none; /* Hides scrollbar in IE/Edge */
+  /* transition: transform 0.4s ease-out; <-- REMOVED */
+}
+
+/* Hides scrollbar in Chrome/Safari/Opera */
+.drivers-grid::-webkit-scrollbar {
+  display: none; 
 }
 
 .driver-portrait {
   flex-shrink: 0;
   width: calc(25% - 15px); /* Show 4 at a time */
+  scroll-snap-align: start; /* Ensures scrolling snaps to the start of the card */
   background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
   border-radius: 16px;
   overflow: hidden;

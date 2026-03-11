@@ -339,7 +339,7 @@
     justify-content: flex-end !important;
   }
   
-  .results-table td:nth-child(9)::after {
+  .results-table td:nth-child(9):after {
     content: " PTS";
     font-size: 0.7rem;
     margin-left: 4px;
@@ -359,10 +359,10 @@
     margin-top: 4px !important;
   }
   
-  .results-table td:nth-child(5)::before { content: "Grid Position:"; color: #888; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; }
-  .results-table td:nth-child(6)::before { content: "Laps Completed:"; color: #888; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; }
-  .results-table td:nth-child(7)::before { content: "Race Time / Gap:"; color: #888; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; }
-  .results-table td:nth-child(8)::before { content: "Fastest Lap:"; color: #888; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; }
+  .results-table td:nth-child(5):before { content: "Grid Position:"; color: #888; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; }
+  .results-table td:nth-child(6):before { content: "Laps Completed:"; color: #888; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; }
+  .results-table td:nth-child(7):before { content: "Race Time / Gap:"; color: #888; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; }
+  .results-table td:nth-child(8):before { content: "Fastest Lap:"; color: #888; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; }
 
   /* =========================================================
      7. F1 OFFICIAL FOOTER STYLE
@@ -387,32 +387,7 @@
     width: 100%;
   }
 
-  /* --- FOOTER SOCIAL ICONS (MOBILE) --- */
-  .social-icons {
-    gap: 12px !important;
-    margin-top: 20px !important;
-    width: 100%;
-    justify-content: flex-start !important; 
-  }
-
-  .social-icons a {
-    width: 48px !important;
-    height: 48px !important;
-    background: #000 !important; 
-    border: 1px solid var(--f1-grey) !important;
-    border-radius: 0 12px 0 12px !important; 
-  }
-
-  .social-icons a svg {
-    width: 22px !important;
-    height: 22px !important;
-  }
-
-  .social-icons a:active {
-    background: var(--f1-red) !important;
-    border-color: var(--f1-red) !important;
-    transform: scale(0.95);
-  }
+  
 
   /* =========================================================
      8. MOBILE-ONLY BOTTOM SHEET MODALS
@@ -610,6 +585,361 @@
     justify-content: center !important;
     padding: 16px !important;
     border-radius: 12px !important; 
+  }
+
+  /* =========================================================
+     12. HERO SECTIONS (DRIVERS & TEAMS)
+     ========================================================= */
+  .drivers-hero, .teams-hero {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 24px 20px !important;
+    gap: 24px !important;
+    border-radius: 0 20px 0 0 !important;
+    background: var(--f1-dark) !important;
+    border: 1px solid var(--f1-grey) !important;
+    border-left: 4px solid var(--f1-red) !important;
+    margin-bottom: 24px !important;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem !important;
+    margin-top: 12px !important;
+    line-height: 1.5 !important;
+    color: #bbb !important;
+  }
+
+  .drivers-stats, .teams-stats {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+    gap: 8px !important;
+  }
+
+  .stat-item {
+    flex: 1 1 calc(33.333% - 8px) !important;
+    padding: 12px 8px !important;
+    background: #000 !important;
+    border: 1px solid var(--f1-grey) !important;
+    border-radius: 0 12px 0 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .stat-item .stat-number {
+    font-size: 1.4rem !important;
+    color: var(--f1-red) !important;
+  }
+
+  .stat-item .stat-label {
+    font-size: 0.65rem !important;
+    letter-spacing: 0.5px !important;
+  }
+
+  /* Specific fix for the 'View Results' button container inside the Teams hero */
+  .teams-stats div[style*="display:flex"] {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-top: 8px !important;
+  }
+
+  /* =========================================================
+     13. THE "BEST" UX UPGRADE: Scrollable Pill Filters
+     ========================================================= */
+  /* Overriding the vertical stack from Section 1 for a sleek horizontal scroll */
+  .filter-controls, .schedule-filters, .filter-buttons {
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding-bottom: 12px !important; /* Breathing room */
+    gap: 12px !important;
+    
+    /* Hiding the ugly scrollbar */
+    scrollbar-width: none !important; 
+    -ms-overflow-style: none !important; 
+  }
+  
+  .filter-controls::-webkit-scrollbar, 
+  .schedule-filters::-webkit-scrollbar, 
+  .filter-buttons::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  /* Converting block buttons into modern swipeable pills */
+  .filter-btn, .btn-outline {
+    flex: 0 0 auto !important; /* Stops them from shrinking */
+    width: auto !important; /* Removes the old 100% stretch */
+    scroll-snap-align: start !important;
+    padding: 12px 24px !important;
+    border-radius: 50px !important; /* Perfect pill shape */
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    font-size: 0.85rem !important;
+    white-space: nowrap !important;
+    letter-spacing: 0.5px !important;
+  }
+
+  .filter-btn.active, .btn-outline.active {
+    background: var(--f1-red) !important;
+    color: #fff !important;
+    border-color: var(--f1-red) !important;
+    box-shadow: 0 4px 15px rgba(225, 6, 0, 0.4) !important;
+  }
+
+ /* =========================================================
+     14. THE "BENTO BOX" APP FOOTER (ULTIMATE REDESIGN)
+     ========================================================= */
+  .site-footer {
+    border-top: none !important;
+    background: #000 !important; /* Pure black background to make cards pop */
+    padding: 16px 12px calc(24px + env(safe-area-inset-bottom)) !important;
+    color: #fff !important;
+  }
+
+  .footer-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important; /* Tight, app-style spacing */
+  }
+
+  /* Bento Card 1: Brand Details (Full Width) */
+  .footer-brand {
+    grid-column: 1 / -1 !important;
+    background: #111115 !important;
+    padding: 20px !important;
+    border-radius: 20px !important;
+    border: 1px solid #222 !important;
+    border-left: 4px solid var(--f1-red) !important;
+    margin-bottom: 0 !important;
+  }
+
+  .footer-brand h2 { 
+    font-size: 1.6rem !important; 
+    margin-bottom: 4px !important; 
+    color: #fff !important; 
+  }
+  
+  .footer-brand p { 
+    font-size: 0.85rem !important; 
+    color: #888 !important; 
+    margin: 0 !important; 
+    line-height: 1.4 !important; 
+  }
+
+  /* Bento Cards 2 & 3: Navigation Links (Side by Side) */
+  .footer-links {
+    background: #0a0a0f !important;
+    padding: 16px 16px 20px !important;
+    border-radius: 16px !important;
+    border: 1px solid #1a1a1a !important;
+    border-bottom: none !important; /* Override old desktop styles */
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .footer-links h3 {
+    font-size: 0.7rem !important;
+    color: #555 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .footer-links ul { 
+    display: flex !important; 
+    flex-direction: column !important; 
+    gap: 12px !important; 
+    padding: 0 !important;
+  }
+  
+  .footer-links a { 
+    font-size: 0.95rem !important; 
+    color: #ddd !important; 
+    padding: 0 !important; 
+    border: none !important; 
+  }
+  
+  .footer-links a:active { 
+    color: var(--f1-red) !important; 
+  }
+
+  /* Bento Card 4: Action Banner (Full Width, F1 Red Gradient) */
+  .footer-cta {
+    grid-column: 1 / -1 !important;
+    background: linear-gradient(135deg, #e10600 0%, #990400 100%) !important; 
+    padding: 16px 20px !important;
+    border-radius: 16px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    border: none !important;
+    margin-top: 4px !important;
+  }
+
+  .footer-cta h3 { 
+    color: #fff !important; 
+    font-size: 1rem !important; 
+    margin: 0 !important; 
+    font-weight: 800 !important; 
+  }
+  
+  .footer-cta p { 
+    display: none !important; /* Hide the extra paragraph text to keep it ultra-clean */ 
+  }
+  
+  .footer-cta .btn {
+    background: #000 !important;
+    color: #fff !important;
+    padding: 10px 18px !important;
+    border-radius: 50px !important;
+    font-size: 0.8rem !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3) !important;
+  }
+
+  /* Bento Row 5: Social Icons Row */
+  .social-icons {
+    grid-column: 1 / -1 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+    margin-top: 4px !important;
+  }
+
+  .social-icons a {
+    flex: 1 !important;
+    height: 50px !important;
+    background: #111115 !important;
+    border: 1px solid #222 !important;
+    border-radius: 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #fff !important;
+    transition: transform 0.1s ease !important;
+  }
+
+  .social-icons a:active { 
+    background: #222 !important; 
+    transform: scale(0.92) !important; 
+  }
+  
+  .social-icons a svg, .social-icons a i { 
+    width: 20px !important; 
+    height: 20px !important; 
+    fill: currentColor !important; 
+  }
+
+  /* Bottom Area: Copyright & Floating Back to Top Pill */
+  .footer-bottom {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-top: 24px !important;
+    padding: 0 4px !important;
+    border: none !important;
+  }
+
+  .footer-bottom p { 
+    font-size: 0.75rem !important; 
+    color: #555 !important; 
+    max-width: 55% !important; 
+    margin: 0 !important; 
+    line-height: 1.3 !important;
+  }
+  
+  .back-to-top {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 12px 20px !important;
+    border-radius: 50px !important;
+    font-size: 0.75rem !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
+
+  /* =========================================================
+     15. DRIVER & TEAM MODALS AS BOTTOM SHEETS
+     ========================================================= */
+  
+  /* 1. Pin the overlay contents to the bottom of the screen */
+  .driver-modal-overlay, .team-modal-overlay {
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    padding: 0 !important;
+  }
+
+  /* 2. Reshape the modal container into a bottom sheet */
+  .driver-modal, .team-modal {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    border-radius: 24px 24px 0 0 !important;
+    border-top: 4px solid var(--f1-red) !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
+    background: var(--f1-dark) !important;
+    
+    /* Start hidden below the screen */
+    transform: translateY(100%) scale(1) !important; 
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+    
+    max-height: 90vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* 3. Slide up smoothly when visible */
+  .driver-modal-overlay.visible .driver-modal,
+  .team-modal-overlay.visible .team-modal {
+    transform: translateY(0) scale(1) !important;
+  }
+
+  /* 4. Tidy up the images to fit the new rounded top */
+  .driver-modal-image, .team-modal-image {
+    border-radius: 20px 20px 0 0 !important;
+    flex-shrink: 0 !important;
+    height: 220px !important;
+    min-height: 220px !important;
+  }
+
+  /* 5. App-style floating Close buttons */
+  .driver-modal-close, .team-modal-close {
+    top: 12px !important;
+    right: 16px !important;
+    background: rgba(0, 0, 0, 0.65) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 1.6rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 100 !important;
+  }
+  
+  /* 6. Ensure smooth internal scrolling */
+  .driver-modal-body, .team-modal-grid {
+    overflow-y: auto !important;
+    display: block !important; /* Overrides the desktop grid */
+  }
+  
+  .driver-modal-content, .team-modal-content {
+    padding: 24px 20px 40px !important; /* Extra bottom padding for safe area */
+    background: transparent !important;
   }
 
 } /* <-- THIS IS THE ONLY CLOSING BRACKET FOR THE @MEDIA QUERY */

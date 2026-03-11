@@ -1,10 +1,9 @@
-/* teams.js — Synchronized for the 11-Team 2026 Layout */
+/* teams.js — Synchronized for the 11-Team 2026 Layout with Mobile Back Button Fix */
 
 (() => {
   const API_ROOT = 'https://api.jolpi.ca/ergast/f1';
   const FALLBACK_RESULTS_URL = 'results.html';
 
-  // Include Navbar and Footer dynamically
   async function includeHTML(id, path) {
     const container = document.getElementById(id);
     if (!container) return;
@@ -30,7 +29,6 @@
     }, 50);
   }
 
-  // Handle Team Category Filtering (All, Top Tier, Midfield, Challengers)
   function initFilters() {
     const buttons = Array.from(document.querySelectorAll('.filter-btn'));
     const cards = Array.from(document.querySelectorAll('.team-card'));
@@ -41,21 +39,18 @@
     function applyFilter(filter) {
       let anyVisible = false;
 
-      // Update active button states
       buttons.forEach(b => {
         const isActive = b.dataset.filter === filter;
         b.classList.toggle('active', isActive);
         b.setAttribute('aria-selected', String(isActive));
       });
 
-      // Filter the grid cards
       cards.forEach(card => {
         const cat = card.dataset.category || 'all';
         const matches = filter === 'all' || cat === filter;
         
         if (matches) {
-          card.style.display = ''; // Reset display
-          // Slight delay for reflow so animation works
+          card.style.display = ''; 
           setTimeout(() => {
             card.classList.remove('filtered-out');
             card.classList.remove('hidden');
@@ -64,7 +59,6 @@
         } else {
           card.classList.add('filtered-out');
           card.classList.add('hidden');
-          // Wait for CSS transition before removing from flow
           setTimeout(() => {
             if(card.classList.contains('hidden')) card.style.display = 'none';
           }, 300);
@@ -78,7 +72,6 @@
     applyFilter('all');
   }
 
-  // Animate Elements on Scroll
   function initRevealOnScroll() {
     const targets = document.querySelectorAll('.reveal');
     if (!targets.length) return;
@@ -100,12 +93,10 @@
     targets.forEach(t => obs.observe(t));
   }
 
-  // Inject and Handle the Detailed Team Modal View
   function initTeamModal() {
     const grid = document.querySelector('.teams-grid');
     if (!grid) return;
 
-    // Create modal DOM structure
     const overlay = document.createElement('div');
     overlay.className = 'team-modal-overlay';
     overlay.innerHTML = `
@@ -130,15 +121,13 @@
     const learnMoreBtn = overlay.querySelector('.modal-learn-more');
 
     function open(card) {
-      // Extract data from the clicked card
       const img = card.querySelector('.team-image img');
       const title = card.querySelector('.team-info h2')?.textContent || '';
       const base = card.querySelector('.team-base')?.textContent || '';
       const desc = card.querySelector('.team-description')?.textContent || '';
       const statNodes = card.querySelectorAll('.team-stats .stat');
-      const teamName = card.dataset.team || ''; // e.g. 'mclaren', 'cadillac', 'audi'
+      const teamName = card.dataset.team || '';
 
-      // Populate Modal
       const modalImg = overlay.querySelector('.team-modal-image img');
       modalImg.src = img?.src || '';
       modalImg.alt = `${title} 2026 Car`;
@@ -159,12 +148,13 @@
 
       overlay.querySelector('.modal-desc-text').textContent = desc || '';
       
-      // Wire up the button to their car details page (e.g., cars/audi.html)
       const carPageLink = teamName ? `cars/${teamName}.html` : '#';
       learnMoreBtn.href = carPageLink;
       learnMoreBtn.style.display = teamName ? 'inline-block' : 'none';
 
-      // Show Modal
+      // BROWSER HISTORY API FIX (Push State)
+      history.pushState({ modalOpen: true }, "", window.location.href);
+
       overlay.classList.add('visible');
       overlay.setAttribute('aria-hidden', 'false');
       modal.setAttribute('aria-hidden', 'false');
@@ -172,16 +162,28 @@
     }
 
     function close() {
-      overlay.classList.remove('visible');
-      overlay.setAttribute('aria-hidden', 'true');
-      modal.setAttribute('aria-hidden', 'true');
+      if (overlay.classList.contains('visible')) {
+        overlay.classList.remove('visible');
+        overlay.setAttribute('aria-hidden', 'true');
+        modal.setAttribute('aria-hidden', 'true');
+        if (history.state && history.state.modalOpen) {
+          history.back(); // Clear dummy state on manual close
+        }
+      }
     }
 
-    // Attach click listener to grid using event delegation
+    // Handle Mobile/Browser Back Button
+    window.addEventListener('popstate', () => {
+      if (overlay.classList.contains('visible')) {
+        overlay.classList.remove('visible');
+        overlay.setAttribute('aria-hidden', 'true');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+    });
+
     grid.addEventListener('click', e => {
       const card = e.target.closest('.team-card');
       if (!card) return;
-      // Prevent opening modal if clicking an existing link inside card
       if (e.target.closest('a') || e.target.closest('button')) return; 
       
       open(card);
@@ -194,7 +196,6 @@
     });
   }
 
-  // Handle broken images gracefully
   function bindImageFallbacks() {
     document.body.addEventListener('error', e => {
       const img = e.target;
@@ -207,7 +208,6 @@
     }, true);
   }
 
-  // Auto-fill HTML <span class="stat-value"> elements via data attributes
   function fillTeamStatsFromDataAttributes() {
     document.querySelectorAll('.team-stats').forEach(statsBlock => {
       const championships = statsBlock.dataset.championships ?? '0';
@@ -223,7 +223,6 @@
     });
   }
 
-  // Fetch API for dynamic Quick Links to results
   async function fetchMostRecentSeason() {
     try {
       const resp = await fetch(`${API_ROOT}/seasons.json?limit=1000`);
@@ -242,12 +241,10 @@
     const resultsLink = document.getElementById('resultsLink');
     const season = await fetchMostRecentSeason();
     if (resultsLink) {
-      // In Fall of 2026, it will route dynamically based on Ergast API
       resultsLink.href = season ? `results.html?season=${encodeURIComponent(season)}` : FALLBACK_RESULTS_URL;
     }
   }
 
-  // Boot up the page
   document.addEventListener('DOMContentLoaded', async () => {
     await Promise.allSettled([
       includeHTML('navbar', 'navbar.html'),

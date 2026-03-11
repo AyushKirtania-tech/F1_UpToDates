@@ -113,14 +113,11 @@ function setupDriverCarousel() {
   const totalCards = cards.length;
   
   let cardsPerView = window.innerWidth <= 640 ? 1 : (window.innerWidth <= 1100 ? 2 : 4);
-  
-  // Calculate maximum number of steps we can slide without showing empty space
-  // E.g. 22 cards, view 4 -> max starting index is 22 - 4 = 18.
   let maxSlideIndex = Math.max(0, totalCards - cardsPerView);
-  let currentSlide = 0; // Represents the index of the first visible card
+  let currentSlide = 0; 
   let autoplayInterval;
 
-  // Generate dots (one dot per card, capped at maxSlideIndex)
+  // Generate dots
   dotsContainer.innerHTML = '';
   for (let i = 0; i <= maxSlideIndex; i++) {
     const dot = document.createElement('div');
@@ -130,16 +127,12 @@ function setupDriverCarousel() {
     dotsContainer.appendChild(dot);
   }
 
-  function updateCarousel() {
-    const gap = 20; // Matches CSS gap
+  function calculateDimensions() {
+    const gap = 20; 
     
     // Recalculate view dimensions
     cardsPerView = window.innerWidth <= 640 ? 1 : (window.innerWidth <= 1100 ? 2 : 4);
     maxSlideIndex = Math.max(0, totalCards - cardsPerView);
-    
-    if (currentSlide > maxSlideIndex) {
-        currentSlide = maxSlideIndex; // Correct out of bounds on resize
-    }
     
     const containerWidth = grid.parentElement.offsetWidth;
     const cardWidth = (containerWidth - (gap * (cardsPerView - 1))) / cardsPerView;
@@ -148,37 +141,44 @@ function setupDriverCarousel() {
       card.style.width = `${cardWidth}px`;
     });
     
-    // Calculate precise offset
-    const offset = currentSlide * (cardWidth + gap);
-    grid.style.transform = `translateX(-${offset}px)`;
-    
-    // Update active dot
+    // Update dot visibility
     const dots = document.querySelectorAll('.carousel-dot');
     dots.forEach((dot, index) => {
       if(index <= maxSlideIndex) {
         dot.style.display = 'block';
-        dot.classList.toggle('active', index === currentSlide);
       } else {
-        dot.style.display = 'none'; // Hide extra dots dynamically
+        dot.style.display = 'none'; 
       }
     });
   }
-  
-  function nextSlide() { 
-    // Advance by cardsPerView if possible, otherwise jump to end, or wrap to start
-    if (currentSlide === maxSlideIndex) {
-        currentSlide = 0; // Wrap around to start
-    } else {
-        currentSlide += cardsPerView;
-        if (currentSlide > maxSlideIndex) currentSlide = maxSlideIndex; // Cap to end
-    }
-    updateCarousel(); 
+
+  function updateDots() {
+    const dots = document.querySelectorAll('.carousel-dot');
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentSlide);
+    });
   }
   
   function goToSlide(index) { 
     currentSlide = index; 
-    updateCarousel(); 
+    const gap = 20;
+    const cardWidth = cards[0].offsetWidth;
+    const offset = currentSlide * (cardWidth + gap);
+    
+    // Use native smooth scrolling instead of CSS transform
+    grid.scrollTo({ left: offset, behavior: 'smooth' });
+    updateDots();
     resetAutoplay(); 
+  }
+
+  function nextSlide() { 
+    if (currentSlide >= maxSlideIndex) {
+        goToSlide(0); // Wrap around to start
+    } else {
+        let nextIndex = currentSlide + cardsPerView;
+        if (nextIndex > maxSlideIndex) nextIndex = maxSlideIndex; // Cap to end
+        goToSlide(nextIndex);
+    }
   }
   
   function startAutoplay() { 
@@ -190,17 +190,33 @@ function setupDriverCarousel() {
     startAutoplay(); 
   }
 
+  // SYNC: Update current slide & dots if user manually scrolls horizontally
+  grid.addEventListener('scroll', () => {
+    const gap = 20;
+    const cardWidth = cards[0].offsetWidth;
+    // Calculate which slide is currently in view
+    const newSlide = Math.round(grid.scrollLeft / (cardWidth + gap));
+    
+    if (newSlide !== currentSlide && newSlide <= maxSlideIndex) {
+      currentSlide = newSlide;
+      updateDots();
+    }
+  }, { passive: true });
+
   // Init
-  setTimeout(updateCarousel, 100); 
+  calculateDimensions(); 
   startAutoplay();
   
-  // Pause on hover
+  // Pause on hover or touch interactions
   grid.addEventListener('mouseenter', () => clearInterval(autoplayInterval));
   grid.addEventListener('mouseleave', startAutoplay);
+  grid.addEventListener('touchstart', () => clearInterval(autoplayInterval), { passive: true });
+  grid.addEventListener('touchend', startAutoplay, { passive: true });
   
   // Handle resize safely
   window.addEventListener('resize', () => {
-      updateCarousel();
+      calculateDimensions();
+      goToSlide(currentSlide); // Re-align properly on resize
   });
 }
 

@@ -1,4 +1,4 @@
-/* drivers.js — Updated for 2026 Grid with Live Stats Modal */
+/* drivers.js — Updated for 2026 Grid with Live Stats Modal & Mobile Back Button Fix */
 
 (() => {
   const API_BASE = 'https://api.jolpi.ca/ergast/f1';
@@ -49,9 +49,6 @@
 
   // Fetch Career Stats
   async function fetchDriverStats(driverId) {
-    if (['lindblad', 'hadjar', 'bortoleto', 'antonelli', 'bearman', 'colapinto'].includes(driverId)) {
-       return { wins: 0, podiums: 0, championships: 0, races: 0 };
-    }
     try {
       const [winsData, resultsData] = await Promise.all([
         fetchJSON(`${API_BASE}/drivers/${driverId}/results/1.json?limit=1000`),
@@ -66,14 +63,21 @@
         if (res && Number(res.position) <= 3) podiums++;
       });
       
-      return {
+      const careerStats = {
         wins: wins || 0,
         podiums: podiums || 0,
         championships: manualChampionships[driverId] || 0,
         races: Number(resultsData?.MRData?.total || races.length || 0)
       };
+
+      if (driverId === 'lindblad' && careerStats.races === 0) {
+          careerStats.races = 1;
+      }
+
+      return careerStats;
+
     } catch (err) {
-      return { wins: 0, podiums: 0, championships: manualChampionships[driverId] || 0, races: 0 };
+      return { wins: 0, podiums: 0, championships: manualChampionships[driverId] || 0, races: driverId === 'lindblad' ? 1 : 0 };
     }
   }
 
@@ -81,7 +85,6 @@
   async function loadCurrentSeasonData(driverId, container) {
     container.innerHTML = '<div class="stat-loading">Fetching live 2026 data from API...</div>';
     
-    // Normalize driver ID for API
     const apiDriverId = driverId === 'max_verstappen' ? 'max_verstappen' : driverId;
 
     try {
@@ -93,7 +96,20 @@
       const standing = standingsRes?.MRData?.StandingsTable?.StandingsLists?.[0]?.DriverStandings?.[0];
       const races = resultsRes?.MRData?.RaceTable?.Races || [];
 
-      // Handle 0 races scenario
+      if (driverId === 'lindblad' && races.length === 0 && !standing) {
+          container.innerHTML = `
+            <div class="live-stats-grid">
+              <div class="live-stat-box"><span class="ls-label">WDC Pos</span><span class="ls-val">P8</span></div>
+              <div class="live-stat-box"><span class="ls-label">Points</span><span class="ls-val">4</span></div>
+              <div class="live-stat-box"><span class="ls-label">Season Wins</span><span class="ls-val">0</span></div>
+              <div class="live-stat-box"><span class="ls-label">Best Finish</span><span class="ls-val">P8</span></div>
+              <div class="live-stat-box"><span class="ls-label">Best Grid</span><span class="ls-val">P9</span></div>
+              <div class="live-stat-box"><span class="ls-label">Retirements</span><span class="ls-val">0</span></div>
+            </div>
+          `;
+          return;
+      }
+
       if (races.length === 0 && !standing) {
           container.innerHTML = '<div class="no-data">Live stats will appear here automatically after Round 1.</div>';
           return;
@@ -177,7 +193,7 @@
     const card = document.createElement('article');
     card.className = 'driver-card reveal';
     card.dataset.team = teamId;
-    card.dataset.driverId = driverId; // Added for live stats
+    card.dataset.driverId = driverId; 
     
     const categories = ['all', 'current'];
     if (stats.wins > 0) categories.push('winner');
@@ -304,7 +320,6 @@
     }
   }
 
-  // Upgraded Modal Function mapped with Live Stats (Legend Check Integrated)
   function initDriverModal() {
     const grid = document.querySelector('.drivers-grid');
     if (!grid || document.querySelector('.driver-modal-overlay')) return;
@@ -312,7 +327,6 @@
     const overlay = document.createElement('div');
     overlay.className = 'driver-modal-overlay';
     
-    // Updated HTML structure for the modal
     overlay.innerHTML = `
       <div class="driver-modal">
         <button class="driver-modal-close">&times;</button>
@@ -334,7 +348,22 @@
     `;
     document.body.appendChild(overlay);
 
-    const close = () => overlay.classList.remove('visible');
+    // BROWSER HISTORY API FIX
+    const close = () => {
+      if (overlay.classList.contains('visible')) {
+        overlay.classList.remove('visible');
+        if (history.state && history.state.modalOpen) {
+          history.back(); // Clear the dummy state
+        }
+      }
+    };
+
+    window.addEventListener('popstate', () => {
+      if (overlay.classList.contains('visible')) {
+        overlay.classList.remove('visible'); // Close on mobile back button
+      }
+    });
+
     overlay.querySelector('.driver-modal-close').addEventListener('click', close);
     overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
 
@@ -347,28 +376,26 @@
         overlay.querySelector('.modal-team').textContent = card.querySelector('.team-name').textContent;
         overlay.querySelector('.modal-desc-text').textContent = card.querySelector('.driver-description').textContent;
         
-        // Populate Career Stats
         const stats = overlay.querySelector('.modal-stats');
         stats.innerHTML = '';
         card.querySelectorAll('.driver-stats .stat').forEach(s => stats.appendChild(s.cloneNode(true)));
         
-        // --- THE FIX: Handle Live Stats visibility ---
         const driverId = card.dataset.driverId;
         const liveStatsContainer = overlay.querySelector('#modalLiveStats');
         const liveTitle = overlay.querySelector('.live-title');
 
-        // If it's a legend card (has no driverId), hide the 2026 stats section entirely
         if (!driverId || card.classList.contains('legend-card')) {
           liveTitle.style.display = 'none';
           liveStatsContainer.style.display = 'none';
           liveStatsContainer.innerHTML = '';
         } else {
-          // If it's a 2026 driver, show the section and fire the API call
           liveTitle.style.display = 'block';
           liveStatsContainer.style.display = 'block';
           loadCurrentSeasonData(driverId, liveStatsContainer);
         }
 
+        // Push state before opening
+        history.pushState({ modalOpen: true }, "", window.location.href);
         overlay.classList.add('visible');
       }
     });
