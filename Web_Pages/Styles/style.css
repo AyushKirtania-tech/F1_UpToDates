@@ -221,6 +221,64 @@ body::before {
   gap: 16px;
 }
 
+/* =========================================================
+   HERO FEATURE NOTICE (ANALYTICS PILL)
+   ========================================================= */
+.hero-feature-notice {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(216, 150, 255, 0.08);
+  border: 1px solid rgba(216, 150, 255, 0.2);
+  padding: 6px 18px 6px 6px;
+  border-radius: 50px;
+  text-decoration: none;
+  margin: 12px 0 20px 0;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  width: fit-content;
+}
+
+.hero-feature-notice:hover {
+  background: rgba(216, 150, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(216, 150, 255, 0.15);
+  border-color: rgba(216, 150, 255, 0.4);
+}
+
+.hero-feature-notice:active {
+  transform: translateY(1px);
+}
+
+.feature-badge {
+  background: #d896ff;
+  color: #000;
+  font-size: 0.75rem;
+  font-weight: 900;
+  padding: 6px 12px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.feature-text {
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+}
+
+.feature-arrow {
+  color: #d896ff;
+  margin-left: 6px;
+  transition: transform 0.3s ease;
+}
+
+/* Make the arrow slide right on hover */
+.hero-feature-notice:hover .feature-arrow {
+  transform: translateX(4px);
+}
+
 /* Next Race Countdown Widget */
 .bento-countdown-box {
   grid-column: span 2;

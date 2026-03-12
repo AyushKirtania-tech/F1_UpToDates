@@ -1046,4 +1046,150 @@
     background: transparent !important;
   }
 
+  
+
+  /* =========================================================
+     18. RACE ANALYTICS DASHBOARD (NATIVE APP MOBILE FIXES)
+     ========================================================= */
+  
+  /* Hero & Controls */
+  .analytics-hero {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 16px !important;
+    border-radius: 12px !important;
+    gap: 16px !important;
+  }
+
+  .analytics-hero .hero-text h1 { font-size: 1.6rem !important; }
+  
+  /* Make the pill controls fit small screens perfectly */
+  .unified-controls {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  .unified-controls select, .unified-controls button {
+    padding: 12px 10px !important;
+    font-size: 0.8rem !important;
+  }
+
+  .unified-controls #seasonSelect { flex: 0 0 75px !important; } /* Just enough for '2024' */
+  .unified-controls #raceSelect { padding-left: 4px !important; }
+  .unified-controls #loadBtn { padding: 12px 16px !important; }
+
+  /* Stack the Bento Dashboard vertically */
+  .bento-dashboard {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    margin-bottom: 24px !important;
+  }
+
+  .bento-card {
+    padding: 16px !important; /* Tighter padding for mobile */
+    border-radius: 12px !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+  }
+
+  .stat-hero-text { font-size: 1.6rem !important; }
+  .card-header h3 { font-size: 1rem !important; }
+
+  /* Bar Charts (Team Points) */
+  .bar-row { gap: 10px !important; }
+  .bar-label { 
+    width: 80px !important; /* Shrink label width so the bar has more room to animate */
+    font-size: 0.75rem !important; 
+  }
+  .bar-value { font-size: 0.9rem !important; width: 30px !important; }
+
+  /* Overtakes List */
+  .list-item { padding: 10px !important; }
+  .delta-box { font-size: 1rem !important; padding: 4px 8px !important; min-width: 45px !important; }
+
+  /* Attrition Diagnostics (The 2x2 Grid Fix) */
+  .attrition-summary {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important; /* Turns 1 row into a perfect 2x2 square */
+    gap: 16px !important;
+    padding-bottom: 16px !important;
+  }
+
+  .attrition-stat .count { font-size: 1.8rem !important; }
+  
+  /* Retirements Log adjustments */
+  .retirements-list {
+    max-height: 220px !important; /* Allow slightly more scrolling height on phones */
+  }
+  
+  .ret-item {
+    padding: 8px 10px !important;
+  }
+  
+  .ret-driver {
+    width: 40% !important; /* Give driver names slightly more room */
+    font-size: 0.85rem !important;
+  }
+  
+  .ret-reason { font-size: 0.7rem !important; }
+  .ret-lap { font-size: 0.75rem !important; }
+
+  /* =========================================================
+   HERO FEATURE NOTICE (ANALYTICS PILL)
+   ========================================================= */
+.hero-feature-notice {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(216, 150, 255, 0.08);
+  border: 1px solid rgba(216, 150, 255, 0.2);
+  padding: 6px 18px 6px 6px;
+  border-radius: 50px;
+  text-decoration: none;
+  margin: 12px 0 20px 0;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  width: fit-content;
+}
+
+.hero-feature-notice:hover {
+  background: rgba(216, 150, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(216, 150, 255, 0.15);
+  border-color: rgba(216, 150, 255, 0.4);
+}
+
+.hero-feature-notice:active {
+  transform: translateY(1px);
+}
+
+.feature-badge {
+  background: #d896ff;
+  color: #000;
+  font-size: 0.75rem;
+  font-weight: 900;
+  padding: 6px 12px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.feature-text {
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+}
+
+.feature-arrow {
+  color: #d896ff;
+  margin-left: 6px;
+  transition: transform 0.3s ease;
+}
+
+/* Make the arrow slide right on hover */
+.hero-feature-notice:hover .feature-arrow {
+  transform: translateX(4px);
+}
+
 } /* <-- THIS IS THE ONLY CLOSING BRACKET FOR THE @MEDIA QUERY */

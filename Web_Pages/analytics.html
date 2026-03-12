@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Race Analytics - F1 Premium</title>
+  
+  <link rel="stylesheet" href="Styles/skeleton.css">
+  <link rel="stylesheet" href="Styles/global-search.css">
+  <link rel="stylesheet" href="Styles/style.css">
+  <link rel="stylesheet" href="Styles/mobile.css">
+  <link rel="stylesheet" href="Styles/navbar.css">
+  <link rel="stylesheet" href="Styles/analytics.css"> 
+</head>
+
+<body>
+  <div id="navbar"></div>
+  
+  <main class="container" id="app">
+    <div class="analytics-hero">
+      <div class="hero-text">
+        <h1>Race Telemetry</h1>
+        <p>Deep-dive diagnostics, grid deltas, and team point hauls.</p>
+      </div>
+      <div class="unified-controls">
+        <select id="seasonSelect" aria-label="Choose season"></select>
+        <div class="divider"></div>
+        <select id="raceSelect" aria-label="Choose race"><option>Pick a season</option></select>
+      </div>
+    </div>
+
+    <div id="loading" class="stat-loading" hidden>
+      <div class="spinner"></div>
+      <p>Crunching FIA Telemetry Data...</p>
+    </div>
+    <div id="error" class="no-data" hidden></div>
+
+    <div id="analyticsDashboard" class="bento-dashboard" hidden>
+      
+      <div class="bento-card card-purple fastest-card">
+        <div class="card-header">
+          <h3>⏱ Fastest Lap</h3>
+          <span class="badge">1 Pt</span>
+        </div>
+        <div id="fastestLapDriver" class="stat-hero-text">—</div>
+        <div class="stat-row">
+          <span id="fastestLapTime" class="stat-highlight">—</span>
+          <span id="fastestLapSpeed" class="stat-sub">—</span>
+        </div>
+      </div>
+
+      <div class="bento-card card-gold winner-card">
+        <div class="card-header">
+          <h3>🏆 Race Winner</h3>
+          <span id="winnerPoints" class="badge badge-gold">—</span>
+        </div>
+        <div id="raceWinner" class="stat-hero-text">—</div>
+        <div id="raceWinnerTeam" class="stat-sub" style="margin-bottom: 12px;">—</div>
+        <div class="stat-row">
+          <span id="winnerTime" class="stat-highlight highlight-gold">—</span>
+          <span id="winnerGrid" class="stat-sub">—</span>
+        </div>
+      </div>
+
+      <div class="bento-card card-wide team-perf-card">
+        <div class="card-header">
+          <h3>Constructors' Point Haul</h3>
+          <p class="subtitle">Total points accumulated in this session</p>
+        </div>
+        <div id="teamPointsList" class="chart-container"></div>
+      </div>
+
+      <div class="bento-card card-green movers-card">
+        <div class="card-header">
+          <h3>Grid Movers</h3>
+          <p class="subtitle">Biggest overtakes and position drops</p>
+        </div>
+        <div id="moversList" class="list-container"></div>
+      </div>
+
+      <div class="bento-card card-red attrition-card">
+        <div class="card-header">
+          <h3>Grid Attrition</h3>
+          <p class="subtitle">Reliability & Incident Diagnostics</p>
+        </div>
+        <div class="attrition-summary">
+          <div class="attrition-stat"><span id="completionRate" class="count text-white">0%</span><span class="label">Completion</span></div>
+          <div class="attrition-stat"><span id="finishCount" class="count text-green">0</span><span class="label">Finished</span></div>
+          <div class="attrition-stat"><span id="dnfCount" class="count text-red">0</span><span class="label">DNF</span></div>
+          <div class="attrition-stat"><span id="totalGridCount" class="count text-muted">0</span><span class="label">Total</span></div>
+        </div>
+        <div id="statusBreakdown" class="pill-grid"></div>
+        
+        <div id="retirementsLog" class="retirements-list"></div>
+      </div>
+
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="Script/common.js"></script>
+  <script src="Script/analytics.js"></script>
+</body>
+</html>
