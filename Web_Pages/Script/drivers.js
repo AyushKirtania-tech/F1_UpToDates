@@ -1,4 +1,4 @@
-/* drivers.js — Updated for 2026 Grid with Live Stats Modal & Mobile Back Button Fix */
+/* drivers.js — Updated for 2026 Grid with Live Stats Modal & Driver Standings Integration */
 
 (() => {
   const API_BASE = 'https://api.jolpi.ca/ergast/f1';
@@ -412,10 +412,92 @@
     if (el) { try { const r = await fetch(path); if(r.ok) el.innerHTML = await r.text(); } catch(e){} }
   }
 
+  // --- DYNAMIC DRIVER STANDINGS API INTEGRATION ---
+  const driverMap = {
+    // Top Tier
+    "max_verstappen": { class: "redbull", color: "#1e3a8a" },
+    "hadjar": { class: "redbull", color: "#1e3a8a" },
+    "norris": { class: "mclaren", color: "#ff8c00" },
+    "piastri": { class: "mclaren", color: "#ff8c00" },
+    "leclerc": { class: "ferrari", color: "#dc2626" },
+    "hamilton": { class: "ferrari", color: "#dc2626" },
+    "russell": { class: "mercedes", color: "#00d2be" },
+    "antonelli": { class: "mercedes", color: "#00d2be" },
+    
+    // Midfield
+    "albon": { class: "williams", color: "#00a0de" },
+    "sainz": { class: "williams", color: "#00a0de" },
+    "alonso": { class: "astonmartin", color: "#006a4e" },
+    "stroll": { class: "astonmartin", color: "#006a4e" },
+    "gasly": { class: "alpine", color: "#0084c7" },
+    "colapinto": { class: "alpine", color: "#0084c7" },
+    
+    // Challengers
+    "lawson": { class: "racingbulls", color: "#0f172a" },
+    "lindblad": { class: "racingbulls", color: "#0f172a" },
+    "ocon": { class: "haas", color: "#ffffff" },
+    "bearman": { class: "haas", color: "#ffffff" },
+    "hulkenberg": { class: "audi", color: "#ff0000" },
+    "bortoleto": { class: "audi", color: "#ff0000" },
+    "perez": { class: "cadillac", color: "#a2a2a2" },
+    "bottas": { class: "cadillac", color: "#a2a2a2" }
+  };
+
+  async function loadDriverStandings() {
+    try {
+      const response = await fetch(`${API_BASE}/current/driverStandings.json`);
+      if (!response.ok) throw new Error("Failed to fetch standings");
+      
+      const data = await response.json();
+      const standings = data.MRData.StandingsTable.StandingsLists[0].DriverStandings;
+      const currentSeason = data.MRData.StandingsTable.season;
+      
+      const table = document.querySelector('.championship-table');
+      if (!table) return;
+
+      const header = table.querySelector('.table-header');
+      table.innerHTML = '';
+      table.appendChild(header);
+
+      standings.forEach(standing => {
+        const driverId = standing.Driver.driverId;
+        const driverName = `${standing.Driver.givenName} ${standing.Driver.familyName}`;
+        const position = standing.position;
+        const points = standing.points;
+        const constructorId = standing.Constructors[0]?.constructorId || 'unknown';
+        
+        const driverInfo = driverMap[driverId] || { class: constructorId, color: "#cccccc" };
+
+        const row = document.createElement('div');
+        row.className = 'table-row';
+        row.setAttribute('role', 'row');
+        
+        row.innerHTML = `
+          <div>${position}</div>
+          <div><span class="team-color ${driverInfo.class}" aria-hidden="true" style="background:${driverInfo.color};"></span>${driverName}</div>
+          <div>${points}</div>
+        `;
+        
+        table.appendChild(row);
+      });
+
+      const sectionTitle = document.querySelector('.championship-section .section-title');
+      if (sectionTitle) {
+         sectionTitle.textContent = `${currentSeason} Driver Standings`;
+      }
+
+    } catch (error) {
+      console.error("Error loading driver standings, falling back to static HTML:", error);
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', async () => {
     await Promise.all([includeHTML('navbar', 'navbar.html'), includeHTML('footer', 'footer.html')]);
     bindImageFallbacks();
     if ($('#driversGrid')) await loadDrivers();
+    
+    // Call the dynamic table load here
+    loadDriverStandings();
   });
 
 })();

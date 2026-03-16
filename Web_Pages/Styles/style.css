@@ -616,34 +616,89 @@ body::before {
   margin-bottom: 20px;
 }
 
-.mini-teams-grid {
+
+
+/* =========================================================
+   CONSTRUCTORS LOGO GRID (BENTO BOX)
+   ========================================================= */
+.constructor-desc {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 18px;
+  line-height: 1.4;
+}
+
+.constructor-logos-grid {
   display: flex;
-  gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 16px;
 }
 
-.mini-team {
-  width: 30px;
-  height: 30px;
+.c-logo-box {
+  width: calc(33.333% - 7px); /* 3 logos per row on mobile */
+  aspect-ratio: 16 / 10;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 8px;
-  background: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
 }
 
-/* Team Colors for Mini Grid */
-.mini-team.mclaren { background: #ff8000; }
-.mini-team.ferrari { background: #e10600; }
-.mini-team.redbull { background: #0600ef; }
-.mini-team.mercedes { background: #00d2be; }
-.mini-team.astonmartin { background: #006f62; }
-.mini-team.williams { background: #00539f; }
-.mini-team.haas { background: #ffffff; }
-.mini-team.rb { background: #1432d1; }
-.mini-team.alpine { background: #0090ff; }
-.mini-team.sauber { background: #00e701; }
-.mini-team.cadillac { background: #222222; border: 1px solid #fff; }
+@media (min-width: 640px) {
+   .c-logo-box { width: calc(25% - 8px); } /* 4 logos per row on larger screens */
+}
 
-.mt-3 { margin-top: auto; align-self: flex-start; }
+/* Make Cadillac stand out as the special 11th team spanning the remaining space */
+.c-logo-box.cadillac-box {
+   border-color: rgba(162, 162, 162, 0.3);
+   background: rgba(162, 162, 162, 0.05);
+   flex-grow: 1; 
+   max-width: 60%;
+}
+
+.c-logo-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--team-color);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+  filter: blur(12px);
+}
+
+.c-logo-box:hover {
+  transform: translateY(-3px);
+  border-color: var(--team-color);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.c-logo-box:hover::before {
+  opacity: 0.25; /* Subtle glowing background of the team's color */
+}
+
+.c-logo-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  z-index: 1;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+  transition: transform 0.3s ease;
+}
+
+.c-logo-box:hover img {
+  transform: scale(1.12); /* Pop the logo out slightly on hover */
+}
+
+
 
 /* ================== RESPONSIVE DESIGN ================== */
 @media (max-width: 1100px) {
@@ -1042,4 +1097,143 @@ footer {
   font-size: 0.95rem;
   color: #fff;
   font-weight: 600;
+}
+
+
+/* =========================================================
+   TABBED STANDINGS BENTO CARD (INDEX.HTML)
+   ========================================================= */
+.bento-standings {
+  grid-column: span 2;
+}
+
+@media (max-width: 1024px) {
+  .bento-standings {
+    grid-column: 1 / -1;
+  }
+}
+
+.standings-tabs {
+  display: flex;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.standings-tab {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.standings-tab.active {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.mini-table-header {
+  display: grid;
+  grid-template-columns: 40px 1fr 60px;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 8px;
+}
+
+.mini-standings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mini-row {
+  display: grid;
+  grid-template-columns: 40px 1fr 60px;
+  align-items: center;
+  font-size: 0.95rem;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.02);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.mini-row:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateX(4px);
+}
+
+.mini-pos {
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.mini-name-col {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mini-color {
+  width: 4px;
+  height: 16px;
+  border-radius: 2px;
+}
+
+.mini-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.mini-team-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-left: 8px;
+  font-weight: 400;
+}
+
+.mini-pts {
+  font-weight: 800;
+  color: var(--text-primary);
+  text-align: right;
+  background: rgba(225, 6, 0, 0.15);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.view-all-link {
+  display: block;
+  text-align: center;
+  margin-top: 16px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.view-all-link:hover {
+  color: var(--accent);
+}
+
+/* Mobile Responsiveness for Tables */
+@media (max-width: 480px) {
+  .mini-row, .mini-table-header {
+    grid-template-columns: 30px 1fr 50px;
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+  .mini-team-sub {
+    display: none; /* Hide team name next to driver on small phones to prevent text squishing */
+  }
 }

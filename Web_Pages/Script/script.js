@@ -224,6 +224,8 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('F1 Bento Dashboard Loaded');
   setupNextRace();
   setupDriverCarousel();
+  initStandingsTabs(); 
+  loadMiniStandings();
 });
 
 
@@ -278,3 +280,103 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error("Could not load Calendar data:", error);
   }
 });
+
+/* =========================================================
+   TABBED STANDINGS WIDGET FOR HOMEPAGE
+   ========================================================= */
+const miniTeamColors = {
+  "red_bull": "#1e3a8a", "ferrari": "#dc2626", "mercedes": "#00d2be",
+  "mclaren": "#ff8c00", "aston_martin": "#006a4e", "williams": "#00a0de",
+  "alpine": "#0084c7", "racing_bulls": "#0f172a", "rb": "#0f172a",
+  "haas": "#ffffff", "audi": "#ff0000", "sauber": "#ff0000", "cadillac": "#a2a2a2"
+};
+
+const miniTeamNames = {
+  "red_bull": "Red Bull", "ferrari": "Ferrari", "mercedes": "Mercedes",
+  "mclaren": "McLaren", "aston_martin": "Aston Martin", "williams": "Williams",
+  "alpine": "Alpine", "racing_bulls": "Racing Bulls", "rb": "Racing Bulls",
+  "haas": "Haas", "audi": "Audi", "sauber": "Sauber", "cadillac": "Cadillac"
+};
+
+function initStandingsTabs() {
+  const tabs = document.querySelectorAll('.standings-tab');
+  const views = document.querySelectorAll('.standings-view');
+  
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Remove active states
+      tabs.forEach(t => t.classList.remove('active'));
+      views.forEach(v => v.style.display = 'none');
+      
+      // Set new active state
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.target).style.display = 'block';
+    });
+  });
+}
+
+async function loadMiniStandings() {
+  const dContainer = document.getElementById('mini-driver-standings');
+  const cContainer = document.getElementById('mini-constructor-standings');
+  if (!dContainer || !cContainer) return;
+
+  try {
+    const [dRes, cRes] = await Promise.all([
+      fetch('https://api.jolpi.ca/ergast/f1/current/driverStandings.json'),
+      fetch('https://api.jolpi.ca/ergast/f1/current/constructorStandings.json')
+    ]);
+
+    const dData = await dRes.json();
+    const cData = await cRes.json();
+
+    const dLists = dData.MRData.StandingsTable.StandingsLists;
+    const cLists = cData.MRData.StandingsTable.StandingsLists;
+
+    if (!dLists.length || !cLists.length) {
+       dContainer.innerHTML = '<p style="text-align:center;color:#aaa;padding:20px;">No data yet for 2026.</p>';
+       cContainer.innerHTML = '<p style="text-align:center;color:#aaa;padding:20px;">No data yet for 2026.</p>';
+       return;
+    }
+
+    // Grab Top 10 for the full-width view
+    const topDrivers = dLists[0].DriverStandings.slice(0, 10);
+    const topConstructors = cLists[0].ConstructorStandings.slice(0, 10);
+
+    // Build Drivers Table
+    dContainer.innerHTML = topDrivers.map(d => {
+      const cId = d.Constructors[0]?.constructorId || 'unknown';
+      const color = miniTeamColors[cId] || '#cccccc';
+      const teamName = miniTeamNames[cId] || d.Constructors[0]?.name || '';
+      return `
+        <div class="mini-row">
+          <span class="mini-pos">${d.position}</span>
+          <div class="mini-name-col">
+            <span class="mini-color" style="background: ${color};"></span>
+            <span class="mini-name">${d.Driver.givenName} ${d.Driver.familyName} <span class="mini-team-sub">${teamName}</span></span>
+          </div>
+          <span class="mini-pts">${d.points}</span>
+        </div>
+      `;
+    }).join('');
+
+    // Build Constructors Table
+    cContainer.innerHTML = topConstructors.map(c => {
+      const cId = c.Constructor.constructorId;
+      const color = miniTeamColors[cId] || '#cccccc';
+      return `
+        <div class="mini-row">
+          <span class="mini-pos">${c.position}</span>
+          <div class="mini-name-col">
+            <span class="mini-color" style="background: ${color};"></span>
+            <span class="mini-name">${c.Constructor.name}</span>
+          </div>
+          <span class="mini-pts">${c.points}</span>
+        </div>
+      `;
+    }).join('');
+
+  } catch (error) {
+    dContainer.innerHTML = '<p style="text-align:center;color:#e10600;padding:20px;">API Error</p>';
+    cContainer.innerHTML = '<p style="text-align:center;color:#e10600;padding:20px;">API Error</p>';
+  }
+}

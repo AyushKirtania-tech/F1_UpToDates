@@ -173,6 +173,44 @@
         </div>
       </div>
 
+      <div class="bento-card bento-standings">
+        <div class="bento-content">
+          <div class="box-header flex-between" style="margin-bottom: 16px;">
+            <h3>Live Standings</h3>
+            <div class="standings-tabs">
+              <button class="standings-tab active" data-target="drivers-tab">Drivers</button>
+              <button class="standings-tab" data-target="constructors-tab">Teams</button>
+            </div>
+          </div>
+          
+          <div class="standings-views">
+            <div id="drivers-tab" class="standings-view active">
+              <div class="mini-table-header">
+                <span>Pos</span>
+                <span>Driver</span>
+                <span style="text-align:right;">Pts</span>
+              </div>
+              <div id="mini-driver-standings" class="mini-standings-list">
+                <div class="loading-spinner" style="width:20px;height:20px;border-width:2px;margin:20px auto;"></div>
+              </div>
+              <a href="drivers.html" class="view-all-link">View Full Driver Standings →</a>
+            </div>
+            
+            <div id="constructors-tab" class="standings-view" style="display: none;">
+              <div class="mini-table-header">
+                <span>Pos</span>
+                <span>Constructor</span>
+                <span style="text-align:right;">Pts</span>
+              </div>
+              <div id="mini-constructor-standings" class="mini-standings-list">
+                <div class="loading-spinner" style="width:20px;height:20px;border-width:2px;margin:20px auto;"></div>
+              </div>
+              <a href="teams.html" class="view-all-link">View Full Team Standings →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="bento-card bento-results">
         <div class="bento-content">
           <div class="results-visual">
@@ -188,22 +226,28 @@
 
       <div class="bento-card bento-constructors">
         <div class="bento-content">
-          <h3>The 11 Constructors</h3>
-          <p>Cadillac officially joins the grid alongside the giants of the sport.</p>
-          <div class="mini-teams-grid">
-            <div class="mini-team mclaren" title="McLaren"></div>
-            <div class="mini-team ferrari" title="Ferrari"></div>
-            <div class="mini-team redbull" title="Red Bull Racing"></div>
-            <div class="mini-team mercedes" title="Mercedes"></div>
-            <div class="mini-team astonmartin" title="Aston Martin"></div>
-            <div class="mini-team williams" title="Williams"></div>
-            <div class="mini-team haas" title="Haas"></div>
-            <div class="mini-team rb" title="Visa Cash App RB"></div>
-            <div class="mini-team alpine" title="Alpine"></div>
-            <div class="mini-team sauber" title="Sauber"></div>
-            <div class="mini-team cadillac" title="Cadillac F1"></div>
+          <div class="box-header flex-between" style="margin-bottom: 8px;">
+            <h3>The 11 Constructors</h3>
+            <span class="era-badge" style="font-size: 0.65rem; padding: 2px 8px; margin: 0;">2026 Grid</span>
           </div>
-          <a href="teams.html" class="btn btn-outline btn-small mt-3">View Team Hub</a>
+          <p class="constructor-desc">Cadillac officially joins the grid alongside the giants of the sport. Welcome to the new era.</p>
+          
+          <div class="constructor-logos-grid">
+            <a href="teams.html" class="c-logo-box" style="--team-color: #ff8c00;" title="McLaren"><img src="images/logos/mclaren.avif" alt="McLaren"></a>
+            <a href="teams.html" class="c-logo-box" style="--team-color: #dc2626;" title="Ferrari"><img src="images/logos/ferrari.avif" alt="Ferrari"></a>
+            <a href="teams.html" class="c-logo-box" style="--team-color: #1e3a8a;" title="Red Bull Racing"><img src="images/logos/redbull.avif" alt="Red Bull"></a>
+            <a href="teams.html" class="c-logo-box" style="--team-color: #00d2be;" title="Mercedes"><img src="images/logos/mercedes.avif" alt="Mercedes"></a>
+            <a href="teams.html" class="c-logo-box" style="--team-color: #006a4e;" title="Aston Martin"><img src="images/logos/aston.avif" alt="Aston Martin"></a>
+            <a href="teams.html" class="c-logo-box" style="--team-color: #00a0de;" title="Williams"><img src="images/logos/williams.avif" alt="Williams"></a>
+            <a href="teams.html" class="c-logo-box" style="--team-color: #ffffff;" title="Haas"><img src="images/logos/haas.avif" alt="Haas"></a>
+            <a href="teams.html" class="c-logo-box" style="--team-color: #0f172a;" title="Racing Bulls"><img src="images/logos/racingbulls.avif" alt="Racing Bulls"></a>
+            <a href="teams.html" class="c-logo-box" style="--team-color: #0084c7;" title="Alpine"><img src="images/logos/alpine.avif" alt="Alpine"></a>
+            <a href="teams.html" class="c-logo-box" style="--team-color: #ff0000;" title="Audi"><img src="images/logos/audi.avif" alt="Audi"></a>
+            
+            <a href="teams.html" class="c-logo-box cadillac-box" style="--team-color: #a2a2a2;" title="Cadillac F1"><img src="images/logos/cadillac.avif" alt="Cadillac"></a>
+          </div>
+
+          <a href="teams.html" class="btn btn-outline btn-block mt-3" style="width: 100%; text-align: center;">Explore Team Hub →</a>
         </div>
       </div>
 

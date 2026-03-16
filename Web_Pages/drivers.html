@@ -24,7 +24,6 @@
   <div id="navbar"></div>
 
   <main id="main" class="drivers-main" tabindex="-1">
-    <!-- Hero -->
     <header class="drivers-hero" aria-labelledby="drivers-heading">
       <div class="hero-content">
         <h1 id="drivers-heading">F1 Drivers</h1>
@@ -47,7 +46,6 @@
       </div>
     </header>
 
-    <!-- Filters -->
     <section class="filter-section" aria-label="Driver filters">
       <div class="container">
         <div class="filter-intro">
@@ -89,15 +87,10 @@
       </div>
     </section>
 
-
-    <!-- DRIVERS GRID - Will be populated with API + Legend drivers -->
     <div class="drivers-grid" id="driversGrid"
       style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:28px;align-items:start;">
 
-      <!-- Loading state for API drivers -->
-      <!-- Replace the loading message with skeleton cards -->
       <div id="loadingMessage" style="grid-column: 1/-1;">
-        <!-- Add 6 skeleton cards -->
         <div class="skeleton skeleton-card"></div>
         <div class="skeleton skeleton-card"></div>
         <div class="skeleton skeleton-card"></div>
@@ -106,8 +99,6 @@
         <div class="skeleton skeleton-card"></div>
       </div>
 
-      <!-- Legendary Drivers (Static) -->
-      <!-- Ayrton Senna -->
       <article class="driver-card reveal legend-card" data-category="legends champions" data-team="legend"
         data-link="https://en.wikipedia.org/wiki/Ayrton_Senna">
         <div class="driver-header" style="background: linear-gradient(135deg,#1b1b1b,#3a1a1a);">
@@ -132,7 +123,6 @@
         </div>
       </article>
 
-      <!-- Michael Schumacher -->
       <article class="driver-card reveal legend-card" data-category="legends champions" data-team="legend"
         data-link="https://en.wikipedia.org/wiki/Michael_Schumacher">
         <div class="driver-header" style="background: linear-gradient(135deg,#111111,#2b1b1b);">
@@ -156,7 +146,6 @@
         </div>
       </article>
 
-      <!-- Alain Prost -->
       <article class="driver-card reveal legend-card" data-category="legends champions" data-team="legend"
         data-link="https://en.wikipedia.org/wiki/Alain_Prost">
         <div class="driver-header" style="background: linear-gradient(135deg,#2b2b2b,#3b2a2a);">
@@ -180,7 +169,6 @@
         </div>
       </article>
 
-      <!-- Juan Manuel Fangio -->
       <article class="driver-card reveal legend-card" data-category="legends champions" data-team="legend"
         data-link="https://en.wikipedia.org/wiki/Juan_Manuel_Fangio">
         <div class="driver-header" style="background: linear-gradient(135deg,#2a241f,#473627);">
@@ -205,7 +193,6 @@
         </div>
       </article>
 
-      <!-- Niki Lauda -->
       <article class="driver-card reveal legend-card" data-category="legends champions" data-team="legend"
         data-link="https://en.wikipedia.org/wiki/Niki_Lauda">
         <div class="driver-header" style="background: linear-gradient(135deg,#2a2a2a,#4b2a2a);">
@@ -230,7 +217,6 @@
         </div>
       </article>
 
-      <!-- James Hunt -->
       <article class="driver-card reveal legend-card" data-category="legends champions" data-team="legend"
         data-link="https://en.wikipedia.org/wiki/James_Hunt">
         <div class="driver-header" style="background: linear-gradient(135deg,#151515,#2c241f);">
@@ -255,7 +241,6 @@
         </div>
       </article>
 
-      <!-- Jim Clark -->
       <article class="driver-card reveal legend-card" data-category="legends champions" data-team="legend"
         data-link="https://en.wikipedia.org/wiki/Jim_Clark">
         <div class="driver-header" style="background: linear-gradient(135deg,#121212,#2b2b2b);">
@@ -279,7 +264,6 @@
         </div>
       </article>
 
-      <!-- Jackie Stewart -->
       <article class="driver-card reveal legend-card" data-category="legends champions" data-team="legend"
         data-link="https://en.wikipedia.org/wiki/Jackie_Stewart">
         <div class="driver-header" style="background: linear-gradient(135deg,#1b1b1b,#2f2f3a);">
@@ -303,15 +287,24 @@
             success on track.</p>
         </div>
       </article>
-
-      
-
     </div>
 
     <div id="noResults" class="no-results" role="status" aria-live="polite" hidden
       style="margin-top:18px;text-align:center;color:var(--muted);">No drivers match that filter.</div>
 
-    <!-- Styles for smooth transitions -->
+    <section class="championship-section" style="margin-top: 60px;">
+      <div class="container">
+        <h2 class="section-title">2026 Driver Starting Standings</h2>
+        <div class="championship-table" role="table" aria-label="Driver standings">
+          <div class="table-header" role="row">
+            <div role="columnheader">Pos</div>
+            <div role="columnheader">Driver</div>
+            <div role="columnheader">Points</div>
+          </div>
+          </div>
+      </div>
+    </section>
+
     <style>
       .driver-card {
         transition: opacity .28s ease, transform .28s ease;
@@ -325,7 +318,6 @@
         height: auto;
       }
 
-      /* Reveal animation */
       .reveal {
         opacity: 0;
         transform: translateY(20px);
@@ -337,8 +329,6 @@
         transform: translateY(0);
       }
 
-      /* Modal styles */
-      /* Modal overlay */
       .driver-modal-overlay {
         position: fixed;
         inset: 0;
@@ -361,7 +351,7 @@
       }
 
       .driver-modal {
-        background: var(--card-bg);
+        background: var(--card-bg, rgba(20,20,24,0.95));
         border-radius: 20px;
         max-width: 700px;
         width: 90%;
@@ -384,7 +374,7 @@
         right: 16px;
         background: rgba(255, 255, 255, 0.1);
         border: none;
-        color: var(--text, #fff);
+        color: #fff;
         font-size: 2rem;
         width: 40px;
         height: 40px;
@@ -434,7 +424,7 @@
         font-size: 2rem;
         font-weight: 900;
         margin: 0 0 8px;
-        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        background: linear-gradient(135deg, var(--accent), var(--accent-2, #ff4500));
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -482,29 +472,6 @@
         margin-top: 16px;
       }
 
-      .modal-learn-more {
-        display: inline-block;
-        margin-top: 20px;
-        padding: 10px 20px;
-        background: var(--gradient-primary);
-        color: white;
-        text-decoration: none;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 0.95rem;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border: none;
-        cursor: pointer;
-        box-shadow: 0 4px 15px rgba(225, 6, 0, 0.3);
-      }
-
-      .modal-learn-more:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(225, 6, 0, 0.5);
-      }
-
       .filter-btn:focus,
       .driver-card:focus,
       .driver-modal-close:focus {
@@ -518,16 +485,13 @@
           grid-template-columns: 1fr;
           padding: 20px;
         }
-
         .driver-modal-image {
           height: 250px;
           border-radius: 12px;
         }
-
         .driver-modal-image img {
           max-width: 100%;
         }
-
         .modal-stats {
           grid-template-columns: repeat(2, 1fr);
         }
@@ -538,11 +502,9 @@
           width: 95%;
           max-height: 85vh;
         }
-
         .driver-modal-body {
           padding: 16px;
         }
-
         .modal-stats {
           grid-template-columns: repeat(2, 1fr);
           gap: 8px;
@@ -550,9 +512,7 @@
       }
 
       @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
+        to { transform: rotate(360deg); }
       }
 
       .loading-spinner {
@@ -565,7 +525,6 @@
         margin: 20px auto;
       }
 
-      /* Career Stats Header Styling */
       .stats-header {
         margin: 12px 0 8px;
         padding-bottom: 8px;

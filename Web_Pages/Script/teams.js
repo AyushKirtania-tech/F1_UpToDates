@@ -1,4 +1,4 @@
-/* teams.js — Synchronized for the 11-Team 2026 Layout with Mobile Back Button Fix */
+/* teams.js — Synchronized for the 11-Team 2026 Layout with Mobile Back Button Fix & Live Standings API Integration */
 
 (() => {
   const API_ROOT = 'https://api.jolpi.ca/ergast/f1';
@@ -245,6 +245,73 @@
     }
   }
 
+  // --- DYNAMIC CONSTRUCTOR STANDINGS API INTEGRATION ---
+  const constructorMap = {
+    "mclaren": { name: "McLaren", class: "mclaren", color: "#ff8c00" },
+    "ferrari": { name: "Scuderia Ferrari", class: "ferrari", color: "#dc2626" },
+    "mercedes": { name: "Mercedes AMG", class: "mercedes", color: "#00d2be" },
+    "red_bull": { name: "Red Bull Racing", class: "redbull", color: "#1e3a8a" },
+    "williams": { name: "Williams Racing", class: "williams", color: "#00a0de" },
+    "aston_martin": { name: "Aston Martin", class: "astonmartin", color: "#006a4e" },
+    "alpine": { name: "Alpine", class: "alpine", color: "#0084c7" },
+    "rb": { name: "Racing Bulls", class: "racingbulls", color: "#0f172a" },
+    "haas": { name: "Haas", class: "haas", color: "#ffffff" },
+    "audi": { name: "Audi", class: "audi", color: "#ff0000" },
+    "sauber": { name: "Audi", class: "audi", color: "#ff0000" }, 
+    "cadillac": { name: "Cadillac", class: "cadillac", color: "#a2a2a2" },
+    "andretti": { name: "Cadillac", class: "cadillac", color: "#a2a2a2" } 
+  };
+
+  async function loadConstructorStandings() {
+    try {
+      const response = await fetch(`${API_ROOT}/current/constructorStandings.json`);
+      if (!response.ok) throw new Error("Failed to fetch standings");
+      
+      const data = await response.json();
+      const standings = data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
+      const currentSeason = data.MRData.StandingsTable.season;
+      
+      const table = document.querySelector('.championship-table');
+      if (!table) return;
+
+      const header = table.querySelector('.table-header');
+      table.innerHTML = '';
+      table.appendChild(header);
+
+      standings.forEach(standing => {
+        const constructorId = standing.Constructor.constructorId;
+        const position = standing.position;
+        const points = standing.points;
+        
+        const teamInfo = constructorMap[constructorId] || { 
+          name: standing.Constructor.name, 
+          class: constructorId, 
+          color: "#cccccc" 
+        };
+
+        const row = document.createElement('div');
+        row.className = 'table-row';
+        row.setAttribute('role', 'row');
+        
+        row.innerHTML = `
+          <div>${position}</div>
+          <div><span class="team-color ${teamInfo.class}" aria-hidden="true" style="background:${teamInfo.color};"></span>${teamInfo.name}</div>
+          <div>${points}</div>
+        `;
+        
+        table.appendChild(row);
+      });
+
+      const sectionTitle = document.querySelector('.championship-section .section-title');
+      if (sectionTitle) {
+         sectionTitle.textContent = `${currentSeason} Constructor Standings`;
+      }
+
+    } catch (error) {
+      console.error("Error loading constructor standings, falling back to static HTML:", error);
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', async () => {
     await Promise.allSettled([
       includeHTML('navbar', 'navbar.html'),
@@ -257,6 +324,9 @@
     initTeamModal();
     bindImageFallbacks();
     wireResultsLinks();
+    
+    // Call the new API standings function here
+    loadConstructorStandings();
   });
 
 })();
