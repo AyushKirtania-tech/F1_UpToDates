@@ -1,4 +1,4 @@
-/* drivers.js — Updated for 2026 Grid with Live Stats Modal & Filter Fixes */
+/* drivers.js — Updated for 2026 Grid with Live Stats Modal, Filter Fixes & Skeletons */
 
 (() => {
   const API_BASE = 'https://api.jolpi.ca/ergast/f1';
@@ -51,7 +51,6 @@
     const cards = Array.from(document.querySelectorAll('.driver-card'));
     let anyShown = false;
 
-    // Update buttons UI
     document.querySelectorAll('.filter-btn').forEach(btn => {
       const isActive = btn.dataset.filter === currentDriverFilter;
       btn.classList.toggle('active', isActive);
@@ -59,16 +58,15 @@
       btn.setAttribute('aria-pressed', isActive);
     });
 
-    // Filter Cards with CSS !important priority to override stylesheets
     cards.forEach(card => {
       const cats = (card.dataset.category || 'all').toLowerCase().split(' ');
       const show = target === 'all' || cats.includes(target);
       
       if (show) {
-        card.style.removeProperty('display'); // Let original CSS layout take over
+        card.style.removeProperty('display');
         anyShown = true;
       } else {
-        card.style.setProperty('display', 'none', 'important'); // Force hide
+        card.style.setProperty('display', 'none', 'important');
       }
     });
 
@@ -118,7 +116,18 @@
   }
 
   async function loadCurrentSeasonData(driverId, container) {
-    container.innerHTML = '<div class="stat-loading">Fetching live 2026 data from API...</div>';
+    // Skeletons
+    container.innerHTML = `
+      <div class="live-stats-grid">
+        <div class="live-stat-box skeleton-box" style="height: 65px; border-radius: 12px;"></div>
+        <div class="live-stat-box skeleton-box" style="height: 65px; border-radius: 12px;"></div>
+        <div class="live-stat-box skeleton-box" style="height: 65px; border-radius: 12px;"></div>
+        <div class="live-stat-box skeleton-box" style="height: 65px; border-radius: 12px;"></div>
+        <div class="live-stat-box skeleton-box" style="height: 65px; border-radius: 12px;"></div>
+        <div class="live-stat-box skeleton-box" style="height: 65px; border-radius: 12px;"></div>
+      </div>
+    `;
+    
     const apiDriverId = driverId === 'max_verstappen' ? 'max_verstappen' : driverId;
 
     try {
@@ -131,7 +140,7 @@
       const races = resultsRes?.MRData?.RaceTable?.Races || [];
 
       if (races.length === 0 && !standing) {
-          container.innerHTML = '<div class="no-data">Live stats will appear here automatically after Round 1.</div>';
+          container.innerHTML = '<div class="no-data" style="text-align:center; padding:20px; color:#aaa;">Live stats will appear here automatically after Round 1.</div>';
           return;
       }
 
@@ -150,7 +159,7 @@
       const seasonWins = standing?.wins || '0';
 
       container.innerHTML = `
-        <div class="live-stats-grid">
+        <div class="live-stats-grid" style="animation: fadeIn 0.4s ease;">
           <div class="live-stat-box"><span class="ls-label">WDC Pos</span><span class="ls-val">P${position}</span></div>
           <div class="live-stat-box"><span class="ls-label">Points</span><span class="ls-val">${points}</span></div>
           <div class="live-stat-box"><span class="ls-label">Season Wins</span><span class="ls-val">${seasonWins}</span></div>
@@ -160,7 +169,7 @@
         </div>
       `;
     } catch(e) {
-      container.innerHTML = '<div class="no-data">⚠️ Failed to connect to F1 Live API.</div>';
+      container.innerHTML = '<div class="no-data" style="text-align:center; padding:20px; color:#e10600;">⚠️ Failed to connect to F1 Live API.</div>';
     }
   }
 
@@ -208,7 +217,6 @@
     card.dataset.team = teamId;
     card.dataset.driverId = driverId; 
     
-    // Assign proper categories for filters
     const categories = ['all', 'current'];
     if (stats.wins > 0) categories.push('winner');
     if (stats.podiums > 0) categories.push('podium');
@@ -250,8 +258,6 @@
     const legendsCountEl = document.querySelector('.stat-item[aria-label="Legends"] .stat-number');
     if (!grid) return;
 
-    // Safely extract and detach existing legends to prevent deletion
-    // Assign them the 'winner' class alongside 'podium' so they show in the winners filter too
     const existingLegends = Array.from(document.querySelectorAll('.legend-card'));
     existingLegends.forEach(legend => {
         let currentCats = legend.dataset.category || '';
@@ -268,7 +274,7 @@
       const statsPromises = currentDrivers.map(driver => fetchDriverStats(driver.driverId));
       const allStats = await Promise.all(statsPromises);
 
-      if (loadingMsg) loadingMsg.remove(); // Safely remove loading indicator
+      if (loadingMsg) loadingMsg.remove(); 
 
       currentDrivers.forEach((driver, index) => {
         const stats = allStats[index];
@@ -276,22 +282,19 @@
         grid.appendChild(card);
       });
 
-      // Re-add legend cards
       existingLegends.forEach(legend => grid.appendChild(legend));
 
       // UPDATED LOGIC: Exactly 22 Active Drivers
       const totalCount = currentDrivers.length; 
-      // Only count the unique countries represented by the 22 active drivers
       const uniqueCountries = new Set(currentDrivers.map(d => d.nationality));
       
       if (totalDriversEl) totalDriversEl.textContent = totalCount;
       if (totalCountriesEl) totalCountriesEl.textContent = uniqueCountries.size;
-      // Dynamically count legends so it matches the real amount (8) instead of the hardcoded 9
       if (legendsCountEl) legendsCountEl.textContent = existingLegends.length; 
 
       initRevealOnScroll();
       initDriverModal();
-      applyDriverFilter(currentDriverFilter); // Reapply filter logic correctly
+      applyDriverFilter(currentDriverFilter); 
 
     } catch (err) {
       if (loadingMsg) loadingMsg.innerHTML = '<p>Failed to load active drivers.</p>';
@@ -325,6 +328,7 @@
     
     overlay.innerHTML = `
       <div class="driver-modal">
+        <div class="modal-pull-indicator"></div>
         <button class="driver-modal-close">&times;</button>
         <div class="driver-modal-body">
           <div class="driver-modal-image"><img alt=""></div>
@@ -402,7 +406,6 @@
     if (el) { try { const r = await fetch(path); if(r.ok) el.innerHTML = await r.text(); } catch(e){} }
   }
 
-  /* --- DYNAMIC DRIVER STANDINGS TABLE --- */
   const driverMap = {
     "max_verstappen": { class: "redbull", color: "#1e3a8a" },
     "hadjar": { class: "redbull", color: "#1e3a8a" },
@@ -476,13 +479,24 @@
     await Promise.all([includeHTML('navbar', 'navbar.html'), includeHTML('footer', 'footer.html')]);
     bindImageFallbacks();
     
-    // Wire up filter buttons early to be responsive
+    // Global Button Micro-Interaction
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.btn');
+      if (btn && btn.tagName === 'A' && btn.href && !btn.href.includes('#')) {
+        e.preventDefault();
+        btn.classList.add('is-loading');
+        setTimeout(() => { window.location.href = btn.href; }, 350); 
+      }
+    });
+
     document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.addEventListener('click', () => applyDriverFilter(btn.dataset.filter));
     });
 
     if ($('#driversGrid')) await loadDrivers();
     loadDriverStandings();
+    
+    if(window.initMobileEnhancements) setTimeout(window.initMobileEnhancements, 300);
   });
 
 })();

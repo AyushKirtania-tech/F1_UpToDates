@@ -1192,4 +1192,50 @@
   transform: translateX(4px);
 }
 
+/* =========================================================
+     19. NATIVE APP TOUCH, REVEALS, & DRAG HANDLES
+     ========================================================= */
+  
+  /* Remove blue tap highlights on Android/iOS */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Smooth transition for the physical press effect */
+  .bento-card, .driver-portrait, .btn, .c-logo-box, .circuit-card, .team-card, .driver-card {
+    transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease !important;
+  }
+  
+  /* Physical "Press" Feedback on Tap */
+  .bento-card:active, .driver-portrait:active, .btn:active, .c-logo-box:active, .circuit-card:active, .team-card:active, .driver-card:active {
+    transform: scale(0.96) !important;
+  }
+
+  /* Scroll Reveal Animation Classes */
+  .mobile-fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  
+  .mobile-fade-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* The grey "Pull handle" at the top of the modals */
+  .modal-pull-indicator {
+    width: 45px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    margin: 12px auto 20px auto;
+    cursor: grab;
+    flex-shrink: 0;
+  }
+  
+  .modal-pull-indicator:active {
+    cursor: grabbing;
+  }
+  
 } /* <-- THIS IS THE ONLY CLOSING BRACKET FOR THE @MEDIA QUERY */

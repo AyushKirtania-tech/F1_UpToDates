@@ -1,4 +1,4 @@
-/* teams.js — Synchronized for the 11-Team 2026 Layout with Mobile Back Button Fix & Live Standings API Integration */
+/* teams.js — Synchronized for the 11-Team 2026 Layout with Mobile Back Button Fix, Skeletons, & Modals */
 
 (() => {
   const API_ROOT = 'https://api.jolpi.ca/ergast/f1';
@@ -99,9 +99,10 @@
 
     const overlay = document.createElement('div');
     overlay.className = 'team-modal-overlay';
+    
     overlay.innerHTML = `
       <div class="team-modal" role="dialog" aria-modal="true" aria-hidden="true">
-        <button class="team-modal-close" aria-label="Close">&times;</button>
+        <div class="modal-pull-indicator"></div> <button class="team-modal-close" aria-label="Close">&times;</button>
         <div class="team-modal-grid">
           <div class="team-modal-image"><img alt=""></div>
           <div class="team-modal-content">
@@ -152,7 +153,6 @@
       learnMoreBtn.href = carPageLink;
       learnMoreBtn.style.display = teamName ? 'inline-block' : 'none';
 
-      // BROWSER HISTORY API FIX (Push State)
       history.pushState({ modalOpen: true }, "", window.location.href);
 
       overlay.classList.add('visible');
@@ -167,12 +167,11 @@
         overlay.setAttribute('aria-hidden', 'true');
         modal.setAttribute('aria-hidden', 'true');
         if (history.state && history.state.modalOpen) {
-          history.back(); // Clear dummy state on manual close
+          history.back(); 
         }
       }
     }
 
-    // Handle Mobile/Browser Back Button
     window.addEventListener('popstate', () => {
       if (overlay.classList.contains('visible')) {
         overlay.classList.remove('visible');
@@ -185,7 +184,6 @@
       const card = e.target.closest('.team-card');
       if (!card) return;
       if (e.target.closest('a') || e.target.closest('button')) return; 
-      
       open(card);
     });
 
@@ -245,7 +243,6 @@
     }
   }
 
-  // --- DYNAMIC CONSTRUCTOR STANDINGS API INTEGRATION ---
   const constructorMap = {
     "mclaren": { name: "McLaren", class: "mclaren", color: "#ff8c00" },
     "ferrari": { name: "Scuderia Ferrari", class: "ferrari", color: "#dc2626" },
@@ -263,6 +260,20 @@
   };
 
   async function loadConstructorStandings() {
+    const table = document.querySelector('.championship-table');
+    if (!table) return;
+    
+    const header = table.querySelector('.table-header');
+    
+    // Inject Skeletons First
+    const skeletonRows = Array(10).fill(`
+      <div class="table-row skeleton-box" style="height: 50px; margin-bottom: 8px; border-radius: 12px; border: none;"></div>
+    `).join('');
+    
+    table.innerHTML = '';
+    table.appendChild(header);
+    table.insertAdjacentHTML('beforeend', skeletonRows); 
+
     try {
       const response = await fetch(`${API_ROOT}/current/constructorStandings.json`);
       if (!response.ok) throw new Error("Failed to fetch standings");
@@ -271,10 +282,6 @@
       const standings = data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
       const currentSeason = data.MRData.StandingsTable.season;
       
-      const table = document.querySelector('.championship-table');
-      if (!table) return;
-
-      const header = table.querySelector('.table-header');
       table.innerHTML = '';
       table.appendChild(header);
 
@@ -282,30 +289,23 @@
         const constructorId = standing.Constructor.constructorId;
         const position = standing.position;
         const points = standing.points;
-        
-        const teamInfo = constructorMap[constructorId] || { 
-          name: standing.Constructor.name, 
-          class: constructorId, 
-          color: "#cccccc" 
-        };
+        const teamInfo = constructorMap[constructorId] || { name: standing.Constructor.name, class: constructorId, color: "#cccccc" };
 
         const row = document.createElement('div');
         row.className = 'table-row';
         row.setAttribute('role', 'row');
+        row.style.animation = 'fadeIn 0.5s ease'; 
         
         row.innerHTML = `
           <div>${position}</div>
           <div><span class="team-color ${teamInfo.class}" aria-hidden="true" style="background:${teamInfo.color};"></span>${teamInfo.name}</div>
           <div>${points}</div>
         `;
-        
         table.appendChild(row);
       });
 
       const sectionTitle = document.querySelector('.championship-section .section-title');
-      if (sectionTitle) {
-         sectionTitle.textContent = `${currentSeason} Constructor Standings`;
-      }
+      if (sectionTitle) sectionTitle.textContent = `${currentSeason} Constructor Standings`;
 
     } catch (error) {
       console.error("Error loading constructor standings, falling back to static HTML:", error);
@@ -318,15 +318,25 @@
       includeHTML('footer', 'footer.html')
     ]);
     
+    // Global Button Micro-Interaction
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.btn');
+      if (btn && btn.tagName === 'A' && btn.href && !btn.href.includes('#')) {
+        e.preventDefault();
+        btn.classList.add('is-loading');
+        setTimeout(() => { window.location.href = btn.href; }, 350); 
+      }
+    });
+    
     initFilters();
     initRevealOnScroll();
     fillTeamStatsFromDataAttributes();
     initTeamModal();
     bindImageFallbacks();
     wireResultsLinks();
-    
-    // Call the new API standings function here
     loadConstructorStandings();
+    
+    if(window.initMobileEnhancements) setTimeout(window.initMobileEnhancements, 300);
   });
 
 })();

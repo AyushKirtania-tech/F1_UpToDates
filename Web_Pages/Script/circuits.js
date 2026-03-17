@@ -259,8 +259,9 @@ document.addEventListener('click', function(e) {
 
   history.pushState({ modalOpen: true }, "", window.location.href);
 
+  // --> ADDED THE PULL INDICATOR HERE AT THE TOP
   showMobileModal(`
-    <div class="circuit-image" style="position: relative; overflow: hidden; margin-top: 10px;">
+    <div class="modal-pull-indicator"></div> <div class="circuit-image" style="position: relative; overflow: hidden; margin-top: 10px;">
       ${imageHtml}
     </div>
     <div style="margin-bottom: 16px;">
