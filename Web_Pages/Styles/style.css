@@ -14,11 +14,11 @@
   --text-muted: #a1a1aa;
   --accent: #e10600;
   --accent-hover: #ff4500;
-  
+
   --card-bg: rgba(20, 20, 24, 0.6);
   --card-border: rgba(255, 255, 255, 0.08);
   --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  
+
   --gradient-accent: linear-gradient(135deg, #e10600 0%, #ff6a00 100%);
   --glass-blur: blur(16px);
 }
@@ -38,7 +38,8 @@ body {
   /* Restored your original background image */
   background: url("../images/background.png") no-repeat center center fixed;
   background-size: cover;
-  background-color: #000; /* Fallback */
+  background-color: #000;
+  /* Fallback */
 }
 
 /* Optional: Add a very slight dark overlay so the glassmorphism cards pop perfectly against your image */
@@ -46,7 +47,8 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6); /* Adjust this (0.1 to 0.9) to make the background image brighter or darker */
+  background: rgba(0, 0, 0, 0.6);
+  /* Adjust this (0.1 to 0.9) to make the background image brighter or darker */
   z-index: -1;
 }
 
@@ -96,10 +98,13 @@ body::before {
 
 /* ================== BENTO DASHBOARD LAYOUT ================== */
 .dashboard-main {
-  max-width: 100%; /* Changed from 1400px to 100% to stretch edge-to-edge */
+  max-width: 100%;
+  /* Changed from 1400px to 100% to stretch edge-to-edge */
   margin: 40px auto;
-  padding: 0 40px; /* Keeps a nice breathing gap on the left and right edges */
-  min-height: calc(100vh - 150px); /* Ensures the grid stretches downward to the footer */
+  padding: 0 40px;
+  /* Keeps a nice breathing gap on the left and right edges */
+  min-height: calc(100vh - 150px);
+  /* Ensures the grid stretches downward to the footer */
 }
 
 .bento-grid {
@@ -147,7 +152,8 @@ body::before {
   margin-bottom: 20px;
 }
 
-.box-header h3, .box-header span {
+.box-header h3,
+.box-header span {
   font-size: 1.2rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -294,9 +300,20 @@ body::before {
 }
 
 @keyframes pulse {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
 }
 
 .race-title {
@@ -366,7 +383,8 @@ body::before {
   gap: 20px;
 }
 
-.champ-driver, .champ-team {
+.champ-driver,
+.champ-team {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -377,7 +395,8 @@ body::before {
   flex: 1;
 }
 
-.champ-driver img, .champ-team img {
+.champ-driver img,
+.champ-team img {
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -387,7 +406,7 @@ body::before {
 
 .champ-team img {
   border-radius: 12px;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   object-fit: contain;
 }
 
@@ -406,13 +425,14 @@ body::before {
 
 /* Race Reminder Widget */
 .bento-reminder {
-  grid-column: span 4; /* CHANGED: Now stretches across the entire screen! */
+  grid-column: span 4;
+  /* CHANGED: Now stretches across the entire screen! */
   display: flex;
   flex-direction: column;
 }
 
 .bento-reminder .bento-content {
-  flex: 1; 
+  flex: 1;
 }
 
 .race-reminder-container {
@@ -431,7 +451,8 @@ body::before {
   padding: 12px !important;
 }
 
-.race-reminder-container h3, .race-reminder-container h4 {
+.race-reminder-container h3,
+.race-reminder-container h4 {
   color: #fff !important;
 }
 
@@ -447,7 +468,10 @@ body::before {
   font-size: 0.9rem;
   transition: color 0.3s ease;
 }
-.view-all:hover { color: #fff; }
+
+.view-all:hover {
+  color: #fff;
+}
 
 .carousel-container {
   position: relative;
@@ -459,23 +483,29 @@ body::before {
 .drivers-grid {
   display: flex;
   gap: 20px;
-  overflow-x: auto; /* Enables manual horizontal scroll */
-  scroll-snap-type: x mandatory; /* Snaps cards perfectly into view */
-  scrollbar-width: none; /* Hides scrollbar in Firefox */
-  -ms-overflow-style: none; /* Hides scrollbar in IE/Edge */
+  overflow-x: auto;
+  /* Enables manual horizontal scroll */
+  scroll-snap-type: x mandatory;
+  /* Snaps cards perfectly into view */
+  scrollbar-width: none;
+  /* Hides scrollbar in Firefox */
+  -ms-overflow-style: none;
+  /* Hides scrollbar in IE/Edge */
   /* transition: transform 0.4s ease-out; <-- REMOVED */
 }
 
 /* Hides scrollbar in Chrome/Safari/Opera */
 .drivers-grid::-webkit-scrollbar {
-  display: none; 
+  display: none;
 }
 
 .driver-portrait {
   flex-shrink: 0;
-  width: calc(25% - 15px); /* Show 4 at a time */
-  scroll-snap-align: start; /* Ensures scrolling snaps to the start of the card */
-  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  width: calc(25% - 15px);
+  /* Show 4 at a time */
+  scroll-snap-align: start;
+  /* Ensures scrolling snaps to the start of the card */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
   border-radius: 16px;
   overflow: hidden;
   position: relative;
@@ -509,7 +539,7 @@ body::before {
   left: 0;
   right: 0;
   padding: 20px;
-  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
 }
 
 .d-num {
@@ -538,7 +568,8 @@ body::before {
   justify-content: center;
   gap: 10px;
   margin-top: 24px;
-  flex-wrap: wrap; /* allows dots to wrap on mobile if needed */
+  flex-wrap: wrap;
+  /* allows dots to wrap on mobile if needed */
 }
 
 .carousel-dot {
@@ -585,8 +616,15 @@ body::before {
 }
 
 @keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .results-text h3 {
@@ -617,19 +655,55 @@ body::before {
 }
 
 /* Team Colors for Mini Grid */
-.mmt-3team.mclaren { background: #ff8000; }
-.mini-team.ferrari { background: #e10600; }
-.mini-team.redbull { background: #0600ef; }
-.mini-team.mercedes { background: #00d2be; }
-.mini-team.astonmartin { background: #006f62; }
-.mini-team.williams { background: #00539f; }
-.mini-team.haas { background: #ffffff; }
-.mini-team.rb { background: #1432d1; }
-.mini-team.alpine { background: #0090ff; }
-.mini-team.sauber { background: #00e701; }
-.mini-team.cadillac { background: #222222; border: 1px solid #fff; }
+.mini-team.mclaren {
+  background: #ff8000;
+}
 
-.mt-3 { margin-top: auto; align-self: flex-start; }
+.mini-team.ferrari {
+  background: #e10600;
+}
+
+.mini-team.redbull {
+  background: #0600ef;
+}
+
+.mini-team.mercedes {
+  background: #00d2be;
+}
+
+.mini-team.astonmartin {
+  background: #006f62;
+}
+
+.mini-team.williams {
+  background: #00539f;
+}
+
+.mini-team.haas {
+  background: #ffffff;
+}
+
+.mini-team.rb {
+  background: #1432d1;
+}
+
+.mini-team.alpine {
+  background: #0090ff;
+}
+
+.mini-team.sauber {
+  background: #00e701;
+}
+
+.mini-team.cadillac {
+  background: #222222;
+  border: 1px solid #fff;
+}
+
+.mt-3 {
+  margin-top: auto;
+  align-self: flex-start;
+}
 
 /* =========================================================
    CONSTRUCTORS LOGO GRID (BENTO BOX)
@@ -650,7 +724,8 @@ body::before {
 }
 
 .c-logo-box {
-  width: calc(33.333% - 7px); /* 3 logos per row on mobile */
+  width: calc(33.333% - 7px);
+  /* 3 logos per row on mobile */
   aspect-ratio: 16 / 10;
   background: rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -666,15 +741,19 @@ body::before {
 }
 
 @media (min-width: 640px) {
-   .c-logo-box { width: calc(25% - 8px); } /* 4 logos per row on larger screens */
+  .c-logo-box {
+    width: calc(25% - 8px);
+  }
+
+  /* 4 logos per row on larger screens */
 }
 
 /* Make Cadillac stand out as the special 11th team spanning the remaining space */
 .c-logo-box.cadillac-box {
-   border-color: rgba(162, 162, 162, 0.3);
-   background: rgba(162, 162, 162, 0.05);
-   flex-grow: 1; 
-   max-width: 60%;
+  border-color: rgba(162, 162, 162, 0.3);
+  background: rgba(162, 162, 162, 0.05);
+  flex-grow: 1;
+  max-width: 60%;
 }
 
 .c-logo-box::before {
@@ -695,7 +774,8 @@ body::before {
 }
 
 .c-logo-box:hover::before {
-  opacity: 0.25; /* Subtle glowing background of the team's color */
+  opacity: 0.25;
+  /* Subtle glowing background of the team's color */
 }
 
 .c-logo-box img {
@@ -703,12 +783,13 @@ body::before {
   max-height: 100%;
   object-fit: contain;
   z-index: 1;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
   transition: transform 0.3s ease;
 }
 
 .c-logo-box:hover img {
-  transform: scale(1.12); /* Pop the logo out slightly on hover */
+  transform: scale(1.12);
+  /* Pop the logo out slightly on hover */
 }
 
 
@@ -718,29 +799,81 @@ body::before {
   .bento-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .bento-hero { grid-column: span 2; grid-row: span 1; }
-  .bento-countdown-box { grid-column: span 2; }
-  .bento-champions { grid-column: span 2; }
-  .bento-reminder { grid-column: span 2; }
-  .bento-drivers { grid-column: span 2; }
-  .bento-results { grid-column: span 2; }
-  .bento-constructors { grid-column: span 2; }
-  
-  .driver-portrait { width: calc(50% - 10px); } /* Show 2 on tablet */
+
+  .bento-hero {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+
+  .bento-countdown-box {
+    grid-column: span 2;
+  }
+
+  .bento-champions {
+    grid-column: span 2;
+  }
+
+  .bento-reminder {
+    grid-column: span 2;
+  }
+
+  .bento-drivers {
+    grid-column: span 2;
+  }
+
+  .bento-results {
+    grid-column: span 2;
+  }
+
+  .bento-constructors {
+    grid-column: span 2;
+  }
+
+  .driver-portrait {
+    width: calc(50% - 10px);
+  }
+
+  /* Show 2 on tablet */
 }
 
 @media (max-width: 640px) {
   .bento-grid {
     grid-template-columns: 1fr;
   }
-  .bento-hero, .bento-countdown-box, .bento-champions, .bento-reminder, .bento-drivers, .bento-results, .bento-constructors {
+
+  .bento-hero,
+  .bento-countdown-box,
+  .bento-champions,
+  .bento-reminder,
+  .bento-drivers,
+  .bento-results,
+  .bento-constructors {
     grid-column: span 1;
   }
-  .bento-hero h1 { font-size: 2.5rem; }
-  .hero-actions { flex-direction: column; }
-  .champs-content { flex-direction: column; align-items: stretch; }
-  .bento-results .bento-content { flex-direction: column; text-align: center; }
-  .driver-portrait { width: 100%; } /* Show 1 on mobile */
+
+  .bento-hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .champs-content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .bento-results .bento-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .driver-portrait {
+    width: 100%;
+  }
+
+  /* Show 1 on mobile */
 }
 
 /* Footer */
@@ -803,11 +936,13 @@ footer {
 
 /* Ensure the Schedule CTA box doesn't overflow horizontally */
 .schedule-cta {
-  width: calc(100% - 80px) !important; /* Accounts for the 40px left/right padding */
+  width: calc(100% - 80px) !important;
+  /* Accounts for the 40px left/right padding */
 }
 
 /* Smart Mobile Adjustments: Shrinks the side gaps on small screens */
 @media (max-width: 768px) {
+
   .dashboard-main,
   .about-main,
   .schedule-main,
@@ -823,7 +958,7 @@ footer {
     padding-left: 20px !important;
     padding-right: 20px !important;
   }
-  
+
   .schedule-cta {
     width: calc(100% - 40px) !important;
   }
@@ -836,7 +971,7 @@ footer {
    ========================================================= */
 
 /* Use 'auto-fit' and '1fr' to force cards to stretch and fill all empty space */
-.teams-main .teams-grid, 
+.teams-main .teams-grid,
 .drivers-main .drivers-grid {
   display: grid !important;
   /* This is the magic line: it fits as many 320px cards as it can, then stretches them (1fr) to fill the row perfectly! */
@@ -846,11 +981,12 @@ footer {
 }
 
 /* Ensure individual cards are allowed to stretch fully */
-.teams-main .team-card, 
+.teams-main .team-card,
 .drivers-main .driver-card {
   display: flex !important;
   flex-direction: column;
-  max-width: none !important; /* Removes any old maximum width caps */
+  max-width: none !important;
+  /* Removes any old maximum width caps */
   width: 100% !important;
 }
 
@@ -863,7 +999,8 @@ footer {
 
 .championship-table {
   width: 100%;
-  max-width: 1000px !important; /* Keeps the table sleek and readable */
+  max-width: 1000px !important;
+  /* Keeps the table sleek and readable */
   background: rgba(20, 20, 20, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
@@ -963,9 +1100,11 @@ footer {
 
 .footer-glow {
   position: absolute;
-  top: 0; left: 50%;
+  top: 0;
+  left: 50%;
   transform: translateX(-50%);
-  width: 60%; height: 1px;
+  width: 60%;
+  height: 1px;
   background: linear-gradient(90deg, transparent, var(--accent), transparent);
   box-shadow: 0 0 20px var(--accent);
 }
@@ -983,27 +1122,47 @@ footer {
   letter-spacing: -1px;
   margin-bottom: 12px;
 }
-.footer-brand h2 span { color: var(--accent); }
-.footer-brand p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+
+.footer-brand h2 span {
+  color: var(--accent);
+}
+
+.footer-brand p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
 
 
 
-.footer-links h3, .footer-cta h3 {
+.footer-links h3,
+.footer-cta h3 {
   color: #fff;
   font-size: 1.1rem;
   margin-bottom: 16px;
   text-transform: uppercase;
 }
 
-.footer-links ul { list-style: none; padding: 0; }
-.footer-links li { margin-bottom: 10px; }
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+}
+
 .footer-links a {
   color: var(--muted);
   text-decoration: none;
   transition: all 0.2s ease;
   display: inline-block;
 }
-.footer-links a:hover { color: var(--accent); transform: translateX(5px); }
+
+.footer-links a:hover {
+  color: var(--accent);
+  transform: translateX(5px);
+}
 
 .footer-bottom {
   display: flex;
@@ -1017,10 +1176,13 @@ footer {
 
 /* --- BACK TO TOP BUTTON --- */
 .back-to-top {
-  position: fixed !important; /* Makes it float beautifully over the page */
-  bottom: 80px !important; /* Sits perfectly right above your floating Help button */
+  position: fixed !important;
+  /* Makes it float beautifully over the page */
+  bottom: 80px !important;
+  /* Sits perfectly right above your floating Help button */
   right: 24px !important;
-  z-index: 9990; /* Keeps it above everything else */
+  z-index: 9990;
+  /* Keeps it above everything else */
   background: rgba(20, 20, 25, 0.8);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -1031,7 +1193,7 @@ footer {
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-  opacity: 0; 
+  opacity: 0;
   visibility: hidden;
   transform: translateY(20px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
@@ -1047,13 +1209,15 @@ footer {
   background: var(--accent);
   border-color: var(--accent);
   box-shadow: 0 8px 25px rgba(225, 6, 0, 0.4);
-  transform: translateY(-3px); /* Makes it pop up slightly when hovered */
+  transform: translateY(-3px);
+  /* Makes it pop up slightly when hovered */
 }
 
 /* Mobile adjustments */
 @media (max-width: 768px) {
   .back-to-top {
-    bottom: 24px !important; /* Drops to the very bottom corner since the Help button is hidden on phones! */
+    bottom: 24px !important;
+    /* Drops to the very bottom corner since the Help button is hidden on phones! */
     right: 16px !important;
   }
 }
@@ -1072,11 +1236,11 @@ footer {
   display: flex;
   align-items: center;
   gap: 12px;
-  background: linear-gradient(135deg, rgba(20,20,25,0.8), rgba(10,10,12,0.9));
+  background: linear-gradient(135deg, rgba(20, 20, 25, 0.8), rgba(10, 10, 12, 0.9));
   border: 1px dashed rgba(225, 6, 0, 0.4);
   padding: 10px 20px;
   border-radius: 50px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   cursor: default;
   transition: all 0.3s ease;
 }
@@ -1150,7 +1314,7 @@ footer {
 .standings-tab.active {
   background: rgba(255, 255, 255, 0.1);
   color: var(--text-primary);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .mini-table-header {
@@ -1241,13 +1405,17 @@ footer {
 
 /* Mobile Responsiveness for Tables */
 @media (max-width: 480px) {
-  .mini-row, .mini-table-header {
+
+  .mini-row,
+  .mini-table-header {
     grid-template-columns: 30px 1fr 50px;
     font-size: 0.85rem;
     padding: 8px;
   }
+
   .mini-team-sub {
-    display: none; /* Hide team name next to driver on small phones to prevent text squishing */
+    display: none;
+    /* Hide team name next to driver on small phones to prevent text squishing */
   }
 }
 

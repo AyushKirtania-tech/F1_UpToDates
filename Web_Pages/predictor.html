@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Championship Oracle - F1 Racing Hub</title>
 
-  <!-- GLOBAL STYLES -->
   <link rel="stylesheet" href="Styles/style.css">
   <link rel="stylesheet" href="Styles/mobile.css">
   <link rel="stylesheet" href="Styles/navbar.css">
@@ -13,7 +12,6 @@
   <link rel="stylesheet" href="Styles/global-search.css">
   <link rel="stylesheet" href="Styles/keyboard-shortcuts.css">
 
-  <!-- GLOBAL SCRIPTS -->
   <script defer src="Script/common.js"></script>
   <script defer src="Script/navbar.js"></script>
   <script defer src="Script/predictor.js"></script>
@@ -23,19 +21,13 @@
 
 <body>
 
-  <!-- Ambient background glow -->
   <div class="ambient-glow glow-1"></div>
   <div class="ambient-glow glow-2"></div>
 
-  <!-- Navbar -->
   <div id="navbar"></div>
 
-  <!-- =========================
-       MAIN DASHBOARD
-  ========================== -->
   <main class="dashboard-main container" style="margin-top: 100px; padding-bottom: 80px;">
 
-    <!-- HERO SECTION -->
     <section class="predictor-hero text-center" style="margin-bottom: 60px;">
       <span class="era-badge">F1 Analytics</span>
 
@@ -48,16 +40,12 @@
         Experience the 2026 title fight through data.
       </p>
 
-      <!-- VIEW TOGGLE -->
       <div class="view-toggle">
-        <button id="btnFanView" class="toggle-btn active">Live Fan Vote</button>
-        <button id="btnAiView" class="toggle-btn">AI Prediction Model</button>
+        <button id="btnFanView" class="toggle-btn active" aria-pressed="true">Live Fan Vote</button>
+        <button id="btnAiView" class="toggle-btn" aria-pressed="false">AI Prediction Model</button>
       </div>
     </section>
 
-    <!-- =========================
-         FAN VIEW (Ranking Tower)
-    ========================== -->
     <div id="fanViewContainer">
 
       <div class="ranking-layout">
@@ -67,16 +55,12 @@
           <p>Select a driver to cast your prediction.</p>
         </div>
 
-        <!-- Dynamic Ranking Rows Injected by JS -->
         <div class="ranking-tower" id="rankingTower"></div>
 
       </div>
 
     </div>
 
-    <!-- =========================
-         AI VIEW (Probability Bars)
-    ========================== -->
     <div id="aiViewContainer" style="display:none;">
 
       <div class="ai-layout">
@@ -89,7 +73,6 @@
           </p>
         </div>
 
-        <!-- Dynamic AI Bars Injected by JS -->
         <div class="ai-bars" id="aiBarsContainer"></div>
 
       </div>
@@ -98,9 +81,8 @@
 
   </main>
 
-  <!-- =========================
-       FOOTER
-  ========================== -->
+  <button id="backToTopBtn" class="back-to-top" aria-label="Scroll back to top">↑</button>
+
   <footer class="site-footer">
     <div class="footer-glow"></div>
 
@@ -149,6 +131,22 @@
     </div>
 
   </footer>
+  
+  <script>
+    // Include minimal back to top initialization specific for pages lacking global script.js
+    document.addEventListener("DOMContentLoaded", () => {
+      const backBtn = document.getElementById('backToTopBtn');
+      if(backBtn) {
+        window.addEventListener('scroll', () => {
+          if(window.scrollY > 400) backBtn.classList.add('show');
+          else backBtn.classList.remove('show');
+        }, { passive: true });
+        backBtn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    });
+  </script>
 
 </body>
 </html>

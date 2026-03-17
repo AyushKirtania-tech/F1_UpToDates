@@ -2,6 +2,8 @@
 const API_BASE = 'https://api.jolpi.ca/ergast/f1';
 
 let allCircuits = [];
+let currentCircuitFilter = 'all';
+let currentCircuitSearch = '';
 
 // Circuit data with additional information
 const circuitDetails = {
@@ -17,10 +19,7 @@ const circuitDetails = {
   'red_bull_ring': { type: 'permanent', classic: false, length: '4.318', turns: '10', lapRecord: '1:05.619', firstRace: '1970', grandPrixName: 'Austrian Grand Prix', description: 'A short, fast circuit in the stunning Austrian mountains with aggressive racing.', image: 'images/circuits/austrian.jpg' },
   'jeddah': { type: 'street', classic: false, length: '6.174', turns: '27', lapRecord: '1:30.734', firstRace: '2021', grandPrixName: 'Saudi Arabian Grand Prix', description: 'The fastest street circuit in F1 with long straights and high-speed corners.', image: 'images/circuits/saudi.webp' },
   'americas': { type: 'permanent', classic: false, length: '5.513', turns: '20', lapRecord: '1:36.169', firstRace: '2012', grandPrixName: 'United States Grand Prix', description: 'A modern circuit in Texas with multiple overtaking opportunities and great facilities.', image: 'images/circuits/americas.avif' },
-
-  // MADRID Mapping
   'madrid': { type: 'street', classic: false, length: '5.474', turns: '20', lapRecord: 'N/A', firstRace: '2026', grandPrixName: 'Spanish Grand Prix', description: 'A brand-new hybrid street circuit built around the IFEMA exhibition centre and Valdebebas, bringing F1 back to the Spanish capital.', image: 'images/circuits/madrid.avif' },
-
   'miami': { type: 'street', classic: false, length: '5.410', turns: '19', lapRecord: '1:29.708', firstRace: '2022', grandPrixName: 'Miami Grand Prix', description: 'A modern street circuit around the Hard Rock Stadium with an American atmosphere.', image: 'images/circuits/miami.avif' },
   'zandvoort': { type: 'permanent', classic: true, length: '4.259', turns: '14', lapRecord: '1:11.097', firstRace: '1952', grandPrixName: 'Dutch Grand Prix', description: 'A historic Dutch circuit known for its banked corners and passionate orange fans.', image: 'images/circuits/dutch.jpeg' },
   'hungaroring': { type: 'permanent', classic: false, length: '4.381', turns: '14', lapRecord: '1:16.627', firstRace: '1986', grandPrixName: 'Hungarian Grand Prix', description: 'A tight and twisty circuit near Budapest, often compared to Monaco without walls.', image: 'images/circuits/hungarian.webp' },
@@ -30,10 +29,7 @@ const circuitDetails = {
   'villeneuve': { type: 'permanent', classic: true, length: '4.361', turns: '14', lapRecord: '1:13.078', firstRace: '1978', grandPrixName: 'Canadian Grand Prix', description: 'A semi-permanent circuit on Île Notre-Dame with the famous Wall of Champions.', image: 'images/circuits/canadian.jpg' },
   'yas_marina': { type: 'permanent', classic: false, length: '5.281', turns: '16', lapRecord: '1:26.103', firstRace: '2009', grandPrixName: 'Abu Dhabi Grand Prix', description: 'A spectacular twilight race at the Yas Marina complex in Abu Dhabi.', image: 'images/circuits/abu_dhabi.avif' },
   'rodriguez': { type: 'permanent', classic: true, length: '4.304', turns: '17', lapRecord: '1:17.774', firstRace: '1963', grandPrixName: 'Mexico City Grand Prix', description: 'High altitude circuit with passionate fans and unique challenges due to thin air.', image: 'images/circuits/mexico.jpg' },
-
-  // BARCELONA Mapping
   'catalunya': { type: 'permanent', classic: false, length: '4.657', turns: '14', lapRecord: '1:16.330', firstRace: '1991', grandPrixName: 'Barcelona Grand Prix', description: 'Continuing its long F1 legacy alongside the Madrid entry, this sweeping technical circuit now hosts the Barcelona Grand Prix.', image: 'images/circuits/spanish.jpg' },
-
   'losail': { type: 'permanent', classic: false, length: '5.419', turns: '16', lapRecord: '1:22.384', firstRace: '2021', grandPrixName: 'Qatar Grand Prix', description: 'Held at the Lusail (Losail) International Circuit — a modern, high-speed permanent track.', image: 'images/circuits/qatar.webp' }
 };
 
@@ -97,7 +93,6 @@ function createCircuitCard(circuit) {
   const { locality, country } = Location;
   const resultsUrl = buildResultsUrlForCircuit({ circuitId: circuit.circuitId, season: '2026' });
 
-  // Fallback string logs the error to your console so you can see exactly what path failed
   const fallbackStr = `console.error('Failed to load image:', this.src); this.onerror=null; this.src='https://source.unsplash.com/400x200/?racing,circuit';`;
 
   return `
@@ -139,35 +134,51 @@ function renderCircuits(circuits) {
   container.innerHTML = circuits.map(circuit => createCircuitCard(circuit)).join('');
 }
 
-function filterCircuits(filter) {
+/* ---------- COMBINED FILTER & SEARCH LOGIC ---------- */
+function applyCircuitFilters() {
   const cards = document.querySelectorAll('.circuit-card');
-  document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.filter === filter));
+  
   cards.forEach(card => {
-    let show = false;
-    switch (filter) {
-      case 'all': show = true; break;
-      case 'street': show = card.dataset.type === 'street'; break;
-      case 'permanent': show = card.dataset.type === 'permanent'; break;
-      case 'classic': show = card.dataset.classic === 'true'; break;
+    let showByFilter = false;
+    switch (currentCircuitFilter) {
+      case 'all': showByFilter = true; break;
+      case 'street': showByFilter = card.dataset.type === 'street'; break;
+      case 'permanent': showByFilter = card.dataset.type === 'permanent'; break;
+      case 'classic': showByFilter = card.dataset.classic === 'true'; break;
     }
-    card.classList.toggle('hidden', !show);
+    
+    const name = (card.dataset.name || '').toLowerCase();
+    const country = (card.dataset.country || '').toLowerCase();
+    const search = currentCircuitSearch.toLowerCase();
+    const showBySearch = name.includes(search) || country.includes(search);
+    
+    // Direct CSS !important property change to override rogue stylesheets
+    if (showByFilter && showBySearch) {
+      card.style.removeProperty('display');
+    } else {
+      card.style.setProperty('display', 'none', 'important');
+    }
   });
+}
+
+function filterCircuits(filter) {
+  currentCircuitFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.filter === filter);
+  });
+  applyCircuitFilters();
 }
 
 function searchCircuits(query) {
-  const cards = document.querySelectorAll('.circuit-card');
-  const searchTerm = query.toLowerCase();
-  cards.forEach(card => {
-    const name = card.dataset.name || '';
-    const country = card.dataset.country || '';
-    const matches = name.includes(searchTerm) || country.includes(searchTerm);
-    card.classList.toggle('hidden', !matches);
-  });
+  currentCircuitSearch = query;
+  applyCircuitFilters();
 }
 
+/* ---------- SORTING LOGIC ---------- */
 function sortCircuits(sortBy) {
   const container = document.getElementById('circuits-container');
   const cards = Array.from(container.querySelectorAll('.circuit-card'));
+  
   cards.sort((a, b) => {
     switch (sortBy) {
       case 'name': return a.dataset.name.localeCompare(b.dataset.name);
@@ -207,30 +218,37 @@ async function fetchCircuits() {
 async function initCircuits() {
   const loading = document.getElementById('loading');
   if (loading) loading.style.display = '';
+  
   allCircuits = await fetchCircuits();
+  
   if (loading) loading.style.display = 'none';
-
   if (!allCircuits || allCircuits.length === 0) return;
 
   renderCircuits(allCircuits);
   updateStats(allCircuits);
-
-  document.querySelectorAll('.filter-btn').forEach(btn => btn.addEventListener('click', () => filterCircuits(btn.dataset.filter)));
-  const searchInput = document.getElementById('circuit-search');
-  if (searchInput) searchInput.addEventListener('input', (e) => searchCircuits(e.target.value));
-  const sortSelect = document.getElementById('sort-select');
-  if (sortSelect) sortSelect.addEventListener('change', (e) => sortCircuits(e.target.value));
+  
+  // Enforce any filters/searches immediately after rendering
+  applyCircuitFilters();
 }
 
-document.addEventListener('DOMContentLoaded', initCircuits);
-
+document.addEventListener('DOMContentLoaded', () => {
+  // Bind UI Events Immediately
+  document.querySelectorAll('.filter-btn').forEach(btn => btn.addEventListener('click', () => filterCircuits(btn.dataset.filter)));
+  
+  const searchInput = document.getElementById('circuit-search');
+  if (searchInput) searchInput.addEventListener('input', (e) => searchCircuits(e.target.value));
+  
+  const sortSelect = document.getElementById('sort-select');
+  if (sortSelect) sortSelect.addEventListener('change', (e) => sortCircuits(e.target.value));
+  
+  initCircuits();
+});
 
 // Mobile Click to open Circuit Details
 document.addEventListener('click', function(e) {
   const card = e.target.closest('.circuit-card');
-  if (!card || window.innerWidth > 768) return; // Only trigger on mobile
+  if (!card || window.innerWidth > 768) return;
 
-  // Prevent opening the modal if they clicked the "View Results" link
   if (e.target.closest('a')) return;
 
   const name = card.querySelector('.circuit-name').innerText;
@@ -239,7 +257,6 @@ document.addEventListener('click', function(e) {
   const infoGrid = card.querySelector('.circuit-info').innerHTML;
   const desc = card.querySelector('.circuit-description').innerText;
 
-  // BROWSER HISTORY API FIX (Push State)
   history.pushState({ modalOpen: true }, "", window.location.href);
 
   showMobileModal(`
@@ -263,15 +280,14 @@ document.addEventListener('click', function(e) {
 window.addEventListener('popstate', () => {
   const overlay = document.querySelector('.mobile-modal-overlay');
   if (overlay && overlay.classList.contains('active')) {
-    overlay.classList.remove('active'); // Close modal on physical back button
+    overlay.classList.remove('active'); 
   }
 });
 
 document.addEventListener('click', e => {
-  // If closing via the 'X' button or clicking the background overlay manually
   if (e.target.closest('.mobile-modal-close') || e.target.classList.contains('mobile-modal-overlay')) {
     if (history.state && history.state.modalOpen) {
-      history.back(); // Clear the dummy state so history stays clean
+      history.back(); 
     }
   }
 });

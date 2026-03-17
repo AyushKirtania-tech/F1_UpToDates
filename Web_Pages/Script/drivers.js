@@ -1,4 +1,4 @@
-/* drivers.js — Updated for 2026 Grid with Live Stats Modal & Driver Standings Integration */
+/* drivers.js — Updated for 2026 Grid with Live Stats Modal & Filter Fixes */
 
 (() => {
   const API_BASE = 'https://api.jolpi.ca/ergast/f1';
@@ -37,6 +37,46 @@
     'hadjar': 0, 'bortoleto': 0, 'lindblad': 0, 'colapinto': 0 
   };
 
+  /* ---------- FILTER LOGIC ---------- */
+  let currentDriverFilter = 'all';
+
+  function applyDriverFilter(filter) {
+    currentDriverFilter = filter || 'all';
+    const f = currentDriverFilter.toLowerCase();
+    
+    // Maps the HTML 'data-filter' values to the generated categories
+    const map = {'podiums':'podium', 'winners':'winner', 'legends':'legends', 'current':'current'}; 
+    const target = map[f] || f;
+    
+    const cards = Array.from(document.querySelectorAll('.driver-card'));
+    let anyShown = false;
+
+    // Update buttons UI
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      const isActive = btn.dataset.filter === currentDriverFilter;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-selected', isActive);
+      btn.setAttribute('aria-pressed', isActive);
+    });
+
+    // Filter Cards with CSS !important priority to override stylesheets
+    cards.forEach(card => {
+      const cats = (card.dataset.category || 'all').toLowerCase().split(' ');
+      const show = target === 'all' || cats.includes(target);
+      
+      if (show) {
+        card.style.removeProperty('display'); // Let original CSS layout take over
+        anyShown = true;
+      } else {
+        card.style.setProperty('display', 'none', 'important'); // Force hide
+      }
+    });
+
+    const noResults = $('#noResults');
+    if (noResults) noResults.hidden = anyShown;
+  }
+
+  /* ---------- DATA FETCHING ---------- */
   async function fetchJSON(url) {
     try {
       const r = await fetch(url);
@@ -47,7 +87,6 @@
     }
   }
 
-  // Fetch Career Stats
   async function fetchDriverStats(driverId) {
     try {
       const [winsData, resultsData] = await Promise.all([
@@ -70,10 +109,7 @@
         races: Number(resultsData?.MRData?.total || races.length || 0)
       };
 
-      if (driverId === 'lindblad' && careerStats.races === 0) {
-          careerStats.races = 1;
-      }
-
+      if (driverId === 'lindblad' && careerStats.races === 0) careerStats.races = 1;
       return careerStats;
 
     } catch (err) {
@@ -81,10 +117,8 @@
     }
   }
 
-  // Fetch Live 2026 Season Stats
   async function loadCurrentSeasonData(driverId, container) {
     container.innerHTML = '<div class="stat-loading">Fetching live 2026 data from API...</div>';
-    
     const apiDriverId = driverId === 'max_verstappen' ? 'max_verstappen' : driverId;
 
     try {
@@ -96,32 +130,16 @@
       const standing = standingsRes?.MRData?.StandingsTable?.StandingsLists?.[0]?.DriverStandings?.[0];
       const races = resultsRes?.MRData?.RaceTable?.Races || [];
 
-      if (driverId === 'lindblad' && races.length === 0 && !standing) {
-          container.innerHTML = `
-            <div class="live-stats-grid">
-              <div class="live-stat-box"><span class="ls-label">WDC Pos</span><span class="ls-val">P8</span></div>
-              <div class="live-stat-box"><span class="ls-label">Points</span><span class="ls-val">4</span></div>
-              <div class="live-stat-box"><span class="ls-label">Season Wins</span><span class="ls-val">0</span></div>
-              <div class="live-stat-box"><span class="ls-label">Best Finish</span><span class="ls-val">P8</span></div>
-              <div class="live-stat-box"><span class="ls-label">Best Grid</span><span class="ls-val">P9</span></div>
-              <div class="live-stat-box"><span class="ls-label">Retirements</span><span class="ls-val">0</span></div>
-            </div>
-          `;
-          return;
-      }
-
       if (races.length === 0 && !standing) {
           container.innerHTML = '<div class="no-data">Live stats will appear here automatically after Round 1.</div>';
           return;
       }
 
       let bestFinish = 999, bestGrid = 999, dnfs = 0;
-      
       races.forEach(r => {
           const res = r.Results[0];
           const pos = parseInt(res.position);
           const grid = parseInt(res.grid);
-          
           if (pos < bestFinish) bestFinish = pos;
           if (grid > 0 && grid < bestGrid) bestGrid = grid;
           if (!res.status.includes('Finished') && !res.status.match(/\+\d/)) dnfs++;
@@ -147,16 +165,11 @@
   }
 
   const teamColors = {
-    'red_bull': 'linear-gradient(135deg,#1e3a8a,#3730a3)',
-    'ferrari': 'linear-gradient(135deg,#dc2626,#991b1b)',
-    'mercedes': 'linear-gradient(135deg,#00d2be,#00a19c)',
-    'mclaren': 'linear-gradient(135deg,#ff8c00,#ff6600)',
-    'alpine': 'linear-gradient(135deg,#0084c7,#005a8f)',
-    'aston_martin': 'linear-gradient(135deg,#006a4e,#004d3b)',
-    'williams': 'linear-gradient(135deg,#00a0de,#0073a3)',
-    'racing_bulls': 'linear-gradient(135deg,#0f172a,#1e293b)',
-    'audi': 'linear-gradient(135deg,#000000,#ff0000)',
-    'haas': 'linear-gradient(135deg,#6b7280,#374151)',
+    'red_bull': 'linear-gradient(135deg,#1e3a8a,#3730a3)', 'ferrari': 'linear-gradient(135deg,#dc2626,#991b1b)',
+    'mercedes': 'linear-gradient(135deg,#00d2be,#00a19c)', 'mclaren': 'linear-gradient(135deg,#ff8c00,#ff6600)',
+    'alpine': 'linear-gradient(135deg,#0084c7,#005a8f)', 'aston_martin': 'linear-gradient(135deg,#006a4e,#004d3b)',
+    'williams': 'linear-gradient(135deg,#00a0de,#0073a3)', 'racing_bulls': 'linear-gradient(135deg,#0f172a,#1e293b)',
+    'audi': 'linear-gradient(135deg,#000000,#ff0000)', 'haas': 'linear-gradient(135deg,#6b7280,#374151)',
     'cadillac': 'linear-gradient(135deg,#ffffff,#a2a2a2)'
   };
   
@@ -195,6 +208,7 @@
     card.dataset.team = teamId;
     card.dataset.driverId = driverId; 
     
+    // Assign proper categories for filters
     const categories = ['all', 'current'];
     if (stats.wins > 0) categories.push('winner');
     if (stats.podiums > 0) categories.push('podium');
@@ -233,21 +247,28 @@
     const loadingMsg = $('#loadingMessage');
     const totalDriversEl = $('#totalDrivers');
     const totalCountriesEl = $('#totalCountries');
+    const legendsCountEl = document.querySelector('.stat-item[aria-label="Legends"] .stat-number');
     if (!grid) return;
 
+    // Safely extract and detach existing legends to prevent deletion
+    // Assign them the 'winner' class alongside 'podium' so they show in the winners filter too
     const existingLegends = Array.from(document.querySelectorAll('.legend-card'));
     existingLegends.forEach(legend => {
         let currentCats = legend.dataset.category || '';
         if (!currentCats.includes('podium')) legend.dataset.category = currentCats + ' podium winner';
+        legend.remove(); 
     });
 
-    grid.innerHTML = ''; 
+    if (loadingMsg) {
+      loadingMsg.style.display = 'block';
+      loadingMsg.innerHTML = '<div class="loading-spinner"></div><p>Loading API Data...</p>';
+    }
 
     try {
-      if (loadingMsg) loadingMsg.innerHTML = '<div class="loading-spinner"></div><p>Loading...</p>';
-
       const statsPromises = currentDrivers.map(driver => fetchDriverStats(driver.driverId));
       const allStats = await Promise.all(statsPromises);
+
+      if (loadingMsg) loadingMsg.remove(); // Safely remove loading indicator
 
       currentDrivers.forEach((driver, index) => {
         const stats = allStats[index];
@@ -255,52 +276,27 @@
         grid.appendChild(card);
       });
 
+      // Re-add legend cards
       existingLegends.forEach(legend => grid.appendChild(legend));
 
-      const totalCount = currentDrivers.length + existingLegends.length;
+      // UPDATED LOGIC: Exactly 22 Active Drivers
+      const totalCount = currentDrivers.length; 
+      // Only count the unique countries represented by the 22 active drivers
       const uniqueCountries = new Set(currentDrivers.map(d => d.nationality));
-      ['Brazilian', 'German', 'French', 'Argentine', 'Austrian', 'British'].forEach(c => uniqueCountries.add(c));
       
       if (totalDriversEl) totalDriversEl.textContent = totalCount;
       if (totalCountriesEl) totalCountriesEl.textContent = uniqueCountries.size;
+      // Dynamically count legends so it matches the real amount (8) instead of the hardcoded 9
+      if (legendsCountEl) legendsCountEl.textContent = existingLegends.length; 
 
-      if (loadingMsg) loadingMsg.remove();
-      
       initRevealOnScroll();
       initDriverModal();
-      initFilters();
+      applyDriverFilter(currentDriverFilter); // Reapply filter logic correctly
 
     } catch (err) {
+      if (loadingMsg) loadingMsg.innerHTML = '<p>Failed to load active drivers.</p>';
       existingLegends.forEach(legend => grid.appendChild(legend));
     }
-  }
-
-  function initFilters() {
-    const buttons = Array.from(document.querySelectorAll('.filter-btn'));
-    const noResults = $('#noResults');
-    if (!buttons.length) return;
-
-    function applyFilter(filter) {
-      const f = (filter || 'all').toLowerCase();
-      const map = {'podiums':'podium', 'winners':'winner', 'legends':'legends'}; 
-      const target = map[f] || f;
-      
-      const cards = Array.from(document.querySelectorAll('.driver-card'));
-      let anyShown = false;
-
-      buttons.forEach(btn => btn.classList.toggle('active', btn.dataset.filter === filter));
-
-      cards.forEach(card => {
-        const cats = (card.dataset.category || 'all').toLowerCase().split(' ');
-        const show = target === 'all' || cats.includes(target);
-        card.style.display = show ? '' : 'none';
-        if (show) anyShown = true;
-      });
-      if (noResults) noResults.hidden = anyShown;
-    }
-
-    buttons.forEach(btn => btn.addEventListener('click', () => applyFilter(btn.dataset.filter)));
-    applyFilter('all');
   }
 
   function initRevealOnScroll() {
@@ -348,20 +344,15 @@
     `;
     document.body.appendChild(overlay);
 
-    // BROWSER HISTORY API FIX
     const close = () => {
       if (overlay.classList.contains('visible')) {
         overlay.classList.remove('visible');
-        if (history.state && history.state.modalOpen) {
-          history.back(); // Clear the dummy state
-        }
+        if (history.state && history.state.modalOpen) history.back(); 
       }
     };
 
     window.addEventListener('popstate', () => {
-      if (overlay.classList.contains('visible')) {
-        overlay.classList.remove('visible'); // Close on mobile back button
-      }
+      if (overlay.classList.contains('visible')) overlay.classList.remove('visible'); 
     });
 
     overlay.querySelector('.driver-modal-close').addEventListener('click', close);
@@ -394,7 +385,6 @@
           loadCurrentSeasonData(driverId, liveStatsContainer);
         }
 
-        // Push state before opening
         history.pushState({ modalOpen: true }, "", window.location.href);
         overlay.classList.add('visible');
       }
@@ -412,9 +402,8 @@
     if (el) { try { const r = await fetch(path); if(r.ok) el.innerHTML = await r.text(); } catch(e){} }
   }
 
-  // --- DYNAMIC DRIVER STANDINGS API INTEGRATION ---
+  /* --- DYNAMIC DRIVER STANDINGS TABLE --- */
   const driverMap = {
-    // Top Tier
     "max_verstappen": { class: "redbull", color: "#1e3a8a" },
     "hadjar": { class: "redbull", color: "#1e3a8a" },
     "norris": { class: "mclaren", color: "#ff8c00" },
@@ -423,16 +412,12 @@
     "hamilton": { class: "ferrari", color: "#dc2626" },
     "russell": { class: "mercedes", color: "#00d2be" },
     "antonelli": { class: "mercedes", color: "#00d2be" },
-    
-    // Midfield
     "albon": { class: "williams", color: "#00a0de" },
     "sainz": { class: "williams", color: "#00a0de" },
     "alonso": { class: "astonmartin", color: "#006a4e" },
     "stroll": { class: "astonmartin", color: "#006a4e" },
     "gasly": { class: "alpine", color: "#0084c7" },
     "colapinto": { class: "alpine", color: "#0084c7" },
-    
-    // Challengers
     "lawson": { class: "racingbulls", color: "#0f172a" },
     "lindblad": { class: "racingbulls", color: "#0f172a" },
     "ocon": { class: "haas", color: "#ffffff" },
@@ -465,50 +450,39 @@
         const position = standing.position;
         const points = standing.points;
         const constructorId = standing.Constructors[0]?.constructorId || 'unknown';
-        
         const driverInfo = driverMap[driverId] || { class: constructorId, color: "#cccccc" };
 
         const row = document.createElement('div');
         row.className = 'table-row';
         row.setAttribute('role', 'row');
-        
         row.innerHTML = `
           <div>${position}</div>
           <div><span class="team-color ${driverInfo.class}" aria-hidden="true" style="background:${driverInfo.color};"></span>${driverName}</div>
           <div>${points}</div>
         `;
-        
         table.appendChild(row);
       });
 
       const sectionTitle = document.querySelector('.championship-section .section-title');
-      if (sectionTitle) {
-         sectionTitle.textContent = `${currentSeason} Driver Standings`;
-      }
+      if (sectionTitle) sectionTitle.textContent = `${currentSeason} Driver Standings`;
 
     } catch (error) {
       console.error("Error loading driver standings, falling back to static HTML:", error);
     }
   }
 
+  // Init block
   document.addEventListener('DOMContentLoaded', async () => {
     await Promise.all([includeHTML('navbar', 'navbar.html'), includeHTML('footer', 'footer.html')]);
     bindImageFallbacks();
-    if ($('#driversGrid')) await loadDrivers();
     
-    // Call the dynamic table load here
+    // Wire up filter buttons early to be responsive
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => applyDriverFilter(btn.dataset.filter));
+    });
+
+    if ($('#driversGrid')) await loadDrivers();
     loadDriverStandings();
   });
 
-})();
-
-/* =========================================================
-   VERCEL WEB ANALYTICS (Global Injection)
-   ========================================================= */
-(() => {
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-  const script = document.createElement('script');
-  script.defer = true;
-  script.src = '/_vercel/insights/script.js';
-  document.head.appendChild(script);
 })();

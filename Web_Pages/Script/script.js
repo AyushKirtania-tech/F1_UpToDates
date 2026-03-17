@@ -2,10 +2,27 @@
 
 const $ = (selector) => document.querySelector(selector);
 
+// Fix: Removed insecure HTTP fallback
 const API_SOURCES = [
-  'https://api.jolpi.ca/ergast/f1',
-  'http://api.jolpi.ca/ergast/f1'
+  'https://api.jolpi.ca/ergast/f1'
 ];
+
+// Helper Function: Fetch with LocalStorage Caching to boost performance
+async function fetchWithCache(url, cacheKey, ttlMs = 3600000) { // Default cache 1 hr
+  const cachedData = localStorage.getItem(cacheKey);
+  if (cachedData) {
+    const parsedData = JSON.parse(cachedData);
+    if (Date.now() - parsedData.timestamp < ttlMs) {
+      return parsedData.data;
+    }
+  }
+  
+  const response = await fetch(url);
+  if (!response.ok) throw new Error('API fetching failed');
+  const data = await response.json();
+  localStorage.setItem(cacheKey, JSON.stringify({ timestamp: Date.now(), data }));
+  return data;
+}
 
 // 2026 START DATES FOR COUNTDOWN FALLBACK
 const FALLBACK_RACES = [
@@ -16,28 +33,23 @@ const FALLBACK_RACES = [
   }
 ];
 
-// Fetch next race logic
+// Fetch next race logic utilizing Cache
 async function fetchNextRace() {
   const now = new Date();
   
-  for (const apiBase of API_SOURCES) {
-    try {
-      const response = await fetch(`${apiBase}/current.json`);
-      if (response.ok) {
-        const data = await response.json();
-        const races = data.MRData.RaceTable.Races;
-        if (races && races.length > 0) {
-          const nextRace = races.find(race => {
-            const timeToUse = race.time ? race.time.substring(0, 8) : '14:00:00';
-            const raceDate = new Date(`${race.date}T${timeToUse}Z`);
-            return raceDate > now;
-          });
-          if (nextRace) return nextRace;
-        }
-      }
-    } catch (error) {
-      console.warn(`Failed to fetch from ${apiBase}:`, error);
+  try {
+    const data = await fetchWithCache(`${API_SOURCES[0]}/current.json`, 'f1_current_season');
+    const races = data.MRData.RaceTable.Races;
+    if (races && races.length > 0) {
+      const nextRace = races.find(race => {
+        const timeToUse = race.time ? race.time.substring(0, 8) : '14:00:00';
+        const raceDate = new Date(`${race.date}T${timeToUse}Z`);
+        return raceDate > now;
+      });
+      if (nextRace) return nextRace;
     }
+  } catch (error) {
+    console.warn(`Failed to fetch from Jolpi:`, error);
   }
   
   return FALLBACK_RACES[0];
@@ -103,7 +115,15 @@ function startCountdown(targetDate) {
   setInterval(updateCountdown, 1000);
 }
 
-// Carousel Logic adapted for 22 Drivers & Bento Grid sizing
+// Helper Function: Debounce for window resize performance
+function debounce(func, wait) {
+  let timeout;
+  return function(...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), wait);
+  };
+}
+
 function setupDriverCarousel() {
   const grid = document.getElementById('driversGrid');
   const dotsContainer = document.getElementById('carouselDots');
@@ -117,7 +137,6 @@ function setupDriverCarousel() {
   let currentSlide = 0; 
   let autoplayInterval;
 
-  // Generate dots
   dotsContainer.innerHTML = '';
   for (let i = 0; i <= maxSlideIndex; i++) {
     const dot = document.createElement('div');
@@ -129,34 +148,23 @@ function setupDriverCarousel() {
 
   function calculateDimensions() {
     const gap = 20; 
-    
-    // Recalculate view dimensions
     cardsPerView = window.innerWidth <= 640 ? 1 : (window.innerWidth <= 1100 ? 2 : 4);
     maxSlideIndex = Math.max(0, totalCards - cardsPerView);
     
     const containerWidth = grid.parentElement.offsetWidth;
     const cardWidth = (containerWidth - (gap * (cardsPerView - 1))) / cardsPerView;
     
-    cards.forEach(card => {
-      card.style.width = `${cardWidth}px`;
-    });
+    cards.forEach(card => card.style.width = `${cardWidth}px`);
     
-    // Update dot visibility
     const dots = document.querySelectorAll('.carousel-dot');
     dots.forEach((dot, index) => {
-      if(index <= maxSlideIndex) {
-        dot.style.display = 'block';
-      } else {
-        dot.style.display = 'none'; 
-      }
+      dot.style.display = index <= maxSlideIndex ? 'block' : 'none'; 
     });
   }
 
   function updateDots() {
     const dots = document.querySelectorAll('.carousel-dot');
-    dots.forEach((dot, index) => {
-      dot.classList.toggle('active', index === currentSlide);
-    });
+    dots.forEach((dot, index) => dot.classList.toggle('active', index === currentSlide));
   }
   
   function goToSlide(index) { 
@@ -165,36 +173,26 @@ function setupDriverCarousel() {
     const cardWidth = cards[0].offsetWidth;
     const offset = currentSlide * (cardWidth + gap);
     
-    // Use native smooth scrolling instead of CSS transform
     grid.scrollTo({ left: offset, behavior: 'smooth' });
     updateDots();
     resetAutoplay(); 
   }
 
   function nextSlide() { 
-    if (currentSlide >= maxSlideIndex) {
-        goToSlide(0); // Wrap around to start
-    } else {
+    if (currentSlide >= maxSlideIndex) goToSlide(0);
+    else {
         let nextIndex = currentSlide + cardsPerView;
-        if (nextIndex > maxSlideIndex) nextIndex = maxSlideIndex; // Cap to end
+        if (nextIndex > maxSlideIndex) nextIndex = maxSlideIndex;
         goToSlide(nextIndex);
     }
   }
   
-  function startAutoplay() { 
-    autoplayInterval = setInterval(nextSlide, 3500); 
-  }
-  
-  function resetAutoplay() { 
-    clearInterval(autoplayInterval); 
-    startAutoplay(); 
-  }
+  function startAutoplay() { autoplayInterval = setInterval(nextSlide, 3500); }
+  function resetAutoplay() { clearInterval(autoplayInterval); startAutoplay(); }
 
-  // SYNC: Update current slide & dots if user manually scrolls horizontally
   grid.addEventListener('scroll', () => {
     const gap = 20;
     const cardWidth = cards[0].offsetWidth;
-    // Calculate which slide is currently in view
     const newSlide = Math.round(grid.scrollLeft / (cardWidth + gap));
     
     if (newSlide !== currentSlide && newSlide <= maxSlideIndex) {
@@ -203,31 +201,45 @@ function setupDriverCarousel() {
     }
   }, { passive: true });
 
-  // Init
   calculateDimensions(); 
   startAutoplay();
   
-  // Pause on hover or touch interactions
   grid.addEventListener('mouseenter', () => clearInterval(autoplayInterval));
   grid.addEventListener('mouseleave', startAutoplay);
   grid.addEventListener('touchstart', () => clearInterval(autoplayInterval), { passive: true });
   grid.addEventListener('touchend', startAutoplay, { passive: true });
   
-  // Handle resize safely
-  window.addEventListener('resize', () => {
+  // Fix: Debounced resize listener
+  window.addEventListener('resize', debounce(() => {
       calculateDimensions();
-      goToSlide(currentSlide); // Re-align properly on resize
-  });
+      goToSlide(currentSlide); 
+  }, 100));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('F1 Bento Dashboard Loaded');
   setupNextRace();
   setupDriverCarousel();
   initStandingsTabs(); 
   loadMiniStandings();
+  initBackToTop();
 });
 
+/* =========================================================
+   BACK TO TOP BUTTON
+   ========================================================= */
+function initBackToTop() {
+  const backBtn = document.getElementById('backToTopBtn');
+  if(!backBtn) return;
+  
+  window.addEventListener('scroll', () => {
+    if(window.scrollY > 400) backBtn.classList.add('show');
+    else backBtn.classList.remove('show');
+  }, { passive: true });
+  
+  backBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
 
 /* =========================================================
    ADD TO CALENDAR (GOOGLE CALENDAR REMINDER)
@@ -237,13 +249,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (!btn) return;
 
   try {
-    // Fetch the Next Race details from the API
-    const res = await fetch('https://api.jolpi.ca/ergast/f1/current/next.json');
-    if (!res.ok) throw new Error('API Error');
-    const data = await res.json();
+    const data = await fetchWithCache('https://api.jolpi.ca/ergast/f1/current/next.json', 'f1_next_race_cal');
     const nextRace = data?.MRData?.RaceTable?.Races?.[0];
-    
-    // If there is no next race (season over), do nothing
     if (!nextRace || !nextRace.date || !nextRace.time) return;
 
     const raceName = nextRace.raceName;
@@ -251,30 +258,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     const raceTime = nextRace.time; 
     const circuit = nextRace.Circuit.circuitName;
 
-    // Convert F1 API Time (UTC) to a valid Javascript Date Object
-    const startDate = new Date(`${raceDate}T${raceTime}`);
+    // Fix: Safely parse date and time to avoid Safari/Browser anomalies
+    const [year, month, day] = raceDate.split('-').map(Number);
+    const [hours, mins, secs] = raceTime.replace('Z', '').split(':').map(Number);
     
-    // Estimate race duration as 2 hours for the calendar block
+    // Create UTC Date
+    const startDate = new Date(Date.UTC(year, month - 1, day, hours, mins, secs));
     const endDate = new Date(startDate.getTime() + (2 * 60 * 60 * 1000)); 
 
-    // Google Calendar requires a very specific Date format: YYYYMMDDTHHMMSSZ
-    const formatGCalDate = (date) => {
-      return date.toISOString().replace(/-|:|\.\d{3}/g, '');
-    };
+    const formatGCalDate = (date) => date.toISOString().replace(/-|:|\.\d{3}/g, '');
 
     const gCalStart = formatGCalDate(startDate);
     const gCalEnd = formatGCalDate(endDate);
 
-    // Build the dynamic URL
     const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=🏎️+F1:+${encodeURIComponent(raceName)}&dates=${gCalStart}/${gCalEnd}&details=Don't+miss+the+${encodeURIComponent(raceName)}!&location=${encodeURIComponent(circuit)}`;
 
-    // Show the button now that the link is ready
     btn.style.display = 'inline-flex';
-    
-    // Open the Google Calendar tab when clicked
-    btn.addEventListener('click', () => {
-      window.open(gCalUrl, '_blank');
-    });
+    btn.addEventListener('click', () => window.open(gCalUrl, '_blank'));
 
   } catch (error) {
     console.error("Could not load Calendar data:", error);
@@ -304,11 +304,9 @@ function initStandingsTabs() {
   
   tabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      // Remove active states
       tabs.forEach(t => t.classList.remove('active'));
       views.forEach(v => v.style.display = 'none');
       
-      // Set new active state
       tab.classList.add('active');
       document.getElementById(tab.dataset.target).style.display = 'block';
     });
@@ -321,13 +319,11 @@ async function loadMiniStandings() {
   if (!dContainer || !cContainer) return;
 
   try {
-    const [dRes, cRes] = await Promise.all([
-      fetch('https://api.jolpi.ca/ergast/f1/current/driverStandings.json'),
-      fetch('https://api.jolpi.ca/ergast/f1/current/constructorStandings.json')
+    // Utilize cache to avoid hitting limits when moving between pages
+    const [dData, cData] = await Promise.all([
+      fetchWithCache('https://api.jolpi.ca/ergast/f1/current/driverStandings.json', 'f1_drivers_std'),
+      fetchWithCache('https://api.jolpi.ca/ergast/f1/current/constructorStandings.json', 'f1_const_std')
     ]);
-
-    const dData = await dRes.json();
-    const cData = await cRes.json();
 
     const dLists = dData.MRData.StandingsTable.StandingsLists;
     const cLists = cData.MRData.StandingsTable.StandingsLists;
@@ -338,11 +334,9 @@ async function loadMiniStandings() {
        return;
     }
 
-    // Grab Top 10 for the full-width view
     const topDrivers = dLists[0].DriverStandings.slice(0, 10);
     const topConstructors = cLists[0].ConstructorStandings.slice(0, 10);
 
-    // Build Drivers Table
     dContainer.innerHTML = topDrivers.map(d => {
       const cId = d.Constructors[0]?.constructorId || 'unknown';
       const color = miniTeamColors[cId] || '#cccccc';
@@ -359,7 +353,6 @@ async function loadMiniStandings() {
       `;
     }).join('');
 
-    // Build Constructors Table
     cContainer.innerHTML = topConstructors.map(c => {
       const cId = c.Constructor.constructorId;
       const color = miniTeamColors[cId] || '#cccccc';
