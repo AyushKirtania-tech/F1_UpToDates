@@ -250,12 +250,22 @@ function initGlobalButtonInteractions() {
       e.preventDefault(); 
       btn.classList.add('is-loading'); 
       setTimeout(() => { window.location.href = btn.href; }, 350); 
+      
+      // Failsafe: remove spinner after 1 second in case navigation is cancelled
+      setTimeout(() => { btn.classList.remove('is-loading'); }, 1000);
+    }
+  });
+
+  // BFCache Fix: Wipe loading states when user uses the Browser Back Button
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) {
+      document.querySelectorAll('.is-loading').forEach(b => b.classList.remove('is-loading'));
     }
   });
 }
 
 /* =========================================================
-   MOBILE "NATIVE APP" JAVASCRIPT LOGIC
+   MOBILE "NATIVE APP" JAVASCRIPT LOGIC (FIXED DRAG)
    ========================================================= */
 window.initMobileEnhancements = function() {
   if (window.innerWidth > 768) return;
@@ -275,7 +285,7 @@ window.initMobileEnhancements = function() {
 
   cards.forEach(card => observer.observe(card));
 
-  // 2. Swipe Down to Close Bottom Sheets
+  // 2. Swipe Down to Close Bottom Sheets (Fixed CSS Override)
   let startY = 0;
   let currentY = 0;
   let isDragging = false;
@@ -285,11 +295,17 @@ window.initMobileEnhancements = function() {
     const modal = e.target.closest('.driver-modal') || e.target.closest('.mobile-modal') || e.target.closest('.team-modal');
     if (!modal) return;
     
-    if (e.target.closest('.modal-pull-indicator') || e.target.closest('.driver-modal-close') || e.target.closest('.team-modal-close') || modal.scrollTop === 0) {
+    // Find the actual scrollable area inside the modal
+    const scrollArea = modal.querySelector('.driver-modal-body, .team-modal-grid') || modal;
+    
+    // Allow drag if grabbing the handle, the close button, OR if the user is at the very top of the scrollable area
+    if (e.target.closest('.modal-pull-indicator') || e.target.closest('.driver-modal-close') || e.target.closest('.team-modal-close') || scrollArea.scrollTop <= 0) {
       startY = e.touches[0].clientY;
       isDragging = true;
       activeModal = modal;
-      activeModal.style.transition = 'none'; 
+      
+      // Force override the CSS transition so it sticks to the finger
+      activeModal.style.setProperty('transition', 'none', 'important'); 
     }
   }, { passive: true });
 
@@ -297,25 +313,36 @@ window.initMobileEnhancements = function() {
     if (!isDragging || !activeModal) return;
     currentY = e.touches[0].clientY;
     const diff = currentY - startY;
-    if (diff > 0) { activeModal.style.transform = `translateY(${diff}px)`; }
+    
+    if (diff > 0) { 
+      // Force override the CSS transform using setProperty to beat the !important tag
+      activeModal.style.setProperty('transform', `translateY(${diff}px)`, 'important');
+    }
   }, { passive: true });
 
   document.addEventListener('touchend', () => {
     if (!isDragging || !activeModal) return;
     isDragging = false;
     const diff = currentY - startY;
-    activeModal.style.transition = 'transform 0.35s cubic-bezier(0.32, 0.72, 0, 1)';
+    
+    // Restore the smooth snap animation
+    activeModal.style.setProperty('transition', 'transform 0.35s cubic-bezier(0.32, 0.72, 0, 1)', 'important');
     
     if (diff > 120) { 
+      // Dragged far enough: Close the modal
       const overlay = activeModal.closest('.driver-modal-overlay') || activeModal.closest('.mobile-modal-overlay') || activeModal.closest('.team-modal-overlay');
-      if(overlay) {
+      if (overlay) {
           overlay.classList.remove('visible');
           overlay.classList.remove('active');
           if (history.state && history.state.modalOpen) history.back();
       }
-      setTimeout(() => { activeModal.style.transform = ''; }, 400);
+      // Clean up inline styles after animation finishes
+      setTimeout(() => { 
+        if (activeModal) activeModal.style.removeProperty('transform'); 
+      }, 400);
     } else {
-      activeModal.style.transform = 'translateY(0)';
+      // Didn't drag far enough: Snap back to top (let CSS take over again)
+      activeModal.style.removeProperty('transform');
     }
     activeModal = null;
   });
