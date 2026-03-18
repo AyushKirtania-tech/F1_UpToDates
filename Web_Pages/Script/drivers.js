@@ -31,10 +31,10 @@
   ];
 
   const manualChampionships = {
-    'max_verstappen': 4, 'leclerc': 0, 'hamilton': 7, 'russell': 0, 'perez': 0, 'sainz': 0, 
-    'norris': 1, 'piastri': 0, 'alonso': 2, 'stroll': 0, 'gasly': 0, 'albon': 0, 'ocon': 0, 
-    'hulkenberg': 0, 'bottas': 0, 'lawson': 0, 'antonelli': 0, 'bearman': 0, 
-    'hadjar': 0, 'bortoleto': 0, 'lindblad': 0, 'colapinto': 0 
+    'max_verstappen': 4, 'leclerc': 0, 'hamilton': 7, 'russell': 0, 'perez': 0, 'sainz': 0,
+    'norris': 1, 'piastri': 0, 'alonso': 2, 'stroll': 0, 'gasly': 0, 'albon': 0, 'ocon': 0,
+    'hulkenberg': 0, 'bottas': 0, 'lawson': 0, 'antonelli': 0, 'bearman': 0,
+    'hadjar': 0, 'bortoleto': 0, 'lindblad': 0, 'colapinto': 0
   };
 
   /* ---------- FILTER LOGIC ---------- */
@@ -43,11 +43,16 @@
   function applyDriverFilter(filter) {
     currentDriverFilter = filter || 'all';
     const f = currentDriverFilter.toLowerCase();
-    
-    // Maps the HTML 'data-filter' values to the generated categories
-    const map = {'podiums':'podium', 'winners':'winner', 'legends':'legends', 'current':'current'}; 
+
+    const map = {
+      'podiums': 'podium',
+      'winners': 'winner',
+      'legends': 'legends',
+      'current': 'current'
+    };
+
     const target = map[f] || f;
-    
+
     const cards = Array.from(document.querySelectorAll('.driver-card'));
     let anyShown = false;
 
@@ -61,17 +66,21 @@
     cards.forEach(card => {
       const cats = (card.dataset.category || 'all').toLowerCase().split(' ');
       const show = target === 'all' || cats.includes(target);
-      
-      if (show) {
-        card.style.removeProperty('display');
-        anyShown = true;
-      } else {
-        card.style.setProperty('display', 'none', 'important');
-      }
+
+      card.classList.toggle('filtered-out', !show);
+      if (show) anyShown = true;
     });
 
     const noResults = $('#noResults');
     if (noResults) noResults.hidden = anyShown;
+  }
+
+  function bindFilterButtons() {
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        applyDriverFilter(btn.dataset.filter);
+      });
+    });
   }
 
   /* ---------- DATA FETCHING ---------- */
@@ -95,11 +104,12 @@
       const wins = parseInt(winsData?.MRData?.total || '0', 10);
       const races = resultsData?.MRData?.RaceTable?.Races || [];
       let podiums = 0;
+
       races.forEach(race => {
         const res = race?.Results?.[0];
         if (res && Number(res.position) <= 3) podiums++;
       });
-      
+
       const careerStats = {
         wins: wins || 0,
         podiums: podiums || 0,
@@ -109,14 +119,17 @@
 
       if (driverId === 'lindblad' && careerStats.races === 0) careerStats.races = 1;
       return careerStats;
-
     } catch (err) {
-      return { wins: 0, podiums: 0, championships: manualChampionships[driverId] || 0, races: driverId === 'lindblad' ? 1 : 0 };
+      return {
+        wins: 0,
+        podiums: 0,
+        championships: manualChampionships[driverId] || 0,
+        races: driverId === 'lindblad' ? 1 : 0
+      };
     }
   }
 
   async function loadCurrentSeasonData(driverId, container) {
-    // Skeletons
     container.innerHTML = `
       <div class="live-stats-grid">
         <div class="live-stat-box skeleton-box" style="height: 65px; border-radius: 12px;"></div>
@@ -127,7 +140,7 @@
         <div class="live-stat-box skeleton-box" style="height: 65px; border-radius: 12px;"></div>
       </div>
     `;
-    
+
     const apiDriverId = driverId === 'max_verstappen' ? 'max_verstappen' : driverId;
 
     try {
@@ -140,18 +153,20 @@
       const races = resultsRes?.MRData?.RaceTable?.Races || [];
 
       if (races.length === 0 && !standing) {
-          container.innerHTML = '<div class="no-data" style="text-align:center; padding:20px; color:#aaa;">Live stats will appear here automatically after Round 1.</div>';
-          return;
+        container.innerHTML = '<div class="no-data" style="text-align:center; padding:20px; color:#aaa;">Live stats will appear here automatically after Round 1.</div>';
+        return;
       }
 
       let bestFinish = 999, bestGrid = 999, dnfs = 0;
       races.forEach(r => {
-          const res = r.Results[0];
-          const pos = parseInt(res.position);
-          const grid = parseInt(res.grid);
-          if (pos < bestFinish) bestFinish = pos;
-          if (grid > 0 && grid < bestGrid) bestGrid = grid;
-          if (!res.status.includes('Finished') && !res.status.match(/\+\d/)) dnfs++;
+        const res = r?.Results?.[0];
+        if (!res) return;
+
+        const pos = parseInt(res.position, 10);
+        const grid = parseInt(res.grid, 10);
+        if (pos < bestFinish) bestFinish = pos;
+        if (grid > 0 && grid < bestGrid) bestGrid = grid;
+        if (!String(res.status || '').includes('Finished') && !String(res.status || '').match(/\+\d/)) dnfs++;
       });
 
       const points = standing?.points || '0';
@@ -163,43 +178,80 @@
           <div class="live-stat-box"><span class="ls-label">WDC Pos</span><span class="ls-val">P${position}</span></div>
           <div class="live-stat-box"><span class="ls-label">Points</span><span class="ls-val">${points}</span></div>
           <div class="live-stat-box"><span class="ls-label">Season Wins</span><span class="ls-val">${seasonWins}</span></div>
-          <div class="live-stat-box"><span class="ls-label">Best Finish</span><span class="ls-val">${bestFinish === 999 ? '-' : 'P'+bestFinish}</span></div>
-          <div class="live-stat-box"><span class="ls-label">Best Grid</span><span class="ls-val">${bestGrid === 999 ? '-' : 'P'+bestGrid}</span></div>
+          <div class="live-stat-box"><span class="ls-label">Best Finish</span><span class="ls-val">${bestFinish === 999 ? '-' : 'P' + bestFinish}</span></div>
+          <div class="live-stat-box"><span class="ls-label">Best Grid</span><span class="ls-val">${bestGrid === 999 ? '-' : 'P' + bestGrid}</span></div>
           <div class="live-stat-box"><span class="ls-label">Retirements</span><span class="ls-val">${dnfs}</span></div>
         </div>
       `;
-    } catch(e) {
+    } catch (e) {
       container.innerHTML = '<div class="no-data" style="text-align:center; padding:20px; color:#e10600;">⚠️ Failed to connect to F1 Live API.</div>';
     }
   }
 
   const teamColors = {
-    'red_bull': 'linear-gradient(135deg,#1e3a8a,#3730a3)', 'ferrari': 'linear-gradient(135deg,#dc2626,#991b1b)',
-    'mercedes': 'linear-gradient(135deg,#00d2be,#00a19c)', 'mclaren': 'linear-gradient(135deg,#ff8c00,#ff6600)',
-    'alpine': 'linear-gradient(135deg,#0084c7,#005a8f)', 'aston_martin': 'linear-gradient(135deg,#006a4e,#004d3b)',
-    'williams': 'linear-gradient(135deg,#00a0de,#0073a3)', 'racing_bulls': 'linear-gradient(135deg,#0f172a,#1e293b)',
-    'audi': 'linear-gradient(135deg,#000000,#ff0000)', 'haas': 'linear-gradient(135deg,#6b7280,#374151)',
+    'red_bull': 'linear-gradient(135deg,#1e3a8a,#3730a3)',
+    'ferrari': 'linear-gradient(135deg,#dc2626,#991b1b)',
+    'mercedes': 'linear-gradient(135deg,#00d2be,#00a19c)',
+    'mclaren': 'linear-gradient(135deg,#ff8c00,#ff6600)',
+    'alpine': 'linear-gradient(135deg,#0084c7,#005a8f)',
+    'aston_martin': 'linear-gradient(135deg,#006a4e,#004d3b)',
+    'williams': 'linear-gradient(135deg,#00a0de,#0073a3)',
+    'racing_bulls': 'linear-gradient(135deg,#0f172a,#1e293b)',
+    'audi': 'linear-gradient(135deg,#000000,#ff0000)',
+    'haas': 'linear-gradient(135deg,#6b7280,#374151)',
     'cadillac': 'linear-gradient(135deg,#ffffff,#a2a2a2)'
   };
-  
-  function getTeamColor(teamId) { return teamColors[teamId] || 'linear-gradient(135deg,#333,#555)'; }
-  
+
+  function getTeamColor(teamId) {
+    return teamColors[teamId] || 'linear-gradient(135deg,#333,#555)';
+  }
+
   const flagMap = {
-    'British': 'uk.jpg','Dutch': 'netherlands.webp','Monegasque': 'monaco.png','Spanish': 'spain.png','Mexican': 'mexico.png',
-    'Thai': 'thailand.png','French': 'france.png','Australian': 'australia.png','German': 'germany.jpg',
-    'Canadian': 'canada.png','Finnish': 'finland.svg','Italian': 'italy.webp','Brazilian': 'brazil.png','New Zealander': 'new-zealand.png',
+    'British': 'uk.jpg',
+    'Dutch': 'netherlands.webp',
+    'Monegasque': 'monaco.png',
+    'Spanish': 'spain.png',
+    'Mexican': 'mexico.png',
+    'Thai': 'thailand.png',
+    'French': 'france.png',
+    'Australian': 'australia.png',
+    'German': 'germany.jpg',
+    'Canadian': 'canada.png',
+    'Finnish': 'finland.svg',
+    'Italian': 'italy.webp',
+    'Brazilian': 'brazil.png',
+    'New Zealander': 'new-zealand.png',
     'Argentine': 'argentina.png'
   };
-  function getFlagImage(nat) { return flagMap[nat] || 'default.png'; }
+
+  function getFlagImage(nat) {
+    return flagMap[nat] || 'default.png';
+  }
 
   function getDriverImageFilename(driverId) {
     const map = {
-      'max_verstappen': 'max.jpg','norris': 'lando.webp','leclerc': 'leclerc.jpg','hamilton': 'lewis.jpg',
-      'russell': 'george.jpg','sainz': 'carlos.jpeg','piastri': 'piastri.webp','alonso': 'alonso.jpg',
-      'stroll': 'lance.jpg','gasly': 'gasly.jpg','albon': 'albon.jpg', 'ocon': 'ocon.avif',
-      'hulkenberg': 'nico.webp','perez': 'Sergio.jpg','bottas': 'bottas.jpg', 'lawson': 'liam.avif',
-      'bearman': 'oliver.webp','antonelli': 'antonelli.avif', 'colapinto': 'franco.webp',
-      'hadjar': 'isack.webp','bortoleto': 'gabriel.webp', 'lindblad': 'lindblad.avif'
+      'max_verstappen': 'max.jpg',
+      'norris': 'lando.webp',
+      'leclerc': 'leclerc.jpg',
+      'hamilton': 'lewis.jpg',
+      'russell': 'george.jpg',
+      'sainz': 'carlos.jpeg',
+      'piastri': 'piastri.webp',
+      'alonso': 'alonso.jpg',
+      'stroll': 'lance.jpg',
+      'gasly': 'gasly.jpg',
+      'albon': 'albon.jpg',
+      'ocon': 'ocon.avif',
+      'hulkenberg': 'nico.webp',
+      'perez': 'Sergio.jpg',
+      'bottas': 'bottas.jpg',
+      'lawson': 'liam.avif',
+      'bearman': 'oliver.webp',
+      'antonelli': 'antonelli.avif',
+      'colapinto': 'franco.webp',
+      'hadjar': 'isack.webp',
+      'bortoleto': 'gabriel.webp',
+      'lindblad': 'lindblad.avif'
     };
     return map[driverId] || `${driverId}.jpg`;
   }
@@ -215,8 +267,8 @@
     const card = document.createElement('article');
     card.className = 'driver-card reveal';
     card.dataset.team = teamId;
-    card.dataset.driverId = driverId; 
-    
+    card.dataset.driverId = driverId;
+
     const categories = ['all', 'current'];
     if (stats.wins > 0) categories.push('winner');
     if (stats.podiums > 0) categories.push('podium');
@@ -260,9 +312,9 @@
 
     const existingLegends = Array.from(document.querySelectorAll('.legend-card'));
     existingLegends.forEach(legend => {
-        let currentCats = legend.dataset.category || '';
-        if (!currentCats.includes('podium')) legend.dataset.category = currentCats + ' podium winner';
-        legend.remove(); 
+      const currentCats = legend.dataset.category || '';
+      if (!currentCats.includes('podium')) legend.dataset.category = `${currentCats} podium winner`.trim();
+      legend.remove();
     });
 
     if (loadingMsg) {
@@ -274,7 +326,7 @@
       const statsPromises = currentDrivers.map(driver => fetchDriverStats(driver.driverId));
       const allStats = await Promise.all(statsPromises);
 
-      if (loadingMsg) loadingMsg.remove(); 
+      if (loadingMsg) loadingMsg.remove();
 
       currentDrivers.forEach((driver, index) => {
         const stats = allStats[index];
@@ -284,18 +336,16 @@
 
       existingLegends.forEach(legend => grid.appendChild(legend));
 
-      // UPDATED LOGIC: Exactly 22 Active Drivers
-      const totalCount = currentDrivers.length; 
+      const totalCount = currentDrivers.length;
       const uniqueCountries = new Set(currentDrivers.map(d => d.nationality));
-      
+
       if (totalDriversEl) totalDriversEl.textContent = totalCount;
       if (totalCountriesEl) totalCountriesEl.textContent = uniqueCountries.size;
-      if (legendsCountEl) legendsCountEl.textContent = existingLegends.length; 
+      if (legendsCountEl) legendsCountEl.textContent = existingLegends.length;
 
       initRevealOnScroll();
       initDriverModal();
-      applyDriverFilter(currentDriverFilter); 
-
+      applyDriverFilter(currentDriverFilter);
     } catch (err) {
       if (loadingMsg) loadingMsg.innerHTML = '<p>Failed to load active drivers.</p>';
       existingLegends.forEach(legend => grid.appendChild(legend));
@@ -325,7 +375,7 @@
 
     const overlay = document.createElement('div');
     overlay.className = 'driver-modal-overlay';
-    
+
     overlay.innerHTML = `
       <div class="driver-modal">
         <div class="modal-pull-indicator"></div>
@@ -336,7 +386,7 @@
             <h2 class="modal-name"></h2>
             <div class="modal-team"></div>
             <p class="modal-desc-text"></p>
-            
+
             <h3 class="modal-section-title">Career Statistics</h3>
             <div class="modal-stats"></div>
 
@@ -351,16 +401,18 @@
     const close = () => {
       if (overlay.classList.contains('visible')) {
         overlay.classList.remove('visible');
-        if (history.state && history.state.modalOpen) history.back(); 
+        if (history.state && history.state.modalOpen) history.back();
       }
     };
 
     window.addEventListener('popstate', () => {
-      if (overlay.classList.contains('visible')) overlay.classList.remove('visible'); 
+      if (overlay.classList.contains('visible')) overlay.classList.remove('visible');
     });
 
     overlay.querySelector('.driver-modal-close').addEventListener('click', close);
-    overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) close();
+    });
 
     grid.addEventListener('click', e => {
       const card = e.target.closest('.driver-card');
@@ -370,11 +422,11 @@
         overlay.querySelector('.modal-name').textContent = card.querySelector('h2').textContent;
         overlay.querySelector('.modal-team').textContent = card.querySelector('.team-name').textContent;
         overlay.querySelector('.modal-desc-text').textContent = card.querySelector('.driver-description').textContent;
-        
+
         const stats = overlay.querySelector('.modal-stats');
         stats.innerHTML = '';
         card.querySelectorAll('.driver-stats .stat').forEach(s => stats.appendChild(s.cloneNode(true)));
-        
+
         const driverId = card.dataset.driverId;
         const liveStatsContainer = overlay.querySelector('#modalLiveStats');
         const liveTitle = overlay.querySelector('.live-title');
@@ -403,7 +455,12 @@
 
   async function includeHTML(id, path) {
     const el = document.getElementById(id);
-    if (el) { try { const r = await fetch(path); if(r.ok) el.innerHTML = await r.text(); } catch(e){} }
+    if (el) {
+      try {
+        const r = await fetch(path);
+        if (r.ok) el.innerHTML = await r.text();
+      } catch (e) {}
+    }
   }
 
   const driverMap = {
@@ -435,11 +492,11 @@
     try {
       const response = await fetch(`${API_BASE}/current/driverStandings.json`);
       if (!response.ok) throw new Error("Failed to fetch standings");
-      
+
       const data = await response.json();
       const standings = data.MRData.StandingsTable.StandingsLists[0].DriverStandings;
       const currentSeason = data.MRData.StandingsTable.season;
-      
+
       const table = document.querySelector('.championship-table');
       if (!table) return;
 
@@ -468,29 +525,27 @@
 
       const sectionTitle = document.querySelector('.championship-section .section-title');
       if (sectionTitle) sectionTitle.textContent = `${currentSeason} Driver Standings`;
-
     } catch (error) {
       console.error("Error loading driver standings, falling back to static HTML:", error);
     }
   }
 
-  // Init block
+  /* ---------- INIT ---------- */
   document.addEventListener('DOMContentLoaded', async () => {
     await Promise.all([includeHTML('navbar', 'navbar.html'), includeHTML('footer', 'footer.html')]);
     bindImageFallbacks();
-    
-    // Global Button Micro-Interaction
+    bindFilterButtons();
+
     document.addEventListener('click', (e) => {
       const btn = e.target.closest('.btn');
       if (btn && btn.tagName === 'A' && btn.href && !btn.href.includes('#')) {
         e.preventDefault();
         btn.classList.add('is-loading');
-        setTimeout(() => { window.location.href = btn.href; }, 350); 
-        setTimeout(() => { btn.classList.remove('is-loading'); }, 1000); // Failsafe
+        setTimeout(() => { window.location.href = btn.href; }, 350);
+        setTimeout(() => { btn.classList.remove('is-loading'); }, 1000);
       }
     });
 
-    // BFCache Fix: Wipe loading states when user uses the Browser Back Button
     window.addEventListener('pageshow', (e) => {
       if (e.persisted) {
         document.querySelectorAll('.is-loading').forEach(b => b.classList.remove('is-loading'));
@@ -499,8 +554,8 @@
 
     if ($('#driversGrid')) await loadDrivers();
     loadDriverStandings();
-    
-    if(window.initMobileEnhancements) setTimeout(window.initMobileEnhancements, 300);
+
+    if (window.initMobileEnhancements) setTimeout(window.initMobileEnhancements, 300);
   });
 
 })();

@@ -798,3 +798,33 @@ footer {
     font-size: 0.95rem;
   }
 }
+
+
+/* ---------- FILTER ANIMATION (PREMIUM) ---------- */
+
+/* Base state */
+.driver-card {
+  transition: 
+    opacity 0.35s ease,
+    transform 0.35s ease,
+    filter 0.35s ease;
+  will-change: opacity, transform;
+}
+
+/* Hidden state (animated) */
+.driver-card.filtered-out {
+  opacity: 0;
+  transform: translateY(12px) scale(0.96);
+  filter: blur(4px);
+  pointer-events: none;
+}
+
+/* Final removal from layout AFTER animation */
+.driver-card.filtered-out.is-gone {
+  display: none !important;
+}
+
+/* Optional: stagger effect */
+.driver-card {
+  transition-delay: calc(var(--i, 0) * 20ms);
+}
