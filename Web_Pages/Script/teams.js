@@ -318,24 +318,6 @@
       includeHTML('footer', 'footer.html')
     ]);
     
-    // Global Button Micro-Interaction
-    document.addEventListener('click', (e) => {
-      const btn = e.target.closest('.btn');
-      if (btn && btn.tagName === 'A' && btn.href && !btn.href.includes('#')) {
-        e.preventDefault();
-        btn.classList.add('is-loading');
-        setTimeout(() => { window.location.href = btn.href; }, 350); 
-        setTimeout(() => { btn.classList.remove('is-loading'); }, 1000); // Failsafe
-      }
-    });
-
-    // BFCache Fix: Wipe loading states when user uses the Browser Back Button
-    window.addEventListener('pageshow', (e) => {
-      if (e.persisted) {
-        document.querySelectorAll('.is-loading').forEach(b => b.classList.remove('is-loading'));
-      }
-    });
-    
     initFilters();
     initRevealOnScroll();
     fillTeamStatsFromDataAttributes();

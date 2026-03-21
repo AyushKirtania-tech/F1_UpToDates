@@ -242,28 +242,6 @@ function initCursorGlow() {
   animateGlow();
 }
 
-// 4. GLOBAL BUTTON MICRO-INTERACTION (Sleek Loading Spinner on clicks)
-function initGlobalButtonInteractions() {
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.btn');
-    if (btn && btn.tagName === 'A' && btn.href && btn.getAttribute('target') !== '_blank' && !btn.href.includes('#')) {
-      e.preventDefault(); 
-      btn.classList.add('is-loading'); 
-      setTimeout(() => { window.location.href = btn.href; }, 350); 
-      
-      // Failsafe: remove spinner after 1 second in case navigation is cancelled
-      setTimeout(() => { btn.classList.remove('is-loading'); }, 1000);
-    }
-  });
-
-  // BFCache Fix: Wipe loading states when user uses the Browser Back Button
-  window.addEventListener('pageshow', (e) => {
-    if (e.persisted) {
-      document.querySelectorAll('.is-loading').forEach(b => b.classList.remove('is-loading'));
-    }
-  });
-}
-
 /* =========================================================
    MOBILE "NATIVE APP" JAVASCRIPT LOGIC (FIXED DRAG)
    ========================================================= */
@@ -285,7 +263,7 @@ window.initMobileEnhancements = function() {
 
   cards.forEach(card => observer.observe(card));
 
-  // 2. Swipe Down to Close Bottom Sheets (Fixed CSS Override)
+  // 2. Swipe Down to Close Bottom Sheets
   let startY = 0;
   let currentY = 0;
   let isDragging = false;
@@ -357,7 +335,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initStandingsTabs(); 
   loadMiniStandings();
   initBackToTop();
-  initGlobalButtonInteractions(); 
   setTimeout(window.initMobileEnhancements, 300);
 });
 
@@ -372,7 +349,7 @@ function initBackToTop() {
 }
 
 /* =========================================================
-   ADD TO CALENDAR (WITH MICRO-INTERACTION)
+   ADD TO CALENDAR 
    ========================================================= */
 document.addEventListener('DOMContentLoaded', async () => {
   const btn = document.getElementById('addToCalendarBtn');
@@ -394,11 +371,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     btn.style.display = 'inline-flex';
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      btn.classList.add('is-loading'); // Show Spinner
-      setTimeout(() => {
-        btn.classList.remove('is-loading');
-        window.open(gCalUrl, '_blank');
-      }, 500); // 500ms tactile delay
+      window.open(gCalUrl, '_blank');
     });
 
   } catch (error) { console.error("Could not load Calendar data:", error); }
