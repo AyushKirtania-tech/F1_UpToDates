@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>F1 Racing Hub - The 2026 Era</title>
-  
+  <title>F1 Racing Hub — The 2026 Era</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="Styles/style.css">
   <link rel="stylesheet" href="Styles/mobile.css">
   <link rel="stylesheet" href="Styles/navbar.css">
@@ -13,99 +16,184 @@
   <link rel="stylesheet" href="Styles/global-search.css">
   <link rel="stylesheet" href="Styles/keyboard-shortcuts.css">
   <link rel="stylesheet" href="Styles/race-reminder.css">
-  
+  <link rel="stylesheet" href="Styles/premium.css">
+
   <script defer src="Script/keyboard-shortcuts.js"></script>
   <script defer src="Script/global-search.js"></script>
   <script defer src="Script/race-reminder.js"></script>
-  
+
   <meta name="description" content="Your ultimate source for Formula 1 news, 2026 schedules, race results, team standings, and driver profiles.">
 </head>
 
 <body>
-  <div class="ambient-glow glow-1"></div>
-  <div class="ambient-glow glow-2"></div>
+  <!-- NOISE OVERLAY -->
+  <div class="noise-overlay" aria-hidden="true"></div>
 
+  <!-- AMBIENT GLOWS -->
+  <div class="ambient-glow glow-1" aria-hidden="true"></div>
+  <div class="ambient-glow glow-2" aria-hidden="true"></div>
+  <div class="ambient-glow glow-3" aria-hidden="true"></div>
+
+  <!-- LIVE RACE BAR -->
+  <div class="live-race-bar" id="liveRaceBar" aria-label="Next race information">
+    <div class="lrb-inner">
+      <div class="lrb-status">
+        <span class="lrb-dot"></span>
+        <span class="lrb-label" id="lrbStatusLabel">UPCOMING</span>
+      </div>
+      <div class="lrb-divider" aria-hidden="true"></div>
+      <div class="lrb-race-info">
+        <span class="lrb-round" id="lrbRound">Round —</span>
+        <span class="lrb-name" id="lrbRaceName">Loading schedule...</span>
+      </div>
+      <div class="lrb-divider" aria-hidden="true"></div>
+      <div class="lrb-timer" id="lrbTimer" aria-live="polite">
+        <span class="lrb-t" id="lrbD">--</span><small>D</small>
+        <span class="lrb-sep" aria-hidden="true">:</span>
+        <span class="lrb-t" id="lrbH">--</span><small>H</small>
+        <span class="lrb-sep" aria-hidden="true">:</span>
+        <span class="lrb-t" id="lrbM">--</span><small>M</small>
+        <span class="lrb-sep" aria-hidden="true">:</span>
+        <span class="lrb-t" id="lrbS">--</span><small>S</small>
+      </div>
+      <a href="schedule.html" class="lrb-cta" aria-label="View full schedule">Full Calendar →</a>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
   <div id="navbar"></div>
 
-  <main class="dashboard-main">
-    
-    <div class="bento-grid">
-      
-      <div class="bento-card bento-hero">
-        <div class="card-glow"></div>
-        <div class="bento-content">
-          <span class="era-badge">The 2026 Revolution</span>
-          <h1>Welcome to the<br><span class="text-gradient">Apex of Motorsport</span></h1>
-          <p>Experience the all-new 11-team grid, active aerodynamics, and the 50/50 hybrid power split. Track every apex, every overtake, and every championship point.</p>
-          
-          <a href="analytics.html" class="hero-feature-notice">
-            <span class="feature-badge">New</span>
-            <span class="feature-text">Live Race Telemetry <span class="feature-arrow">➔</span></span>
+  <main class="dashboard-main" id="main">
+
+    <!-- ═══════════════════════════════════════
+         CINEMATIC HERO
+    ═══════════════════════════════════════ -->
+    <section class="hero-cinematic" aria-labelledby="hero-headline">
+      <div class="hero-bg-wrap" aria-hidden="true">
+        <div class="hero-bg-img"></div>
+        <div class="hero-gradient-overlay"></div>
+        <div class="hero-scan-lines"></div>
+      </div>
+
+      <div class="hero-content-wrap">
+        <div class="hero-eyebrow">
+          <span class="hero-era-tag">2026 Formula 1 World Championship</span>
+          <span class="hero-separator" aria-hidden="true">|</span>
+          <span class="hero-teams-count">11 Teams · 22 Drivers · 24 Races</span>
+        </div>
+
+        <h1 class="hero-headline" id="hero-headline">
+          <span class="hero-line-1">Feel</span>
+          <span class="hero-line-2">The <em>Speed.</em></span>
+        </h1>
+
+        <p class="hero-subtext">
+          Active aerodynamics. 50/50 hybrid power. A brand-new team.
+          <br>The most radical regulation change in a decade starts now.
+        </p>
+
+        <div class="hero-actions">
+          <a href="schedule.html" class="btn-hero-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            2026 Calendar
           </a>
-          
-          <div class="hero-actions">
-            <a href="schedule.html" class="btn btn-primary">
-              <span>View 2026 Calendar</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-            <a href="about.html" class="btn btn-outline">Explore the Rules</a>
-          </div>
-
-          <div class="predictor-teaser">
-            <div class="teaser-glass">
-              <span class="teaser-icon">🏁</span>
-              <div class="teaser-text">
-                <span class="teaser-label">Stay Up To Date</span>
-                <span class="teaser-title">The Definitive 2026 Hub</span>
-              </div>
-            </div>
-          </div>
-
+          <a href="analytics.html" class="btn-hero-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            Live Telemetry
+          </a>
+          <a href="about.html" class="btn-hero-ghost">Explore the 2026 Rules →</a>
         </div>
       </div>
 
-      <div class="bento-card bento-countdown-box">
+      <div class="hero-scroll-indicator" aria-hidden="true">
+        <div class="scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+
+      <!-- HERO STATS STRIP -->
+      <div class="hero-stats-strip">
+        <div class="hss-item">
+          <span class="hss-num">24</span>
+          <span class="hss-lbl">Grand Prix</span>
+        </div>
+        <div class="hss-div" aria-hidden="true"></div>
+        <div class="hss-item">
+          <span class="hss-num">11</span>
+          <span class="hss-lbl">Constructors</span>
+        </div>
+        <div class="hss-div" aria-hidden="true"></div>
+        <div class="hss-item">
+          <span class="hss-num">22</span>
+          <span class="hss-lbl">Drivers</span>
+        </div>
+        <div class="hss-div" aria-hidden="true"></div>
+        <div class="hss-item">
+          <span class="hss-num">5</span>
+          <span class="hss-lbl">Continents</span>
+        </div>
+        <div class="hss-div" aria-hidden="true"></div>
+        <div class="hss-item">
+          <span class="hss-num">100%</span>
+          <span class="hss-lbl">Sustainable Fuel</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         BENTO DASHBOARD
+    ═══════════════════════════════════════ -->
+    <div class="bento-grid">
+
+      <!-- NEXT RACE COUNTDOWN -->
+      <div class="bento-card bento-countdown-box reveal-card" role="region" aria-label="Next race countdown">
         <div class="bento-content">
           <div class="box-header">
-            <span class="live-dot"></span>
+            <span class="live-dot" aria-hidden="true"></span>
             <h3>Next Race</h3>
           </div>
           <h2 id="nr-name" class="race-title">Loading...</h2>
           <div class="race-details">
-            <p id="nr-circuit" class="circuit-name"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> ...</p>
-            <p id="nr-date" class="race-date"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> ...</p>
+            <p id="nr-circuit">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              ...
+            </p>
+            <p id="nr-date">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              ...
+            </p>
           </div>
-          <div class="countdown-grid countdown" id="countdownGrid">
+          <div class="countdown-grid" id="countdownGrid" aria-live="polite">
             <div class="time-box"><span id="cd-days">00</span><small>Days</small></div>
             <div class="time-box"><span id="cd-hours">00</span><small>Hours</small></div>
             <div class="time-box"><span id="cd-mins">00</span><small>Mins</small></div>
             <div class="time-box"><span id="cd-secs">00</span><small>Secs</small></div>
           </div>
-          
           <div class="calendar-action">
-            <button id="addToCalendarBtn" class="add-cal-btn" style="display: none;">
-              <span class="cal-icon">📅</span> 
+            <button id="addToCalendarBtn" class="add-cal-btn" style="display:none;" aria-label="Add race to Google Calendar">
+              <span class="cal-icon" aria-hidden="true">📅</span>
               <span class="cal-text">Set Reminder</span>
             </button>
           </div>
         </div>
       </div>
 
-      <div class="bento-card bento-champions">
+      <!-- DEFENDING CHAMPIONS -->
+      <div class="bento-card bento-champions reveal-card" role="region" aria-label="Defending champions">
         <div class="bento-content">
           <div class="box-header">
-            <span>🏆 Defending Champions</span>
+            <span aria-hidden="true">🏆</span>
+            <h3>Defending Champions</h3>
           </div>
           <div class="champs-content">
             <div class="champ-driver">
-              <img src="images/drivers/lando.webp" alt="Lando Norris">
+              <img src="images/drivers/lando.webp" alt="Lando Norris, 2025 World Driver Champion">
               <div>
                 <small>Driver's Champion</small>
                 <strong>Lando Norris 🇬🇧</strong>
               </div>
             </div>
             <div class="champ-team">
-              <img src="images/logos/mclaren.avif" alt="McLaren">
+              <img src="images/logos/mclaren.avif" alt="McLaren, 2025 Constructors' Champions">
               <div>
                 <small>Constructor's Champion</small>
                 <strong>McLaren 🟧</strong>
@@ -115,105 +203,93 @@
         </div>
       </div>
 
-      <div class="bento-card bento-reminder">
+      <!-- LOCAL TIME TABLE -->
+      <div class="bento-card bento-reminder reveal-card" role="region" aria-label="Race weekend schedule in local time">
         <div class="bento-content">
           <div class="box-header">
-            <span>⏰ Local Time Table</span>
+            <span aria-hidden="true">⏰</span>
+            <h3>Local Time Table</h3>
           </div>
           <div id="race-reminder-container" class="race-reminder-container">
-            <p style="color: var(--text-muted); font-size: 0.9rem; text-align: center;">Loading local race times...</p>
+            <p style="color:var(--text-muted);font-size:.9rem;text-align:center;">Loading local race times...</p>
           </div>
         </div>
       </div>
 
-      <div class="bento-card bento-drivers">
+      <!-- DRIVER CAROUSEL -->
+      <div class="bento-card bento-drivers reveal-card" role="region" aria-label="2026 driver lineup carousel">
         <div class="bento-content">
           <div class="box-header flex-between">
             <h3>2026 Grid Lineup</h3>
-            <a href="drivers.html" class="view-all">View All 22 Drivers →</a>
+            <a href="drivers.html" class="view-all" aria-label="View all 22 drivers">View All 22 →</a>
           </div>
-          
           <div class="carousel-container">
-            <div class="drivers-grid" id="driversGrid">
-              <a href="drivers.html" class="driver-portrait"><img src="images/drivers/max.jpg" alt="Max Verstappen"><div class="portrait-info"><span class="d-num">#3</span><h4>Max Verstappen</h4><span class="d-team">Red Bull Racing</span></div></a>
-              <a href="drivers.html" class="driver-portrait"><img src="images/drivers/isack.webp" alt="Isack Hadjar"><div class="portrait-info"><span class="d-num">#6</span><h4>Isack Hadjar</h4><span class="d-team">Red Bull Racing</span></div></a>
-              
-              <a href="drivers.html" class="driver-portrait"><img src="images/drivers/lando.webp" alt="Lando Norris"><div class="portrait-info"><span class="d-num">#1</span><h4>Lando Norris</h4><span class="d-team">McLaren</span></div></a>
-              <a href="drivers.html" class="driver-portrait"><img src="images/drivers/piastri.webp" alt="Oscar Piastri"><div class="portrait-info"><span class="d-num">#81</span><h4>Oscar Piastri</h4><span class="d-team">McLaren</span></div></a>
-              
-              <a href="drivers.html" class="driver-portrait"><img src="images/drivers/leclerc.jpg" alt="Charles Leclerc"><div class="portrait-info"><span class="d-num">#16</span><h4>Charles Leclerc</h4><span class="d-team">Ferrari</span></div></a>
-              <a href="drivers.html" class="driver-portrait"><img src="images/drivers/lewis.jpg" alt="Lewis Hamilton"><div class="portrait-info"><span class="d-num">#44</span><h4>Lewis Hamilton</h4><span class="d-team">Ferrari</span></div></a>
-              
-              <a href="drivers.html" class="driver-portrait"><img src="images/drivers/george.jpg" alt="George Russell"><div class="portrait-info"><span class="d-num">#63</span><h4>George Russell</h4><span class="d-team">Mercedes</span></div></a>
-              <a href="drivers.html" class="driver-portrait"><img src="images/drivers/antonelli.avif" alt="Kimi Antonelli"><div class="portrait-info"><span class="d-num">#12</span><h4>Kimi Antonelli</h4><span class="d-team">Mercedes</span></div></a>
-              
-              <a href="drivers.html" class="driver-portrait"><img src="images/drivers/alonso.jpg" alt="Fernando Alonso"><div class="portrait-info"><span class="d-num">#14</span><h4>Fernando Alonso</h4><span class="d-team">Aston Martin</span></div></a>
-              <a href="drivers.html" class="driver-portrait"><img src="images/drivers/lance.jpg" alt="Lance Stroll"><div class="portrait-info"><span class="d-num">#18</span><h4>Lance Stroll</h4><span class="d-team">Aston Martin</span></div></a>
-              
-              <a href="drivers.html" class="driver-portrait"><img src="images/drivers/nico.webp" alt="Nico Hulkenberg" onerror="this.src='images/drivers/nico.jpg'"><div class="portrait-info"><span class="d-num">#27</span><h4>Nico Hulkenberg</h4><span class="d-team">Sauber</span></div></a>
-              <a href="drivers.html" class="driver-portrait"><img src="images/drivers/gabriel.webp" alt="Gabriel Bortoleto"><div class="portrait-info"><span class="d-num">#85</span><h4>Gabriel Bortoleto</h4><span class="d-team">Sauber</span></div></a>
-              
-              <a href="drivers.html" class="driver-portrait"><img src="images/drivers/gasly.jpg" alt="Pierre Gasly"><div class="portrait-info"><span class="d-num">#10</span><h4>Pierre Gasly</h4><span class="d-team">Alpine</span></div></a>
-              <a href="drivers.html" class="driver-portrait"><img src="images/drivers/Doohan.webp" alt="Jack Doohan"><div class="portrait-info"><span class="d-num">#7</span><h4>Jack Doohan</h4><span class="d-team">Alpine</span></div></a>
-              
-              <a href="drivers.html" class="driver-portrait"><img src="images/drivers/albon.jpg" alt="Alex Albon"><div class="portrait-info"><span class="d-num">#23</span><h4>Alex Albon</h4><span class="d-team">Williams</span></div></a>
-              <a href="drivers.html" class="driver-portrait"><img src="images/drivers/carlos.jpeg" alt="Carlos Sainz"><div class="portrait-info"><span class="d-num">#55</span><h4>Carlos Sainz</h4><span class="d-team">Williams</span></div></a>
-              
-              <a href="drivers.html" class="driver-portrait"><img src="images/drivers/ocon.avif" alt="Esteban Ocon"><div class="portrait-info"><span class="d-num">#31</span><h4>Esteban Ocon</h4><span class="d-team">Haas</span></div></a>
-              <a href="drivers.html" class="driver-portrait"><img src="images/drivers/oliver.webp" alt="Oliver Bearman"><div class="portrait-info"><span class="d-num">#87</span><h4>Oliver Bearman</h4><span class="d-team">Haas</span></div></a>
-              
-              <a href="drivers.html" class="driver-portrait"><img src="images/drivers/liam.avif" alt="Liam Lawson"><div class="portrait-info"><span class="d-num">#30</span><h4>Liam Lawson</h4><span class="d-team">Visa Cash App RB</span></div></a>
-              <a href="drivers.html" class="driver-portrait"><img src="images/drivers/lindblad.avif" alt="Arvid Lindblad"><div class="portrait-info"><span class="d-num">#41</span><h4>Arvid Lindblad</h4><span class="d-team">Visa Cash App RB</span></div></a>
-              
-              <a href="drivers.html" class="driver-portrait"><img src="images/drivers/Sergio.jpg" alt="Sergio Perez"><div class="portrait-info"><span class="d-num">#11</span><h4>Sergio Perez</h4><span class="d-team">Cadillac F1</span></div></a>
-              <a href="drivers.html" class="driver-portrait"><img src="images/drivers/bottas.jpg" alt="Valtteri Bottas"><div class="portrait-info"><span class="d-num">#77</span><h4>Valtteri Bottas</h4><span class="d-team">Cadillac F1</span></div></a>
+            <div class="drivers-grid" id="driversGrid" role="list" aria-label="Driver portraits">
+              <a href="drivers.html" class="driver-portrait" role="listitem"><img src="images/drivers/max.jpg" alt="Max Verstappen"><div class="portrait-info"><span class="d-num">#3</span><h4>Max Verstappen</h4><span class="d-team">Red Bull Racing</span></div></a>
+              <a href="drivers.html" class="driver-portrait" role="listitem"><img src="images/drivers/isack.webp" alt="Isack Hadjar"><div class="portrait-info"><span class="d-num">#6</span><h4>Isack Hadjar</h4><span class="d-team">Red Bull Racing</span></div></a>
+              <a href="drivers.html" class="driver-portrait" role="listitem"><img src="images/drivers/lando.webp" alt="Lando Norris"><div class="portrait-info"><span class="d-num">#1</span><h4>Lando Norris</h4><span class="d-team">McLaren</span></div></a>
+              <a href="drivers.html" class="driver-portrait" role="listitem"><img src="images/drivers/piastri.webp" alt="Oscar Piastri"><div class="portrait-info"><span class="d-num">#81</span><h4>Oscar Piastri</h4><span class="d-team">McLaren</span></div></a>
+              <a href="drivers.html" class="driver-portrait" role="listitem"><img src="images/drivers/leclerc.jpg" alt="Charles Leclerc"><div class="portrait-info"><span class="d-num">#16</span><h4>Charles Leclerc</h4><span class="d-team">Ferrari</span></div></a>
+              <a href="drivers.html" class="driver-portrait" role="listitem"><img src="images/drivers/lewis.jpg" alt="Lewis Hamilton"><div class="portrait-info"><span class="d-num">#44</span><h4>Lewis Hamilton</h4><span class="d-team">Ferrari</span></div></a>
+              <a href="drivers.html" class="driver-portrait" role="listitem"><img src="images/drivers/george.jpg" alt="George Russell"><div class="portrait-info"><span class="d-num">#63</span><h4>George Russell</h4><span class="d-team">Mercedes</span></div></a>
+              <a href="drivers.html" class="driver-portrait" role="listitem"><img src="images/drivers/antonelli.avif" alt="Kimi Antonelli"><div class="portrait-info"><span class="d-num">#12</span><h4>Kimi Antonelli</h4><span class="d-team">Mercedes</span></div></a>
+              <a href="drivers.html" class="driver-portrait" role="listitem"><img src="images/drivers/alonso.jpg" alt="Fernando Alonso"><div class="portrait-info"><span class="d-num">#14</span><h4>Fernando Alonso</h4><span class="d-team">Aston Martin</span></div></a>
+              <a href="drivers.html" class="driver-portrait" role="listitem"><img src="images/drivers/lance.jpg" alt="Lance Stroll"><div class="portrait-info"><span class="d-num">#18</span><h4>Lance Stroll</h4><span class="d-team">Aston Martin</span></div></a>
+              <a href="drivers.html" class="driver-portrait" role="listitem"><img src="images/drivers/albon.jpg" alt="Alex Albon"><div class="portrait-info"><span class="d-num">#23</span><h4>Alex Albon</h4><span class="d-team">Williams</span></div></a>
+              <a href="drivers.html" class="driver-portrait" role="listitem"><img src="images/drivers/carlos.jpeg" alt="Carlos Sainz"><div class="portrait-info"><span class="d-num">#55</span><h4>Carlos Sainz</h4><span class="d-team">Williams</span></div></a>
+              <a href="drivers.html" class="driver-portrait" role="listitem"><img src="images/drivers/ocon.avif" alt="Esteban Ocon"><div class="portrait-info"><span class="d-num">#31</span><h4>Esteban Ocon</h4><span class="d-team">Haas</span></div></a>
+              <a href="drivers.html" class="driver-portrait" role="listitem"><img src="images/drivers/oliver.webp" alt="Oliver Bearman"><div class="portrait-info"><span class="d-num">#87</span><h4>Oliver Bearman</h4><span class="d-team">Haas</span></div></a>
+              <a href="drivers.html" class="driver-portrait" role="listitem"><img src="images/drivers/gasly.jpg" alt="Pierre Gasly"><div class="portrait-info"><span class="d-num">#10</span><h4>Pierre Gasly</h4><span class="d-team">Alpine</span></div></a>
+              <a href="drivers.html" class="driver-portrait" role="listitem"><img src="images/drivers/franco.webp" alt="Franco Colapinto"><div class="portrait-info"><span class="d-num">#43</span><h4>Franco Colapinto</h4><span class="d-team">Alpine</span></div></a>
+              <a href="drivers.html" class="driver-portrait" role="listitem"><img src="images/drivers/liam.avif" alt="Liam Lawson"><div class="portrait-info"><span class="d-num">#30</span><h4>Liam Lawson</h4><span class="d-team">Racing Bulls</span></div></a>
+              <a href="drivers.html" class="driver-portrait" role="listitem"><img src="images/drivers/lindblad.avif" alt="Arvid Lindblad"><div class="portrait-info"><span class="d-num">#41</span><h4>Arvid Lindblad</h4><span class="d-team">Racing Bulls</span></div></a>
+              <a href="drivers.html" class="driver-portrait" role="listitem"><img src="images/drivers/nico.webp" alt="Nico Hülkenberg"><div class="portrait-info"><span class="d-num">#27</span><h4>Nico Hülkenberg</h4><span class="d-team">Audi</span></div></a>
+              <a href="drivers.html" class="driver-portrait" role="listitem"><img src="images/drivers/gabriel.webp" alt="Gabriel Bortoleto"><div class="portrait-info"><span class="d-num">#5</span><h4>Gabriel Bortoleto</h4><span class="d-team">Audi</span></div></a>
+              <a href="drivers.html" class="driver-portrait" role="listitem"><img src="images/drivers/Sergio.jpg" alt="Sergio Perez"><div class="portrait-info"><span class="d-num">#11</span><h4>Sergio Perez</h4><span class="d-team">Cadillac F1</span></div></a>
+              <a href="drivers.html" class="driver-portrait" role="listitem"><img src="images/drivers/bottas.jpg" alt="Valtteri Bottas"><div class="portrait-info"><span class="d-num">#77</span><h4>Valtteri Bottas</h4><span class="d-team">Cadillac F1</span></div></a>
             </div>
-            <div class="carousel-controls" id="carouselDots"></div>
+            <div class="carousel-controls" id="carouselDots" role="tablist" aria-label="Driver carousel navigation"></div>
           </div>
         </div>
       </div>
 
-      <div class="bento-card bento-standings">
+      <!-- LIVE STANDINGS -->
+      <div class="bento-card bento-standings reveal-card" role="region" aria-label="Live championship standings">
         <div class="bento-content">
-          <div class="box-header flex-between" style="margin-bottom: 16px;">
+          <div class="box-header flex-between" style="margin-bottom:16px;">
             <h3>Live Standings</h3>
-            <div class="standings-tabs">
-              <button class="standings-tab active" data-target="drivers-tab">Drivers</button>
-              <button class="standings-tab" data-target="constructors-tab">Teams</button>
+            <div class="standings-tabs" role="tablist" aria-label="Standings view toggle">
+              <button class="standings-tab active" data-target="drivers-tab" role="tab" aria-selected="true" aria-controls="drivers-tab">Drivers</button>
+              <button class="standings-tab" data-target="constructors-tab" role="tab" aria-selected="false" aria-controls="constructors-tab">Teams</button>
             </div>
           </div>
-          
           <div class="standings-views">
-            <div id="drivers-tab" class="standings-view active">
-              <div class="mini-table-header">
-                <span>Pos</span>
-                <span>Driver</span>
-                <span style="text-align:right;">Pts</span>
+            <div id="drivers-tab" class="standings-view" role="tabpanel">
+              <div class="mini-table-header" aria-hidden="true">
+                <span>Pos</span><span>Driver</span><span style="text-align:right;">Pts</span>
               </div>
-              <div id="mini-driver-standings" class="mini-standings-list">
+              <div id="mini-driver-standings" class="mini-standings-list" aria-live="polite">
                 <div class="loading-spinner" style="width:20px;height:20px;border-width:2px;margin:20px auto;"></div>
               </div>
-              <a href="drivers.html" class="view-all-link">View Full Driver Standings →</a>
+              <a href="drivers.html" class="view-all-link">Full Driver Standings →</a>
             </div>
-            
-            <div id="constructors-tab" class="standings-view" style="display: none;">
-              <div class="mini-table-header">
-                <span>Pos</span>
-                <span>Constructor</span>
-                <span style="text-align:right;">Pts</span>
+            <div id="constructors-tab" class="standings-view" style="display:none;" role="tabpanel">
+              <div class="mini-table-header" aria-hidden="true">
+                <span>Pos</span><span>Constructor</span><span style="text-align:right;">Pts</span>
               </div>
-              <div id="mini-constructor-standings" class="mini-standings-list">
+              <div id="mini-constructor-standings" class="mini-standings-list" aria-live="polite">
                 <div class="loading-spinner" style="width:20px;height:20px;border-width:2px;margin:20px auto;"></div>
               </div>
-              <a href="teams.html" class="view-all-link">View Full Team Standings →</a>
+              <a href="teams.html" class="view-all-link">Full Team Standings →</a>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="bento-card bento-results">
+      <!-- RACE RESULTS CTA -->
+      <div class="bento-card bento-results reveal-card" role="region" aria-label="Latest race results">
         <div class="bento-content">
-          <div class="results-visual">
+          <div class="results-visual" aria-hidden="true">
             <div class="podium-icon">🏁</div>
           </div>
           <div class="results-text">
@@ -224,50 +300,81 @@
         </div>
       </div>
 
-      <div class="bento-card bento-constructors">
+      <!-- CONSTRUCTORS GRID -->
+      <div class="bento-card bento-constructors reveal-card" role="region" aria-label="11 F1 constructors for 2026">
         <div class="bento-content">
-          <div class="box-header flex-between" style="margin-bottom: 8px;">
+          <div class="box-header flex-between" style="margin-bottom:8px;">
             <h3>The 11 Constructors</h3>
-            <span class="era-badge" style="font-size: 0.65rem; padding: 2px 8px; margin: 0;">2026 Grid</span>
+            <span class="era-badge" style="font-size:.65rem;padding:2px 8px;margin:0;">2026 Grid</span>
           </div>
-          <p class="constructor-desc">Cadillac officially joins the grid alongside the giants of the sport. Welcome to the new era.</p>
-          
-          <div class="constructor-logos-grid">
-            <a href="teams.html" class="c-logo-box" style="--team-color: #ff8c00;" title="McLaren"><img src="images/logos/mclaren.avif" alt="McLaren"></a>
-            <a href="teams.html" class="c-logo-box" style="--team-color: #dc2626;" title="Ferrari"><img src="images/logos/ferrari.avif" alt="Ferrari"></a>
-            <a href="teams.html" class="c-logo-box" style="--team-color: #1e3a8a;" title="Red Bull Racing"><img src="images/logos/redbull.avif" alt="Red Bull"></a>
-            <a href="teams.html" class="c-logo-box" style="--team-color: #00d2be;" title="Mercedes"><img src="images/logos/mercedes.avif" alt="Mercedes"></a>
-            <a href="teams.html" class="c-logo-box" style="--team-color: #006a4e;" title="Aston Martin"><img src="images/logos/aston.avif" alt="Aston Martin"></a>
-            <a href="teams.html" class="c-logo-box" style="--team-color: #00a0de;" title="Williams"><img src="images/logos/williams.avif" alt="Williams"></a>
-            <a href="teams.html" class="c-logo-box" style="--team-color: #ffffff;" title="Haas"><img src="images/logos/haas.avif" alt="Haas"></a>
-            <a href="teams.html" class="c-logo-box" style="--team-color: #0f172a;" title="Racing Bulls"><img src="images/logos/racingbulls.avif" alt="Racing Bulls"></a>
-            <a href="teams.html" class="c-logo-box" style="--team-color: #0084c7;" title="Alpine"><img src="images/logos/alpine.avif" alt="Alpine"></a>
-            <a href="teams.html" class="c-logo-box" style="--team-color: #ff0000;" title="Audi"><img src="images/logos/audi.avif" alt="Audi"></a>
-            
-            <a href="teams.html" class="c-logo-box cadillac-box" style="--team-color: #a2a2a2;" title="Cadillac F1"><img src="images/logos/cadillac.avif" alt="Cadillac"></a>
+          <p class="constructor-desc">Cadillac officially joins the grid. Welcome to the new era.</p>
+          <div class="constructor-logos-grid" role="list" aria-label="Constructor logos">
+            <a href="teams.html" class="c-logo-box" style="--team-color:#ff8c00;" title="McLaren" role="listitem"><img src="images/logos/mclaren.avif" alt="McLaren"></a>
+            <a href="teams.html" class="c-logo-box" style="--team-color:#dc2626;" title="Ferrari" role="listitem"><img src="images/logos/ferrari.avif" alt="Ferrari"></a>
+            <a href="teams.html" class="c-logo-box" style="--team-color:#1e3a8a;" title="Red Bull Racing" role="listitem"><img src="images/logos/redbull.avif" alt="Red Bull"></a>
+            <a href="teams.html" class="c-logo-box" style="--team-color:#00d2be;" title="Mercedes" role="listitem"><img src="images/logos/mercedes.avif" alt="Mercedes"></a>
+            <a href="teams.html" class="c-logo-box" style="--team-color:#006a4e;" title="Aston Martin" role="listitem"><img src="images/logos/aston.avif" alt="Aston Martin"></a>
+            <a href="teams.html" class="c-logo-box" style="--team-color:#00a0de;" title="Williams" role="listitem"><img src="images/logos/williams.avif" alt="Williams"></a>
+            <a href="teams.html" class="c-logo-box" style="--team-color:#ffffff;" title="Haas" role="listitem"><img src="images/logos/haas.avif" alt="Haas"></a>
+            <a href="teams.html" class="c-logo-box" style="--team-color:#0f172a;" title="Racing Bulls" role="listitem"><img src="images/logos/racingbulls.avif" alt="Racing Bulls"></a>
+            <a href="teams.html" class="c-logo-box" style="--team-color:#0084c7;" title="Alpine" role="listitem"><img src="images/logos/alpine.avif" alt="Alpine"></a>
+            <a href="teams.html" class="c-logo-box" style="--team-color:#ff0000;" title="Audi" role="listitem"><img src="images/logos/audi.avif" alt="Audi"></a>
+            <a href="teams.html" class="c-logo-box cadillac-box" style="--team-color:#a2a2a2;" title="Cadillac F1" role="listitem"><img src="images/logos/cadillac.avif" alt="Cadillac"></a>
           </div>
-
-          <a href="teams.html" class="btn btn-outline btn-block mt-3" style="width: 100%; text-align: center;">Explore Team Hub →</a>
+          <a href="teams.html" class="btn btn-outline mt-3" style="width:100%;text-align:center;display:block;">Explore Team Hub →</a>
         </div>
       </div>
 
-      <div class="bento-card bento-circuits" style="padding: 0; position: relative; overflow: hidden;">
-        <img src="images/circuits/monaco.jpg" alt="Monaco Circuit" class="circuit-bg">
-        <div class="circuit-overlay"></div>
-        
+      <!-- CIRCUITS CTA -->
+      <div class="bento-card bento-circuits reveal-card" style="padding:0;position:relative;overflow:hidden;" role="region" aria-label="F1 circuits global tour">
+        <img src="images/circuits/monaco.jpg" alt="Monaco street circuit at night" class="circuit-bg">
+        <div class="circuit-overlay" aria-hidden="true"></div>
         <div class="bento-content circuit-content">
-          <div class="box-header" style="margin-bottom: 8px; border:none; padding:0;">
-            <span class="era-badge" style="background: rgba(225, 6, 0, 0.15); color: #ff4500; border: 1px solid rgba(225, 6, 0, 0.3); font-size: 0.65rem; margin: 0;">24 Epic Destinations</span>
-          </div>
-          <h3 style="font-size: 1.4rem; margin-bottom: 6px; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">The Global Tour</h3>
-          <p style="color: rgba(255,255,255,0.7); font-size: 0.85rem; margin-bottom: 16px; line-height: 1.4; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">
-            From the neon streets of Las Vegas to the historic high-speed corners of Monza. Explore the tracks of 2026.
+          <span class="era-badge" style="background:rgba(225,6,0,.15);color:#ff4500;border:1px solid rgba(225,6,0,.3);font-size:.65rem;margin:0;">24 Epic Destinations</span>
+          <h3 style="font-size:1.4rem;margin:8px 0 6px;text-shadow:0 2px 4px rgba(0,0,0,.8);">The Global Tour</h3>
+          <p style="color:rgba(255,255,255,.7);font-size:.85rem;margin-bottom:16px;line-height:1.5;text-shadow:0 1px 3px rgba(0,0,0,.8);">
+            From Las Vegas neon to Monza's Temple of Speed. Every circuit. Every story.
           </p>
-          <a href="circuits.html" class="btn btn-primary" style="width: 100%; text-align: center; background: rgba(225, 6, 0, 0.8); backdrop-filter: blur(4px); border: none;">Explore Circuits</a>
+          <a href="circuits.html" class="btn btn-primary" style="width:100%;text-align:center;background:rgba(225,6,0,.85);backdrop-filter:blur(4px);border:none;">Explore Circuits</a>
         </div>
       </div>
 
     </div>
+    <!-- /bento-grid -->
+
+    <!-- ═══════════════════════════════════════
+         EDITORIAL STRIP — THE 2026 TECH
+    ═══════════════════════════════════════ -->
+    <section class="editorial-strip reveal-card" aria-labelledby="editorial-title">
+      <div class="editorial-label" id="editorial-title">THE 2026 REVOLUTION</div>
+      <div class="editorial-grid">
+        <div class="editorial-item">
+          <div class="ei-number" aria-hidden="true">01</div>
+          <div class="ei-icon" aria-hidden="true">⚡</div>
+          <h4>50/50 Power Split</h4>
+          <p>350kW MGU-K delivers equal electrical and combustion power — the most radical hybrid unit ever seen in F1.</p>
+        </div>
+        <div class="editorial-item">
+          <div class="ei-number" aria-hidden="true">02</div>
+          <div class="ei-icon" aria-hidden="true">💨</div>
+          <h4>Active Aerodynamics</h4>
+          <p>X-Mode vs Z-Mode. Drivers flip between low-drag straights and high-downforce corners at the push of a button.</p>
+        </div>
+        <div class="editorial-item">
+          <div class="ei-number" aria-hidden="true">03</div>
+          <div class="ei-icon" aria-hidden="true">🏎️</div>
+          <h4>The Nimble Car</h4>
+          <p>Shorter, narrower, lighter. The 2026 chassis is 30kg lighter and designed for wheel-to-wheel combat.</p>
+        </div>
+        <div class="editorial-item">
+          <div class="ei-number" aria-hidden="true">04</div>
+          <div class="ei-icon" aria-hidden="true">🌿</div>
+          <h4>100% Sustainable Fuel</h4>
+          <p>F1 races on fully renewable drop-in fuel for the first time — thrilling sound, zero new carbon.</p>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <div id="footer"></div>
@@ -275,6 +382,6 @@
   <script src="Script/common.js"></script>
   <script src="Script/script.js"></script>
   <script src="Script/navbar.js"></script>
+  <script src="Script/premium.js"></script>
 </body>
-
 </html>

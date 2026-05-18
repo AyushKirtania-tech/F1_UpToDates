@@ -1,0 +1,579 @@
+/* ═══════════════════════════════════════════════════════════════
+   premium-global.css
+   Universal design system — loads on EVERY page via common.js
+   Covers: fonts · navbar · scroll reveal · glow · buttons ·
+           cards · footer · back-to-top · typography · mobile
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── DESIGN TOKENS ─────────────────────────────────────────── */
+:root {
+  --pg-font-display: 'Barlow Condensed', 'Impact', 'Franklin Gothic Medium', sans-serif;
+  --pg-font-body:    'Barlow', 'Segoe UI', system-ui, sans-serif;
+
+  --pg-bg-void:    #060608;
+  --pg-bg-deep:    #0A0A0C;
+  --pg-bg-surface: #111116;
+  --pg-bg-raised:  #18181f;
+
+  --pg-text-primary:   #F2F2F4;
+  --pg-text-secondary: #A0A0B0;
+  --pg-text-muted:     #60607A;
+  --pg-text-dim:       #3a3a50;
+
+  --pg-accent:      #E10600;
+  --pg-accent-bright: #FF2010;
+  --pg-accent-dim:  rgba(225, 6, 0, 0.14);
+  --pg-accent-glow: rgba(225, 6, 0, 0.35);
+
+  --pg-gold:   #C9A84C;
+  --pg-silver: #9EABB5;
+  --pg-bronze: #A0614A;
+
+  --pg-border-subtle: rgba(255, 255, 255, 0.045);
+  --pg-border-light:  rgba(255, 255, 255, 0.08);
+  --pg-border-medium: rgba(255, 255, 255, 0.14);
+
+  --pg-r-sm:  8px;
+  --pg-r-md:  14px;
+  --pg-r-lg:  20px;
+  --pg-r-xl:  28px;
+
+  --pg-shadow-sm:   0 2px 10px rgba(0,0,0,0.4);
+  --pg-shadow-md:   0 8px 32px rgba(0,0,0,0.5);
+  --pg-shadow-lg:   0 20px 60px rgba(0,0,0,0.6);
+  --pg-shadow-glow: 0 0 40px rgba(225,6,0,0.12);
+
+  --pg-ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+  --pg-ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --pg-ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  --pg-t-fast: 0.15s var(--pg-ease-smooth);
+  --pg-t-med:  0.28s var(--pg-ease-smooth);
+  --pg-t-slow: 0.45s var(--pg-ease-out);
+}
+
+/* ─── BASE TYPOGRAPHY ───────────────────────────────────────── */
+html {
+  font-family: var(--pg-font-body) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--pg-font-body) !important;
+}
+
+/* Headings get display font */
+h1, h2, h3, h4,
+.section-title,
+.hero-content h1,
+.bento-hero h1,
+.schedule-hero h1,
+.circuits-hero h1,
+.drivers-hero h1 h2,
+.teams-hero h1,
+.race-title,
+.driver-info h2,
+.team-info h2,
+.car-hero h1,
+.box-header h3,
+.card-header h3 {
+  font-family: var(--pg-font-display) !important;
+}
+
+/* ─── NOISE TEXTURE ─────────────────────────────────────────── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ─── AMBIENT GLOW ORBS ─────────────────────────────────────── */
+.pg-glow-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.pg-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  will-change: transform;
+}
+
+.pg-glow-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(225,6,0,0.1) 0%, transparent 70%);
+}
+
+.pg-glow-2 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(80,80,200,0.055) 0%, transparent 70%);
+  right: -10vw; bottom: 20vh;
+}
+
+/* ─── NAVBAR — PREMIUM SCROLL BEHAVIOR ─────────────────────── */
+.site-header {
+  transition:
+    background 0.4s var(--pg-ease-smooth),
+    border-color 0.4s var(--pg-ease-smooth),
+    box-shadow 0.4s var(--pg-ease-smooth),
+    transform 0.35s var(--pg-ease-smooth) !important;
+  will-change: transform, background;
+}
+
+.site-header.pg-scrolled {
+  background: rgba(6, 6, 8, 0.94) !important;
+  border-bottom-color: var(--pg-border-subtle) !important;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.45) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+}
+
+/* Hide on scroll down — mobile only */
+.site-header.pg-hidden {
+  transform: translateY(-110%) !important;
+}
+
+/* Navbar link font */
+.main-nav a {
+  font-family: var(--pg-font-display) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  font-size: 0.85rem !important;
+  transition: color var(--pg-t-fast), background var(--pg-t-fast) !important;
+}
+
+/* Logo */
+.logo h1, .logo h1 a {
+  font-family: var(--pg-font-display) !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+}
+
+/* ─── SCROLL REVEAL ─────────────────────────────────────────── */
+.pg-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.65s var(--pg-ease-out),
+    transform 0.65s var(--pg-ease-out);
+}
+
+.pg-reveal.pg-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── GLOBAL CARD POLISH ────────────────────────────────────── */
+/* Applies a subtle entry polish to cards on any page */
+.bento-card,
+.driver-card,
+.team-card,
+.circuit-card,
+.race-card,
+.feature-card,
+.era-card,
+.tech-spec-card,
+.specs-card,
+.stat-box {
+  transition:
+    transform 0.32s var(--pg-ease-spring),
+    box-shadow 0.32s var(--pg-ease-smooth),
+    border-color 0.28s var(--pg-ease-smooth) !important;
+  will-change: transform;
+}
+
+/* Unified hover — light lift on every card type */
+.bento-card:hover,
+.driver-card:hover,
+.team-card:hover,
+.circuit-card:hover,
+.era-card:hover,
+.tech-spec-card:hover,
+.specs-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.55), var(--pg-shadow-glow) !important;
+}
+
+.race-card:hover {
+  transform: translateY(-8px) !important;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px) !important;
+  border-color: var(--pg-border-medium) !important;
+}
+
+/* ─── CURSOR GLOW (desktop only) ────────────────────────────── */
+/* Injected by JS — just ensuring pointer-events safe */
+.pg-cursor-glow {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(70px);
+  will-change: transform;
+  transition: opacity 0.5s ease;
+}
+
+/* ─── BUTTONS — GLOBAL UPGRADE ──────────────────────────────── */
+.btn,
+.filter-btn,
+.btn-primary,
+.btn-outline {
+  font-family: var(--pg-font-display) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.07em !important;
+  text-transform: uppercase !important;
+  transition:
+    transform var(--pg-t-med),
+    background var(--pg-t-med),
+    box-shadow var(--pg-t-med),
+    border-color var(--pg-t-fast) !important;
+}
+
+.btn-primary:hover,
+.btn.btn-primary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(225,6,0,0.45) !important;
+}
+
+.btn-outline:hover,
+.btn.btn-outline:hover {
+  transform: translateY(-2px) !important;
+}
+
+.filter-btn.active {
+  box-shadow: 0 4px 14px rgba(225,6,0,0.3) !important;
+}
+
+/* ─── SECTION TITLES ────────────────────────────────────────── */
+.section-title,
+.section-header h2,
+.circuits-hero h1,
+.schedule-hero h1,
+.drivers-hero .hero-content h1,
+.teams-hero .hero-content h1,
+.about-hero .hero-content h1,
+.analytics-hero .hero-text h1 {
+  font-family: var(--pg-font-display) !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.01em !important;
+}
+
+/* ─── HERO SECTIONS — OTHER PAGES ──────────────────────────── */
+/* Drivers, Teams, Circuits, Schedule, Analytics */
+.drivers-hero,
+.teams-hero,
+.circuits-hero,
+.schedule-hero,
+.analytics-hero {
+  border-left: 3px solid var(--pg-accent) !important;
+  transition: border-color var(--pg-t-fast);
+}
+
+/* ─── ERA BADGE ─────────────────────────────────────────────── */
+.era-badge {
+  font-family: var(--pg-font-display) !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+}
+
+/* ─── STAT ITEMS ────────────────────────────────────────────── */
+.stat-number {
+  font-family: var(--pg-font-display) !important;
+  font-size: 1.7rem !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.stat-label,
+.stat-desc,
+.stat-text {
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+}
+
+/* ─── TABLE ROW HOVER ───────────────────────────────────────── */
+.table-row,
+.mini-row,
+.ret-item,
+.list-item {
+  transition: background var(--pg-t-fast), transform var(--pg-t-fast) !important;
+}
+
+.table-row:hover,
+.mini-row:hover {
+  background: rgba(255,255,255,0.05) !important;
+  transform: translateX(3px) !important;
+}
+
+/* ─── FILTER BUTTONS ────────────────────────────────────────── */
+.filter-btn {
+  transition:
+    transform var(--pg-t-med),
+    background var(--pg-t-med),
+    border-color var(--pg-t-fast),
+    color var(--pg-t-fast) !important;
+}
+
+.filter-btn:hover {
+  transform: translateY(-3px) !important;
+}
+
+/* ─── DRIVER CARD IMAGE ZOOM ────────────────────────────────── */
+.driver-card .driver-image img,
+.team-card .team-image img,
+.circuit-card .circuit-image img {
+  transition: transform 0.5s var(--pg-ease-smooth) !important;
+}
+
+.driver-card:hover .driver-image img,
+.team-card:hover .team-image img,
+.circuit-card:hover .circuit-image img {
+  transform: scale(1.07) !important;
+}
+
+/* ─── LINKS ─────────────────────────────────────────────────── */
+.footer-links a {
+  transition: color var(--pg-t-fast), transform var(--pg-t-fast) !important;
+}
+
+.footer-links a:hover {
+  transform: translateX(4px) !important;
+}
+
+/* ─── BACK TO TOP ───────────────────────────────────────────── */
+#backToTop,
+.back-to-top {
+  position: fixed !important;
+  bottom: 28px !important;
+  right: 28px !important;
+  z-index: 9990;
+  background: rgba(14, 14, 20, 0.88) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid var(--pg-border-light) !important;
+  color: var(--pg-text-primary) !important;
+  padding: 10px 20px !important;
+  border-radius: 50px !important;
+  font-family: var(--pg-font-display) !important;
+  font-weight: 700 !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+  transition: all var(--pg-t-med) !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(14px) !important;
+  box-shadow: var(--pg-shadow-md) !important;
+}
+
+#backToTop.show,
+.back-to-top.show {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) !important;
+}
+
+#backToTop:hover,
+.back-to-top:hover {
+  background: var(--pg-accent) !important;
+  border-color: var(--pg-accent) !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 24px rgba(225,6,0,0.4) !important;
+}
+
+/* ─── SKELETON ──────────────────────────────────────────────── */
+.skeleton-box,
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.03) 25%,
+    rgba(255,255,255,0.065) 50%,
+    rgba(255,255,255,0.03) 75%
+  ) !important;
+  background-size: 200% 100% !important;
+  animation: pgShimmer 1.6s ease-in-out infinite !important;
+}
+
+@keyframes pgShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ─── INPUT / SELECT ────────────────────────────────────────── */
+select,
+input[type="text"],
+input[type="search"] {
+  font-family: var(--pg-font-body) !important;
+  transition: border-color var(--pg-t-fast), box-shadow var(--pg-t-fast) !important;
+}
+
+select:focus,
+input:focus {
+  box-shadow: 0 0 0 2px rgba(225,6,0,0.25) !important;
+  outline: none !important;
+}
+
+/* ─── MODAL PULL INDICATOR ──────────────────────────────────── */
+.modal-pull-indicator {
+  width: 44px;
+  height: 5px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 10px;
+  margin: 12px auto 18px;
+  cursor: grab;
+}
+
+/* ─── SCROLLBAR ─────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+::-webkit-scrollbar-thumb {
+  background: rgba(225,6,0,0.35);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--pg-accent); }
+
+/* Firefox */
+* { scrollbar-width: thin; scrollbar-color: rgba(225,6,0,0.35) transparent; }
+
+/* ─── SELECTION ─────────────────────────────────────────────── */
+::selection {
+  background: rgba(225, 6, 0, 0.3);
+  color: #fff;
+}
+
+/* ─── SCHEDULE PAGE ─────────────────────────────────────────── */
+.race-card {
+  border-left: 3px solid transparent !important;
+  transition:
+    transform 0.32s var(--pg-ease-spring),
+    border-color 0.25s ease,
+    box-shadow 0.32s ease,
+    opacity 0.3s ease !important;
+}
+
+.race-card:hover {
+  border-left-color: var(--pg-accent) !important;
+}
+
+/* ─── CIRCUIT CARDS ─────────────────────────────────────────── */
+.circuit-card {
+  overflow: hidden;
+}
+
+.circuit-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(225,6,0,0.06) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity var(--pg-t-med);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.circuit-card:hover::after { opacity: 1; }
+
+/* ─── ANALYTICS BENTO ───────────────────────────────────────── */
+.bento-card.card-gold {
+  background: linear-gradient(180deg, rgba(212,175,55,0.06) 0%, rgba(14,14,20,0.8) 100%) !important;
+}
+
+.bento-card.card-purple {
+  background: linear-gradient(180deg, rgba(216,150,255,0.05) 0%, rgba(14,14,20,0.8) 100%) !important;
+}
+
+/* ─── CAR PAGES (teams/cars/*) ──────────────────────────────── */
+.feature-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.035), transparent);
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
+.feature-card:hover::before { left: 100%; }
+
+.tech-detail {
+  transition: background var(--pg-t-fast), transform var(--pg-t-fast) !important;
+}
+
+.tech-detail:hover {
+  background: rgba(255,255,255,0.04) !important;
+  transform: translateX(3px) !important;
+}
+
+/* ─── DRIVER MODAL ──────────────────────────────────────────── */
+.driver-modal-overlay,
+.team-modal-overlay {
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+}
+
+/* ─── PAGE TRANSITIONS ──────────────────────────────────────── */
+/* Fade-in on page load */
+main,
+.dashboard-main,
+.drivers-main,
+.teams-main,
+.circuits-main,
+.schedule-main,
+.results-main,
+.car-main,
+.about-main {
+  animation: pgFadeIn 0.5s var(--pg-ease-out) both;
+}
+
+@keyframes pgFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── REDUCED MOTION ────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── RESPONSIVE ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  #backToTop,
+  .back-to-top {
+    bottom: 20px !important;
+    right: 16px !important;
+  }
+
+  .pg-cursor-glow { display: none !important; }
+}
